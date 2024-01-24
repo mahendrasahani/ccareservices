@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
+
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.form-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.image-part{
+    width: 50%;
+    position: relative;
+    border-right: 1px solid rgb(177, 170, 170);
+}
+
+.image-part>img{
+    position: absolute;
+    top: 51%;
+    left: 44%;
+    transform: translate(-50%,-50%);
+    width: 38%;
+}
+
+.form-part{
+    width: 50%;
+    position: relative;
+    background:linear-gradient(to right,#2a35cf,rgb(95, 157, 214));
+}
+
+.form{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding:35px 20px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    max-height: 480px;
+    width: 450px;
+    background:white;
+}
+
+.form>p{
+    font-family: 'Rubik', sans-serif;
+    color: black;
+}
+
+.email-field{
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   width: 80%;
+   margin: auto;
+   
+}
+
+.email-field>label{
+    font-family: 'Rubik', sans-serif;
+    color: #2b2b2b;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+label>span{
+    color: red;
+}
+
+.psd-field{
+    display: flex;
+   flex-direction: column;
+   gap: 10px;
+   width: 80%;
+   margin: auto;
+}
+
+.psd-field>label{
+    font-family: 'Rubik', sans-serif;
+    color: #2b2b2b;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.psd-field+p{
+    width: 80%;
+    text-align:left;
+    margin: auto;
+    color:#2a35cf;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.input-field{
+    display: flex;
+    align-items: center;
+}
+
+
+input{
+    height: 35px;
+    padding: 5px;
+    border: 1px solid #c4bdbd;
+   border-radius: 5px;
+    font-size: 12px;
+   color: grey;
+}
+
+
+
+.form-btn{
+    width: 80%;
+    /* padding: 5px 0px; */
+    background:linear-gradient(to right,#2a35cf,rgb(95, 157, 214));
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    margin: auto;
+    height: 45px;
+    border: 1px solid grey;
+    cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    border-radius: 5px;
+}
+
+.form-btn:hover{
+    color: #2a35cf;
+    background: white;
+}
+
+.form-btn+p{
+    width: 80%;
+    text-align: center;
+    margin: auto;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.form-btn+p>a{
+    color:#2a35cf;
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width:992px) {
+    .image-part{
+        display: none;
+    }
+
+    .form-part{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:500px) {
+    .form{
+        gap: 15px;
+        padding: 13px 0px;
+        width: 300px;
+    }
+
+}

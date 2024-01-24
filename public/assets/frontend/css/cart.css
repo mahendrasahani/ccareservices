@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(to right, rgb(253, 253, 253), rgb(241, 241, 241));
+}
+
+.sticky-header{
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.checkout-steps{
+    width: 83%;
+    margin: auto;
+    margin-top: 40px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    position: relative;
+    background: white;
+}
+
+.steps{
+    display: flex;
+    justify-content: space-around;
+}
+
+.steps>span{
+width: 10px;
+height: 10px;
+  background: grey;
+  border-radius: 50%;
+  
+}
+.steps span:first-child {
+    background: black;
+}
+
+.steps-line{
+    left: 13%;
+    top: 32%;
+    position: absolute;
+    width: 74%;
+    border-top: 1px solid grey;
+}
+
+.order-details{
+    background-color:#f8f8f8;
+}
+
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+}
+
+.btn{
+    width: 29px;
+    height: 24px;
+    padding:0px !important;
+}
+
+.order-card>p{
+    font-family: 'Rubik', sans-serif;
+    color: #2b2b2b;
+    font-size: 12px;
+}
+
+#form1{
+    text-align: center;
+    height: 25px !important;
+}
+
+.form-outline{
+    text-align: center;
+}
+
+.btn-checkout{
+    width: 100% !important;
+    height: 30px !important;
+    background-color: #213854   ;
+}
+
+.btn-submit {
+    width: 149px;
+    height: 42px;
+    background-color: #213854;
+}
+.order-img{
+    border-radius: 5px;
+}
