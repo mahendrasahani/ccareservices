@@ -61,8 +61,8 @@
                 <h6 class="fw-bold  text-white">Need Help
 
                 </h6>
-                <a href="index.html" class="text-decoration-none"><img src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}"
-                        class="w-50"></a>
+                <a href="index.html" class="text-decoration-none"><img
+                        src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}" class="w-50"></a>
                 <ul class="list-inline hover-animate">
 
                     <a href="tel:+9198264525856" class="text-decoration-none text-white ">
@@ -315,5 +315,6 @@
 setActiveClassByUrl();
 </script>
 @yield('javascript-section')
-</body> 
+</body>
+
 </html>

@@ -18,14 +18,14 @@
     <!-- Head title -->
     <title>Home Appliances On Rent In Gurgaon- Appliance Rental Services</title>
 
-     
+
     <meta name="description"
         content="Cool Care Services offers Home appliances on Rent in Gurgaon with affordable Rental AMC Services. Quote Now for Electronics items for rental!" />
 </head>
 
 <body>
 
-     <!-- Top-Header -->
+    <!-- Top-Header -->
     <section class="top-header" id="myElement">
         <div class="container-fluid">
             <div class="row">
@@ -47,22 +47,27 @@
             <div class="row">
                 <div class="d-flex">
                     <div class="col-md-6" id="media-logo">
-                        <a href=""><img src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}" class="w-25"></a>
+                        <a href=""><img src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}"
+                                class="w-25"></a>
                     </div>
                     <div class="col-md-6 text-end pt-4">
                         <div class="top-icon d-flex justify-content-end" style="cursor: pointer; padding: 0 44px;">
                             <a href="#"><i class="fa-solid fa-magnifying-glass px-2" style="color: #676767;"></i></a>
                             <a href="#"><i class="fa-regular fa-heart px-2" style="color: #676767;"></i></a>
-                            <a href="./cart.php" class="d-flex">
+                            <a href="./cart.php" class="d-flex align-items-center">
                                 <i class="fa-solid fa-cart-shopping px-2" style="color: #676767;"></i><span
                                     class="cart-count" id="cartItemCount">0</span></a>
-                                    <li      class="dropdown d-inline" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-regular fa-user px-2" style="color: #676767;"></i>
-                                    </li>
-                                    <ul class="dropdown-menu dropdown-menu-end login-drop" id="" aria-labelledby="dropdownUser1">
-                                        <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}" style=" color: #01316b;">Dashboard</a></li>
-                                        <li><a class="dropdown-item fw-bold" href="{{route('login')}}" style=" color: #01316b;">Login</a></li>
-                                    </ul>
+                            <li class="dropdown d-inline" id="dropdownUser1" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa-regular fa-user px-2" style="color: #676767;"></i>
+                            </li>
+                            <ul class="dropdown-menu dropdown-menu-end login-drop" id=""
+                                aria-labelledby="dropdownUser1">
+                                <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}"
+                                        style=" color: #01316b;">Dashboard</a></li>
+                                <li><a class="dropdown-item fw-bold" href="{{route('login')}}"
+                                        style=" color: #01316b;">Login</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -88,7 +93,8 @@
                                         Laptop
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="./laptop-on-rent-gurgaon.php">Laptop on Rent</a></li>
+                                        <li><a class="dropdown-item" href="./laptop-on-rent-gurgaon.php">Laptop on
+                                                Rent</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown">
