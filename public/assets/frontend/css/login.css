@@ -43,7 +43,7 @@
     padding:35px 20px;
     border: 1px solid grey;
     border-radius: 20px;
-    max-height: 480px;
+    max-height: 500px;
     width: 450px;
     background:white;
 }
@@ -53,7 +53,7 @@
     color: black;
 }
 
-.email-field{
+.form-field{
    display: flex;
    flex-direction: column;
    gap: 10px;
@@ -62,7 +62,7 @@
    
 }
 
-.email-field>label{
+.form-field>label{
     font-family: 'Rubik', sans-serif;
     color: #2b2b2b;
     font-weight: 600;
@@ -72,15 +72,7 @@
 label>span{
     color: red;
 }
-
-.psd-field{
-    display: flex;
-   flex-direction: column;
-   gap: 10px;
-   width: 80%;
-   margin: auto;
-}
-
+ 
 .psd-field>label{
     font-family: 'Rubik', sans-serif;
     color: #2b2b2b;
@@ -116,15 +108,13 @@ input{
 
 
 
-.form-btn{
-    width: 80%;
-    /* padding: 5px 0px; */
-    background:linear-gradient(to right,#2a35cf,rgb(95, 157, 214));
+.form-btn {
+    background: linear-gradient(to right,#2a35cf,rgb(95, 157, 214));
     color: white;
     font-weight: 600;
     font-size: 15px;
+    padding: 10px 140px;
     margin: auto;
-    height: 45px;
     border: 1px solid grey;
     cursor: pointer;
     font-family: 'Rubik', sans-serif;
@@ -149,7 +139,14 @@ input{
     color:#2a35cf;
     cursor: pointer;
 }
-
+.form-part a{
+    text-decoration: none;
+}
+.form-part a span { 
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
 
 @media only screen and (max-width:992px) {
     .image-part{

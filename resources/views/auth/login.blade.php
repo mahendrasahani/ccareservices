@@ -56,18 +56,18 @@
         <div class="form-part" >
             <form action="" class="form" id="login-form">
                 <p style="text-align: center;font-size:17px;font-weight: 600;">LOGIN TO COOLCARE</p>
-                <div class="email-field">
+                <div class="form-field">
                     <label for="text">Email <span>*</span></label>
                     <input type="email" placeholder="Enter your email....." required>
                 </div>
                 
                
-                <div class="psd-field"> 
+                <div class="form-field"> 
                     <label for="password">Password <span>*</span></label>
                      <input type="password" placeholder="Enter your password....." required>
                 </div>
 
-                <p>Forget Password?</p>
+                <a href="#" style="text-align:center"><span>Forget Password?</span></a>
 
                 <button class="form-btn">Login</button>
                 <p>Don't have an account? <a href="{{route('register')}}">Signup here</a></p>

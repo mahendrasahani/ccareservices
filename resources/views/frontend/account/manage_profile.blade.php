@@ -18,125 +18,114 @@
           <div class="dashboard-heading">
             <h3>Edit Profile</h3>
           </div>
-          <form action="">
-            <div class="row mb-3">
+          <form class="edit-form" action="">
+            <div class="row">
               <div class="col-md-6">
                 <div class="form-field">
-                  <label for="fullName">Full Name:</label>
+                  <label for="fullName" class="form-about">Full Name:</label>
                   <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-field">
-                  <label for="email">Email:</label>
-                  <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-field">
-                  <label for="" class="form-about">Phone No.</label>
-                  <input required placeholder="Enter your number" type="tel" name="" id="" />
+                  <label for="email" class="form-about">Email:</label>
+                  <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="username" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-field">
-                  <label for="" class="form-about">Enter Company Name</label>
-                  <input required placeholder="Enter your company name" type="company" name="" id="" />
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-field">
-                  <label for="" class="form-about">Enter Your Password</label>
-                  <input required placeholder="Enter your password" type="password" name="" id="" />
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-field">
-                  <label for="" class="form-about">Confirm Your Password</label>
-                  <input required placeholder="Enter your password" type="password" name="" id="" />
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-field">
-                  <label for="" class="form-about">Address 1</label>
-                  <input required placeholder="Address 1" type="add 1" name="" id="" />
+                  <label for="phoneNumber" class="form-about">Phone No.</label>
+                  <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter phone number" pattern="[0-9]{10}"
+                    title="Please enter a 10-digit phone number" required />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-field">
-                  <label for="" class="form-about">Address 2</label>
-                  <input required placeholder="Address 2" type="add 2" name="" id="" />
+                  <label for="companyName" class="form-about">Enter Company Name</label>
+                  <input required placeholder="Enter your company name" type="company" name="companyName" id="companyName" />
                 </div>
               </div>
-
+          
               <div class="col-md-6">
                 <div class="form-field">
-                  <label for="" class="form-about">Enter Your City</label>
-                  <input required placeholder="City" type="city" name="" id="" />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-field">
-                  <label for="" class="form-about">Enter Your Post Code</label>
-                  <input required placeholder="Postcode" type="postcode" name="" id="" />
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-field">
-                  <label class="form-about">Select Country</label>
-                  <select id="country" name="country" class="form-control"></select>
+                  <label for="password" class="form-about">Password:</label>
+                  <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="new-password" required />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-field">
-                  <label class="form-about">Select State</label>
-                  <select name="state" id="state" class="form-control"></select>
+                  <label for="confirmPassword" class="form-about">Confirm Password:</label>
+                  <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" autocomplete="confirm-password" required />
                 </div>
               </div>
-
-
-              <div class="row upload-file mt-2">
+              <div class="col-md-6">
+                <div class="form-field">
+                  <label for="address1" class="form-about">Address 1</label>
+                  <input required placeholder="Address 1" type="add 1" name="address" id="address1" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-field">
+                  <label for="address2" class="form-about">Address 2</label>
+                  <input required placeholder="Address 2" type="add 2" name="address" id="address2" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-field">
+                  <label for="city" class="form-about">City:</label>
+                  <input type="text" id="city" name="city" placeholder="Enter your city" required />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-field">
+                  <label for="postalCode" class="form-about">Postal Code:</label>
+                  <input type="text" id="postalCode" name="postalCode" placeholder="Enter your postal code" required />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-field">
+                  <label for="country">Country:</label>
+                  <select id="country" onchange="updateStates()">
+                    <option value="">Select Country</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-field">
+                  <label for="state">State:</label>
+                  <select id="state">
+                    <option value="">Select State</option>
+                  </select>
+                </div>
+              </div>
+          
+              <div class="row">
                 <div class="col-md-4">
-                  <p class="form-about ">Upload Aadhar Card Front</p>
-                  <input class=" " required placeholder="Aadhar" type="file" name="" id="file" />
-                </div>
-                <div class="col-md-4 ">
-                  <p class="form-about ">Upload Aadhar Card Back</p>
-                  <input class=" " required placeholder="Aadhar" type="file" name="" id="fileBack" />
+                  <div class="form-field">
+                    <label for="aadharUpload" class="form-about">Upload Aadhar Card:</label>
+                    <input type="file" id="aadharUpload" name="aadharUpload" accept=".pdf" required />
+                    <small>Allowed formats:PDF</small>
+                  </div>
                 </div>
                 <div class="col-md-4">
-                  <p class="form-about ">Company Id</p>
-                  <input class="  " required placeholder="Aadhar" type="file" name="" id="companyfile" />
+                  <div class="form-field">
+                    <label for="aadharUpload" class="form-about">Upload Aadhar Card Back:</label>
+                    <input type="file" id="aadharUploadBack" name="aadharUploadBack" accept=".pdf" required />
+                    <small>Allowed formats: PDF</small>
+                  </div>
                 </div>
-              </div>
-              <div class="row upload-file">
-                <div class="card" id="aside">
-                  <div class="card-body">
-                    <div class="upload-container">
-                      <div class="circle" id="selected-image-container">
-                        <img class="profile-pic"
-                          src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg">
-                      </div>
-                      <div class="p-image text-center">
-                        <button class="upload-button" onclick="document.querySelector('.file-upload').click()">Select
-                          Image</button>
-                        <input class="file-upload d-none" type="file" name="image" accept="image/*"
-                          onchange="displayImage(this)" />
-                      </div>
-                    </div>
-
-
+                <div class="col-md-4">
+                  <div class="form-field">
+                    <label for="companyId" class="form-about">Company Id:</label>
+                    <input type="file" id="companyId" name="aadharUpload" accept=".pdf" required />
+                    <small>Allowed formats:PDF</small>
                   </div>
                 </div>
               </div>
-              <div class="text-end mt-4">
-                <input class="btn px-4 py-3 btn-outline-dark" type="submit" value="Submit" />
-              </div>
+          
+          
+              <input class="btn px-4 py-3 btn-outline-dark" type="submit" value="Submit" />
+          
             </div>
           </form>
           <section class="address">
@@ -168,117 +157,7 @@
 <!--registration page-->
 
 
-<form class="edit-form" action="">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="form-field">
-        <label for="fullName">Full Name:</label>
-        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-field">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-field">
-        <label for="" class="form-about">Phone No.</label>
-        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter phone number" pattern="[0-9]{10}"
-          title="Please enter a 10-digit phone number" required />
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-field">
-        <label for="" class="form-about">Enter Company Name</label>
-        <input required placeholder="Enter your company name" type="company" name="" id="" />
-      </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="form-field">
-        <label for="password" class="form-about">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required />
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-field">
-        <label for="confirmPassword" class="form-about">Confirm Password:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password"
-          required />
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-field">
-        <label for="" class="form-about">Address 1</label>
-        <input required placeholder="Address 1" type="add 1" name="address" id="address1" />
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-field">
-        <label for="" class="form-about">Address 2</label>
-        <input required placeholder="Address 2" type="add 2" name="address" id="address2" />
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-field">
-        <label for="city" class="form-about">City:</label>
-        <input type="text" id="city" name="city" placeholder="Enter your city" required />
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-field">
-        <label for="postalCode" class="form-about">Postal Code:</label>
-        <input type="text" id="postalCode" name="postalCode" placeholder="Enter your postal code" required />
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-field">
-        <label for="country">Country:</label>
-  <select id="country" onchange="updateStates()">
-    <option value="">Select Country</option>
-  </select>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-field">
-       <label for="state">State:</label>
-  <select id="state">
-    <option value="">Select State</option>
-  </select>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-field">
-          <label for="aadharUpload" class="form-about">Upload Aadhar Card:</label>
-          <input type="file" id="aadharUpload" name="aadharUpload" accept=".pdf" required />
-          <small>Allowed formats:PDF</small>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-field">
-          <label for="aadharUpload" class="form-about">Upload Aadhar Card Back:</label>
-          <input type="file" id="aadharUploadBack" name="aadharUploadBack" accept=".pdf" required />
-          <small>Allowed formats: PDF</small>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-field">
-          <label for="aadharUpload" class="form-about">Company Id:</label>
-          <input type="file" id="aadharUpload" name="aadharUpload" accept=".pdf" required />
-          <small>Allowed formats:PDF</small>
-        </div>
-      </div>
-    </div>
-
-
-    <input class="btn px-4 py-3 btn-outline-dark" type="submit" value="Submit" />
-
-  </div>
-</form>
 
 
 

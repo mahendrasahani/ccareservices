@@ -61,15 +61,19 @@
 
             <form action="" class="form" id="signup-form">
                 <p style="text-align: center;font-size:17px;font-weight: 600;">SIGNUP TO COOLCARE</p>
-                <div class="email-field">
+                <div class="form-field">
+                    <label for="">Full Name <span>*</span></label>
+                    <input type="text" placeholder="Enter your name....." required>
+                </div>
+                <div class="form-field">
                     <label for="">Email <span>*</span></label>
                     <input type="email" placeholder="Enter your email....." required>
                 </div>
-                <div class="psd-field"> 
+                <div class="form-field"> 
                     <label for="">Password <span>*</span></label>
                     <input type="password" placeholder="Create your password....." required>
                 </div>
-                <div class="psd-field"> 
+                <div class="form-field"> 
                     <label for="">Confirm Password <span>*</span></label>
                     <input type="password" placeholder="Confirm your password....." required>
                 </div>
