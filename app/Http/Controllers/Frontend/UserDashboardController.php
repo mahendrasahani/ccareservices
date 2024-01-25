@@ -20,5 +20,8 @@ class UserDashboardController extends Controller
     public function purchaseHistoryPageView(){
         return view('frontend.account.purchase_history');
     }
+    public function viewProductDetailPageView(){
+        return view('frontend.account.view_product_detail');
+    }
    
 }

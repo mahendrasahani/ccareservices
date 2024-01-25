@@ -61,7 +61,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                            <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                             <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -81,7 +81,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                             <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                             <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                             <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -111,7 +111,9 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                            <a href="">
+                                                <p>ASUS ROG Phone 2 </p>
+                                            </a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -121,7 +123,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                             <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -148,7 +150,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                             <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -158,7 +160,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                             <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -168,7 +170,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                             <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -178,7 +180,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                             <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -188,7 +190,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                             <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -198,7 +200,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                             <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
@@ -208,7 +210,7 @@
                                                 alt="">
                                         </div>
                                         <div class="recent-products-content">
-                                            <p>ASUS ROG Phone 2 </p>
+                                             <a href=""><p>ASUS ROG Phone 2 </p></a>
                                             <span>$301.00</span>
                                         </div>
                                     </div>
