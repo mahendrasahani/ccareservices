@@ -1,6 +1,4 @@
 @extends('layouts/frontend/main')
-
-
 @section('main-section')
  <!-- slider banner srart -->
  <section class="owl-carousel" id="owl-carousel">

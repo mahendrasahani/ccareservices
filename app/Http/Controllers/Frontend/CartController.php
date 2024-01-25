@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class CartController extends Controller
 {
-    public function homePageView(){
-        return view('frontend.home');
+    public function cartPageView(){
+        return view('frontend.cart');
     }
 }

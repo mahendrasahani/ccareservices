@@ -27,16 +27,16 @@
             <div class="col-md-3">
                 <h6 class="fw-bold text-white">Information</h6>
                 <ul class="list-inline hover-animate">
-                    <a href="about_us.php" class="text-decoration-none text-white ">
+                    <a href="{{route('frontend.about.view')}}" class="text-decoration-none text-white ">
                         <li class="pt-2">About Us</li>
                     </a>
-                    <a href="privacy.html" class="text-decoration-none text-white">
+                    <a href="{{route('frontend.privacy_policy.view')}}" class="text-decoration-none text-white">
                         <li class="pt-2">Privacy Policy</li>
                     </a>
-                    <a href="terms.php" class="text-decoration-none text-white">
+                    <a href="{{route('frontend.terms_and_condition.view')}}" class="text-decoration-none text-white">
                         <li class="pt-2">Terms & Conditions</li>
                     </a>
-                    <a href="contact.php" class="text-decoration-none text-white">
+                    <a href="{{route('frontend.contact_us.view')}}" class="text-decoration-none text-white">
                         <li class="pt-2">Contact Us</li>
                     </a>
 
@@ -299,5 +299,7 @@
         $('html, body').animate({ scrollTop: 0 }, '300');
     }); 
 </script>
+
+@yield('javascript-section')
 </body> 
 </html>

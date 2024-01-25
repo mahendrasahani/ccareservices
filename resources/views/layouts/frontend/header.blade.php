@@ -60,8 +60,8 @@
                                         <i class="fa-regular fa-user px-2" style="color: #676767;"></i>
                                     </li>
                                     <ul class="dropdown-menu dropdown-menu-end login-drop" id="" aria-labelledby="dropdownUser1">
-                                        <li><a class="dropdown-item fw-bold" href="dashboard.php" style=" color: #01316b;">Dashboard</a></li>
-                                        <li><a class="dropdown-item fw-bold" href="login.php" style=" color: #01316b;">Login</a></li>
+                                        <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}" style=" color: #01316b;">Dashboard</a></li>
+                                        <li><a class="dropdown-item fw-bold" href="{{route('login')}}" style=" color: #01316b;">Login</a></li>
                                     </ul>
                         </div>
                     </div>
