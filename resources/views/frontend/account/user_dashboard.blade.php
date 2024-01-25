@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 
-<?php include "include/sidebar.php" ?>
+            @include('layouts/frontend/sidebar')
 
                 <section class="middle col-md-6">
                     <div class="">

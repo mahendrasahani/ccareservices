@@ -25,6 +25,9 @@ Route::get('/contact-us', [PageController::class, 'contactUsPageView'])->name('f
 // ------------------------ All Pages route (end) --------------------------------------------------------
 
 Route::get('/dashboard', [UserDashboardController::class, 'userDashboardPageView'])->name('frontend.user.dashboar.view');
+Route::get('/manage-profile', [UserDashboardController::class, 'manageProfilePageView'])->name('frontend.user.manage_profile.view');
+Route::get('/discount', [UserDashboardController::class, 'discountPageView'])->name('frontend.user.discount.view');
+Route::get('/purchase-history', [UserDashboardController::class, 'purchaseHistoryPageView'])->name('frontend.user.purchase_history.view');
 
 // -------------------------After user login (start) ------------------------------------------------------------
 Route::middleware('auth')->group(function () {

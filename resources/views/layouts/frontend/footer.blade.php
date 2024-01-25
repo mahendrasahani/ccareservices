@@ -299,7 +299,21 @@
         $('html, body').animate({ scrollTop: 0 }, '300');
     }); 
 </script>
+<script>
+    function setActiveClassByUrl(){
+      var currentUrl = window.location.href;
+    var links = document.querySelectorAll('.sidebar-menu ul li a');
 
+    links.forEach(function (link){
+        if (link.href === currentUrl){
+        link.parentElement.classList.add('active');
+        }else{
+        link.parentElement.classList.remove('active');
+        }
+      });
+    } 
+setActiveClassByUrl();
+</script>
 @yield('javascript-section')
 </body> 
 </html>

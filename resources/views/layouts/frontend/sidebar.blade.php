@@ -15,28 +15,13 @@
             </div>
             <div class="sidebar-menu">
                 <ul>
-                    <li class="active"><a href="./dashboard.php"><i class="fa-solid fa-user-tie"></i>Dashboard</a> </li>
-                    <li><a href="#"><i class="fa-solid fa-tag"></i>Discount</a></li>
-                    <li><a href="./purchase-history.php"><i class="fa-solid fa-clock-rotate-left"></i>Purchase History</a> </li>
-                    <li><a href="./registration.php"><i class="fa-solid fa-user-pen"></i>Manage Profile</a></li>
+                    <li class="active"><a href="{{route('frontend.user.dashboar.view')}}"><i class="fa-solid fa-user-tie"></i>Dashboard</a> </li>
+                    <li><a href="{{route('frontend.user.discount.view')}}"><i class="fa-solid fa-tag"></i>Discount</a></li>
+                    <li><a href="{{route('frontend.user.purchase_history.view')}}"><i class="fa-solid fa-clock-rotate-left"></i>Purchase History</a> </li>
+                    <li><a href="{{route('frontend.user.manage_profile.view')}}"><i class="fa-solid fa-user-pen"></i>Manage Profile</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </section>
 
-<script>
-    function setActiveClassByUrl(){
-      var currentUrl = window.location.href;
-    var links = document.querySelectorAll('.sidebar-menu ul li a');
-
-    links.forEach(function (link){
-        if (link.href === currentUrl){
-        link.parentElement.classList.add('active');
-        }else{
-        link.parentElement.classList.remove('active');
-        }
-      });
-    } 
-setActiveClassByUrl();
-</script>
