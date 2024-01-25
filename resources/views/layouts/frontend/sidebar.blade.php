@@ -8,8 +8,8 @@
                             src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg">
                     </div>
                     <div class="identity">
-                        <h3>Name</h3>
-                        <p>customer@gmail.com</p>
+                        <h3>{{Auth::user()->name}}</h3>
+                        <p>{{Auth::user()->email}}</p>
                     </div>
                 </div>
             </div>

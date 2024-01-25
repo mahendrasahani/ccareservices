@@ -21,6 +21,19 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_type',
+        'phone',
+        'company_name',
+        'address_1',
+        'address_2',
+        'country',
+        'state',
+        'city',
+        'postal_code',
+        'aadhar_front',
+        'aadhar_back',
+        'company_id',
+        'profile',
     ];
 
     /**

@@ -54,17 +54,18 @@
              <img src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}" alt="">
         </div>
         <div class="form-part" >
-            <form action="" class="form" id="login-form">
+            <form method="POST" action="{{ route('login') }}" class="form" id="login-form">
+                @csrf
                 <p style="text-align: center;font-size:17px;font-weight: 600;">LOGIN TO COOLCARE</p>
                 <div class="form-field">
                     <label for="text">Email <span>*</span></label>
-                    <input type="email" placeholder="Enter your email....." required>
+                    <input type="email" name="email" placeholder="Enter your email....." required>
                 </div>
                 
                
                 <div class="form-field"> 
                     <label for="password">Password <span>*</span></label>
-                     <input type="password" placeholder="Enter your password....." required>
+                     <input type="password" name="password" placeholder="Enter your password....." required>
                 </div>
 
                 <a href="#" style="text-align:center"><span>Forget Password?</span></a>

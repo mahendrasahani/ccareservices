@@ -58,14 +58,25 @@
                                     class="cart-count" id="cartItemCount">0</span></a>
                             <li class="dropdown d-inline" id="dropdownUser1" data-bs-toggle="dropdown"
                                 aria-expanded="false">
+                                @guest
                                 <i class="fa-regular fa-user px-2" style="color: #676767;"></i>
+                                @else
+                                <i class="fa-regular fa-user px-2" style="color: #676767;"></i>{{Auth::user()->name}}
+                                @endguest
                             </li>
                             <ul class="dropdown-menu dropdown-menu-end login-drop" id=""
                                 aria-labelledby="dropdownUser1">
-                                <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}"
-                                        style=" color: #01316b;">Dashboard</a></li>
-                                <li><a class="dropdown-item fw-bold" href="{{route('login')}}"
-                                        style=" color: #01316b;">Login</a></li>
+                                @guest
+                                <li><a class="dropdown-item fw-bold" href="{{route('login')}}" style=" color: #01316b;">Login</a></li>
+                                @else
+                                <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}" style=" color: #01316b;">Dashboard</a></li>
+
+                                <form action="{{route('logout')}}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-primary m-0 w-100"><i class="fa fa-sign-out mx-2"
+                        aria-hidden="true"></i> Logout</button>
+                  </form>
+                  @endguest
                             </ul>
                         </div>
                     </div>
