@@ -1,43 +1,6 @@
 @extends('layouts/frontend/main')
 @section('main-section')
-
-<style>
-    table {
-        width: 100%;
-        border: 1px solid #ddd;
-    }
-
-    th,
-    td {
-        padding: 10px;
-        text-align: center;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    tr {
-        border-bottom: 1px solid #ddd;
-    }
-
-    .discount-details .discount-details-btn {
-        background-color: #01316b;
-        color: white;
-        border: none;
-        padding: 5px 18px;
-        border-radius: 0;
-        font-size: 12px;
-        text-decoration: none;
-    }
-
-    .discount-details .discount-details-btn:hover {
-        background-color: #02b8df;
-    }
-    .pagination li a{
-        color: #01316b;
-    }
-</style>
+ 
 
 <section class="dahboard-wrapper">
     <div class="container">
@@ -61,37 +24,37 @@
                             <td><b>20230927-05154224</b> <br> <span>Jan 24,2024</span> </td>
                             <td><b>1 products</b> <br> <span>from 1 shops</span> </td>
                             <td><b>$186.11</b> </td>
-                            <td><a href="#" class="discount-details-btn ">View Details</a> </td>
+                            <td><a href="{{route('frontend.user.view_product_detail.view')}}" class="discount-details-btn ">View Details</a> </td>
                         </tr>
                         <tr>
                             <td><b>20230927-05154224</b> <br> <span>Jan 24,2024</span> </td>
                             <td><b>1 products</b> <br> <span>from 1 shops</span> </td>
                             <td><b>$186.11</b> </td>
-                            <td><a href="#" class="discount-details-btn ">View Details</a> </td>
+                            <td><a href="{{route('frontend.user.purchase_history.view')}}" class="discount-details-btn ">View Details</a> </td>
                         </tr>
                         <tr>
                             <td><b>20230927-05154224</b> <br> <span>Jan 24,2024</span> </td>
                             <td><b>1 products</b> <br> <span>from 1 shops</span> </td>
                             <td><b>$186.11</b> </td>
-                            <td><a href="#" class="discount-details-btn ">View Details</a> </td>
+                            <td><a href="{{route('frontend.user.view_product_detail.view')}}" class="discount-details-btn ">View Details</a> </td>
                         </tr>
                         <tr>
                             <td><b>20230927-05154224</b> <br> <span>Jan 24,2024</span> </td>
                             <td><b>1 products</b> <br> <span>from 1 shops</span> </td>
                             <td><b>$186.11</b> </td>
-                            <td><a href="#" class="discount-details-btn ">View Details</a> </td>
+                            <td><a href="{{route('frontend.user.view_product_detail.view')}}" class="discount-details-btn ">View Details</a> </td>
                         </tr>
                         <tr>
                             <td><b>20230927-05154224</b> <br> <span>Jan 24,2024</span> </td>
                             <td><b>1 products</b> <br> <span>from 1 shops</span> </td>
                             <td><b>$186.11</b> </td>
-                            <td><a href="#" class="discount-details-btn ">View Details</a> </td>
+                            <td><a href="{{route('frontend.user.view_product_detail.view')}}" class="discount-details-btn ">View Details</a> </td>
                         </tr>
                         <tr>
                             <td><b>20230927-05154224</b> <br> <span>Jan 24,2024</span> </td>
                             <td><b>1 products</b> <br> <span>from 1 shops</span> </td>
                             <td><b>$186.11</b> </td>
-                            <td><a href="#" class="discount-details-btn ">View Details</a> </td>
+                            <td><a href="{{route('frontend.user.view_product_detail.view')}}" class="discount-details-btn ">View Details</a> </td>
                         </tr>
                           
                     </table>
