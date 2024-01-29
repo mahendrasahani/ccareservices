@@ -27,16 +27,16 @@
             <div class="col-md-3">
                 <h6 class="fw-bold text-white">Information</h6>
                 <ul class="list-inline hover-animate">
-                    <a href="about_us.php" class="text-decoration-none text-white ">
+                    <a href="{{route('frontend.about.view')}}" class="text-decoration-none text-white ">
                         <li class="pt-2">About Us</li>
                     </a>
-                    <a href="privacy.html" class="text-decoration-none text-white">
+                    <a href="{{route('frontend.privacy_policy.view')}}" class="text-decoration-none text-white">
                         <li class="pt-2">Privacy Policy</li>
                     </a>
-                    <a href="terms.php" class="text-decoration-none text-white">
+                    <a href="{{route('frontend.terms_and_condition.view')}}" class="text-decoration-none text-white">
                         <li class="pt-2">Terms & Conditions</li>
                     </a>
-                    <a href="contact.php" class="text-decoration-none text-white">
+                    <a href="{{route('frontend.contact_us.view')}}" class="text-decoration-none text-white">
                         <li class="pt-2">Contact Us</li>
                     </a>
 
@@ -61,8 +61,8 @@
                 <h6 class="fw-bold  text-white">Need Help
 
                 </h6>
-                <a href="index.html" class="text-decoration-none"><img src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}"
-                        class="w-50"></a>
+                <a href="index.html" class="text-decoration-none"><img
+                        src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}" class="w-50"></a>
                 <ul class="list-inline hover-animate">
 
                     <a href="tel:+9198264525856" class="text-decoration-none text-white ">
@@ -299,5 +299,22 @@
         $('html, body').animate({ scrollTop: 0 }, '300');
     }); 
 </script>
-</body> 
+<script>
+    function setActiveClassByUrl(){
+      var currentUrl = window.location.href;
+    var links = document.querySelectorAll('.sidebar-menu ul li a');
+
+    links.forEach(function (link){
+        if (link.href === currentUrl){
+        link.parentElement.classList.add('active');
+        }else{
+        link.parentElement.classList.remove('active');
+        }
+      });
+    } 
+setActiveClassByUrl();
+</script>
+@yield('javascript-section')
+</body>
+
 </html>
