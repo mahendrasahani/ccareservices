@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\backend\AdminDashboardController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\ProductController;
 
 // -------------------------After Admin login (start) ------------------------------------------------------------
 Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
@@ -16,5 +17,6 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/brand/search', [BrandController::class, 'search'])->name('backend.brand.search');
 
 
+    Route::get('admin/product', [ProductController::class, 'index'])->name('backend.admin.product.index');
 });
 // -------------------------After Admin login (end) ------------------------------------------------------------
