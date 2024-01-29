@@ -199,7 +199,7 @@
                             </span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="inhouse-products.html">Products</a></li>
+                            <li><a href="{{route('backend.admin.product.index')}}">Products</a></li>
                             <li><a href="brands.html">Brand</a></li>
                             <li><a href="attributes.html">Attributes</a></li>
                             <li><a href="reviews.html">Reviews</a></li>
