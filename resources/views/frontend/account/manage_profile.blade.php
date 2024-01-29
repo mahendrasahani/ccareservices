@@ -114,7 +114,7 @@
                   <div class="form-field">
                     <label for="aadharUpload" class="form-about">Upload Aadhar Card Back:</label>
                     <input type="file" id="aadharUploadBack" name="aadharUploadBack" accept=".pdf" required />
-                    <small>Allowed formats: PDF</small>
+                    <small>Allowed formats:PDF</small>
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -136,8 +136,7 @@
                       onchange="displayImage(this)" />
                   </div>
                 </div> 
-              <input class="btn  btn-outline-dark mt-4" type="submit" value="Submit" />
-
+              <input class="btn  btn-outline-dark mt-4" type="submit" value="Submit" /> 
             </div>
           </form>
           <section class="address mt-5">

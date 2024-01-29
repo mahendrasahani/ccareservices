@@ -244,7 +244,7 @@
                 <img src="{{url('public/assets/frontend/images/categry/coolcare-laptop.jpg')}}" class="card-img-top"
                   alt="...">
                 <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center categry">LEPTOP ON RENT</h6>
+                  <h6 class="card-title text-center categry">LAPTOP ON RENT</h6>
                 </div>
               </a>
             </div>
@@ -265,9 +265,9 @@
         </div>
       </div>
       <div class="col-md-12 mt-5 mb-2">
-        <a href="#" class="text-decoration-none" id="show-hidden-menu">
-          <button class="animate-btx" style="margin: 0px auto;">
-            View More
+        <a href="#" class="text-decoration-none" >
+          <button class="animate-btx" style="margin: 0px auto;" id="show-hidden-menu">
+            View More 
             <span id="arrow-icon"></span>
           </button>
         </a>

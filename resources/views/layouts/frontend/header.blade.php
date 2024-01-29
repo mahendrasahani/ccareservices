@@ -11,12 +11,45 @@
     <link rel="stylesheet" href="{{url('public/assets/frontend/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="{{url('public/assets/frontend/font/MarlinGeo-ExtraBold.ttf')}}">
 
     <!-- Head title -->
     <title>Home Appliances On Rent In Gurgaon- Appliance Rental Services</title>
 
+    <style>
+         
+
+        .search-field {
+            background-color: transparent;
+            background-image: url(https://wp-themes.com/wp-content/themes/twentythirteen/images/search-icon.png);
+            background-position: 5px center;
+            background-repeat: no-repeat;
+            background-size: 18px 18px;
+            border: none;
+            cursor: pointer; 
+            margin: 3px 0;
+            padding: 0 0 0 34px;
+            position: relative;
+            -webkit-transition: width 400ms ease, background 400ms ease;
+            transition: width 400ms ease, background 400ms ease;
+            width: 0px;
+            cursor: pointer;
+        }
+
+        .search-field:focus { 
+            cursor: text;
+            outline: 0;
+            width: 170px;
+            color: #000;
+            border: 1px solid #000;
+        }
+
+        .search-form .search-submit {
+            display: none;
+        }
+    </style>
 
     <meta name="description"
         content="Cool Care Services offers Home appliances on Rent in Gurgaon with affordable Rental AMC Services. Quote Now for Electronics items for rental!" />
@@ -50,10 +83,18 @@
                                 class="w-25"></a>
                     </div>
                     <div class="col-md-6 text-end pt-4">
-                        <div class="top-icon d-flex justify-content-end" style="cursor: pointer; padding: 0 44px;">
-                            <a href="#"><i class="fa-solid fa-magnifying-glass px-2" style="color: #676767;"></i></a>
-                            <a href="#"><i class="fa-regular fa-heart px-2" style="color: #676767;"></i></a>
-                            <a href="./cart.php" class="d-flex align-items-center">
+                        <div class="top-icon d-flex justify-content-end" style="cursor: pointer; padding: 0 44px;"> 
+                            <a href="#"> 
+                                    <form role="search" method="get" class="search-form" action="">
+                                        <label>
+
+                                            <input type="search" class="search-field" placeholder="Search …" value=""
+                                                name="s" title="Search for:" />
+                                        </label>
+                                        <input type="submit" class="search-submit" value="Search" />
+                                    </form> 
+                            </a>
+                            <a href="{{route('frontend.cart.view')}}" class="d-flex align-items-center">
                                 <i class="fa-solid fa-cart-shopping px-2" style="color: #676767;"></i><span
                                     class="cart-count" id="cartItemCount">0</span></a>
                             <li class="dropdown d-inline" id="dropdownUser1" data-bs-toggle="dropdown"
@@ -67,16 +108,19 @@
                             <ul class="dropdown-menu dropdown-menu-end login-drop" id=""
                                 aria-labelledby="dropdownUser1">
                                 @guest
-                                <li><a class="dropdown-item fw-bold" href="{{route('login')}}" style=" color: #01316b;">Login</a></li>
+                                <li><a class="dropdown-item fw-bold" href="{{route('login')}}"
+                                        style=" color: #01316b;">Login</a></li>
                                 @else
-                                <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}" style=" color: #01316b;">Dashboard</a></li>
-
-                                <form action="{{route('logout')}}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-primary m-0 w-100"><i class="fa fa-sign-out mx-2"
-                        aria-hidden="true"></i> Logout</button>
-                  </form>
-                  @endguest
+                                <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}"
+                                        style=" color: #01316b;">Dashboard</a></li>
+                                <li>
+                                    <form action="{{route('logout')}}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="p-2  dropdown-item fw-bold"
+                                            style=" font-size: 13px;color: #01316b;"> Logout</button>
+                                    </form>
+                                </li>
+                                @endguest
                             </ul>
                         </div>
                     </div>
@@ -103,7 +147,8 @@
                                         Laptop
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="./laptop-on-rent-gurgaon.php">Laptop on
+                                        <li><a class="dropdown-item"
+                                                href="{{route('frontend.view_product.view')}}">Laptop on
                                                 Rent</a></li>
                                     </ul>
                                 </li>
@@ -126,7 +171,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link " aria-current="page" href="#">washing Machine</a>
+                                    <a class="nav-link " aria-current="page" href="#">Washing Machine</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link " aria-current="page" href="#">Refrigerator</a>

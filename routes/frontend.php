@@ -22,6 +22,8 @@ Route::get('/about-us', [PageController::class, 'aboutPageView'])->name('fronten
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicyPageView'])->name('frontend.privacy_policy.view');
 Route::get('/terms-and-condition', [PageController::class, 'termsAndConditionPageView'])->name('frontend.terms_and_condition.view');
 Route::get('/contact-us', [PageController::class, 'contactUsPageView'])->name('frontend.contact_us.view');
+Route::get('/product', [PageController::class, 'viewProductPageView'])->name('frontend.view_product.view');
+Route::get('/single-product', [PageController::class, 'viewSingleProductView'])->name('frontend.single_product.view');
 // ------------------------ All Pages route (end) --------------------------------------------------------
 
 

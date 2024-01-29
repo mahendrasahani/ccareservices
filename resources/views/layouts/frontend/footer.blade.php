@@ -8,7 +8,7 @@
                         <li class="pt-2">Home</li>
                     </a>
                     <a href="" class="text-decoration-none text-white">
-                        <li class="pt-2">Leptop</li>
+                        <li class="pt-2">Laptop</li>
                     </a>
                     <a href="" class="text-decoration-none text-white">
                         <li class="pt-2">Heater</li>
@@ -155,17 +155,23 @@
         });
     });
 </script>
+
 <script>
-    $(document).ready(function ()
-    {
-        $('#show-hidden-menu').click(function (e)
-        {
+    $(document).ready(function () {
+        $('#show-hidden-menu').click(function (e) {
             e.preventDefault(); // Prevent the default behavior of the anchor link
             $('#hiddenContent').slideToggle('slow');
             $('#arrow-icon i').toggleClass('fa-arrow-down fa-arrow-up');
+
+            // Toggle button text
+            var buttonText = $('#show-hidden-menu').text().trim();
+            $('#show-hidden-menu').text(buttonText === 'View More' ? 'View Less' : 'View More');
         });
     });
 </script>
+
+
+
 <script>
     $(document).ready(function ()
     {
