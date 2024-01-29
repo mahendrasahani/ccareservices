@@ -22,4 +22,10 @@ class PageController extends Controller
     public function contactUsPageView(){
         return view('frontend.pages.contact_us');
     }
+    public function viewProductPageView(){
+        return view('frontend.product.index');
+    }
+    public function viewSingleProductView(){
+        return view('frontend.product.single_product');
+    }
 }

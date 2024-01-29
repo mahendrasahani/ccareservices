@@ -1,6 +1,12 @@
 @extends('layouts/frontend/main')
 @section('main-section')
 
+
+<style>
+  .order-paymnent tr td:nth-of-type(1){
+text-align:left;
+  }
+</style>
 <!-- background image-->
 <section>
   <section id="banner-image">
@@ -222,10 +228,10 @@
                     <th style="text-align: end">Subtotal</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="order-paymnent">
                   <tr>
                     <td class="footable-first-visible">
-                      <a href="single-product.html" target="_blank">
+                      <a href="single-product.html" target="_blank" class="product-name-default">
                         2 Ton Window Ac On Rent
                       </a>
                       <strong>× 1</strong>
@@ -267,7 +273,7 @@
                       ₹3,300.00
                     </td>
                   </tr>
-                  <tr>
+                  <tr> 
                     <td>
                       <!-- Payment Method -->
                       <h5 class="mb-3">Payment Method</h5>
@@ -283,8 +289,7 @@
                             name="paymentMethod" value="cashOnDelivery" checked>
                           <label class="form-check-label" for="cashOnDelivery" style="margin-left: 14px;">Cash on
                             Delivery (COD)</label>
-                        </div>
-
+                        </div> 
                       </div>
 
                       <!-- Credit Card Information -->
@@ -309,7 +314,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <button type="button" class="btn btn-warning animation" style="font-size: 19px;">Place
+                      <button type="button" class="btn btn-checkout " style="background-color: #213854; border: none; color:#fff;">Place
                         Order</button>
                     </td>
                   </tr>

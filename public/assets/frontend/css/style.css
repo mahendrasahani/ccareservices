@@ -27,7 +27,7 @@ body {
   font-size: 8px !important;
 }
 #header-ul li {
-  padding-right: 17px;
+     margin: 0 8px;
   font-size: 13px;
   position: relative;
 }
@@ -98,7 +98,7 @@ ul.dropdown-menu {
   margin: 2px 0;
 }
 ul.dropdown-menu li a.dropdown-item {
-  padding: 11px 17px;
+  padding: 10px 7px;
   font-size: 13px;
 }
 .dropdown-item.active,
@@ -191,10 +191,10 @@ h6.card-title.text-center.categry {
 }
 ul.dropdown-menu li {
   padding: 0 0 0 0;
-  margin: 0 -15px 0 0;
+  /* margin: 0 -15px 0 0; */
 }
 ul.dropdown-menu.dropdown-menu-end.login-drop.show {
-  padding: 8px 16px 1px 2px;
+  padding: 5px 5px;
 }
 ul.dropdown-menu.dropdown-menu-end.login-drop.show:hover {
   color: #01b7de !important;
@@ -246,7 +246,7 @@ button.btn.btn-warning.animation:hover {
   color: #a2a2a2;
 }
 .animate-btx {
-  border: none;
+  border: 1px solid #01b7de;
   display: block;
   position: relative;
   padding: 3px 20px;
@@ -291,7 +291,7 @@ button.btn.btn-warning.animation:hover {
 }
 
 .animate-btx:hover {
-  color: white;
+  color: #000;
 }
 
 .animate-btx:active span::before {
@@ -1068,7 +1068,7 @@ h3.text-center.mt-5.mb-5.before::before {
   color: #002c6f;
 }
 .p-tag p {
-  font-size: 11px;
+  font-size: 13px;
 }
 .p-tag li {
   font-size: 11px;
@@ -1502,11 +1502,18 @@ section.dahboard-wrapper {
     background: #eee;
     padding: 11px;
     border-radius:7px;
-}
-
-
-
-    
+} 
+    #myTabs li a{
+      color:#000;
+    }
     /* ---------------------------------- View Product css End -------------------------------------- */
+
+
+    /* ---------------------------------- Cart and Checkout css Start -------------------------------------- */
+      .product-name-default{
+    text-decoration:none;
+    color:#213854;
+  }
+    /* ---------------------------------- Cart and Checkout css End -------------------------------------- */
 
 
