@@ -24,13 +24,14 @@ Route::get('/terms-and-condition', [PageController::class, 'termsAndConditionPag
 Route::get('/contact-us', [PageController::class, 'contactUsPageView'])->name('frontend.contact_us.view');
 // ------------------------ All Pages route (end) --------------------------------------------------------
 
-Route::get('/manage-profile', [UserDashboardController::class, 'manageProfilePageView'])->name('frontend.user.manage_profile.view');
-Route::get('/discount', [UserDashboardController::class, 'discountPageView'])->name('frontend.user.discount.view');
-Route::get('/purchase-history', [UserDashboardController::class, 'purchaseHistoryPageView'])->name('frontend.user.purchase_history.view');
-Route::get('/product-detail', [UserDashboardController::class, 'viewProductDetailPageView'])->name('frontend.user.view_product_detail.view');
+
 
 // -------------------------After user login (start) ------------------------------------------------------------
 Route::middleware(['auth', 'user_check'])->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'userDashboardPageView'])->name('frontend.user.dashboar.view');
+    Route::get('/manage-profile', [UserDashboardController::class, 'manageProfilePageView'])->name('frontend.user.manage_profile.view');
+    Route::get('/discount', [UserDashboardController::class, 'discountPageView'])->name('frontend.user.discount.view');
+    Route::get('/purchase-history', [UserDashboardController::class, 'purchaseHistoryPageView'])->name('frontend.user.purchase_history.view');
+    Route::get('/product-detail', [UserDashboardController::class, 'viewProductDetailPageView'])->name('frontend.user.view_product_detail.view');
 });
 // -------------------------After user login (end) ------------------------------------------------------------

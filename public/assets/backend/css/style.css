@@ -15667,3 +15667,9 @@ li span .sidebar-option{
  }
 }
 
+/* form input field validation error (start) */
+.input_error{
+  color:red;
+  font-weight: bold;
+}
+/* form input field validation error (end) */
