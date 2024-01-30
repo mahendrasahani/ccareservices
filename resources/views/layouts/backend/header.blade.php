@@ -9,7 +9,7 @@
     <!-- theme meta -->
     <meta name="theme-name" content="quixlab" />
 
-    <title>Testing</title>
+    <title>Home Appliances On Rent In Gurgaon- Appliance Rental Services</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{url('public/assets/backend/images/favicon.png')}}">
     <!-- Pignose Calender -->
