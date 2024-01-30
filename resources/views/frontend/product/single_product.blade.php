@@ -1,51 +1,56 @@
 @extends('layouts/frontend/main')
 @section('main-section')
-<style> 
-body {  
-	.wrapper { 
-		min-width: 400px;
-		background: #ffffff;
-		padding: 20px;
-		border-radius: 10px;
-		.thumbnail {
-			.thumbnailBox {
-				border-radius: 4px;
-				overflow: hidden;
-				max-height: 100px;
-				min-height: 100px;
-				min-width: 100px;
-				max-width: 100px;
-				margin-bottom: 15px;
-				cursor: pointer;
-				border: 2px solid transparent;
-				transition: all 0.5s;
-				&.active {
-					opacity: 1;
-					border: 2px solid #202020;
-				}
-				img {
-					aspect-ratio: 1/1;
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-				}
-			}
-		}
-		.mainImage {
-			overflow: hidden;
-			min-width: 500px;
-			max-width: 500px;
-			border-radius: 10px;
-			cursor: crosshair;
-			img {
-				width: 100%;
-				height: 100%;
-				aspect-ratio: 1/1;
-				object-fit: cover;
-			}
-		}
-	}
-} 
+<style>
+    body {
+        .wrapper {
+            min-width: 400px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+
+            .thumbnail {
+                .thumbnailBox {
+                    border-radius: 4px;
+                    overflow: hidden;
+                    max-height: 100px;
+                    min-height: 100px;
+                    min-width: 100px;
+                    max-width: 100px;
+                    margin-bottom: 15px;
+                    cursor: pointer;
+                    border: 2px solid transparent;
+                    transition: all 0.5s;
+
+                    &.active {
+                        opacity: 1;
+                        border: 2px solid #202020;
+                    }
+
+                    img {
+                        aspect-ratio: 1/1;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+
+            .mainImage {
+                overflow: hidden;
+                min-width: 500px;
+                max-width: 500px;
+                border-radius: 10px;
+                cursor: crosshair;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    aspect-ratio: 1/1;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
 </style>
 <section id="banner-image">
     <!-- breadcrumb strat -->
@@ -76,7 +81,7 @@ body {
                         style=" background-image:url('{{url('public/assets/frontend/images/single-product/product-single.jpg')}}"></img>
                 </div> -->
 
-                <div class="wrapper"> 
+                <div class="wrapper">
                     <section class="mainImage"> </section>
                     <section class="thumbnail"> </section>
                 </div>
@@ -213,73 +218,72 @@ body {
         // Update the span element with the new item count
         document.getElementById('cartItemCount').innerText = newItemCount;
     }
-</script> 
+</script>
 
 <script>
     // document selector
-        const thumbnailWrapper = document.querySelector(".thumbnail");
-        const thumbnailBox = document.querySelectorAll(".thumbnailBox");
-        const mainImage = document.querySelector(".mainImage");
+    const thumbnailWrapper = document.querySelector(".thumbnail");
+    const thumbnailBox = document.querySelectorAll(".thumbnailBox");
+    const mainImage = document.querySelector(".mainImage");
 
-        // list of images
-        const imageList = [
-            "https://images.unsplash.com/photo-1618424181497-157f25b6ddd5?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wJTIwY29tcHV0ZXJ8ZW58MHx8MHx8fDA%3D",
-                        "https://media.sketchfab.com/models/52d7da884412402eba0d6ce143969b90/thumbnails/38b86078358748dfb2b7ad9e98d0e89d/2642a999cbfa4076b78dff973dea08bf.jpeg",
-            "https://media.sketchfab.com/models/269e7e4a84fe429faa7bfe4069792047/thumbnails/1551456ef80d43a285f47fb3a8428f77/0c831503e2c44ea9a3f67785e858f798.jpeg"
-        ];
+    // list of images
+    const imageList = [
+        "https://images.unsplash.com/photo-1618424181497-157f25b6ddd5?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wJTIwY29tcHV0ZXJ8ZW58MHx8MHx8fDA%3D",
+        "https://media.sketchfab.com/models/52d7da884412402eba0d6ce143969b90/thumbnails/38b86078358748dfb2b7ad9e98d0e89d/2642a999cbfa4076b78dff973dea08bf.jpeg",
+        "https://media.sketchfab.com/models/269e7e4a84fe429faa7bfe4069792047/thumbnails/1551456ef80d43a285f47fb3a8428f77/0c831503e2c44ea9a3f67785e858f798.jpeg"
+    ];
 
-        // Set the first image to be shown initially
-        mainImage.innerHTML = `<img src="${imageList[0]}" alt="">`;
-        mainImage.addEventListener("mousemove", (e) =>
-        {
-            const containerWidth = mainImage.offsetWidth;
-            const containerHeight = mainImage.offsetHeight;
+    // Set the first image to be shown initially
+    mainImage.innerHTML = `<img src="${imageList[0]}" alt="">`;
+    mainImage.addEventListener("mousemove", (e) =>
+    {
+        const containerWidth = mainImage.offsetWidth;
+        const containerHeight = mainImage.offsetHeight;
 
-            const image = mainImage.querySelector("img");
-            const imageWidth = image.offsetWidth;
-            const imageHeight = image.offsetHeight;
+        const image = mainImage.querySelector("img");
+        const imageWidth = image.offsetWidth;
+        const imageHeight = image.offsetHeight;
 
-            const x = e.pageX - mainImage.offsetLeft;
-            const y = e.pageY - mainImage.offsetTop;
+        const x = e.pageX - mainImage.offsetLeft;
+        const y = e.pageY - mainImage.offsetTop;
 
-            const translateX = (containerWidth / 2 - x) * 2;
-            const translateY = (containerHeight / 2 - y) * 2;
+        const translateX = (containerWidth / 2 - x) * 2;
+        const translateY = (containerHeight / 2 - y) * 2;
 
-            const scale = 3;
+        const scale = 3;
 
-            image.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-        });
-        mainImage.addEventListener("mouseleave", (e) =>
-        {
-            const image = mainImage.querySelector("img");
-            image.style.transform = "translate(0%, 0%) scale(1)";
-        });
-        imageList.forEach((image, index) =>
-        {
-            const isActive = index === 0 ? "active" : "";
-            const child = `<div class="thumbnailBox ${isActive}">
+        image.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    });
+    mainImage.addEventListener("mouseleave", (e) =>
+    {
+        const image = mainImage.querySelector("img");
+        image.style.transform = "translate(0%, 0%) scale(1)";
+    });
+    imageList.forEach((image, index) =>
+    {
+        const isActive = index === 0 ? "active" : "";
+        const child = `<div class="thumbnailBox ${isActive}">
             <img src="${image}" alt="">
         </div>`;
-            const div = document.createElement("div");
-            div.innerHTML = child;
-            thumbnailWrapper.appendChild(div);
-        });
+        const div = document.createElement("div");
+        div.innerHTML = child;
+        thumbnailWrapper.appendChild(div);
+    });
 
-        thumbnailWrapper.querySelectorAll(".thumbnailBox").forEach((thumbnail) =>
+    thumbnailWrapper.querySelectorAll(".thumbnailBox").forEach((thumbnail) =>
+    {
+        thumbnail.addEventListener("click", (e) =>
         {
-            thumbnail.addEventListener("click", (e) =>
+            const activeThumbnail = document.querySelector(".thumbnailBox.active");
+            if (activeThumbnail)
             {
-                const activeThumbnail = document.querySelector(".thumbnailBox.active");
-                if (activeThumbnail)
-                {
-                    activeThumbnail.classList.remove("active");
-                }
-                thumbnail.classList.add("active");
-                imageSrc = thumbnail.querySelector("img").getAttribute("src");
-                mainImage.innerHTML = `<img src="${imageSrc}" alt="">`;
-            });
+                activeThumbnail.classList.remove("active");
+            }
+            thumbnail.classList.add("active");
+            imageSrc = thumbnail.querySelector("img").getAttribute("src");
+            mainImage.innerHTML = `<img src="${imageSrc}" alt="">`;
         });
-
+    }); 
 </script>
 
 @endsection

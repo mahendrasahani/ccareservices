@@ -161,8 +161,8 @@
         $('#show-hidden-menu').click(function (e) {
             e.preventDefault(); // Prevent the default behavior of the anchor link
             $('#hiddenContent').slideToggle('slow');
-            $('#arrow-icon i').toggleClass('fa-arrow-down fa-arrow-up');
-
+            $('#arrow-icon i').toggleClass('fa-arrow-down fa-arrow-up'); 
+            
             // Toggle button text
             var buttonText = $('#show-hidden-menu').text().trim();
             $('#show-hidden-menu').text(buttonText === 'View More' ? 'View Less' : 'View More');
