@@ -36,7 +36,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group mb-0">
+                                        <div class="form-group mb-3 mr-2 text-right">
                                             <button type="submit" class="btn btn-primary">Update</button>
                                         </div>
                                     </form>
