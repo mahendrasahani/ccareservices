@@ -266,7 +266,7 @@
       </div>
       <div class="col-md-12 mt-5 mb-2">
         <a href="#" class="text-decoration-none" >
-          <button class="animate-btx" style="margin: 0px auto;" id="show-hidden-menu">
+          <button class="animate-btx animate-btx-home" style="margin: 0px auto;" id="show-hidden-menu">
             View More 
             <span id="arrow-icon"></span>
           </button>
