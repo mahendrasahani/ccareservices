@@ -1,14 +1,6 @@
 @extends('layouts/backend/main')
 @section('main-section')
 
- 
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
             <div class="top-set">
                 <div class="container-fluid">

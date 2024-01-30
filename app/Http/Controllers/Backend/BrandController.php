@@ -21,6 +21,7 @@ class BrandController extends Controller{
         $fileNameNew = $name.'_brand_logo_'.time().'.'.$fileFromRequest->getClientOriginalExtension();  // creating new file name 
         $fileFromRequest->move(public_path($fileStorePath), $fileNameNew);   // uploadin file in project folder
        
+        
         Brand::create([
             'name' => $name,
             'logo' => 'public/'.$fileStorePath.'/'.$fileNameNew,
@@ -65,6 +66,12 @@ class BrandController extends Controller{
         $search_brand_list = Brand::where('name', 'LIKE', '%'.$search_val.'%')->get();
         $html = '';
         $count = 1;
+        if($search_brand_list->count() == 0){
+            $html .= '<tr>';
+            $html .= '<td class="text-center" style="display: table-cell;" colspan="4">No Result Found</td>';
+            $html .= '</td>';
+            $html .= '</tr>';
+        }else{
         foreach ($search_brand_list as $brand) {
             $html .= '<tr>';
             $html .= '<td class="" style="display: table-cell;">' . $count++ . '</td>';
@@ -76,6 +83,8 @@ class BrandController extends Controller{
             $html .= '</td>';
             $html .= '</tr>';
         }
+    }
+
         return $html;
     }
 }

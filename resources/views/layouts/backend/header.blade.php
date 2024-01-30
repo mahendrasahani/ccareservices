@@ -201,7 +201,7 @@
                         <ul aria-expanded="false"> 
                             <li><a href="{{route('backend.admin.product.index')}}">Products</a></li> 
                             <li><a href="{{route('backend.brand.index')}}">Brand</a></li>
-                            <li><a href="attributes.html">Attributes</a></li>
+                            <li><a href="{{route('backend.attribute.index')}}">Attributes</a></li>
                             <li><a href="reviews.html">Reviews</a></li>
                             <li><a href="bulk-import.html">Bulk Import</a></li>
                             <li><a href="product_sheet/products.xlsx" download>Bulk Export</a></li>
@@ -217,7 +217,7 @@
 
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="category.html">Category</a></li>
+                            <li><a href="{{route('backend.main_category.index')}}">Main Category</a></li>
                             <li><a href="sub-category.html">Sub Category</a></li>
                         </ul>
                     </li>

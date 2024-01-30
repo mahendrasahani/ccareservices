@@ -15673,3 +15673,11 @@ li span .sidebar-option{
   font-weight: bold;
 }
 /* form input field validation error (end) */
+.badge {
+  margin-left: 0 !important;
+  margin-top: 3px !important;
+      }
+      .table .thead-dark th {
+          color: #252525 !important;
+          background-color: #e8e8e8 !important;
+          border-color: #f6f6f6 !important;}
