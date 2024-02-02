@@ -33,7 +33,7 @@
                                                         <td>{{$count++}}</td>
                                                         <td>{{$value->attribute->name}}</td>
                                                         <td>{{$value->name}}</td>
-                                                        <td class="text-center" style="border: 0;">
+                                                        <td class="text-center " style="border: 0;">
                                                             <a href="{{route('backend.attribute_value.edit', [$value->id])}}"><i class="fa-regular fa-pen-to-square"></i></a>
                                                         </td>
                                                     </tr>
