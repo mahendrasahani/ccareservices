@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -218,7 +218,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('backend.main_category.index')}}">Main Category</a></li>
-                            <li><a href="sub-category.html">Sub Category</a></li>
+                            <li><a href="{{route('backend.sub_category.index')}}">Sub Category</a></li>
                         </ul>
                     </li>
 

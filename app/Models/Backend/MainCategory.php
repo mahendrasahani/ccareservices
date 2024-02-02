@@ -22,4 +22,8 @@ class MainCategory extends Model
     protected $casts = [
         'filtering_attribute' => 'array',
     ];
+
+    public function subCategory(){
+        return $this->hasMany(SubCategory::class, 'main_category_id', 'id');
+    }
 }

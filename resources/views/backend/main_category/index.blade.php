@@ -18,17 +18,17 @@
                             <div class="card" style="border: 1px solid #e9e9e9;">
                                 <div class="card-header d-flex" style="border-bottom: 1px solid #e9e9e9;">
                                     <div class="col text-center text-md-left">
-                                        <h4 class="mb-md-0 h5 pt-3">Main Categories
-                                        </h4>
-                                    </div>
+                                        <h4 class="mb-md-0 h5 pt-3">Main Categories</h4></div>
         
-                                    <div class="col-md-2">
+                                    <div class="col-md-4">
                                         <div class="form-group mb-0">
                                             <input type="text" class="form-control form-control-sm" id="search" name="search"
-                                                placeholder="Type name & Enter">
+                                                placeholder="Search by category name">
                                         </div>
                                     </div>
                                 </div> 
+                                @php if(isset($_GET['page'])){$page_number = $_GET['page'];}else{ $page_number = 1;} $count = $page_number * 10 - 9;  @endphp 
+
                                     <table id="myTable" class="table aiz-table mb-0 footable footable-1 breakpoint-lg">
                                         <thead>
                                             <tr class="footable-header">
@@ -51,9 +51,9 @@
                                             </tr>
                                         </thead>
         
-                                        <tbody>
+                                        <tbody id="category_table_body">
                                             @foreach($main_cat_list as $main_cat)
-                                            <tr>
+                                            <tr id="cat_list_{{$main_cat->id}}">
                                                 <!-- <td class="footable-first-visible">
                                                     <div class="form-group d-inline-block">
                                                         <label class="aiz-checkbox">
@@ -62,12 +62,12 @@
                                                         </label>
                                                     </div>
                                                 </td> -->
-                                                <td style="display: table-cell;">1</td>
+                                                <td style="display: table-cell;">{{$count++}}</td>
                                                 <td>{{$main_cat->name}}</td>
                                                  
                                                 <td>{{$main_cat->ordering_number}}</td>
                                                 <td style="width:15%">
-                                                    <img src="{{url($main_cat->thumbnail)}}" width="100%">
+                                                    <img src="{{$main_cat->thumbnail != '' ? url($main_cat->thumbnail):url('public/assets/both/placeholder/main_category.jpg')}}" width="100%">
                                                 </td>
                                                 <td>
                                                     <label class="switch">
@@ -77,19 +77,14 @@
                                                 </td>
                                                 <td class="footable-last-visible">
                                                     <a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2" href="{{route('backend.main_category.edit', [$main_cat->id])}}" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a>
-                                                    <a href="javascript:void()"
-                                                        class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete delete_ico"
-                                                        title="Delete" data-toggle="modal"
-                                                        data-target="#myModal">
-                                                        <i class="fa-solid fa-trash-can"></i> 
-                                                    </a>
+                                                    <button value="{{$main_cat->id}}" class="btn btn-icon btn-sm delete_ico" id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
                                                 </td>
                                             </tr>
                                             @endforeach
                                             
                                         </tbody>
                                     </table>
-                                  <div>
+                                  <div id="my_pagination">
                                         {{$main_cat_list->links('pagination::bootstrap-5')}}
                                     </div>
                             </div>
@@ -127,36 +122,81 @@
                 var $toggleButton = $(this);
                 var status = $toggleButton.prop('checked') ? '1':'0';
                 var main_category_id = $(this).data('id');
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You want to change status !",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes"
-                    }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
+                $.ajax({
                             url: "{{route('backend.main_category.change_status')}}",
                             data: {'status':status, 'main_category_id':main_category_id},
                             type: "GET",
                             success: function(response){
                                 if(response.status == 200){
-                                    
+                                    Swal.fire({
+                                        title: "Success!",
+                                        text: "Status successfully updated.",
+                                        icon: "success"
+                                    });  
                                 }
                             }
                         });
-                        // Swal.fire({
-                        // title: "Deleted!",
-                        // text: "Your file has been deleted.",
-                        // icon: "success"
-                        // });
+            });
+        </script>
 
+        <script> 
+            $(document).on('click', '#delete_btn', function(){
+                const id = $(this).val();
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                    url: "{{route('backend.main_category.destroy')}}",
+                    data:{'id':id},
+                    type:"GET",
+                    success:function(response){
+                        Swal.fire({
+                        title: "Deleted!",
+                        text: "Main category has been deleted.",
+                        icon: "success"
+                        });
+                        $("#cat_list_"+id).hide(); 
+                    }
+                })
+
+                        
                     }
                     });
+
+
                 
             });
+        </script>
+
+    <script>
+            $(document).ready(function (){
+                $(document).on('keydown', '#search', function (){
+                    const search_val = $(this).val();   
+                    if(search_val === ''){
+                        $('#my_pagination').show();
+
+                    }else{
+                    $.ajax({
+                        url:"{{route('backend.main_category.search')}}",
+                        method: "GET", 
+                        data: {'search_val': search_val},
+                        success: function(result){ 
+                            $("#category_table_body").html(result);
+                            $('#my_pagination').hide();
+                        }
+                    }); 
+                }
+                 
+                });
+            }); 
         </script>
 @endsection
 @endsection

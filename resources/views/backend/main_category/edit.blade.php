@@ -44,7 +44,7 @@
                                             <div class="file-preview box sm mt-2">
                                                 <div class="d-flex justify-content-between align-items-center file-preview-item" data-id="83" title="Sports-&amp;-outdoor.png">
                                                     <div class="align-items-center align-self-stretch d-flex justify-content-center thumb">
-                                                        <img src="{{url($main_cat_detail->thumbnail)}}" class="img-fit" width="20%">
+                                                        <img src="{{$main_cat_detail->thumbnail != '' ? url($main_cat_detail->thumbnail):url('public/assets/both/placeholder/main_category.jpg')}}" class="img-fit" width="20%">
                                                     </div>
                                                     <div class="col body">
                                                         <h6 class="d-flex">
@@ -83,7 +83,7 @@
                                             <div class="file-preview box sm">
                                                 <div class="d-flex justify-content-between align-items-center mt-2 file-preview-item" data-id="83" title="Sports-&amp;-outdoor.png">
                                                     <div class="align-items-center align-self-stretch d-flex justify-content-center thumb">
-                                                        <img src="{{url($main_cat_detail->meta_image)}}" class="img-fit" width="20%">
+                                                        <img src="{{$main_cat_detail->meta_image != '' ? url($main_cat_detail->meta_image):url('public/assets/both/placeholder/main_category.jpg')}}" class="img-fit" width="20%">
                                                     </div>
                                                     <div class="col body">
                                                     @php
@@ -102,7 +102,7 @@
                                      <label class="col-md-3 col-form-label">Filtering Attributes</label>
                                        <div class="col-md-9">
                                          <div class="dropdown bootstrap-select show-tick form-control">
-                                            <select class="selectpicker form-control" name="filtering_attributes[]" data-toggle="select2" data-placeholder="Choose ..." data-live-search="true" multiple="" required>
+                                            <select class="selectpicker form-control" name="filtering_attributes[]" data-toggle="select2" data-placeholder="Choose ..." data-live-search="true" multiple="">
                                             @foreach($attribute_list as $attribute)
                                                 <option value="{{$attribute->id}}" @if(in_array($attribute->id, $main_cat_detail->filtering_attribute)) selected @endif>{{$attribute->name}}</option> 
                                             @endforeach 

@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AttributeValueController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\MainCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SubCategoryController;
 use App\Models\Backend\MainCategory;
 
 // -------------------------After Admin login (start) ------------------------------------------------------------
@@ -41,10 +42,33 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::post('/admin/main-category/store', [MainCategoryController::class, 'store'])->name('backend.main_category.store');
     Route::get('/admin/main-category/edit/{id}', [MainCategoryController::class, 'edit'])->name('backend.main_category.edit');
     Route::post('/admin/main-category/update/{id}', [MainCategoryController::class, 'update'])->name('backend.main_category.update');
+    Route::get('/admin/main-category/destroy', [MainCategoryController::class, 'destroy'])->name('backend.main_category.destroy');
     Route::get('/admin/main-category/change-status', [MainCategoryController::class, 'changeStatus'])->name('backend.main_category.change_status');
+    Route::get('/admin/main-category/search', [MainCategoryController::class, 'search'])->name('backend.main_category.search');
+// ------------------------------------Main Category Routes(ends)----------------------------------------------------------------
+
+
+// ------------------------------------Main Category Routes(start)----------------------------------------------------------------
+Route::get('/admin/sub-category', [SubCategoryController::class, 'index'])->name('backend.sub_category.index');
+Route::get('/admin/sub-category/create', [SubCategoryController::class, 'create'])->name('backend.sub_category.create');
+Route::post('/admin/sub-category/store', [SubCategoryController::class, 'store'])->name('backend.sub_category.store');
+Route::get('/admin/sub-category/edit/{id}', [SubCategoryController::class, 'edit'])->name('backend.sub_category.edit');
+Route::post('/admin/sub-category/update/{id}', [SubCategoryController::class, 'update'])->name('backend.sub_category.update');
+Route::get('/admin/sub-category/destroy', [SubCategoryController::class, 'destroy'])->name('backend.sub_category.destroy');
+Route::get('/admin/sub-category/change-status', [SubCategoryController::class, 'changeStatus'])->name('backend.sub_category.change_status');
+Route::get('/admin/sub-category/search', [SubCategoryController::class, 'search'])->name('backend.sub_category.search');
 // ------------------------------------Main Category Routes(ends)----------------------------------------------------------------
 
 
     Route::get('admin/product', [ProductController::class, 'index'])->name('backend.admin.product.index');
+    Route::get('/admin/product/create', [ProductController::class, 'create'])->name('backend.product.create');
+Route::post('/admin/product/store', [ProductController::class, 'store'])->name('backend.product.store');
+    Route::post('/admin/product/add-attribute', [ProductController::class, 'addAttribute'])->name('backend.product.add_attribute');
+Route::post('/admin/product/get-attribte-value', [ProductController::class, 'getAttributeValue'])->name('backend.product.get-attribte-value');
+// Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit'])->name('backend.product.edit');
+// Route::post('/admin/product/update/{id}', [ProductController::class, 'update'])->name('backend.product.update');
+// Route::get('/admin/product/destroy', [ProductController::class, 'destroy'])->name('backend.product.destroy');
+// Route::get('/admin/product/change-status', [ProductController::class, 'changeStatus'])->name('backend.product.change_status');
+// Route::get('/admin/product/search', [ProductController::class, 'search'])->name('backend.product.search');
 });
 // -------------------------After Admin login (end) ------------------------------------------------------------

@@ -11,12 +11,9 @@
                                 <form action="">
                                     <div class="card" style="border: 1px solid #dfdfdf;">
                                         <div class="card-header" style=" border-bottom: 1px solid #dfdfdf;">
-                                        @foreach($attribute_value_list as $key => $value)
-                                        <h3 class="h5"> {{$value->attribute->name}}</h3> 
-                                        @if($key == 0)
-                                        @break
-                                        @endif
-                                        @endforeach
+                                    
+                                        <h3 class="h5"> {{$attribute_detail->name}}</h3> 
+                                       
                                         
                                         </div>
                                         <div class="card-body">
@@ -66,8 +63,8 @@
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="name">Attribute</label>
-                                                    <input type="hidden" name="attribute_id" class="form-control" value="{{$value->attribute->ID}}" readonly> 
-                                                    <div class="form-control" readonly>{{$value->attribute->name}}</div>
+                                                    <input type="hidden" name="attribute_id" class="form-control" value="{{$attribute_detail->id}}" readonly> 
+                                                    <div class="form-control" readonly>{{$attribute_detail->name}}</div>
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="name">Attribute Value Name</label>

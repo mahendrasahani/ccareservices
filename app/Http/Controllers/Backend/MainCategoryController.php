@@ -28,29 +28,39 @@ class MainCategoryController extends Controller
             return intval(trim($value, '"'));
         })->all(); 
      
+        $newMainCategory = MainCategory::create([
+            'name' =>$name,
+            'ordering_number' => $order_number,
+            'meta_title' => $meta_title,
+            'meta_description' => $meta_description,
+           
+            'filtering_attribute' => $filtering_attributes,
+            'status' => 1
+        ]);
+        $newMainCategoryId = $newMainCategory->id;
 
+        if($request->has('thumbnail_img')){
         $thumbnailImgPath = 'assets/backend/upload/main_category_thumbnail';
         $thumbnailImgFromRequest = $request->file('thumbnail_img');
         $originalThumbnailName = $request->file('thumbnail_img')->getClientOriginalName();
         $thumbnailNewName = $name.'_thumbnail_'.time().'.'.$thumbnailImgFromRequest->getClientOriginalExtension();
         $thumbnailImgFromRequest->move(public_path($thumbnailImgPath), $thumbnailNewName);
+        MainCategory::where('id', $newMainCategoryId)->update([ 
+            'thumbnail' => 'public/'.$thumbnailImgPath.'/'.$thumbnailNewName
+        ]);
+        }
 
+        if($request->has('meta_img')){ 
         $metaImgPath = 'assets/backend/upload/main_category_meta_img';
         $metaImgFromRequest = $request->file('meta_img');
         $originalMetaImgName = $request->file('meta_img')->getClientOriginalName();
         $metaImgNewName = $name.'_meta_img_'.time().'.'.$metaImgFromRequest->getClientOriginalExtension();
         $metaImgFromRequest->move(public_path($metaImgPath), $metaImgNewName);
-
-        MainCategory::create([
-            'name' =>$name,
-            'ordering_number' => $order_number,
-            'thumbnail' => 'public/'.$thumbnailImgPath.'/'.$thumbnailNewName,
-            'meta_title' => $meta_title,
-            'meta_description' => $meta_description,
-            'meta_image' => 'public/'.$metaImgPath.'/'.$metaImgNewName,
-            'filtering_attribute' => $filtering_attributes,
-            'status' => 1
+        MainCategory::where('id', $newMainCategoryId)->update([ 
+            'meta_image' => 'public/'.$metaImgPath.'/'.$metaImgNewName
         ]);
+    }
+        
         return redirect()->route('backend.main_category.index')->with('success', "Main Category has been added successfully");   
     }
 
@@ -110,7 +120,61 @@ class MainCategoryController extends Controller
             'status' => 200,
             'message' => "success"
         ]);
-
     }
 
+    public function destroy(Request $request){
+        $id = $request->id;
+        
+        $main_cat = MainCategory::find($id);
+        $delete_result = $main_cat->delete();
+        if($delete_result){
+            return response()->json([
+                'status' => 200,
+                'message' => 'success'
+            ]);
+        }else{
+            return response()->json([
+                'status' => 400,
+                'message' => 'failed'
+            ]);
+        }
+    }
+
+    public function search(Request $request){
+        $search_val = $request->search_val;
+        if($search_val != ''){
+            $search_result = MainCategory::where('name', 'LIKE', '%'.$search_val.'%')->get();
+        }else{
+            $search_result = MainCategory::orderBy('id', 'desc')->paginate(10);
+        }
+        $html = '';
+        $count = 1;
+        if($search_result->count() == 0){
+            $html .= '<tr>';
+            $html .= '<td class="text-center" style="display: table-cell;" colspan="4">No Result Found</td>';
+            $html .= '</td>';
+            $html .= '</tr>';
+        }else{
+            foreach($search_result as $search_data){
+                $html.= '<tr>';
+                $html.= '<tr id="cat_list_'.$search_data->id.'">';
+                $html.= '<td style="display: table-cell;">'.$count++.'</td>';
+                $html.= '<td>'.$search_data->name.'</td>';
+                $html.= '<td>'.$search_data->ordering_number.'</td>';
+                $html.= '<td style="width:15%"><img src="'.($search_data->thumbnail != '' ? url($search_data->thumbnail) : url('public/assets/both/placeholder/main_category.jpg') ).'" width="100%"></td>';
+                $html.= '<td>';
+                $html.= '<label class="switch">';
+                $html.= '<input type="checkbox"'.($search_data->status == 1 ? 'checked':'').' id="status" name="status" value="'.$search_data->status.'" data-id="'.$search_data->id.'">';
+                $html.= '<span class="slider"></span>';
+                $html.= '</label>';
+                $html.= '</td>';
+                $html.= '<td class="footable-last-visible">';
+                $html.= '<a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2" href="'.route('backend.main_category.edit', [$search_data->id]).'" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a>';
+                $html.= '<button value="'.$search_data->id.'" class="btn btn-icon btn-sm delete_ico" id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>';
+                $html.= '</td>';
+                $html.= '</tr>';
+            }
+        }
+        return $html;
+    }
 }

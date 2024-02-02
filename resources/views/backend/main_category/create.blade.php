@@ -38,7 +38,7 @@
                                                 <label class="control-label" for="password">Thumbnail<small>(200x300)</small></label>
                                             </div>
                                             <div class="col-md-9">
-                                                    <input type="file" name="thumbnail_img" required>
+                                                    <input type="file" name="thumbnail_img">
                                             </div>
                                         </div>
                             
@@ -65,7 +65,7 @@
                                                 <label class="control-label" for="password">Meta Image</label>
                                             </div>
                                             <div class="col-md-9"> 
-                                                    <input type="file" name="meta_img" required>
+                                                    <input type="file" name="meta_img">
                                             </div>
                                         </div>
                             

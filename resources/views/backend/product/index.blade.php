@@ -12,7 +12,7 @@
                         <h1 class="h4">All products</h1>
                     </div>
                     <div class="col-md-8 text-md-right">
-                        <a href="product-create.html" class="btn btn-primary" style="background-color: #f5a100; border: none; border-radius: 50em;">
+                        <a href="{{route('backend.product.create')}}" class="btn btn-primary" style="background-color: #f5a100; border: none; border-radius: 50em;">
                             <span>Add New Product</span>
                         </a>
                     </div>

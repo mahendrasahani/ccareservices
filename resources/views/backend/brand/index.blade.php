@@ -149,23 +149,22 @@
             }
         });
     }); 
-        </script>
+</script>
 
-        <script>
+    <script>
         $(document).ready(function (){
-        $(document).on('keyup', '#search', function (){
-            const search_val = $(this).val();  
-            $.ajax({
-                url:"{{route('backend.brand.search')}}",
-                method: "GET", 
-                data: {'search_val': search_val},
-                success: function(result){
-                    $("#brand_table_body").html(result);
-                }
+            $(document).on('keyup', '#search', function (){
+                const search_val = $(this).val();  
+                $.ajax({
+                    url:"{{route('backend.brand.search')}}",
+                    method: "GET", 
+                    data: {'search_val': search_val},
+                    success: function(result){
+                        $("#brand_table_body").html(result);
+                    }
+                }); 
             });
-
-        });
         }); 
-        </script>
+    </script>
         @endsection
 @endsection

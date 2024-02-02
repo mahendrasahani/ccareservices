@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 class AttributeValueController extends Controller{
     public function index($id){
         $attribute_value_list = AttributeValue::with('Attribute')->where('attribute_id', $id)->paginate(10);
-        return view('backend.attribute_value.index', compact('attribute_value_list'));
+        $attribute_detail = Attribute::where('id', $id)->first(); 
+
+        return view('backend.attribute_value.index', compact('attribute_value_list', 'attribute_detail'));
     }
 
     public function store(Request $request){
