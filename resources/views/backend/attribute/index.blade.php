@@ -40,8 +40,8 @@
                                                             @endforeach
                                                         </td>
                                                         <td class="d-flex" style="border: 0;">
-                                                            <a href="{{route('backend.attribute_value.index', [$attribute->id])}}"><i class="fa-solid fa-gear"></i></a>
-                                                            <a href="{{route('backend.attribute.edit', [$attribute->id])}}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                                            <a href="{{route('backend.attribute_value.index', [$attribute->id])}}"><i class="fa-solid fa-gear text-white set_1"></i></a>
+                                                            <a href="{{route('backend.attribute.edit', [$attribute->id])}}"><i class="fa-regular fa-pen-to-square text-white edit_icon"></i></a>
                                                         </td>
                                                     </tr>
                                                     @endforeach 
