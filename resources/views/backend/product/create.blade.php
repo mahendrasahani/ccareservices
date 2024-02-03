@@ -7,7 +7,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 mt-3 mb-3">
-                            <h3>Add new Product</h3>
+                            <h3>Add new Product</h3> 
                         </div>
                     </div>
                 </div>
@@ -19,7 +19,8 @@
                                     <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
                                         <h4 class="mb-0 h6">Product Information</h4>
                                     </div>
-                                    <form action="{{route('backend.product.store')}}" method="POST" id="product_form">
+                                    <form action="{{route('backend.product.store')}}" method="POST" enctype="multipart/form-data" id="create_product_form">
+                                    <!-- <form  enctype="multipart/form-data" id="create_product_form" onsubmit="validateAndSubmit(event)"> -->
                                     @csrf
                                     <div class="card-body">
                                             <div class="form-group row">
@@ -63,7 +64,7 @@
                                             <div class="col-md-8">
                                                 <div class="input-group" data-toggle="" data-type="image" data-multiple="true">
                                                     <div class="input-group-text"> 
-                                                        <input type="file" id="product_images" name="product_images[]" multiple  required>
+                                                        <input type="file" id="product_images" name="product_images[]" multiple >
                                                     </div>  
                                                 </div>
                                             </div>
@@ -81,7 +82,7 @@
                                                 <label class="col-md-3 col-from-label">Regular price <span
                                                         class="text-danger">*</span></label>
                                                 <div class="col-md-8">
-                                                    <input type="number" step="1" min="1" placeholder="Product Price" name="product_price" id="product_price" class="form-control" required="">
+                                                    <input type="number" step="1" min="1" placeholder="Product Price" name="product_price" id="product_price" class="form-control"  >
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -145,8 +146,8 @@
                                     </div>
                                     <div class="card-body">
                                         <div id="container">
-                                            <div id="editor" name="product_description">
-                                            </div>
+                                            <textarea id="editor" name="product_description"></textarea>
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -193,7 +194,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mar-all  mb-3">
-                                                <button type="submit" class="btn btn-primary" id="upload-product">Create Product</button>
+                                                <button class="btn btn-primary" >Add Product</button>
                                             </div>
                                         </div>
                                     </div>
@@ -216,8 +217,7 @@
                                         <h5 class="mb-0 h6">Product Brand</h5>
                                     </div>
                                     <div class="card-body">
-                                        <select class="form-control selectpicker" name="product_brand" id="product_brand" data-live-search="true" title="Select Brand">
-                                            <option value="">Select Brand</option>
+                                        <select class="form-control" name="product_brand" data-live-search="true" title="Select Brand">
                                             @foreach($brand_list as $brand)
                                             <option value="{{$brand->id}}">{{$brand->name}}</option> 
                                             @endforeach
@@ -247,9 +247,9 @@
                                                                 <span>
                                                                     <button onclick="showOptions(event, 'sub_cat_list_{{$key}}','show_{{$key}}','hide_{{$key}}')" id="show_{{$key}}" class="show_btn"><i class="fa-solid fa-plus"></i></button>
                                                                     <button onclick="hideOptions(event, 'sub_cat_list_{{$key}}','show_{{$key}}','hide_{{$key}}')" id="hide_{{$key}}" class="hide_btn" style="display:none;"><i class="fa-solid fa-minus"></i></button>
-                                                                    <label for="check0"></label>
-                                                                    <input type="checkbox" id="check_{{$key}}" name="checks_{{$key}}" onchange="checkAllBox('check_{{$key}}', 'sub_checkbox_{{$key}}')">
-                                                                    <label for="option0"> {{$main_cat->name}}</label>
+                                                                    <label for="main_cat_{{$key}}"></label>
+                                                                    <input type="checkbox" id="main_cat_{{$key}}" name="main_categories[]" onchange="checkAllBox('main_cat_{{$key}}', 'sub_checkbox_{{$key}}')" value="{{$main_cat->id}}">
+                                                                    <label for="main_cat_{{$key}}"> {{$main_cat->name}}</label>
                                                                 </span> 
                                                             </div>
                     
@@ -257,7 +257,7 @@
                                                                 @foreach($main_cat->subCategory as $sub_cat)
                                                                 <div class="product-card">
                                                                     <span>
-                                                                        <input type="checkbox" class="checkInside0 sub_checkbox_{{$key}}" name="sub_categories[{{$key}}][]" value="{{$sub_cat->name}}">
+                                                                        <input type="checkbox" class="checkInside0 sub_checkbox_{{$key}}" name="sub_categories[]" value="{{$sub_cat->id}}" onchange="removeAllCheckBox('main_cat_{{$key}}', 'sub_checkbox_{{$key}}')">
                                                                         <label>{{$sub_cat->name}}</label>
                                                                     </span> 
                                                                 </div>
@@ -300,7 +300,7 @@
                                             <button type="button" class="btn btn-primary" onclick="calculate()">Calculate</button>
                                        
                                     </div>
-                                    <div id="result" class="mt-4"></div>
+                                    <div id="result" class="mt-4 mx-4"></div>
                                 </div>
                             </div>
                         </div>
@@ -310,42 +310,14 @@
             </div>
         </div>
 
-        @section('javascript-section')
-            <!-- <script>
-                    function validateProductForm() {
-                        var product_name = document.getElementById('product_name').value;
-                        var min_qty = document.getElementById('min_qty').value; 
- 
-                        document.getElementById('productNameError').innerText = ""; 
-                        document.getElementById('minQtyError').innerText = ""; 
-
-                        if (product_name === "") {
-                            document.getElementById('productNameError').innerText = "Name is required";
-                            document.getElementById('product_name').focus();
-                            return false;  
-                        } else if(min_qty === ""){
-                            document.getElementById('minQtyError').innerText = "Min Qty is required"; 
-                            document.getElementById('min_qty').focus();
-                            return false;  
-                        }
-                        else {
-                            document.getElementById('nameError').innerText = "";
-                            }
-                            return true;
-                    }
-            </script> -->
+        @section('javascript-section') 
         <script>
-            function addAttribute(){
-                $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
+            function validateAndSubmit(event) {
+            event.preventDefault(); 
+                var formData = $('#create_product_form').serializeArray(); 
 
-                    var formData = $('#product_form').serializeArray();
-
-                        // Add dynamically added fields to formData
-                        var attributeName = $('#add_on select[name^="product_attributes"]');
+                
+                var attributeName = $('#add_on select[name^="product_attributes"]');
                         attributeName.each(function(index, element) {
                             formData.push({
                                 name: element.name,
@@ -361,19 +333,62 @@
                         });
 
 
+ 
+                $.ajaxSetup({
+                    header: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{route('backend.product.store')}}",  
+                    type: "POST",
+                    data: formData,
+                    success: function(response){
+                        console.log(response);
+                    }
+                });
+
+            } 
+        </script>
+
+        <script>
+            function addAttribute(){
+                var imageInput = document.getElementById('product_images');
+
+                 
+                $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    }); 
+                    var formData = $('#product_form').serializeArray(); 
+                        var attributeName = $('#add_on select[name^="product_attributes"]');
+                        attributeName.each(function(index, element) {
+                            formData.push({
+                                name: element.name,
+                                value: $(element).val()
+                            });
+                        }); 
+                        var attributeValue = $('#add_on select[name^="filtering_attributes"]');
+                        attributeValue.each(function(index, element) {
+                            formData.push({
+                                name: element.name,
+                                value: $(element).val()
+                            });
+                        }); 
                  $.ajax({
                     url: "{{route('backend.product.add_attribute')}}",
                     type: "POST",
                     data: formData,
                     success: function (response){
-                        if(response.message == 'empty'){
-
+                        console.log(response);
+                        // if(response.message == 'empty'){ 
                             var appendIn = document.getElementById('add_on');
                             var rowId = Date.now(); 
                             var add_to_html = '<div class="row gutters-5" id="">' +
                                   '<div class="col-md-3">' +
                                       '<div class="form-group">' +
-                                          '<select onchange="get_attributes_values(this, '+rowId+')"  class="asf selectpicker form-control"  data-live-search="true" title="Main Category"name="product_attributes">';
+                                          '<select onchange="get_attributes_values(this, '+rowId+')"  class="asf selectpicker form-control"  data-live-search="true" title="Main Category"name="product_attributes[]">';
                                           response.attributes.forEach(function(item) {
                                             add_to_html += '<option value="' + item.id + '">' + item.name + '</option>';
                                             });
@@ -395,11 +410,10 @@
                                       '</button>' +
                                   '</div>' +
                               '</div>';
-                              appendIn.innerHTML += add_to_html;
-                              console.log(response);
+                              appendIn.insertAdjacentHTML('beforeend', add_to_html);
+                              
                               $('.selectpicker').selectpicker('refresh');
-                            }  
-                            console.log(response);
+                            // }
                     }
                  });
             }
@@ -421,8 +435,7 @@
                     response.attributes_value.forEach(function(item) {
                     add_to_html += '<option value="'+item.id+'">'+item.name+'</option>'; 
                 }); 
-                    var selectFields = document.getElementById(selectId); 
-                   
+                    var selectFields = document.getElementById(selectId);  
                     selectFields.innerHTML += add_to_html; 
                     $('.selectpicker').selectpicker('refresh');
                 }
@@ -442,6 +455,7 @@
         });
     });
 </script>
+
     <script>
         CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
              toolbar: {
@@ -565,14 +579,7 @@
             ]
         });
     </script>
-    <script>
-        $(document).ready(function () {
-            $("hide").hide();
-            $("show").click(function () {
-                $("hide").Toogle();
-            });
-        });
-    </script> 
+  
     <script>
         function calculate() {
             var amount = parseFloat(document.getElementById('amount').value);
@@ -586,9 +593,9 @@
             var taxAmount = (amount * taxRate) / 100;
             var totalAmount = amount + vatAmount + taxAmount; 
             var resultHTML = '<h4>Result:</h4>' +
-                '<p>VAT Amount: $' + vatAmount.toFixed(2) + '</p>' +
-                '<p>Tax Amount: $' + taxAmount.toFixed(2) + '</p>' +
-                '<p>Total Amount (including VAT and Tax): $' + totalAmount.toFixed(2) + '</p>';
+                '<p>VAT Amount: ₹' + vatAmount.toFixed(2) + '</p>' +
+                '<p>Tax Amount: ₹ ' + taxAmount.toFixed(2) + '</p>' +
+                '<p>Total Amount (including VAT and Tax): ₹ ' + totalAmount.toFixed(2) + '</p>';
             document.getElementById('result').innerHTML = resultHTML;
         }
     </script>
@@ -597,57 +604,42 @@
         $('.selectpicker').selectpicker();
     });
 </script>
-<script>
-    // document.addEventListener('DOMContentLoaded', function(){
-    //         for(let i=0;i<4;i++){
-    //             const Show=document.getElementById(`show${i}`);
-    //             const Hide=document.getElementById(`hide${i}`);
-    //             const gamesOption = document.getElementById(`options${i}`);
-    //             Hide.style.display="none";
-    //             Hide.style.fontSize="10px";
-    //             Show.style.fontSize="10px";
-    //             gamesOption.style.display="none"
-    //             gamesOption.style.marginLeft="44px";
-    //             const check=document.getElementById(`check${i}`);
-    //             check.addEventListener("click", function() {
-    //             const gamesOptions = document.querySelectorAll(`.checkInside${i}`);
-    
-    //              gamesOptions.forEach(option => {
-    //                  option.checked = check.checked;
-    //               });
-    //             });
-    //         }
-    //     });
-
+<script>  
         function checkAllBox(main, sub){
-        var mainCheckbox = document.getElementById(main); 
-        var subCheckboxes = document.querySelectorAll('.'+sub); 
-        for (var i = 0; i < subCheckboxes.length; i++) {
-            subCheckboxes[i].checked = mainCheckbox.checked;
-        }
-        }
-
+        var mainCheckboxs = document.getElementById(main); 
+        var subCheckboxes = document.querySelectorAll('.'+sub);  
+            for (var i = 0; i < subCheckboxes.length; i++) {
+                subCheckboxes[i].checked = mainCheckboxs.checked;
+            }  
+        } 
+        function removeAllCheckBox(main, sub){
+            var mainCheckboxs = document.getElementById(main); 
+            var subCheckboxes = document.querySelectorAll('.'+sub + ':checked');  
+            if (subCheckboxes.length > 0) { 
+                mainCheckboxs.checked = true; 
+            }else{
+                mainCheckboxs.checked = false; 
+            }
+        } 
         function showOptions(event, option,show,hide){
             event.preventDefault();
-            const gamesOption = document.getElementById(option);
-            const Show=document.getElementById(show);
-            const Hide=document.getElementById(hide)
-            Show.style.display="none";
-            Hide.style.display="inline"    
-            if(gamesOption.style.display="none")
-            gamesOption.style.display="block";
-    }
-
+            const subCatList = document.getElementById(option);
+            const showBtn=document.getElementById(show);
+            const hideBtn=document.getElementById(hide)
+            showBtn.style.display="none";
+            hideBtn.style.display="inline"    
+            if(subCatList.style.display="none")
+            subCatList.style.display="block";
+    } 
     function hideOptions(event, option,show,hide){
         event.preventDefault();
-        const gamesOption = document.getElementById(option);
-        const Show=document.getElementById(show);
-        const Hide=document.getElementById(hide)
-        Show.style.display="inline";
-        Hide.style.display="none"
-    
-        if(gamesOption.style.display="block")
-        gamesOption.style.display="none";
+        const subCatList = document.getElementById(option);
+        const showBtn=document.getElementById(show);
+        const hideBtn=document.getElementById(hide)
+        showBtn.style.display="inline";
+        hideBtn.style.display="none" 
+        if(subCatList.style.display="block")
+        subCatList.style.display="none";
     } 
     </script>
         @endsection

@@ -72,11 +72,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($product_list as $product)
                                         <tr>
                                             <td style="display: table-cell;">
                                                 <div class="form-group">
                                                     <div class="form-check-inline">
-                                                        <input type="checkbox" class="form-check-input check-one" name="id[]" value="307">
+                                                        <input type="checkbox" class="form-check-input check-one" name="product_id[]" value="{{$product->id}}">
                                                         <label class="form-check-label"></label>
                                                     </div>
                                                 </div>
@@ -86,11 +87,13 @@
                                                     <div class="d-flex align-items-center">
                                                         <a href="#" target="_blank" class="">
                                                             <div class="d-flex align-items-center">
-                                                                <img src="{{url('public/assets/backend/images/products_img/iphone-1.jpg')}}">
+
+                                                                <img src="{{url('public/'.$product->product_images[0])}}" width="50%">
+
                                                                 <span class="flex-grow-1 minw-0">
                                                                     <div class=" text-truncate-2">
                                                                         <p class="font-s">
-                                                                            Apple iPhone 12 Pro, 128GB, 256GB, 512 GB Deep Purple
+                                                                            {{$product->product_name}}
                                                                         </p>
                                                                     </div>
                                                                 </span>
@@ -104,25 +107,31 @@
                                                     <div>
                                                         <span>Rating</span>: <span class="rating rating-sm my-2"><i class="las la-star active"></i><i class="las la-star active"></i><i class="las la-star active"></i><i class="las la-star active"></i><i class="las la-star active"></i></span>
                                                     </div>
-                                                    <div><span>Total Sold</span>: <span class="fw-600">2</span></div>
+                                                    <!-- <div><span>Total Sold</span>: <span class="fw-600">2</span></div> -->
                                                     <div>
-                                                        <span>Price</span>: <span class="fw-600">₹999.00 - ₹1,299.00</span>
+                                                        <span>Price</span>: <span class="fw-600">₹{{number_format($product->regular_price, 2)}}</span>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td style="display: table-cell;">
-                                                <span class="badge badge-primary mb-1">Cellphones & Tabs</span>
-                                                <span class="badge badge-primary mb-1">Smartphones</span>
+                                            @php 
+                                                $main_cat = App\Models\Backend\MainCategory::whereIn('id', $product->main_category)->get();
+                                            @endphp
+                                            @foreach($main_cat as $main)
+                                                <span class="badge badge-primary mb-1">{{$main->name}}</span> 
+                                                @endforeach
                                             </td>
                                             <td>
                                                 <div
                                                     class="h-50px w-100px d-flex align-items-center justify-content-center">
-                                                    <img src="{{url('public/assets/backend/images/products_img/brand.png')}}" class="w-50">
+                                                    
+                                                    <img src="{{url($product->getBrand->logo)}}" width="15%">
+
                                                 </div>
                                             </td>
                                             <td style="display: table-cell;">
                                                 <label class="switch">
-                                                    <input type="checkbox">
+                                                <input type="checkbox" {{$product->product_status == 1 ? 'checked' : ''}}>
                                                     <span class="slider"></span>
                                                 </label>
                                             </td>
@@ -177,31 +186,10 @@
                                                         </a>
                                                 </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
-                                <nav class="mt-3">
-                                    <ul class="pagination">
-                                        <li class="page-item disabled" aria-disabled="true" aria-label="pagination.previous">
-                                            <span class="page-link  border-0" aria-hidden="true">‹</span>
-                                        </li>
-                                        <li class="page-item active" aria-current="page"><span class="page-link  border-0">1</span>
-                                        </li>
-                                        <li class="page-item"><a class="page-link  border-0" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link  border-0" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link  border-0" href="#">4</a></li>
-                                        <li class="page-item"><a class="page-link  border-0" href="#">5</a></li>
-                                        <li class="page-item"><a class="page-link  border-0" href="#">6</a></li>
-                                        <li class="page-item"><a class="page-link  border-0" href="#">7</a></li>
-                                        <li class="page-item"><a class="page-link  border-0" href="#">8</a></li>
-                                        <li class="page-item"><a class="page-link  border-0" href="#">9</a></li>
-                                        <li class="page-item"><a class="page-link  border-0" href="#">10</a></li>
-                                        <li class="page-item"><a class="page-link  border-0" href="#">11</a></li>
-                                        <li class="page-item"><a class="page-link  border-0" href="#">12</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link  border-0" href="#" rel="next" aria-label="pagination.next">›</a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                 
                             </div>
                         </div>
                     </div>

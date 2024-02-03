@@ -13,7 +13,8 @@ use App\Models\Backend\Product;
 class ProductController extends Controller
 {
     public function index(){
-        return view('backend.product.index');
+        $product_list = Product::with('getBrand')->get(); 
+        return view('backend.product.index', compact('product_list'));
     }
 
     public function create(){  
@@ -25,23 +26,35 @@ class ProductController extends Controller
 
     public function addAttribute(Request $request){  
         $formData = $request->all();
-        // $productAttributes = $formData['product_attributes'];
-
+        
         if($request->has('product_attributes')){ 
-            return response()->json([
+            $productAttributes = $formData['product_attributes'];
+            $attribute_list = Attribute::whereNotIn('id', $productAttributes)->get();
+        }else{
+            $attribute_list = Attribute::get();
+        }
+        return response()->json([
                 'status' => 200,
-                'message' => 'not_empty',
+                'message' => 'empty',
+                'attributes' => $attribute_list,
                 'data' => $formData
               ]); 
-        }else{ 
-            $attribute_list = Attribute::get();
-          return response()->json([
-            'status' => 200,
-            'message' => 'empty',
-            'attributes' => $attribute_list,
-            'data' => $formData
-          ]); 
-        }
+
+        // if($request->has('product_attributes')){ 
+        //     return response()->json([
+        //         'status' => 200,
+        //         'message' => 'not_empty',
+        //         'data' => $formData
+        //       ]); 
+        // }else{ 
+        //     $attribute_list = Attribute::get();
+        //   return response()->json([
+        //     'status' => 200,
+        //     'message' => 'empty',
+        //     'attributes' => $attribute_list,
+        //     'data' => $formData
+        //   ]); 
+        // }
     }
 
     public function getAttributeValue(Request $request){
@@ -54,13 +67,14 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-        $formData = $request->all();
-        return $formData;
+        // $formData = $request->all();
+        // return $formData;
+        // return $request->product_images;
 
         $product_name = $request->product_name;
         $min_qty = $request->min_qty;
-        $max_qty = $request->max_qty;
-        $product_images = $request->product_images;
+        $max_qty = $request->max_qty;  
+
         $product_price = $request->product_price;
         $sku = $request->sku;
         $stock_status = $request->stock_status;
@@ -71,12 +85,18 @@ class ProductController extends Controller
         $meta_description = $request->meta_description;
         $slug = $request->slug;
         $product_status = $request->product_status;
-        $product_brand = $request->product_brand;
+        $product_brand = $request->product_brand; 
+        $main_categories = collect($request->main_categories)->map(function ($value) {
+            return intval(trim($value, '"'));
+        })->all();  
+        $sub_categories = collect($request->sub_categories)->map(function ($value) {
+            return intval(trim($value, '"'));
+        })->all(); 
 
-        Product::create([
+        $newProduct = Product::create([
             'product_name' => $product_name,
             'min_purchase_qty' => $min_qty,
-            'max_purchase_qty' => $max_qty, 
+            'max_purchase_qty' => $max_qty,  
             'regular_price' => $product_price,
             'sku' => $sku,
             'stock_status' => $stock_status,
@@ -87,10 +107,34 @@ class ProductController extends Controller
             'meta_description' => $meta_description,
             'slug' => $slug,
             'product_status' => $product_status,
-            'brand' => $product_brand
-        ]);
+            'brand' => $product_brand,
+            'main_category' => $main_categories,
+            'sub_category' => $sub_categories
+        ]); 
+        $newProductId = $newProduct->id; 
+        $images = $request->file('product_images'); 
+        if ($images) {
+            $productFolderPath = 'assets/backend/upload/products/';
+            $storedImages = []; 
+            foreach ($images as $key => $image) {
+                $imageName = $key.'_'.time() . '.' . $image->getClientOriginalExtension(); 
+                $image->move(public_path($productFolderPath), $imageName); 
+                $storedImages[] = $productFolderPath . $imageName;
+            }
+            $imagesString = implode(',', $storedImages);
+            Product::where('id', $newProductId)->update([
+                'product_images' => json_encode($storedImages, JSON_UNESCAPED_SLASHES)
+            ]);
+        }
+
+          
+
+    }
 
 
+    public function test(Request $request){
+        $formData = $request->all();
+        return $formData;
     }
 
 }

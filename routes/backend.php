@@ -62,8 +62,10 @@ Route::get('/admin/sub-category/search', [SubCategoryController::class, 'search'
 
     Route::get('admin/product', [ProductController::class, 'index'])->name('backend.admin.product.index');
     Route::get('/admin/product/create', [ProductController::class, 'create'])->name('backend.product.create');
+Route::get('/admin/product/test', [ProductController::class, 'test'])->name('backend.product.test');
 Route::post('/admin/product/store', [ProductController::class, 'store'])->name('backend.product.store');
     Route::post('/admin/product/add-attribute', [ProductController::class, 'addAttribute'])->name('backend.product.add_attribute');
+Route::post('/admin/product/get-attribte-value', [ProductController::class, 'getAttributeValue'])->name('backend.product.get-attribte-value');
 Route::post('/admin/product/get-attribte-value', [ProductController::class, 'getAttributeValue'])->name('backend.product.get-attribte-value');
 // Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit'])->name('backend.product.edit');
 // Route::post('/admin/product/update/{id}', [ProductController::class, 'update'])->name('backend.product.update');

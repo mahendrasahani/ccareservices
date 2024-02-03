@@ -27,10 +27,20 @@ class Product extends Model
         'product_status',
         'brand',
         'main_category',
-        'sub_category'
+        'sub_category',
+        'attribute_name',
+        'attribute_value'
     ];
 
-    protected $cast = [
-    'product_images' => 'array'
+    protected $casts = [
+    'product_images' => 'array',
+    'main_category' => 'array',
+    'sub_category' => 'array',
+    'attribute_name' => 'array',
+    'attribute_value' => 'array'
     ];
+
+    public function getBrand(){
+        return $this->belongsTo(Brand::class, 'brand');
+    }
 }
