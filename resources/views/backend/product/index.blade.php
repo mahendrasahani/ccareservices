@@ -133,7 +133,7 @@
                                                     </a>
                                                     <a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2"
                                                         href="edit-product.html" title="Edit">
-                                                        <i class="fa-regular fa-pen-to-square"></i>
+                                                        <i class="fa-regular fa-pen-to-square text-white"></i>
                                                     </a>
                                                     <a class="btn btn-soft-success btn-icon btn-circle btn-sm eye_3"
                                                         href="javascript:void()" title="Duplicate" onclick="duplicateRow(this)">
