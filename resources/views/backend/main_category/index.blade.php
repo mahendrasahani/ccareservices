@@ -76,7 +76,7 @@
                                                     </label>
                                                 </td>
                                                 <td class="footable-last-visible">
-                                                    <a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2" href="{{route('backend.main_category.edit', [$main_cat->id])}}" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a>
+                                                    <a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2" href="{{route('backend.main_category.edit', [$main_cat->id])}}" title="Edit"><i class="fa-regular fa-pen-to-square text-white"></i></a>
                                                     <button value="{{$main_cat->id}}" class="btn btn-icon btn-sm delete_ico" id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
                                                 </td>
                                             </tr>

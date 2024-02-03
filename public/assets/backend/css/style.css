@@ -200,8 +200,8 @@ button.btn.btn-warning.btn_add.text-white.pt-2{
     border-radius: 50% !important;
 }
 .eye-2 {
-  background: #25bcf1;
-  color: #377a92;
+  background: #f5a100;
+  /* color: #377a92; */
   border-radius: 100% !important;
 
 }
@@ -214,6 +214,7 @@ button.btn.btn-warning.btn_add.text-white.pt-2{
   background-color: #ef486a;
   border-radius: 50% !important;
   color: rgb(218, 218, 218);
+  margin-left: 4px
 }
 .dropdown.mb-2.mb-md-0 button.btn.border.dropdown-toggle{
   background-color: transparent;
@@ -586,6 +587,7 @@ cursor: pointer;
   border-radius: 50px;
   padding: 8px;
   font-size: 12px;
+  margin-right: 4px
 }
 
 .dots-line{
