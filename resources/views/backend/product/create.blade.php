@@ -19,15 +19,15 @@
                                     <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
                                         <h4 class="mb-0 h6">Product Information</h4>
                                     </div>
-                                    <form action="{{route('backend.product.store')}}" method="POST" enctype="multipart/form-data" id="create_product_form">
-                                    <!-- <form  enctype="multipart/form-data" id="create_product_form" onsubmit="validateAndSubmit(event)"> -->
+                                    <!-- <form action="{{route('backend.product.store')}}" method="POST" enctype="multipart/form-data" id="create_product_form"> -->
+                                    <form  enctype="multipart/form-data" id="create_product_form" onsubmit="validateAndSubmit(event)">
                                     @csrf
                                     <div class="card-body">
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-from-label">Product Name <span class="text-danger">*</span> <i
                                                         class="las la-language text-danger" title="Translatable"></i></label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control" name="product_name" placeholder="Product Name" id="product_name">
+                                                    <input type="text" class="form-control" name="product_name" placeholder="Product Name" id="product_name" required>
                                                         <span id="productNameError" class="formFiedllerror"></span>
                                                 </div>
                                             </div>
@@ -35,7 +35,7 @@
                                                 <label class="col-md-3 col-from-label">Minimum Purchase Qty <span
                                                         class="text-danger">*</span></label>
                                                 <div class="col-md-8">
-                                                    <input type="number" class="form-control" name="min_qty" min="1" value="1" id="min_qty" placeholder="Product Minimum Purchase Qty.">
+                                                    <input type="number" class="form-control" name="min_qty" min="1" value="1" id="min_qty" placeholder="Product Minimum Purchase Qty." required>
                                                     <small class="text-muted">Customer need to purchase this minimum
                                                         quantity for this product. Minimum should be 1.</small>
                                                         <span id="minQtyError" class="formFiedllerror"></span>
@@ -44,7 +44,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-from-label">Maximum Purchase Qty</label>
                                                 <div class="col-md-8">
-                                                    <input type="number" class="form-control" name="max_qty" min="0" id="max_qty" placeholder="Product Maximum Purchase Qty.">
+                                                    <input type="number" class="form-control" name="max_qty" min="1" value="1"  id="max_qty" placeholder="Product Maximum Purchase Qty." required>
                                                     <small class="text-muted">Customer will be able to purchase this
                                                         maximum quantity for this product. Default empty for
                                                         unlimited.</small>
@@ -82,7 +82,7 @@
                                                 <label class="col-md-3 col-from-label">Regular price <span
                                                         class="text-danger">*</span></label>
                                                 <div class="col-md-8">
-                                                    <input type="number" step="1" min="1" placeholder="Product Price" name="product_price" id="product_price" class="form-control"  >
+                                                    <input type="number" step="1" min="1" placeholder="Product Price" name="product_price" id="product_price" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -126,7 +126,7 @@
                                             <label class="col-md-3 col-from-label">Discount <span class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="number" lang="en" min="1" step="1" placeholder="Discount"
-                                                    name="discount" class="form-control">
+                                                    name="discount" class="form-control" required>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group"> 
@@ -146,9 +146,9 @@
                                     </div>
                                     <div class="card-body">
                                         <div id="container">
-                                            <textarea id="editor" name="product_description"></textarea>
-                                          
+                                            <textarea id="editor" name="product_description"></textarea> 
                                         </div>
+                                        <span id="editorError" class="formFiedllerror"></span>
                                     </div>
                                 </div>
                                 <div class="card" style="border: 1px solid #e8e8e8;">
@@ -194,7 +194,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mar-all  mb-3">
-                                                <button class="btn btn-primary" >Add Product</button>
+                                                <button class="btn btn-primary">Add Product</button>
                                             </div>
                                         </div>
                                     </div>
@@ -207,8 +207,8 @@
                                     </div>
                                     <div class="card-body">
                                         <select class="form-control" id="product_status" name="product_status">
-                                            <option value="0">Draft</option>
                                             <option value="1" selected>Published</option>
+                                            <option value="0">Draft</option>
                                         </select>
                                     </div>
                                 </div>
@@ -217,8 +217,9 @@
                                         <h5 class="mb-0 h6">Product Brand</h5>
                                     </div>
                                     <div class="card-body">
-                                        <select class="form-control" name="product_brand" data-live-search="true" title="Select Brand">
-                                            @foreach($brand_list as $brand)
+                                        <select class="form-control" name="product_brand" data-live-search="true" title="Select Brand" required>
+                                        <option value="">Select Brand</option> 
+                                        @foreach($brand_list as $brand)
                                             <option value="{{$brand->id}}">{{$brand->name}}</option> 
                                             @endforeach
                                         </select>
@@ -248,7 +249,7 @@
                                                                     <button onclick="showOptions(event, 'sub_cat_list_{{$key}}','show_{{$key}}','hide_{{$key}}')" id="show_{{$key}}" class="show_btn"><i class="fa-solid fa-plus"></i></button>
                                                                     <button onclick="hideOptions(event, 'sub_cat_list_{{$key}}','show_{{$key}}','hide_{{$key}}')" id="hide_{{$key}}" class="hide_btn" style="display:none;"><i class="fa-solid fa-minus"></i></button>
                                                                     <label for="main_cat_{{$key}}"></label>
-                                                                    <input type="checkbox" id="main_cat_{{$key}}" name="main_categories[]" onchange="checkAllBox('main_cat_{{$key}}', 'sub_checkbox_{{$key}}')" value="{{$main_cat->id}}">
+                                                                    <input type="checkbox" class="main_checkbox" id="main_cat_{{$key}}" name="main_categories[]" onchange="checkAllBox('main_cat_{{$key}}', 'sub_checkbox_{{$key}}')" value="{{$main_cat->id}}">
                                                                     <label for="main_cat_{{$key}}"> {{$main_cat->name}}</label>
                                                                 </span> 
                                                             </div>
@@ -267,6 +268,7 @@
                                                         </li> 
                                                         @endforeach
                                                 </ul>
+                                                <span id="categoryError" class="formFiedllerror"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -312,56 +314,91 @@
 
         @section('javascript-section') 
         <script>
-            function validateAndSubmit(event) {
-            event.preventDefault(); 
-                var formData = $('#create_product_form').serializeArray(); 
+      let myEditor;
 
-                
-                var attributeName = $('#add_on select[name^="product_attributes"]');
-                        attributeName.each(function(index, element) {
-                            formData.push({
-                                name: element.name,
-                                value: $(element).val()
-                            });
-                        }); 
-                        var attributeValue = $('#add_on select[name^="filtering_attributes"]');
-                        attributeValue.each(function(index, element) {
-                            formData.push({
-                                name: element.name,
-                                value: $(element).val()
-                            });
-                        });
-
-
+ClassicEditor
+    .create(document.querySelector('#editor'))
+    .then(editor => {
+        myEditor = editor;
+         
+    })
+    .catch(error => {
+        console.error(error);
+    });
  
-                $.ajaxSetup({
-                    header: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            function validateAndSubmit(event) {
+                    event.preventDefault();  
+                    var errorFields = document.getElementsByClassName('formFiedllerror');
+                    for (var i = 0; i < errorFields.length; i++) {
+                        errorFields[i].innerText = '';
                     }
-                });
-                $.ajax({
-                    url: "{{route('backend.product.store')}}",  
-                    type: "POST",
-                    data: formData,
-                    success: function(response){
-                        console.log(response);
-                    }
-                });
 
-            } 
+                    var formData = new FormData($('#create_product_form')[0]); 
+                    var CatCheckboxes = document.querySelectorAll('.main_checkbox:checked');  
+                    if (CatCheckboxes.length < 1) {
+                        var EmptyCatCheckboxes = document.querySelectorAll('.main_checkbox');  
+                        document.getElementById('categoryError').innerText = 'Select category.';
+                        EmptyCatCheckboxes[0].focus();
+                        return;
+                    }
+ 
+                    const editorValue = myEditor.getData();
+                    if(editorValue == ''){
+                        document.getElementById('editorError').innerText = 'Enter product description';
+                        myEditor.focus();
+                        return;
+                    }else{
+                        formData.append('product_description', editorValue);
+                    }
+                    
+                    // Append additional data to formData
+                    var attributeName = $('#add_on select[name^="product_attributes"]');
+                    attributeName.each(function(index, element) {
+                        formData.append(element.name, $(element).val());
+                    });
+                                                                                                          
+                    var attributeValue = $('#add_on select[name^="filtering_attributes"]');
+                    attributeValue.each(function(index, element) {
+                        formData.append(element.name, $(element).val());
+                    });
+
+                    // Append productImagesValue to formData
+                    var productImagesInput = document.getElementById('product_images');
+                    var productImagesValue = productImagesInput.files;
+                    for (var i = 0; i < productImagesValue.length; i++) {
+                        formData.append('product_images[]', productImagesValue[i].name);
+                    } 
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    }); 
+                    $.ajax({
+                        url: "{{route('backend.product.store')}}",
+                        type: "POST",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                           if(response.status == 200 && response.message == "success"){
+                            localStorage.setItem('product_create', 'success');
+                            window.location.href = "{{route('backend.admin.product.index')}}";
+                           }
+                        }
+                    });
+                }    
         </script>
 
         <script>
             function addAttribute(){
-                var imageInput = document.getElementById('product_images');
-
-                 
+                
+                var imageInput = document.getElementById('product_images');                 
                 $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     }); 
-                    var formData = $('#product_form').serializeArray(); 
+                    var formData = $('#create_product_form').serializeArray(); 
                         var attributeName = $('#add_on select[name^="product_attributes"]');
                         attributeName.each(function(index, element) {
                             formData.push({
@@ -456,129 +493,7 @@
     });
 </script>
 
-    <script>
-        CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
-             toolbar: {
-                items: [
-                    'exportPDF', 'exportWord', '|',
-                    'findAndReplace', 'selectAll', '|',
-                    'heading', '|',
-                    'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
-                    'bulletedList', 'numberedList', 'todoList', '|',
-                    'outdent', 'indent', '|',
-                    'undo', 'redo',
-
-                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
-                    'alignment', '|',
-                    'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
-                    'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-                    'textPartLanguage', '|',
-                    'sourceEditing'
-                ],
-                shouldNotGroupWhenFull: true
-            }, 
-            list: {
-                properties: {
-                    styles: true,
-                    startIndex: true,
-                    reversed: true
-                }
-            }, 
-            heading: {
-                options: [
-                    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-                    { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-                    { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-                    { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-                    { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-                ]
-            },
-             placeholder: 'Welcome to CKEditor&nbsp;5!',
-             fontFamily: {
-                options: [
-                    'default',
-                    'Arial, Helvetica, sans-serif',
-                    'Courier New, Courier, monospace',
-                    'Georgia, serif',
-                    'Lucida Sans Unicode, Lucida Grande, sans-serif',
-                    'Tahoma, Geneva, sans-serif',
-                    'Times New Roman, Times, serif',
-                    'Trebuchet MS, Helvetica, sans-serif',
-                    'Verdana, Geneva, sans-serif'
-                ],
-                supportAllValues: true
-            },
-             fontSize: {
-                options: [10, 12, 14, 'default', 18, 20, 22],
-                supportAllValues: true
-            },
-              htmlSupport: {
-                allow: [
-                    {
-                        name: /.*/,
-                        attributes: true,
-                        classes: true,
-                        styles: true
-                    }
-                ]
-            },
-              htmlEmbed: {
-                showPreviews: true
-            },
-             link: {
-                decorators: {
-                    addTargetToExternalLinks: true,
-                    defaultProtocol: 'https://',
-                    toggleDownloadable: {
-                        mode: 'manual',
-                        label: 'Downloadable',
-                        attributes: {
-                            download: 'file'
-                        }
-                    }
-                }
-            },
-             mention: {
-                feeds: [
-                    {
-                        marker: '@',
-                        feed: [
-                            '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
-                            '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
-                            '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
-                            '@sugar', '@sweet', '@topping', '@wafer'
-                        ],
-                        minimumCharacters: 1
-                    }
-                ]
-            },
-             removePlugins: [ 
-                'AIAssistant',
-                'CKBox',
-                'CKFinder',
-                'EasyImage', 
-                'RealTimeCollaborativeComments',
-                'RealTimeCollaborativeTrackChanges',
-                'RealTimeCollaborativeRevisionHistory',
-                'PresenceList',
-                'Comments',
-                'TrackChanges',
-                'TrackChangesData',
-                'RevisionHistory',
-                'Pagination',
-                'WProofreader',
-                 'MathType',
-                 'SlashCommand',
-                'Template',
-                'DocumentOutline',
-                'FormatPainter',
-                'TableOfContents',
-                'PasteFromOfficeEnhanced'
-            ]
-        });
-    </script>
+    
   
     <script>
         function calculate() {
@@ -600,7 +515,7 @@
         }
     </script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function () {   
         $('.selectpicker').selectpicker();
     });
 </script>

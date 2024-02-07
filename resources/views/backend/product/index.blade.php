@@ -88,7 +88,7 @@
                                                         <a href="#" target="_blank" class="">
                                                             <div class="d-flex align-items-center">
 
-                                                                <img src="{{url('public/'.$product->product_images[0])}}" width="50%">
+                                                                <img src="{{$product->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->product_images[0])}}" width="50%">
 
                                                                 <span class="flex-grow-1 minw-0">
                                                                     <div class=" text-truncate-2">
@@ -109,7 +109,12 @@
                                                     </div>
                                                     <!-- <div><span>Total Sold</span>: <span class="fw-600">2</span></div> -->
                                                     <div>
-                                                        <span>Price</span>: <span class="fw-600">₹{{number_format($product->regular_price, 2)}}</span>
+                                                        <span>Price</span>: <span class="fw-600">₹<strike>{{number_format($product->regular_price, 2)}}</strike></span>
+                                                        @if($product->discount_type == 'flat')
+                                                        <span>Price</span>: <span class="fw-600">₹{{number_format($product->regular_price - $product->discount, 2)}}</span>
+                                                        @elseif($product->discount_type == 'percent')
+                                                        <span>Price</span>: <span class="fw-600">₹{{number_format($product->regular_price - ($product->regular_price * $product->discount)/100, 2)}}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>
@@ -125,7 +130,7 @@
                                                 <div
                                                     class="h-50px w-100px d-flex align-items-center justify-content-center">
                                                     
-                                                    <img src="{{url($product->getBrand->logo)}}" width="15%">
+                                                    <img src="{{$product->getBrand->logo == '' ? url('public/assets/both/placeholder/brand.jpg') : url($product->getBrand->logo)}}" width="15%">
 
                                                 </div>
                                             </td>
@@ -137,11 +142,11 @@
                                             </td>
                                                 <td class="text-right footable-last-visible ">
                                                     <a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage"
-                                                        href="307.html" title="View">
+                                                        href="{{route('backend.product.view', [$product->id])}}" title="View">
                                                         <i class="fa-regular fa-eye"></i>
                                                     </a>
                                                     <a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2"
-                                                        href="edit-product.html" title="Edit">
+                                                        href="{{route('backend.product.edit', [$product->id])}}" title="Edit">
                                                         <i class="fa-regular fa-pen-to-square text-white"></i>
                                                     </a>
                                                     <a class="btn btn-soft-success btn-icon btn-circle btn-sm eye_3"
@@ -189,7 +194,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                 
+                                <div>
+                                {{$product_list->links('pagination::bootstrap-5')}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -199,5 +206,22 @@
         <!-- #/ container -->
     </div>
 
+@section('javascript-section')
+<script>
+document.addEventListener("DOMContentLoaded", function() { 
+    var projectStatus = localStorage.getItem('product_create');
+    if (projectStatus == 'success') { 
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Operation successful with session value',
 
+        }); 
+     localStorage.removeItem('product_create');
+    }
+});
+
+</script>
+
+@endsection
 @endsection

@@ -1055,7 +1055,12 @@ label {
 
 button {
   border-radius: 0; }
-
+  .brand-img-logo{
+    width: 35px;
+  }
+.brand-img-logo img{
+  width: 100%;
+  }
 button:focus {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color; }

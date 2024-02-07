@@ -9,11 +9,12 @@ use App\Models\Backend\Brand;
 use App\Models\Backend\MainCategory;
 use Illuminate\Http\Request;
 use App\Models\Backend\Product;
+use Str;
 
 class ProductController extends Controller
 {
     public function index(){
-        $product_list = Product::with('getBrand')->get(); 
+        $product_list = Product::with('getBrand')->orderBy('id', 'desc')->paginate(10); 
         return view('backend.product.index', compact('product_list'));
     }
 
@@ -25,8 +26,7 @@ class ProductController extends Controller
     }
 
     public function addAttribute(Request $request){  
-        $formData = $request->all();
-        
+        $formData = $request->all(); 
         if($request->has('product_attributes')){ 
             $productAttributes = $formData['product_attributes'];
             $attribute_list = Attribute::whereNotIn('id', $productAttributes)->get();
@@ -38,8 +38,7 @@ class ProductController extends Controller
                 'message' => 'empty',
                 'attributes' => $attribute_list,
                 'data' => $formData
-              ]); 
-
+              ]);  
         // if($request->has('product_attributes')){ 
         //     return response()->json([
         //         'status' => 200,
@@ -66,11 +65,7 @@ class ProductController extends Controller
           ]); 
     }
 
-    public function store(Request $request){
-        // $formData = $request->all();
-        // return $formData;
-        // return $request->product_images;
-
+    public function store(Request $request){ 
         $product_name = $request->product_name;
         $min_qty = $request->min_qty;
         $max_qty = $request->max_qty;  
@@ -93,10 +88,17 @@ class ProductController extends Controller
             return intval(trim($value, '"'));
         })->all(); 
 
+        $attribute_name = collect($request->product_attributes)->map(function ($value) {
+            return intval(trim($value, '"'));
+        })->all(); 
+        // $attribute_value = collect($request->filtering_attributes)->map(function ($value) {
+        //     return intval(trim($value, '"'));
+        // })->all(); 
+
         $newProduct = Product::create([
             'product_name' => $product_name,
             'min_purchase_qty' => $min_qty,
-            'max_purchase_qty' => $max_qty,  
+            'max_purchase_qty' => $max_qty,   
             'regular_price' => $product_price,
             'sku' => $sku,
             'stock_status' => $stock_status,
@@ -105,36 +107,123 @@ class ProductController extends Controller
             'product_description' => $product_description,
             'meta_title' => $meta_title,
             'meta_description' => $meta_description,
-            'slug' => $slug,
+            'slug' => $slug == '' ? Str::slug($product_name) : Str::slug($slug),
             'product_status' => $product_status,
             'brand' => $product_brand,
-            'main_category' => $main_categories,
-            'sub_category' => $sub_categories
+            'main_category' => $main_categories,    
+            'sub_category' => $sub_categories,
+            'attribute_name' => $attribute_name,
+            'attribute_value' => $request->filtering_attributes
         ]); 
         $newProductId = $newProduct->id; 
-        $images = $request->file('product_images'); 
-        if ($images) {
-            $productFolderPath = 'assets/backend/upload/products/';
-            $storedImages = []; 
-            foreach ($images as $key => $image) {
-                $imageName = $key.'_'.time() . '.' . $image->getClientOriginalExtension(); 
-                $image->move(public_path($productFolderPath), $imageName); 
-                $storedImages[] = $productFolderPath . $imageName;
+        $imagePaths = []; 
+        if ($request->hasFile('product_images')) {
+            foreach ($request->file('product_images') as $key => $image) {
+                $fileStorePath = 'assets/backend/upload/products'; 
+                // Generate a unique filename for each image
+                $fileName = $key . '_' . time() . '.' . $image->getClientOriginalExtension(); 
+                // Move the image to the specified directory
+                $image->move(public_path($fileStorePath), $fileName); 
+                // Store the image path in the array
+                $imagePaths[] = $fileStorePath . '/' . $fileName;
             }
-            $imagesString = implode(',', $storedImages);
             Product::where('id', $newProductId)->update([
-                'product_images' => json_encode($storedImages, JSON_UNESCAPED_SLASHES)
+                'product_images' => json_encode($imagePaths, JSON_UNESCAPED_SLASHES)
             ]);
         }
 
-          
-
+        return response()->json([
+            "status" => 200,
+            "message" => "success"
+        ]);  
     }
 
+        public function edit($id){
+            $product_detail = Product::where('id', $id)->first();
+            $brand_list = Brand::where('status', 1)->get();
+            $main_category_list = MainCategory::where('status', 1)->get();
+            return view('backend.product.edit', compact('product_detail', 'brand_list', 'main_category_list'));
+        }
 
-    public function test(Request $request){
-        $formData = $request->all();
-        return $formData;
-    }
+        public function update($id, Request $request){
+        
+            $product_name = $request->product_name;
+            $min_qty = $request->min_qty;
+            $max_qty = $request->max_qty;  
+
+            $product_price = $request->product_price;
+            $sku = $request->sku;
+            $stock_status = $request->stock_status;
+            $discount = $request->discount;
+            $discount_type = $request->discount_type;
+            $product_description = $request->product_description;
+            $meta_title = $request->meta_title;
+            $meta_description = $request->meta_description;
+            $slug = $request->slug;
+            $product_status = $request->product_status;
+            $product_brand = $request->product_brand; 
+            $main_categories = collect($request->main_categories)->map(function ($value) {
+                return intval(trim($value, '"'));
+            })->all();  
+            $sub_categories = collect($request->sub_categories)->map(function ($value) {
+                return intval(trim($value, '"'));
+            })->all(); 
+
+            $attribute_name = collect($request->product_attributes)->map(function ($value) {
+                return intval(trim($value, '"'));
+            })->all(); 
+            // $attribute_value = collect($request->filtering_attributes)->map(function ($value) {
+            //     return intval(trim($value, '"'));
+            // })->all(); 
+
+            $newProduct = Product::where('id', $id)->update([
+                'product_name' => $product_name,
+                'min_purchase_qty' => $min_qty,
+                'max_purchase_qty' => $max_qty,   
+                'regular_price' => $product_price,
+                'sku' => $sku,
+                'stock_status' => $stock_status,
+                'discount' => $discount,
+                'discount_type' => $discount_type,
+                'product_description' => $product_description,
+                'meta_title' => $meta_title,
+                'meta_description' => $meta_description,
+                'slug' => $slug == '' ? Str::slug($product_name) : Str::slug($slug),
+                'product_status' => $product_status,
+                'brand' => $product_brand,
+                'main_category' => $main_categories,    
+                'sub_category' => $sub_categories,
+                'attribute_name' => $attribute_name,
+                'attribute_value' => $request->filtering_attributes
+            ]); 
+            // $newProductId = $newProduct->id; 
+            $imagePaths = []; 
+            if ($request->hasFile('product_images')) {
+                foreach ($request->file('product_images') as $key => $image) {
+                    $fileStorePath = 'assets/backend/upload/products'; 
+                    // Generate a unique filename for each image
+                    $fileName = $key . '_' . time() . '.' . $image->getClientOriginalExtension(); 
+                    // Move the image to the specified directory
+                    $image->move(public_path($fileStorePath), $fileName); 
+                    // Store the image path in the array
+                    $imagePaths[] = $fileStorePath . '/' . $fileName;
+                }
+                Product::where('id', $id)->update([
+                    'product_images' => json_encode($imagePaths, JSON_UNESCAPED_SLASHES)
+                ]);
+            }
+
+            return response()->json([
+                "status" => 200,
+                "message" => "success"
+            ]);  
+        }
+
+
+        public function view($id){
+            $product_detail = Product::where('id', $id)->with('getBrand')->first();
+            // return $product_detail;
+            return view('backend.product.view', compact('product_detail'));
+        }
 
 }
