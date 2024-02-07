@@ -89,61 +89,95 @@
             </div>
             <div class="col-md-6">
                 <div class="product-right-content">
-                    <div class="reviews d-flex">
-                        <div class="star mx-2">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        </div>
-                        <div class="review-counting d-flex mx-2">
-                            <p class="">0 Reviews |</p>
-                            <a href="#description" style="text-decoration:none;">
-                                <p class="" style="color:#01316b"> &nbsp Write a Review</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-details">
-                        <h1 class="fs-3">HP Laptop core i5</h1>
-                        <p>Product Code: HP Core i5</p>
-                        <div class="available d-flex">
-                            <p class="mx-2">Availability:</p>
-                            <p class="text-success"> In Stock</p>
-                            <!-- <p class="text-danger"> Out of Stock</p> -->
-                        </div>
-                    </div>
-                    <div class="prpduct-price">
-                        <h4>Rs 1000 / Month</h4>
-                    </div>
-                    <form action="#">
-                        <div class="select-box">
-                            <label for="select-option" class="month-select">Select Month:</label> <br>
-                            <select name="select-option" id="select-option" aria-placeholder="---Please Select---">
-                                <option value="1">---Please Select---</option>
-                                <option value="2">1</option>
-                                <option value="3">2</option>
-                                <option value="3">3</option>
-                                <option value="3">4</option>
-                                <option value="3">5</option>
-                            </select>
-                            <br>
-                            <label for="select-option" class="month-select mt-2">Delivery Date:</label> <br>
-                            <input type="date" id="selectDate" name="selectDate">
-                        </div>
-                        <div class="product-quantity d-flex mt-3">
-                            <div class="mx-2 d-flex">
-                                <p class="mx-2 m-auto"> Qty</p>
-                                <input type="number" id="quantity" value="0" min="0"
-                                    style="width: 10%;padding-left: 10px;height: 30px;">
-                                <button type="button" class="btn btn-warning animation  mx-2 " onclick="addToCart()">Add
-                                    to Cart</button>
-                                <button type="button" class="btn btn-warning animation ">Add to Wishlist</button>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="reviews d-flex">
+                                <div class="star mx-2">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </div>
+                                <div class="review-counting d-flex mx-2">
+                                    <p class="">0 Reviews |</p>
+                                    <a href="#description" style="text-decoration:none;">
+                                        <p class="" style="color:#01316b"> &nbsp Write a Review</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product-details">
+                                <h1 class="fs-3">HP Laptop core i5</h1>
+                                <p>Product Code: HP Core i5</p>
+                                <div class="available d-flex">
+                                    <p class="mx-2">Availability:</p>
+                                    <p class="text-success"> In Stock</p>
+                                    <!-- <p class="text-danger"> Out of Stock</p> -->
+                                </div>
+                            </div>
+                            <div class="prpduct-price">
+                                <h4>Rs 1000 / Month</h4>
                             </div>
                         </div>
-                    </form>
+                        <div class="col-md-5">
+                            <p>Capacity</p>
+                            <div class="cap-btns d-flex">
+                                <input type="button" id="category" value="160-180 l">
+                                <input type="button" id="category" value="160-180 l">
+                                <input type="button" id="category" value="160-180 l">
+                            </div>
+                            <div class="calculator">
+                                <input type="range" min="1" max="12" value="1" id="slider">
+                                <div class="numbers-container">
+                                    <div class="number">1</div>
+                                    <div class="number">2</div>
+                                    <div class="number">3</div>
+                                    <div class="number">4</div>
+                                    <div class="number">5</div>
+                                    <div class="number">6</div>
+                                    <div class="number">7</div>
+                                    <div class="number">8</div>
+                                    <div class="number">9</div>
+                                    <div class="number">10</div>
+                                    <div class="number">11</div>
+                                    <div class="number">12</div>
+                                </div>
+                                <p>Price: <span id="price">$50</span></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
+
+                <form action="#">
+                    <div class="select-box">
+                        <label for="select-option" class="month-select">Select Month:</label> <br>
+                        <select name="select-option" id="select-option" aria-placeholder="---Please Select---">
+                            <option value="1">---Please Select---</option>
+                            <option value="2">1</option>
+                            <option value="3">2</option>
+                            <option value="3">3</option>
+                            <option value="3">4</option>
+                            <option value="3">5</option>
+                        </select>
+                        <br>
+                        <label for="select-option" class="month-select mt-2">Delivery Date:</label> <br>
+                        <input type="date" id="selectDate" name="selectDate">
+                    </div>
+                    <div class="product-quantity d-flex mt-3">
+                        <div class="mx-2 d-flex">
+                            <p class="mx-2 m-auto"> Qty</p>
+                            <input type="number" id="quantity" value="0" min="0"
+                                style="width: 10%;padding-left: 10px;height: 30px;">
+                            <button type="button" class="btn btn-warning animation  mx-2 " onclick="addToCart()">Add
+                                to Cart</button>
+                            <button type="button" class="btn btn-warning animation ">Add to Wishlist</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 </section>
 <section>
@@ -286,4 +320,23 @@
     }); 
 </script>
 
+<script>
+    const slider = document.getElementById("slider");
+    const priceDisplay = document.getElementById("price");
+ 
+
+    function updatePrice()
+    {
+        const value = slider.value;
+        const price = value * 2; 
+        priceDisplay.textContent = `$${price}`;
+    }
+
+    
+    slider.addEventListener("input", updatePrice);
+ 
+    updatePrice();
+</script>
+
+     
 @endsection

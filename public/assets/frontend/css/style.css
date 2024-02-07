@@ -1520,3 +1520,42 @@ section.dahboard-wrapper {
     /* ---------------------------------- Cart and Checkout css End -------------------------------------- */
 
 
+.cap-btns{
+  display: flex;
+}
+.cap-btns input{
+  margin: 0 10px;
+  background-color: #012f6f;
+  color: #fff;
+  border: 0;
+  padding: 10px;
+  border-radius: 7px;
+}
+
+    input[type=range] {
+        width: 100%;
+        /* Add custom styles for the slider */
+        -webkit-appearance: none; /* Remove default styles */
+        background: #ddd; /* Set background color */
+        height: 5px; /* Set height */
+        border-radius: 5px; /* Set border radius */
+        outline: none; /* Remove outline */
+    }
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Remove default styles */
+        appearance: none;
+        width: 20px; /* Set thumb width */
+        height: 20px; /* Set thumb height */
+        background: #01b7e0; /* Set thumb color */
+        border-radius: 50%; /* Set thumb border radius */
+        cursor: pointer; /* Set cursor type */
+    }
+    .numbers-container {
+        display: flex;
+        justify-content: space-between; 
+        font-size: 12px;
+    }
+    .number {
+        width: calc(100% / 12);
+        text-align: center;
+    }    
