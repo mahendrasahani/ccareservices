@@ -1,57 +1,56 @@
 @extends('layouts/frontend/main')
 @section('main-section')
 <style>
-    body {
-        .wrapper {
-            min-width: 400px;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
+    .wrapper {
+        min-width: 400px;
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
 
-            .thumbnail {
-                .thumbnailBox {
-                    border-radius: 4px;
-                    overflow: hidden;
-                    max-height: 100px;
-                    min-height: 100px;
-                    min-width: 100px;
-                    max-width: 100px;
-                    margin-bottom: 15px;
-                    cursor: pointer;
-                    border: 2px solid transparent;
-                    transition: all 0.5s;
-
-                    &.active {
-                        opacity: 1;
-                        border: 2px solid #202020;
-                    }
-
-                    img {
-                        aspect-ratio: 1/1;
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
-                }
-            }
-
-            .mainImage {
+        .thumbnail {
+            .thumbnailBox {
+                border-radius: 4px;
                 overflow: hidden;
-                min-width: 500px;
-                max-width: 500px;
-                border-radius: 10px;
-                cursor: crosshair;
+                max-height: 100px;
+                min-height: 100px;
+                min-width: 100px;
+                max-width: 100px;
+                margin-bottom: 15px;
+                cursor: pointer;
+                border: 2px solid transparent;
+                transition: all 0.5s;
+
+                &.active {
+                    opacity: 1;
+                    border: 2px solid #202020;
+                }
 
                 img {
+                    aspect-ratio: 1/1;
                     width: 100%;
                     height: 100%;
-                    aspect-ratio: 1/1;
                     object-fit: cover;
                 }
             }
         }
+
+        .mainImage {
+            overflow: hidden;
+            min-width: 500px;
+            max-width: 500px;
+            border-radius: 10px;
+            cursor: crosshair;
+
+            img {
+                width: 100%;
+                height: 100%;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+            }
+        }
     }
 </style>
+
 <section id="banner-image">
     <!-- breadcrumb strat -->
     <div class="container">
@@ -72,20 +71,16 @@
     </div>
     <!-- breadcrumb end -->
 </section>
+
 <section>
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-6">
-                <!-- <div class="img_producto_container" data-scale="1.6">
-                    <img class="dslc-lightbox-image img_producto" href="" target="_self"
-                        style=" background-image:url('{{url('public/assets/frontend/images/single-product/product-single.jpg')}}"></img>
-                </div> -->
+            <div class="col-md-6"> 
 
                 <div class="wrapper">
                     <section class="mainImage"> </section>
                     <section class="thumbnail"> </section>
                 </div>
-
             </div>
             <div class="col-md-6">
                 <div class="product-right-content">
@@ -118,66 +113,74 @@
                                 <h4>Rs 1000 / Month</h4>
                             </div>
                         </div>
-                        <div class="col-md-5">
-                            <p>Capacity</p>
-                            <div class="cap-btns d-flex">
-                                <input type="button" id="category" value="160-180 l">
-                                <input type="button" id="category" value="160-180 l">
-                                <input type="button" id="category" value="160-180 l">
-                            </div>
-                            <div class="calculator">
-                                <input type="range" min="1" max="12" value="1" id="slider">
-                                <div class="numbers-container">
-                                    <div class="number">1</div>
-                                    <div class="number">2</div>
-                                    <div class="number">3</div>
-                                    <div class="number">4</div>
-                                    <div class="number">5</div>
-                                    <div class="number">6</div>
-                                    <div class="number">7</div>
-                                    <div class="number">8</div>
-                                    <div class="number">9</div>
-                                    <div class="number">10</div>
-                                    <div class="number">11</div>
-                                    <div class="number">12</div>
+                    </div>
+
+                    <form action="#">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="select-box">
+                                    <label for="select-option" class="month-select">Select Month:</label> <br>
+                                    <select name="select-option" id="select-option"
+                                        aria-placeholder="---Please Select---">
+                                        <option value="1">---Please Select---</option>
+                                        <option value="2">1</option>
+                                        <option value="3">2</option>
+                                        <option value="3">3</option>
+                                        <option value="3">4</option>
+                                        <option value="3">5</option>
+                                    </select>
+                                    <br>
+                                    <label for="select-option" class="month-select mt-2">Delivery Date:</label> <br>
+                                    <input type="date" id="selectDate" name="selectDate">
                                 </div>
-                                <p>Price: <span id="price">$50</span></p>
+                                <div class="product-quantity d-flex mt-3">
+                                    <div class="mx-2 d-flex">
+                                        <p class="mx-2 m-auto"> Qty</p>
+                                        <input type="number" id="quantity" value="0" min="0"
+                                            style="width: 14%; height: 30px;">
+                                        <button type="button" class="btn btn-warning animation  mx-2 "
+                                            onclick="addToCart()">Add
+                                            to Cart</button>
+                                        <button type="button" class="btn btn-warning animation ">Add to
+                                            Wishlist</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Capacity</h6>
+                                <div class="cap-btns">
+                                    <input type="radio" id="category1" name="category" value="160">
+                                    <label for="category1">160-180 l</label>
+                                    <input type="radio" id="category2" name="category" value="180">
+                                    <label for="category2">180-200 l</label>
+                                    <input type="radio" id="category3" name="category" value="200">
+                                    <label for="category3">200-220 l</label>
+                                </div>
+                                <div class="calculator card">
+                                    <label>Choose Tenure</label>
+                                    <input type="range" min="1" max="12" value="1" id="slider">
+                                    <div class="numbers-container mt-2">
+                                        <div class="number">1</div>
+                                        <div class="number">2</div>
+                                        <div class="number">3</div>
+                                        <div class="number">4</div>
+                                        <div class="number">5</div>
+                                        <div class="number">6</div>
+                                        <div class="number">7</div>
+                                        <div class="number">8</div>
+                                        <div class="number">9</div>
+                                        <div class="number">10</div>
+                                        <div class="number">11</div>
+                                        <div class="number">12</div>
+                                    </div>
+                                    <p>Price: <span id="price">$50</span></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-
-
-
-                <form action="#">
-                    <div class="select-box">
-                        <label for="select-option" class="month-select">Select Month:</label> <br>
-                        <select name="select-option" id="select-option" aria-placeholder="---Please Select---">
-                            <option value="1">---Please Select---</option>
-                            <option value="2">1</option>
-                            <option value="3">2</option>
-                            <option value="3">3</option>
-                            <option value="3">4</option>
-                            <option value="3">5</option>
-                        </select>
-                        <br>
-                        <label for="select-option" class="month-select mt-2">Delivery Date:</label> <br>
-                        <input type="date" id="selectDate" name="selectDate">
-                    </div>
-                    <div class="product-quantity d-flex mt-3">
-                        <div class="mx-2 d-flex">
-                            <p class="mx-2 m-auto"> Qty</p>
-                            <input type="number" id="quantity" value="0" min="0"
-                                style="width: 10%;padding-left: 10px;height: 30px;">
-                            <button type="button" class="btn btn-warning animation  mx-2 " onclick="addToCart()">Add
-                                to Cart</button>
-                            <button type="button" class="btn btn-warning animation ">Add to Wishlist</button>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
     </div>
 </section>
 <section>
@@ -323,20 +326,74 @@
 <script>
     const slider = document.getElementById("slider");
     const priceDisplay = document.getElementById("price");
- 
+    const radioButtons = document.querySelectorAll("input[type='radio'][name='category']");
 
     function updatePrice()
     {
-        const value = slider.value;
-        const price = value * 2; 
+        const sliderValue = slider.value;
+        const selectedRadio = document.querySelector("input[type='radio'][name='category']:checked");
+        const radioValue = selectedRadio ? selectedRadio.value : 0;
+        const price = sliderValue * 2 + parseInt(radioValue);
         priceDisplay.textContent = `$${price}`;
     }
 
-    
     slider.addEventListener("input", updatePrice);
- 
-    updatePrice();
+    radioButtons.forEach(radioButton =>
+    {
+        radioButton.addEventListener("change", updatePrice);
+    });
+
+    updatePrice(); // Initial update
 </script>
 
-     
+<script>
+    const slider = document.getElementById("slider");
+        const priceDisplay = document.getElementById("price");
+        const radioButtons = document.querySelectorAll("input[type='radio'][name='category']");
+
+        function updatePrice()
+        {
+            const sliderValue = slider.value;
+            const selectedRadio = document.querySelector("input[type='radio'][name='category']:checked");
+            const radioValue = selectedRadio ? selectedRadio.value : 0;
+            const price = sliderValue * 2 + parseInt(radioValue);
+            priceDisplay.textContent = `$${price}`;
+        }
+        slider.addEventListener("input",updatePrice);
+        radioButtons.forEach(radioButton=>{
+            radioButton.addEventListener("change",updatePrice)
+        })
+</script>
+
+<div class="col-md-6">
+    <h6>Capacity</h6>
+    <div class="cap-btns">
+        <input type="radio" id="category1" name="category" value="160">
+        <label for="category1">160-180 l</label>
+        <input type="radio" id="category2" name="category" value="180">
+        <label for="category2">180-200 l</label>
+        <input type="radio" id="category3" name="category" value="200">
+        <label for="category3">200-220 l</label>
+    </div>
+    <div class="calculator card">
+        <label>Choose Tenure</label>
+        <input type="range" min="1" max="12" value="1" id="slider">
+        <div class="numbers-container mt-2">
+            <div class="number">1</div>
+            <div class="number">2</div>
+            <div class="number">3</div>
+            <div class="number">4</div>
+            <div class="number">5</div>
+            <div class="number">6</div>
+            <div class="number">7</div>
+            <div class="number">8</div>
+            <div class="number">9</div>
+            <div class="number">10</div>
+            <div class="number">11</div>
+            <div class="number">12</div>
+        </div>
+        <p>Price: <span id="price">$50</span></p>
+    </div>
+</div>
+
 @endsection

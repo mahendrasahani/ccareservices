@@ -117,7 +117,7 @@
                                 <div class="card-body d-flex justify-content-around">
                                 @if($product_detail->product_images !=  '')
                                 @foreach($product_detail->product_images as $image)
-                                <img src="{{url('public/'.$image)}}" class="img-fluid w-25">  
+                                <img src="{{url('public/'.$image)}}" class="img-fluid w-25 m-1">  
                                 @endforeach
                                 @else
                                 <p>No Images Available</p>
