@@ -7,6 +7,7 @@ use App\Models\Backend\Attribute;
 use App\Models\Backend\MainCategory;
 use App\Models\Backend\SubCategory;
 use Illuminate\Http\Request;
+use Str;
 
 class SubCategoryController extends Controller
 {
@@ -22,10 +23,15 @@ class SubCategoryController extends Controller
     }
 
     public function store(Request $request){
+        $validated = $request->validate([
+            'slug' => 'required|unique:sub_categories'
+        ]);
+
         $name = $request->name;
         $main_category = $request->main_category; 
         $ordering_number = $request->ordering_number;
         $meta_title = $request->meta_title;
+        $slug = $request->slug;
         $meta_description = $request->meta_description;  
         $filtering_attributes = collect($request->filtering_attributes)->map(function ($value) {
             return intval(trim($value, '"'));
@@ -35,6 +41,7 @@ class SubCategoryController extends Controller
             'name' =>$name,
             'main_category_id' => $main_category,
             'ordering_number' => $ordering_number ?? '0', 
+            'slug' => Str::slug($slug),
             'meta_title' => $meta_title,
             'meta_description' => $meta_description,
             'filtering_attribute' => $filtering_attributes, 
@@ -75,9 +82,11 @@ class SubCategoryController extends Controller
 
 
     public function update(Request $request, $id){
+         
+
         $name = $request->name;
         $main_category = $request->main_category; 
-        $ordering_number = $request->ordering_number;
+        $ordering_number = $request->ordering_number; 
         $meta_title = $request->meta_title;
         $meta_description = $request->meta_description;  
         $filtering_attributes = collect($request->filtering_attributes)->map(function ($value) {
@@ -88,11 +97,11 @@ class SubCategoryController extends Controller
             'name' =>$name,
             'main_category_id' => $main_category,
             'ordering_number' => $ordering_number ?? '0', 
-            'meta_title' => $meta_title,
+            'meta_title' => $meta_title, 
             'meta_description' => $meta_description,
             'filtering_attribute' => $filtering_attributes, 
             'status' => 1
-        ]); 
+        ]);
         
         if($request->has('thumbnail_image')){
             $thumbnailImgPath = 'assets/backend/upload/sub_category_thumbnail';

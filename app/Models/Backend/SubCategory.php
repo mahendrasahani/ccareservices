@@ -14,6 +14,7 @@ class SubCategory extends Model
         'ordering_number',
         'type',
         'thumbnail_image',
+        'slug',
         'meta_title',
         'meta_description',
         'meta_image',

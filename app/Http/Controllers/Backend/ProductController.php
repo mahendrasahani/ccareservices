@@ -7,6 +7,7 @@ use App\Models\Backend\Attribute;
 use App\Models\Backend\AttributeValue;
 use App\Models\Backend\Brand;
 use App\Models\Backend\MainCategory;
+use App\Models\Backend\SubCategory;
 use Illuminate\Http\Request;
 use App\Models\Backend\Product;
 use Str;
@@ -409,4 +410,11 @@ class ProductController extends Controller
             return $html;
         }
 
+
+        public function productListFrontView($main_category, $sub_category = ''){
+            $main_cat_id = MainCategory::where('slug', $main_category)->first()->id;
+            $sub_cat_id = SubCategory::where('slug', $sub_category)->first()->id;
+            $product_list = Product::whereJsonContains('sub_category', $sub_cat_id)->orderBy('id', 'desc')->paginate(12);
+            return view('frontend.product.index', compact('product_list')); 
+        }
 }

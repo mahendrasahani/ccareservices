@@ -65,11 +65,22 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Slug</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="slug" placeholder="Slug">
+                                            @error('slug')
+                                            <span id="productNameError" class="formFiedllerror">{{$message}}</span>
+                                            @enderror 
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Meta Title</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" name="meta_title" placeholder="Meta Title">
                                         </div>
                                     </div>
+
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Meta description</label>
                                         <div class="col-md-9">

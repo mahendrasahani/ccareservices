@@ -12,6 +12,7 @@ class MainCategory extends Model
     'name',
     'ordering_number',
     'thumbnail',
+    'slug',
     'meta_title',
     'meta_description',
     'meta_image',

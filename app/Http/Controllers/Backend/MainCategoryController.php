@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\Attribute;
 use App\Models\Backend\MainCategory;
 use Illuminate\Http\Request;
+use Str;    
 
 class MainCategoryController extends Controller
 {
@@ -20,9 +21,14 @@ class MainCategoryController extends Controller
     }
 
     public function store(Request $request){
+        $validated = $request->validate([
+            'slug' => 'required|unique:main_categories'
+        ]);
+
         $name = $request->name;
         $order_number = $request->order_number;
         $meta_title = $request->meta_title;
+        $slug = $request->slug;
         $meta_description = $request->meta_description; 
         $filtering_attributes = collect($request->filtering_attributes)->map(function ($value) {
             return intval(trim($value, '"'));
@@ -31,6 +37,7 @@ class MainCategoryController extends Controller
         $newMainCategory = MainCategory::create([
             'name' =>$name,
             'ordering_number' => $order_number,
+            'slug' => Str::slug($slug),
             'meta_title' => $meta_title,
             'meta_description' => $meta_description,
            
@@ -72,7 +79,7 @@ class MainCategoryController extends Controller
 
     public function update(Request $request, $id){
         $name = $request->name;
-        $order_number = $request->ordering_number;
+        $order_number = $request->ordering_number; 
         $meta_title = $request->meta_title;
         $meta_description = $request->meta_description; 
         $filtering_attributes = collect($request->filtering_attributes)->map(function ($value) {

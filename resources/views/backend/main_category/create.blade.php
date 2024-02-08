@@ -44,6 +44,18 @@
                             
                                         <div class="form-group row">
                                             <div class="col-md-3">
+                                                <label class="control-label" for="">Slug</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="Slug" name="slug" class="form-control" required>
+                                                @error('slug')
+                                            <span id="productNameError" class="formFiedllerror">{{$message}}</span>
+                                            @enderror 
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
                                                 <label class="control-label" for="">Meta Title</label>
                                             </div>
                                             <div class="col-md-9">

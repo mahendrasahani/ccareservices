@@ -145,11 +145,7 @@
                         <h6>More Option</h6>
                     </div>
                     <div class="card-body">
-                        <ul class="list-inline">
-                            <li style="border-bottom: 1px solid rgb(210, 210, 210); "><a href="index.html"
-                                    class="text-decoration-none text-dark mx-2 " style="font-size: 13px; ">Home </a>
-
-                        </ul>
+                       
                         <ul class="select-ul-li" id="menu1">
                             <li>
                                 <a href="#" class="text-decoration-none text-dark" style="font-size: 13px;">Laptop</a>
@@ -170,6 +166,7 @@
                                 </ul>
                             </li>
                         </ul>
+
                         <ul class="select-ul-li" id="menu3">
                             <li>
                                 <a href="#" class="text-decoration-none text-dark" style="font-size: 13px;">AC on
@@ -212,23 +209,22 @@
                 </div>
             </div>
             <div class="col-md-10">
-                <div class="row">
+                <div class="row"> 
+                @foreach($product_list as $product)
                     <div class="col-md-3 all laptop" class="content" id="all">
                         <div class="card item ">
                             <div class="card-header">
-                                <a href="single-product.html"><img
-                                        src="{{url('public/assets/frontend/images/single-product/product-single.jpg')}}"
-                                        class="w-100"></a>
+                                <a href="single-product.html"><img src="{{$product->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->product_images[0])}}" class="w-100"></a>
                             </div>
                             <div class="card-body">
-                                <h6 class="fw-bold"> <a href="single-product.html" class="text-decoration-none"
-                                        style="color: black;">HP LAPTOP CORE I5</h6></a>
-                                <p style="font-size: 10px;">HP LAPTOP CORE I5</p>
-                                <p style="font-size: 10px;">HP Core i5</p>
-                                <p class="fw-bold">₹1,000.00</p>
-                                <p class="" style="font-size: 11px; color: gray;">HP laptop i5 3, 4 and 5 generation.
-                                    RAM 4GB or 8GB. Storage 500 GB to 1 TB. Windows 7 or 10...
-                                </p>
+                                <h6 class="fw-bold"> <a href="single-product.html" class="text-decoration-none" style="color: black;">{{$product->product_name}}</h6></a>
+                                 
+                                @if($product->discount_type == 'flat')
+                                <p class="fw-bold">₹{{number_format($product->regular_price - $product->discount, 2)}}</p>
+                                @elseif($product->discount_type == 'percent')
+                                <p class="fw-bold">₹{{number_format($product->regular_price - ($product->regular_price * $product->discount)/100, 2)}}</p>
+                                @endif 
+                                <p class="" style="font-size: 11px; color: gray;">{!! Str::limit($product->product_description, 40) !!}</p>
                                 <hr>
                                 <button class="animate-btx">
                                     <a href="{{route('frontend.single_product.view')}}"><button type="button"
@@ -237,78 +233,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3  item laptop" class="content" id="laptop">
-                        <div class="card">
-                            <div class="card-header">
-                                <a href=""><img
-                                        src="{{url('public/assets/frontend/images/single-product/product-single.jpg')}}"
-                                        class="w-100"></a>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="fw-bold">HP LAPTOP CORE I5</a></h6>
-                                <p style="font-size: 10px;">HP LAPTOP CORE I5</p>
-                                <p style="font-size: 10px;">HP Core i5</p>
-                                <p class="fw-bold">₹1,000.00</p>
-                                <p class="" style="font-size: 11px; color: gray;">HP laptop i5 3, 4 and 5 generation.
-                                    RAM 4GB or 8GB. Storage 500 GB to 1 TB. Windows 7 or 10...
-                                </p>
-                                <hr>
-                                <button class="animate-btx">
-                                    <a href="single-product.php"><button type="button"
-                                            class="btn btn-warning animation">View More</button></a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 oldLaptop" class="content" id="oldLaptop">
-                        <div class="card">
-                            <div class="card-header">
-                                <a href=""><img
-                                        src="{{url('public/assets/frontend/images/single-product/product-single.jpg')}}"
-                                        class="w-100"></a>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="fw-bold">HP LAPTOP CORE I5</h6>
-                                <p style="font-size: 10px;">HP LAPTOP CORE I5</p>
-                                <p style="font-size: 10px;">HP Core i5</p>
-                                <p class="fw-bold">₹1,000.00</p>
-                                <p class="" style="font-size: 11px; color: gray;">HP laptop i5 3, 4 and 5 generation.
-                                    RAM 4GB or 8GB. Storage 500 GB to 1 TB. Windows 7 or 10...
-                                </p>
-                                <hr>
-                                <button class="animate-btx">
-                                    <a href="single-product.php"><button type="button"
-                                            class="btn btn-warning animation">View More</button></a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 all laptop ">
-                        <div class="card">
-                            <div class="card-header">
-                                <a href=""><img
-                                        src="{{url('public/assets/frontend/images/single-product/product-single.jpg')}}"
-                                        class="w-100"></a>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="fw-bold">HP LAPTOP CORE I5</h6>
-                                <p style="font-size: 10px;">HP LAPTOP CORE I5</p>
-                                <p style="font-size: 10px;">HP Core i5</p>
-                                <p class="fw-bold">₹1,000.00</p>
-                                <p class="" style="font-size: 11px; color: gray;">HP laptop i5 3, 4 and 5 generation.
-                                    RAM 4GB or 8GB. Storage 500 GB to 1 TB. Windows 7 or 10...
+                    @endforeach 
 
-                                </p>
-                                <hr>
-                                <button class="animate-btx">
-                                    <a href="single-product.php"><button type="button"
-                                            class="btn btn-warning animation">View More</button></a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
-
+                <div class="col-md-3" class="content" id="">
+                    <button id="load_more">Load More</button>
+                </div>
             </div>
             <div class="col-md-12 mt-5 p-tag">
                 <p>
@@ -385,6 +316,30 @@
             });
         });
     });
+</script>
+
+<script>
+ $(document).on('click', '#load_more', function(){ 
+    console.log('test tss');
+            $('#loader').show();
+ 
+            // $.ajax({
+            //     url: 'your-backend-endpoint',  
+            //     type: 'GET',
+            //     success: function(data) { 
+            //         $('#content').append(data); 
+            //         $('#loader').hide();
+            //     }
+            // });
+ });
+    
+         
+         
+        
+   
+ 
+
+
 </script>
 
 

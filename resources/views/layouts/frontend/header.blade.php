@@ -141,57 +141,25 @@
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="index.html">Home</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        Laptop
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item"
-                                                href="{{route('frontend.view_product.view')}}">Laptop on
-                                                Rent</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        Heater
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Laptop on Rent</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        AC on Rent
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Laptop on Rent</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " aria-current="page" href="#">Washing Machine</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " aria-current="page" href="#">Refrigerator</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " aria-current="page" href="#">Microwave</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " aria-current="page" href="#">LED TV</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " aria-current="page" href="#">Inverter Battery</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " aria-current="page" href="#">R.O</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="#">Furnitures</a>
-                                </li>
 
+                                @foreach($main_categories as $main)
+
+
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link {{count($main->subCategory) > 0 ? 'dropdown-toggle' : ''}}" href="{{route('frontend.product.product_list', [Str::slug($main->name)])}}" role="button" aria-expanded="false">
+                                        {{$main->name}}
+                                    </a>
+                                    @if(count($main->subCategory) > 0)
+                                        <ul class="dropdown-menu">
+                                            @foreach($main->subCategory as $sub)
+                                            <li><a class="dropdown-item" href="{{route('frontend.product.product_list', [Str::slug($main->name), Str::slug($sub->name)])}}">{{$sub->name}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
+                                @endforeach
+ 
                             </ul>
                         </div>
                     </div>

@@ -59,6 +59,16 @@
                                             </div> 
                                         </div>
                                     </div>
+                                    {{-- <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Slug</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="slug" value="{{$sub_cat_detail->slug}}" placeholder="Slug" required>
+                                            @error('slug')
+                                            <span id="productNameError" class="formFiedllerror">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                    </div> --}}
+
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Meta Title</label>
                                         <div class="col-md-9">
