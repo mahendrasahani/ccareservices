@@ -76,6 +76,7 @@
                                         <h5 class="h6">Product price, stock
                                         </h5>
                                     </div>
+                                    
                                     <div class="card-body hidden">
                                         <div class="no_product_variant">
                                             <div class="form-group row">
@@ -442,7 +443,7 @@ ClassicEditor
                                       '</div>' +
                                   '</div>' +
                                   '<div class="col-auto">' +
-                                      '<button type="button" onclick="removePageLink(\'' + rowId + '\')" class="mt-1 btn btn-icon btn-circle btn-sm btn-soft-danger" style="background-color :#ef486a26; border-radius: 55px; color: #ef486a;">' +
+                                      '<button type="button" onclick="" class="mt-1 btn btn-icon btn-circle btn-sm btn-soft-danger" style="background-color :#ef486a26; border-radius: 55px; color: #ef486a;">' +
                                           '<i class="fa-solid fa-xmark"></i>' +
                                       '</button>' +
                                   '</div>' +

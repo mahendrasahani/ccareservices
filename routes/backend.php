@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\backend\AdminDashboardController;
+use App\Http\Controllers\Backend\AdminDashboardController;
 use App\Http\Controllers\Backend\AttributeController;
 use App\Http\Controllers\Backend\AttributeValueController;
 use App\Http\Controllers\Backend\BrandController;
@@ -69,8 +69,10 @@ Route::post('/admin/product/get-attribte-value', [ProductController::class, 'get
 Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit'])->name('backend.product.edit');
 Route::post('/admin/product/update/{id}', [ProductController::class, 'update'])->name('backend.product.update');
 Route::get('admin/product/view/{id}', [ProductController::class, 'view'])->name('backend.product.view');
-// Route::get('/admin/product/destroy', [ProductController::class, 'destroy'])->name('backend.product.destroy');
-// Route::get('/admin/product/change-status', [ProductController::class, 'changeStatus'])->name('backend.product.change_status');
-// Route::get('/admin/product/search', [ProductController::class, 'search'])->name('backend.product.search');
+Route::post('admin/product/clone/', [ProductController::class, 'clone'])->name('backend.product.clone');
+Route::get('/admin/product/destroy', [ProductController::class, 'destroy'])->name('backend.product.destroy');
+Route::get('/admin/product/change-status', [ProductController::class, 'changeStatus'])->name('backend.product.change_status');
+Route::get('/admin/product/multi-destroy', [ProductController::class, 'multiDestroy'])->name('backend.product.multi_destroy');
+Route::get('/admin/product/search', [ProductController::class, 'search'])->name('backend.product.search');
 });
 // -------------------------After Admin login (end) ------------------------------------------------------------
