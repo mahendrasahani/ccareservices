@@ -13,8 +13,24 @@ use Str;
 
 class ProductController extends Controller
 {
-    public function index(){
-        $product_list = Product::with('getBrand')->orderBy('id', 'desc')->paginate(10); 
+    public function index(){ 
+        $product_list = Product::select('*');
+        if(isset($_GET['sortBy']) && $_GET['sortBy'] != ''){
+            if($_GET['sortBy'] == 'price_high_to_low'){
+                $product_list = $product_list->orderBy('regular_price', 'desc');
+            }elseif($_GET['sortBy'] == 'price_low_to_high'){
+                $product_list = $product_list->orderBy('regular_price', 'asc');
+            }
+        }else{
+            $product_list = $product_list->orderBy('id', 'desc');
+        }
+
+        $product_list = $product_list->with('getBrand')->paginate(10); 
+        $product_list->appends([
+            'sortBy' => isset($_GET['sortBy']) ? $_GET['sortBy'] : '',
+            'page' => isset($_GET['page']) ? $_GET['page'] : '',
+        ]);
+
         return view('backend.product.index', compact('product_list'));
     }
 
@@ -224,6 +240,173 @@ class ProductController extends Controller
             $product_detail = Product::where('id', $id)->with('getBrand')->first();
             // return $product_detail;
             return view('backend.product.view', compact('product_detail'));
+        }
+
+        public function clone(Request $request){ 
+            $id = $request->id;
+            $task = Product::find($id);
+            $new = $task->replicate();
+            $new->save(); 
+            $newId = $new->id;
+            $new_product = Product::where('id', $newId)->with('getBrand')->orderBy('id', 'desc')->first(); 
+            $main_cat = MainCategory::whereIn('id', $new_product->main_category)->get();
+            return response()->json([
+                "status" => 200,
+                "message" => "success",
+                "new_product" => $new_product,
+                "main_cat" => $main_cat
+            ]);  
+        }
+
+        public function destroy(Request $request){
+            $id = $request->id;
+            $product = Product::find($id);
+            $delete_result = $product->delete();
+            if($delete_result){
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'success'
+                ]);
+            }else{
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'failed'
+                ]);
+            }
+        }
+
+
+        public function changeStatus(Request $request){
+            $product_id = $request->product_id;
+            $product_status = $request->product_status;
+            Product::where('id', $product_id)->update([
+                'product_status' => $product_status
+            ]);
+            return response()->json([
+                'status' => 200,
+                'message' => "success"
+            ]);
+        }
+
+        public function multiDestroy(Request $request){
+            $ids = $request->selectedIds;
+            $delete_result = Product::whereIn('id', $ids)->delete();
+            if($delete_result){
+            return response()->json([
+                "status" => 200,
+                "message" => "success"
+            ]);
+        }else{
+            return response()->json([
+                "status" => 400,
+                "message" => "faild"
+            ]);
+        }
+        }
+
+
+        public function search(Request $request){
+            $search_val = $request->search_val;
+            if($search_val != ''){
+                $search_result = Product::with('getBrand')->where('product_name', 'LIKE', '%'.$search_val.'%')->get();
+            }else{
+                $search_result = Product::with('getBrand')->orderBy('id', 'desc')->paginate(10);
+            }
+            $html = '';
+            $count = 1;
+            if($search_result->count() == 0){
+                $html .= '<tr>';
+                $html .= '<td class="text-center" style="display: table-cell;" colspan="4">No Result Found</td>';
+                $html .= '</td>';
+                $html .= '</tr>';
+            }else{
+                foreach($search_result as $search_data){ 
+                    $html .= '';
+                    $html .= '<tr id="row_id_'.$search_data->id.'">';
+                    $html .= '<td style="display: table-cell;">';
+                    $html .= '<div class="form-group">';
+                    $html .= '<div class="form-check-inline">';
+                    $html .= '<input type="checkbox" class="form-check-input check-one" name="product_ids[]" value="'.$search_data->id.'">';
+                    $html .= '<label class="form-check-label"></label>';
+                    $html .= '</div>';
+                    $html .= '</div>';
+                    $html .= '</td>';
+                    $html .= '<td style="display: table-cell;">';
+                    $html .= '<a href="" target="_blank" class="text-reset d-block">';
+                    $html .= '<div class="d-flex align-items-center">';
+                    $html .= '<a href="#" target="_blank" class="">';
+                    $html .= '<div class="d-flex align-items-center">';
+
+                    $html .= '<img src="'.($search_data->product_images == null ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$search_data->product_images[0])).'" width="50%">';
+                    
+                    $html .= '<span class="flex-grow-1 minw-0">';
+                    $html .= '<div class=" text-truncate-2">';
+                    $html .= '<p class="font-s">'.$search_data->product_name.'</p>';
+                    $html .= '</div>';
+                    $html .= '</span>';
+                    $html .= '</div>';
+                    $html .= '</a>';
+                    $html .= '</div>';
+                    $html .= '</a>';
+                    $html .= '</td>';
+
+                    $html .= '<td style="display: table-cell;">';
+                    $html .= '<div>';
+                    $html .= '<div>';
+                    $html .= '<span>Rating</span>: <span class="rating rating-sm my-2"><i class="las la-star active"></i><i class="las la-star active"></i><i class="las la-star active"></i><i class="las la-star active"></i><i class="las la-star active"></i></span>';
+                    $html .= '</div>'; 
+                    $html .= '<div>';
+                    $html .= '<span>Price</span>: <span class="fw-600">₹<strike>'.number_format($search_data->regular_price, 2).'</strike></span>';
+                    if($search_data->discount_type == 'flat'){
+                    $html .= '<span>Price</span>: <span class="fw-600">₹'.number_format($search_data->regular_price - $search_data->discount, 2).'</span>';
+                    }
+                    elseif($search_data->discount_type == 'percent'){
+                    $html .= '<span>Price</span>: <span class="fw-600">₹'.number_format($search_data->regular_price - ($search_data->regular_price * $search_data->discount)/100, 2).'</span>';
+                    }
+                    $html .= '</div>';
+                    $html .= '</div>';
+                    $html .= '</td>';                                     
+                
+                    $html .= '<td style="display: table-cell;">'; 
+                    $main_cat = MainCategory::whereIn('id', $search_data->main_category)->get();
+                    foreach($main_cat as $main){
+                    $html .= '<span class="badge badge-primary mb-1">'.$main->name.'</span>';
+                    }
+                    $html .= '</td>';
+                    $html .= '<td>';
+                    $html .= '<div class="h-50px w-100px d-flex align-items-center justify-content-center">';
+                    $html .= '<img src="'.($search_data->getBrand->logo == '' ? url('public/assets/both/placeholder/brand.jpg') : url($search_data->getBrand->logo)).'" width="15%">';
+                    $html .= '</div>';
+                    $html .= '</td>';
+
+                    $html .= '<td><label class="switch">';
+                    $html .= '<input type="checkbox"'. ($search_data->product_status == 1 ? 'checked':'').' id="product_status" name="product_status" value="'.$search_data->product_status.'" data-id="'.$search_data->id.'">';
+                    $html .= '<span class="slider"></span></label>';
+                    $html .= '</td>';
+
+                    $html .= '<td class="text-right footable-last-visible ">';
+
+                    $html .= '<a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage"';
+                    $html .= 'href="'.route('backend.product.view', [$search_data->id]).'" title="View">';
+                    $html .= '<i class="fa-regular fa-eye"></i>';
+                    $html .= '</a>';
+                    
+                    $html .= '<a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2"';
+                    $html .= 'href="'.route('backend.product.edit', [$search_data->id]).'" title="Edit">';
+                    $html .= '<i class="fa-regular fa-pen-to-square text-white"></i>';
+                    $html .= '</a>';
+
+                     
+                    $html .= '<a class="btn btn-soft-success btn-icon btn-circle btn-sm eye_3"';
+                    $html .= 'href="javascript:void()" title="Duplicate" onclick="cloneRow('.$search_data->id.')">';
+                    $html .= '<i class="fa-regular fa-copy"></i>';
+                    $html .= '</a> ';
+                    $html .= '<button value="'.$search_data->id.'" class="btn btn-icon btn-sm delete_ico" id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>';
+
+                    $html .= '</td>';
+                }
+            }
+            return $html;
         }
 
 }

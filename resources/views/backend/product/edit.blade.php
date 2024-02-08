@@ -21,7 +21,9 @@
                                         <h4 class="mb-0 h6">Product Information</h4>
                                     </div>
                                     <!-- <form action="{{route('backend.product.store')}}" method="POST" enctype="multipart/form-data" id="create_product_form"> -->
+                                    
                                     <form  enctype="multipart/form-data" id="create_product_form" onsubmit="validateAndSubmit(event)">
+                                    
                                     @csrf
                                     <div class="card-body">
                                             <div class="form-group row">
@@ -67,9 +69,11 @@
                                                     <div class="input-group-text"> 
                                                         <input type="file" id="product_images" name="product_images[]" multiple >
                                                     </div>  
+
                                                 </div>
 
                                                 <div class="file-preview box sm d-flex">
+
                                                     @if($product_detail->product_images !=  '')
                                                      @foreach($product_detail->product_images as $image)
                                                     <div class="" data-id="2353" title="534.webp">
@@ -87,10 +91,8 @@
                                                     @endforeach
                                                     @else
                                                     <p>No product images</p>
-                                                    @endif
-                                                 
-                                                     
-                                                     
+                                                    @endif 
+
                                                 </div>
                                                 <small class="text-muted">These images are visible in the product details
                                                     page gallery. Use 600x600 or higher sizes images for better quality. But
@@ -220,7 +222,7 @@
                                       </div>
                                   </div>
                                   <div class="col-auto">
-                                      <button type="button" onclick="removePageLink(\'' + rowId + '\')" class="mt-1 btn btn-icon btn-circle btn-sm btn-soft-danger" style="background-color :#ef486a26; border-radius: 55px; color: #ef486a;">
+                                      <button type="button" onclick="" class="mt-1 btn btn-icon btn-circle btn-sm btn-soft-danger" style="background-color :#ef486a26; border-radius: 55px; color: #ef486a;">
                                           <i class="fa-solid fa-xmark"></i>
                                       </button>
                                   </div>
