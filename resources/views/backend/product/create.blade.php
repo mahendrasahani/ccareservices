@@ -1,7 +1,28 @@
 @extends('layouts/backend/main')
 @section('main-section')
 
+<style>
+.image-container {
+    display: inline-block;
+    position: relative;
+    margin-right: 10px;
+    margin-top:5px;
+}
 
+.close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    color: #000;
+    cursor: pointer;
+    font-size: 14px;
+}
+</style>
 <div class="content-body">
             <div class="top-set">
                 <div class="container">
@@ -62,11 +83,11 @@
                                             <label class="col-md-3 col-form-label" for="signinSrEmail">Product
                                                 Images<small>(600x600)</small></label>
                                             <div class="col-md-8">
-                                                <div class="input-group" data-toggle="" data-type="image" data-multiple="true">
-                                                    <div class="input-group-text"> 
-                                                        <input type="file" id="product_images" name="product_images[]" multiple >
-                                                    </div>  
+                                                <div class="input-group" data-toggle="" data-type="image" data-multiple="true"> 
+                                                        <input type="file" id="product_images" class="form-control" name="product_images[]" multiple onchange="displaySelectedImages(event)"> 
                                                 </div>
+                                                
+                                                <div id="imagePreview"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -116,10 +137,7 @@
                                             <div class="col-sm-9">
                                                 <div class="input-group date">
                                                     <input type="date" class="form-control aiz-date-range" name="date_range"
-                                                        placeholder="Select Date" autocomplete="off">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                    </div>
+                                                        placeholder="Select Date" autocomplete="off"> 
                                                 </div>
                                             </div>
                                         </div>
@@ -180,7 +198,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 col-from-label">Description</label>
                                             <div class="col-md-9">
-                                                <textarea name="meta_description" id="meta_description" row="8"></textarea>
+                                                <textarea name="meta_description" id="meta_description" row="8" cols="93"></textarea>
                                             </div>
                                         </div>
                                             <div class="form-group row">
@@ -558,5 +576,47 @@ ClassicEditor
         subCatList.style.display="none";
     } 
     </script>
+
+    <script>
+        function displaySelectedImages(event)
+        {
+            const input = event.target;
+            const preview = document.getElementById('imagePreview');
+
+            // Loop through each selected file
+            for (let i = 0; i < input.files.length; i++)
+            {
+                const file = input.files[i];
+                const reader = new FileReader();
+
+                // Read the file as a data URL
+                reader.readAsDataURL(file);
+
+                // When the file is loaded, create an image element and a close button, and append them to the preview container
+                reader.onload = function ()
+                {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.classList.add('image-container');
+
+                    const img = document.createElement('img');
+                    img.src = reader.result;
+                    img.style.maxWidth = '100px'; // Set maximum width for the displayed image
+
+                    const closeButton = document.createElement('button');
+                    closeButton.innerHTML = '<i class="fas fa-times"></i>'; // Use Font Awesome icon for the close button
+                    closeButton.classList.add('close-button');
+                    closeButton.onclick = function ()
+                    {
+                        imgContainer.remove(); // Remove the image container when the close button is clicked
+                    };
+
+                    imgContainer.appendChild(img);
+                    imgContainer.appendChild(closeButton);
+                    preview.appendChild(imgContainer);
+                }
+            }
+        }
+    </script>
+
         @endsection
 @endsection

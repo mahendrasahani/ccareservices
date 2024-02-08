@@ -27,7 +27,7 @@ body {
   font-size: 8px !important;
 }
 #header-ul li {
-     margin: 0 8px;
+  margin: 0 8px;
   font-size: 13px;
   position: relative;
 }
@@ -239,8 +239,8 @@ button.btn.btn-warning.animation {
 button.btn.btn-warning.animation:hover {
   background-color: #02b8df;
 }
-.animate-btx-home{
-    border: 1px solid #01b7de !important;
+.animate-btx-home {
+  border: 1px solid #01b7de !important;
 }
 
 .side-set {
@@ -1292,7 +1292,7 @@ section.dahboard-wrapper {
   align-items: center;
 }
 
-.recent-products a{
+.recent-products a {
   text-decoration: none;
 }
 .recent-products a p {
@@ -1429,94 +1429,161 @@ section.dahboard-wrapper {
 
 /* ---------------------------------------Purchase History Css Start -----------------------------------------*/
 
-    .table-container {
-        width: 100%;
-        border: 1px solid #ddd;
-    }
+.table-container {
+  width: 100%;
+  border: 1px solid #ddd;
+}
 
-   .table-container th,td {
-        padding: 10px;
-        text-align: center;
-    }
+.table-container th,
+td {
+  padding: 10px;
+  text-align: center;
+}
 
-   .table-container th {
-        background-color: #f2f2f2;
-    }
+.table-container th {
+  background-color: #f2f2f2;
+}
 
-   .table-container tr {
-        border-bottom: 1px solid #ddd;
-    }
+.table-container tr {
+  border-bottom: 1px solid #ddd;
+}
 
-    .discount-details .discount-details-btn {
-        background-color: #01316b;
-        color: white;
-        border: none;
-        padding: 5px 18px;
-        border-radius: 0;
-        font-size: 12px;
-        text-decoration: none;
-    }
+.discount-details .discount-details-btn {
+  background-color: #01316b;
+  color: white;
+  border: none;
+  padding: 5px 18px;
+  border-radius: 0;
+  font-size: 12px;
+  text-decoration: none;
+}
 
-    .discount-details .discount-details-btn:hover {
-        background-color: #02b8df;
-    }
-    .pagination li a{
-        color: #01316b;
-    }
+.discount-details .discount-details-btn:hover {
+  background-color: #02b8df;
+}
+.pagination li a {
+  color: #01316b;
+}
 
+/* ---------------------------------- purchase history css end -------------------------------------- */
 
-    /* ---------------------------------- purchase history css end -------------------------------------- */
-
-
-
-    /* ---------------------------------- View Product css Start -------------------------------------- */
+/* ---------------------------------- View Product css Start -------------------------------------- */
 
 .order-single-details {
-        display: flex;
-    }
+  display: flex;
+}
 
-    .track-order .recent-products-img img {
-        width: 100%;
-    }
+.track-order .recent-products-img img {
+  width: 100%;
+}
 
-    .track-order-name {
-        text-align: justify;
-    }
+.track-order-name {
+  text-align: justify;
+}
 
-    .discount-details .table-container tr:hover {
-        background-color: #e1e1e1;
-    }
-    .single-order-final {
-    display: flex;
-    justify-content: space-between;
+.discount-details .table-container tr:hover {
+  background-color: #e1e1e1;
+}
+.single-order-final {
+  display: flex;
+  justify-content: space-between;
 }
 .final-order {
-    padding: 50px;
+  padding: 50px;
 }
 .total-final {
-    border-radius: 5px;
-    background: #eee;
-    padding: 10px;
+  border-radius: 5px;
+  background: #eee;
+  padding: 10px;
 }
-.total-final p{
-    margin-bottom:0;
-} 
+.total-final p {
+  margin-bottom: 0;
+}
 .order-details h4 {
-    background: #eee;
-    padding: 11px;
-    border-radius:7px;
-} 
-    #myTabs li a{
-      color:#000;
-    }
-    /* ---------------------------------- View Product css End -------------------------------------- */
+  background: #eee;
+  padding: 11px;
+  border-radius: 7px;
+}
+#myTabs li a {
+  color: #000;
+}
+/* ---------------------------------- View Product css End -------------------------------------- */
 
+/* ---------------------------------- Cart and Checkout css Start -------------------------------------- */
+.product-name-default {
+  text-decoration: none;
+  color: #213854;
+}
+/* ---------------------------------- Cart and Checkout css End -------------------------------------- */
 
-    /* ---------------------------------- Cart and Checkout css Start -------------------------------------- */
-      .product-name-default{
-    text-decoration:none;
-    color:#213854;
-  }
-    /* ---------------------------------- Cart and Checkout css End -------------------------------------- */
+.cap-btns {
+  display: flex;
+}
+.cap-btns input {
+  margin: 0 10px;
+  background-color: #012f6f;
+  color: #fff;
+  border: 0;
+  padding: 10px;
+  border-radius: 7px;
+}
+input[type="range"] {
+  width: 100%;
+  background: #ddd;
+  height: 5px;
+  border-radius: 5px;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #01b7e0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.numbers-container {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+}
+.number {
+  width: calc(100% / 12);
+  text-align: center;
+}
+.calculator {
+  padding: 10px;
+  margin: 15px 0px 0 10px;
+}
 
+.cap-btns {
+  display: flex;
+  align-items: center;
+}
+.cap-btns label {
+  font-size: 12px;
+}
 
+.cap-btns input[type="radio"] {
+  display: none;
+}
+
+/* Style for the custom radio button */
+.cap-btns input[type="radio"] + label {
+  display: inline-block;
+  cursor: pointer;
+  border: 2px solid #01b7e0; /* Border color */
+  border-radius: 20px; /* Adjust border radius */
+  background-color: #01b7e0; /* Background color */
+  color: #fff; /* Text color */
+ 
+  margin: 5px;
+  padding: 8px 5px;
+}
+
+.cap-btns input[type="radio"]:checked + label {
+  background-color: #01316b; /* Change background color for checked state */
+  color: #fff; /* Change text color for checked state */
+  border-color: #01316b; /* Change border color for checked state */
+}
