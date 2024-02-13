@@ -344,6 +344,87 @@
             ]
         });
     </script>
+
+    <script>
+        function displaySelectedImages(event)
+        {
+            const input = event.target;
+            const preview = document.getElementById('imagePreview');
+
+            // Loop through each selected file
+            for (let i = 0; i < input.files.length; i++)
+            {
+                const file = input.files[i];
+                const reader = new FileReader();
+
+                // Read the file as a data URL
+                reader.readAsDataURL(file);
+
+                // When the file is loaded, create an image element and a close button, and append them to the preview container
+                reader.onload = function ()
+                {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.classList.add('image-container');
+
+                    const img = document.createElement('img');
+                    img.src = reader.result;
+                    img.style.maxWidth = '100px'; // Set maximum width for the displayed image
+
+                    const closeButton = document.createElement('button');
+                    closeButton.innerHTML = '<i class="fas fa-times"></i>'; // Use Font Awesome icon for the close button
+                    closeButton.classList.add('close-button');
+                    closeButton.onclick = function ()
+                    {
+                        imgContainer.remove(); // Remove the image container when the close button is clicked
+                    };
+
+                    imgContainer.appendChild(img);
+                    imgContainer.appendChild(closeButton);
+                    preview.appendChild(imgContainer);
+                }
+            }
+        }
+    </script>
+    <script>
+        function displaySelectedImagesSec(event)
+        {
+            const input = event.target;
+            const preview = document.getElementById('imagePreviewSec');
+
+            // Loop through each selected file
+            for (let i = 0; i < input.files.length; i++)
+            {
+                const file = input.files[i];
+                const reader = new FileReader();
+
+                // Read the file as a data URL
+                reader.readAsDataURL(file);
+
+                // When the file is loaded, create an image element and a close button, and append them to the preview container
+                reader.onload = function ()
+                {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.classList.add('image-container');
+
+                    const img = document.createElement('img');
+                    img.src = reader.result;
+                    img.style.maxWidth = '100px'; // Set maximum width for the displayed image
+
+                    const closeButton = document.createElement('button');
+                    closeButton.innerHTML = '<i class="fas fa-times"></i>'; // Use Font Awesome icon for the close button
+                    closeButton.classList.add('close-button');
+                    closeButton.onclick = function ()
+                    {
+                        imgContainer.remove(); // Remove the image container when the close button is clicked
+                    };
+
+                    imgContainer.appendChild(img);
+                    imgContainer.appendChild(closeButton);
+                    preview.appendChild(imgContainer);
+                }
+            }
+        }
+    </script>
     @yield('javascript-section')
 
 </body>

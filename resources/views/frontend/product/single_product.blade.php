@@ -2,7 +2,7 @@
 @section('main-section')
 <style>
     .wrapper {
-        min-width: 400px;
+        /* min-width: 400px; */
         background: #ffffff;
         padding: 20px;
         border-radius: 10px;
@@ -36,8 +36,8 @@
 
         .mainImage {
             overflow: hidden;
-            min-width: 500px;
-            max-width: 500px;
+            /* min-width: 500px; */
+            /* max-width: 500px; */
             border-radius: 10px;
             cursor: crosshair;
 
@@ -48,6 +48,56 @@
                 object-fit: cover;
             }
         }
+    }
+
+    .single-review {
+        display: flex;
+            align-items: center;
+    }
+
+    .single-review .rev-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .single-review .rev-img img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .full-rev {
+        margin-left: 10px;
+    }
+
+    .rating {
+        display: inline-block;
+        position: relative;
+        height: 30px;
+         direction: rtl;
+    }
+
+    .rating input[type="checkbox"] {
+        display: none;
+    }
+
+    .rating label {
+        display: inline-block;
+        width: 30px;
+        text-align: center;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .rating label .fas {
+        color: #aaa;
+    }
+
+    .rating input[type="checkbox"]:checked~label .fas {
+        color: #FFD43B;
+    }
+    fieldset{
+        display:flex !important ;
     }
 </style>
 
@@ -75,7 +125,7 @@
 <section>
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-6"> 
+            <div class="col-md-6">
 
                 <div class="wrapper">
                     <section class="mainImage"> </section>
@@ -85,11 +135,11 @@
             <div class="col-md-6">
                 <div class="product-right-content">
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-12">
                             <div class="reviews d-flex">
                                 <div class="star mx-2">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                     <i class="fa-regular fa-star"></i>
                                     <i class="fa-regular fa-star"></i>
                                 </div>
@@ -137,7 +187,7 @@
                                     <div class="mx-2 d-flex">
                                         <p class="mx-2 m-auto"> Qty</p>
                                         <input type="number" id="quantity" value="0" min="0"
-                                            style="width: 14%; height: 30px;">
+                                            style="width: 18%; height: 30px;">
                                         <button type="button" class="btn btn-warning animation  mx-2 "
                                             onclick="addToCart()">Add
                                             to Cart</button>
@@ -219,14 +269,49 @@
                     <div class="col-md-6">
                         <h6>Leave a review</h6>
                         <form id="reviewForm">
-                            <label for="review">Your Review:</label><br>
+                            
+                            <div class="reviews d-flex"> 
+                                <label for="review" style="display: flex;justify-content: center;align-items: center;">Your Review:</label>
+                                <fieldset class="rating">
+                                    <input type="checkbox" id="star5" name="rating" value="5">
+                                    <label class="full" for="star5"><i class="fas fa-star"></i></label>
+                                    <input type="checkbox" id="star4" name="rating" value="4">
+                                    <label class="full" for="star4"><i class="fas fa-star"></i></label>
+                                    <input type="checkbox" id="star3" name="rating" value="3">
+                                    <label class="full" for="star3"><i class="fas fa-star"></i></label>
+                                    <input type="checkbox" id="star2" name="rating" value="2">
+                                    <label class="full" for="star2"><i class="fas fa-star"></i></label>
+                                    <input type="checkbox" id="star1" name="rating" value="1">
+                                    <label class="full" for="star1"><i class="fas fa-star"></i></label>
+                                </fieldset> 
+                            </div> 
                             <textarea id="review" name="review" placeholder="Write your review here..."
-                                cols="50"></textarea><br>
+                                cols="50" class="mt-2 p-2"></textarea><br>
                             <button type="button" class="btn btn-warning animation  mx-2">Submit Review</button>
                         </form>
                     </div>
                     <div class="col-md-6">
-                        <h6>Show some reviws here</h6>
+                        <h6>Reviews by customers</h6>
+                        <div class="single-review ">
+                            <div class="rev-img">
+                                <img src="https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg"
+                                    alt="">
+                            </div>
+                            <div class="full-rev">
+                                <div class="reviews d-flex">
+                                    <div class="star mx-2">
+                                        <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fa-regular fa-star"></i>
+                                    </div>
+
+                                </div>
+                                <div class="rev-name"><b>Kartik Sharma</b></div>
+                                <div class="rev-content"><p>vguihdfvherwiofgvoierwjfgiojriogjrhvknhfrigjtjgopkreokglemko</p></div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -348,52 +433,39 @@
 
 <script>
     const slider = document.getElementById("slider");
-        const priceDisplay = document.getElementById("price");
-        const radioButtons = document.querySelectorAll("input[type='radio'][name='category']");
+    const priceDisplay = document.getElementById("price");
+    const radioButtons = document.querySelectorAll("input[type='radio'][name='category']");
 
-        function updatePrice()
-        {
-            const sliderValue = slider.value;
-            const selectedRadio = document.querySelector("input[type='radio'][name='category']:checked");
-            const radioValue = selectedRadio ? selectedRadio.value : 0;
-            const price = sliderValue * 2 + parseInt(radioValue);
-            priceDisplay.textContent = `$${price}`;
-        }
-        slider.addEventListener("input",updatePrice);
-        radioButtons.forEach(radioButton=>{
-            radioButton.addEventListener("change",updatePrice)
-        })
+    function updatePrice()
+    {
+        const sliderValue = slider.value;
+        const selectedRadio = document.querySelector("input[type='radio'][name='category']:checked");
+        const radioValue = selectedRadio ? selectedRadio.value : 0;
+        const price = sliderValue * 2 + parseInt(radioValue);
+        priceDisplay.textContent = `$${price}`;
+    }
+    slider.addEventListener("input", updatePrice);
+    radioButtons.forEach(radioButton =>
+    {
+        radioButton.addEventListener("change", updatePrice)
+    })
+</script> 
+
+ <script>
+    const ratingInputs = document.querySelectorAll('input[name="rating"]'); 
+    ratingInputs.forEach(input => {
+        input.addEventListener('click', function() {
+            const clickedValue = parseInt(this.value);
+            ratingInputs.forEach(input => {
+                const inputValue = parseInt(input.value);
+                if (inputValue <= clickedValue) {
+                    input.checked = true;
+                } else {
+                    input.checked = false;
+                }
+            });
+        });
+    });
 </script>
-
-<div class="col-md-6">
-    <h6>Capacity</h6>
-    <div class="cap-btns">
-        <input type="radio" id="category1" name="category" value="160">
-        <label for="category1">160-180 l</label>
-        <input type="radio" id="category2" name="category" value="180">
-        <label for="category2">180-200 l</label>
-        <input type="radio" id="category3" name="category" value="200">
-        <label for="category3">200-220 l</label>
-    </div>
-    <div class="calculator card">
-        <label>Choose Tenure</label>
-        <input type="range" min="1" max="12" value="1" id="slider">
-        <div class="numbers-container mt-2">
-            <div class="number">1</div>
-            <div class="number">2</div>
-            <div class="number">3</div>
-            <div class="number">4</div>
-            <div class="number">5</div>
-            <div class="number">6</div>
-            <div class="number">7</div>
-            <div class="number">8</div>
-            <div class="number">9</div>
-            <div class="number">10</div>
-            <div class="number">11</div>
-            <div class="number">12</div>
-        </div>
-        <p>Price: <span id="price">$50</span></p>
-    </div>
-</div>
 
 @endsection

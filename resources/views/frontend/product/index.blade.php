@@ -2,92 +2,16 @@
 @section('main-section')
 
 <style>
-    select.form-select {
-        width: 25%;
-    }
+   #toggleList li{
+    list-style-type: none; 
+    font-size:14px !important;
+   }
 
-    .form-control-sm {
-        padding: 7px 12px;
-    }
-
-    .card-header {
-        background: transparent;
-    }
-
-    .list-inline li .fa-angle-down {
-        transition: transform 0.3s ease;
-    }
-
-    .list-inline li.expanded .fa-angle-down {
-        transform: rotate(180deg);
-    }
-
-    .label-width {
-        width: 100px;
-        /* Adjust the width as needed */
-    }
-
-    .search-cate {
-        font-size: 14px !important;
-        padding: 8px 35px !important;
-    }
-
-    .select-ul-li li {
-        display: none;
-        cursor: pointer;
-        padding: 0px 10px;
-        min-width: 132px;
-    }
-
-    .select-ul-li li:first-child {
-        display: block;
-        border-top: 0px;
-    }
-
-    .select-ul-li {
-        border-bottom: 1px solid rgb(210, 210, 210);
-        display: inline-block;
-        padding: 0;
-        position: relative;
-    }
-
-    .select-ul-li li:hover {
-        background-color: #ddd;
-    }
-
-    .select-ul-li li:first-child:hover {
-        background-color: transparent;
-    }
-
-    .select-ul-li.open li {
-        display: block;
-    }
-
-    .select-ul-li span:before {
-        position: absolute;
-        top: 0;
-        right: 15px;
-        content: "\2193";
-    }
-
-    .select-ul-li.open span:before {
-        content: "\2191";
-    }
-
-    .product {
-        display: inline-block;
-        margin: 10px;
-        padding: 10px;
-        border: 1px solid #ccc;
-    }
-       .hide {
-        display: none;
-    }
-    .select-ul-li li ul{
-        padding-left:0 !important;
-    }
+   #toggleList li a{ 
+    font-size:14px;
+   }
 </style>
- 
+
 <section id="banner-image">
     <!-- breadcrumb strat -->
     <div class="container">
@@ -144,44 +68,28 @@
                     <div class="card-header">
                         <h6>More Option</h6>
                     </div>
-                    <div class="card-body">
-                       
-                        <ul class="select-ul-li" id="menu1">
-                            <li>
-                                <a href="#" class="text-decoration-none text-dark" style="font-size: 13px;">Laptop</a>
-                                <i class="fa-solid fa-caret-down mx-2" onclick="toggleMenu('menu1')"></i>
-                                <ul class="hide">
-                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark"
-                                            style="font-size: 13px;">Laptop On rent</a></li>
+                    <div class="card-body"> 
+                        <ul id="toggleList">
+                            <li ><a href="#" class="text-decoration-none text-dark" >Laptop</a>
+                            <i class="fa-solid fa-caret-down mx-2"></i>
+                                <ul>
+                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark">Window AC on Rent</a> </li> 
                                 </ul>
                             </li>
-                        </ul>
-                        <ul class="select-ul-li" id="menu2">
-                            <li>
-                                <a href="#" class="text-decoration-none text-dark" style="font-size: 13px;">Heater</a>
-                                <i class="fa-solid fa-caret-down mx-2" onclick="toggleMenu('menu2')"></i>
-                                <ul class="hide">
-                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark"
-                                            style="font-size: 13px;">Heater On Rent</a></li>
+                            <li><a href="#" class="text-decoration-none text-dark"  >Heater</a>
+                            <i class="fa-solid fa-caret-down mx-2"></i>
+                                <ul>
+                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark">Heater On Rent</a> 
                                 </ul>
                             </li>
-                        </ul>
-
-                        <ul class="select-ul-li" id="menu3">
-                            <li>
-                                <a href="#" class="text-decoration-none text-dark" style="font-size: 13px;">AC on
-                                    Rent</a>
-                                <i class="fa-solid fa-caret-down mx-2" onclick="toggleMenu('menu3')"></i>
-                                <ul class="hide">
-                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark"
-                                            style="font-size: 13px;">Window AC on Rent</a></li>
-                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark"
-                                            style="font-size: 13px;">Split AC on Rent</a></li>
+                            <li><a href="#" class="text-decoration-none text-dark" >Laptop On rent</a>
+                            <i class="fa-solid fa-caret-down mx-2"></i>
+                                <ul>
+                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark" >Window AC on Rent</a></li>
+                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark" >Split AC on Rent</a> </li>
                                 </ul>
                             </li>
-                        </ul>
-
-                         
+                        </ul> 
                     </div>
                 </div>
                 <!--product filter-->
@@ -209,22 +117,28 @@
                 </div>
             </div>
             <div class="col-md-10">
-                <div class="row"> 
-                @foreach($product_list as $product)
+                <div class="row">
+                    @foreach($product_list as $product)
                     <div class="col-md-3 all laptop" class="content" id="all">
                         <div class="card item ">
                             <div class="card-header">
-                                <a href="single-product.html"><img src="{{$product->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->product_images[0])}}" class="w-100"></a>
+                                <a href="single-product.html"><img
+                                        src="{{$product->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->product_images[0])}}"
+                                        class="w-100"></a>
                             </div>
                             <div class="card-body">
-                                <h6 class="fw-bold"> <a href="single-product.html" class="text-decoration-none" style="color: black;">{{$product->product_name}}</h6></a>
-                                 
+                                <h6 class="fw-bold"><a href="single-product.html" class="text-decoration-none"
+                                        style="color: black;">{{$product->product_name}}</a></h6>
+
                                 @if($product->discount_type == 'flat')
-                                <p class="fw-bold">₹{{number_format($product->regular_price - $product->discount, 2)}}</p>
+                                <p class="fw-bold">₹{{number_format($product->regular_price - $product->discount, 2)}}
+                                </p>
                                 @elseif($product->discount_type == 'percent')
-                                <p class="fw-bold">₹{{number_format($product->regular_price - ($product->regular_price * $product->discount)/100, 2)}}</p>
-                                @endif 
-                                <p class="" style="font-size: 11px; color: gray;">{!! Str::limit($product->product_description, 40) !!}</p>
+                                <p class="fw-bold">₹{{number_format($product->regular_price - ($product->regular_price *
+                                    $product->discount)/100, 2)}}</p>
+                                @endif
+                                <p class="" style="font-size: 11px; color: gray;">{!!
+                                    Str::limit($product->product_description, 40) !!}</p>
                                 <hr>
                                 <button class="animate-btx">
                                     <a href="{{route('frontend.single_product.view')}}"><button type="button"
@@ -234,8 +148,6 @@
                         </div>
                     </div>
                     @endforeach 
-
-                    
                 </div>
                 <div class="col-md-3" class="content" id="">
                     <button id="load_more">Load More</button>
@@ -288,28 +200,27 @@
     </div>
 </section>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ 
 
 <script>
-    function toggleMenu(menuId)
+    document.addEventListener('DOMContentLoaded', function ()
     {
-        var submenu = document.querySelector("#" + menuId + " ul");
-        submenu.classList.toggle("hide");
-    }
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
         const checkboxes = document.querySelectorAll('.filter');
         const items = document.querySelectorAll('.item');
 
-        checkboxes.forEach(function (checkbox) {
-            checkbox.addEventListener('change', function () {
+        checkboxes.forEach(function (checkbox)
+        {
+            checkbox.addEventListener('change', function ()
+            {
                 const filterValue = this.getAttribute('data-filter');
 
-                items.forEach(function (item) {
-                    if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                items.forEach(function (item)
+                {
+                    if (filterValue === 'all' || item.classList.contains(filterValue))
+                    {
                         item.style.display = this.checked ? 'block' : 'none';
-                    } else {
+                    } else
+                    {
                         item.style.display = 'none';
                     }
                 }.bind(this));
@@ -319,29 +230,43 @@
 </script>
 
 <script>
- $(document).on('click', '#load_more', function(){ 
-    console.log('test tss');
-            $('#loader').show();
- 
-            // $.ajax({
-            //     url: 'your-backend-endpoint',  
-            //     type: 'GET',
-            //     success: function(data) { 
-            //         $('#content').append(data); 
-            //         $('#loader').hide();
-            //     }
-            // });
- });
-    
-         
-         
-        
-   
- 
+    $(document).on('click', '#load_more', function ()
+    {
+        console.log('test tss');
+        $('#loader').show();
 
-
+        // $.ajax({
+        //     url: 'your-backend-endpoint',  
+        //     type: 'GET',
+        //     success: function(data) { 
+        //         $('#content').append(data); 
+        //         $('#loader').hide();
+        //     }
+        // });
+    });  
 </script>
 
+<script>
+    // Get all parent list items
+    const parentItems = document.querySelectorAll('#toggleList > li');
+
+    // Add click event listener to each parent list item
+    parentItems.forEach(item =>
+    {
+        item.addEventListener('click', function ()
+        {
+            // Toggle visibility of nested ul
+            const nestedUl = this.querySelector('ul');
+            if (nestedUl)
+            {
+                nestedUl.style.display = nestedUl.style.display === 'none' ? 'block' : 'none';
+            }
+        });
+    });
+
+    // Initially hide all nested ul elements
+    document.querySelectorAll('#toggleList ul').forEach(ul => ul.style.display = 'none');
+</script>
 
 
 @endsection

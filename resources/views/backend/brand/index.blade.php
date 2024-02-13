@@ -80,8 +80,9 @@
                                                 <small>(120x80)</small>
                                                 </label>
                                              <div class="input-group" data-toggle="aizuploader" data-type="image"> 
-                                                    <input type="file" name="logo" class="selected-files" required>
+                                                    <input type="file" class="form-control" name="logo" class="selected-files" onchange="displaySelectedImages(event)" required >
                                                 </div>  
+                                                <div id="imagePreview"></div>
                                             </div>
                                             <div class="form-group mb-3 text-right">
                                                 <button type="submit" class="btn btn-primary add-button" style="background-color: #f5a100; border: none;">Save</button>
