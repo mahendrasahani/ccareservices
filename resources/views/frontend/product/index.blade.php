@@ -126,7 +126,6 @@
                                 <h6 class="fw-bold"><a href="single-product.html" class="text-decoration-none"
                                         style="color: black;">{{$product->product_name}}</a></h6>
 
-                                <h6 class="fw-bold"> <a href="single-product.html" class="text-decoration-none" style="color: black;">{{$product->product_name}}</h6></a>
                                 @if($product->discount_type == 'flat')
                                 <p class="fw-bold">₹{{number_format($product->regular_price - $product->discount, 2)}}
                                 </p>
@@ -180,8 +179,7 @@
         </div>
     </div>
 </section>
-
-@section('javascript-section')
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
  
 
 <script>
@@ -211,8 +209,44 @@
     });
 </script>
 
-    
+<script>
+    $(document).on('click', '#load_more', function ()
+    {
+        console.log('test tss');
+        $('#loader').show();
 
- 
-@endsection
+        // $.ajax({
+        //     url: 'your-backend-endpoint',  
+        //     type: 'GET',
+        //     success: function(data) { 
+        //         $('#content').append(data); 
+        //         $('#loader').hide();
+        //     }
+        // });
+    });  
+</script>
+
+<script>
+    // Get all parent list items
+    const parentItems = document.querySelectorAll('#toggleList > li');
+
+    // Add click event listener to each parent list item
+    parentItems.forEach(item =>
+    {
+        item.addEventListener('click', function ()
+        {
+            // Toggle visibility of nested ul
+            const nestedUl = this.querySelector('ul');
+            if (nestedUl)
+            {
+                nestedUl.style.display = nestedUl.style.display === 'none' ? 'block' : 'none';
+            }
+        });
+    });
+
+    // Initially hide all nested ul elements
+    document.querySelectorAll('#toggleList ul').forEach(ul => ul.style.display = 'none');
+</script>
+
+
 @endsection
