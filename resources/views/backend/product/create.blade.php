@@ -1,6 +1,6 @@
 @extends('layouts/backend/main')
 @section('main-section')
- 
+
 <div class="content-body">
     <div class="top-set">
         <div class="container">
@@ -205,13 +205,13 @@
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header d-flex justify-content-between"
                                 style="border-bottom : 1px solid #e8e8e8;">
-                                <h5 class="mb-0 pt-2">Product Option</h5>
-                                <!-- <button class="btn btn-soft-dark" type="button">Add new Product</button> -->
+                                <h5 class="mb-0 pt-2">Product Option</h5> 
                             </div>
                             <div class="card-body">
                                 <div class="alert alert-info">Add Option</div>
                                 <div class="row">
-                                    <label class="col-md-3 col-form-label" for="product-dropdown">Select an option:</label>
+                                    <label class="col-md-3 col-form-label" for="product-dropdown">Select an
+                                        option:</label>
                                     <div class="col-md-9">
                                         <select class="form-control" name="product-dropdown" id="product-dropdown">
                                             <option value="option1">Option 1</option>
@@ -231,115 +231,121 @@
                                                 <th>Weight</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td style="text-align:end"><i class="fa fa-plus-circle"
-                                                onclick="openPopup()"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td style="text-align:end"><i class="fa fa-minus-circle"
-                                                        aria-hidden="true"></i><i class="fa fa-pencil-square mx-2"></i>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                            <tbody>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td style="text-align:end"><i class="fa fa-plus-circle product-option" data-toggle="modal" data-target="#product_modal" ></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td style="text-align:end"><i class="fa fa-minus-circle"
+                                                            aria-hidden="true"></i><i class="fa fa-pencil-square mx-2"></i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
 
-                        <!-- Product Popup -->
-                        <div id="popup_container" class="popup_container">
-                            <div id="product_popup" class="product_popup">
-                                <div class="popup_head  d-flex justify-content-between">
-                                    <h2>Option Value</h2>
-                                    <i class="fa fa-times" onclick="closePopup(event)" style="cursor:pointer"></i>
-                                </div>
-                                <hr>
-
-                                <!-- <form action="#"> -->
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="product-details">
-                                                <label for="option_value" class="popup_label">Option Value</label>
-                                                <select class="form-control" name="option_value" id="option_value">
-                                                    <option value="option1">Option 1</option>
-                                                    <option value="option2">Option 2</option>
-                                                    <option value="option3">Option 3</option>
-                                                    <option value="option4">Option 4</option>
-                                                    <option value="option5">Option 5</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="product-details">
-                                                <label for="option_value" class="popup_label">Quantity</label><br>
-                                                <input type="number" min="1" style="width:100%" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="product-details">
-                                                <label for="subtract_stock" class="popup_label">Subtract Stock</label>
-                                                <select class="form-control" name="subtract_stock" id="subtract_stock">
-                                                    <option value="yes">Yes</option>
-                                                    <option value="no">No</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="product-details">
-                                                <label for="subtract_stock" class="popup_label">Subtract Stock</label>
-                                                <select class="form-control" name="subtract_stock" id="subtract_stock">
-                                                    <option value="yes">Yes</option>
-                                                    <option value="no">No</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="product-details">
-                                                <label for="price" class="popup_label">Price</label>
-                                                <div class="price d-flex">
-                                                    <select class="form-control" name="price" id="price">
-                                                        <option value="plus">+</option>
-                                                        <option value="minus">-</option>
+                        <!------------------------------------ Modal start -------------------------------->
+                        <div class="modal fade" id="product_modal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Product Options</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="product-details">
+                                                    <label for="option_value" class="popup_label">Option Value</label>
+                                                    <select class="form-control" name="option_value" id="option_value">
+                                                        <option value="option1">Option 1</option>
+                                                        <option value="option2">Option 2</option>
+                                                        <option value="option3">Option 3</option>
+                                                        <option value="option4">Option 4</option>
+                                                        <option value="option5">Option 5</option>
                                                     </select>
-                                                    <input type="number" min="0" style="width:100%"
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="product-details">
+                                                    <label for="option_value" class="popup_label">Quantity</label><br>
+                                                    <input type="number" min="1" style="width:100%"
                                                         class="form-control">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="product-details">
-                                                <label for="weight" class="popup_label">Weight</label>
-                                                <div class="weight d-flex">
-                                                    <select class="form-control" name="weight" id="weight">
-                                                        <option value="plus">+</option>
-                                                        <option value="minus">-</option>
+                                            <div class="col-md-6">
+                                                <div class="product-details">
+                                                    <label for="subtract_stock" class="popup_label">Subtract
+                                                        Stock</label>
+                                                    <select class="form-control" name="subtract_stock"
+                                                        id="subtract_stock">
+                                                        <option value="yes">Yes</option>
+                                                        <option value="no">No</option>
                                                     </select>
-                                                    <input type="number" min="0" style="width:100%"
-                                                        class="form-control">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="popup-btns">
-                                                <button class="btn btn-primary">Save</button>
-                                                <button class="btn btn-danger"
-                                                    onclick="closePopup(event)">Cancel</button>
+                                            <div class="col-md-6">
+                                                <div class="product-details">
+                                                    <label for="subtract_stock" class="popup_label">Subtract
+                                                        Stock</label>
+                                                    <select class="form-control" name="subtract_stock"
+                                                        id="subtract_stock">
+                                                        <option value="yes">Yes</option>
+                                                        <option value="no">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="product-details">
+                                                    <label for="price" class="popup_label">Price</label>
+                                                    <div class="price d-flex">
+                                                        <select class="form-control" name="price" id="price">
+                                                            <option value="plus">+</option>
+                                                            <option value="minus">-</option>
+                                                        </select>
+                                                        <input type="number" min="0" style="width:100%"
+                                                        class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="product-details">
+                                                    <label for="weight" class="popup_label">Weight</label>
+                                                    <div class="weight d-flex">
+                                                        <select class="form-control" name="weight" id="weight">
+                                                            <option value="plus">+</option>
+                                                            <option value="minus">-</option>
+                                                        </select>
+                                                        <input type="number" min="0" style="width:100%"
+                                                        class="form-control">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                <!-- </form> -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary ">Save changes</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
+                        </div> 
+                        <!------------------------------ Modal End --------------------->
+ 
 
                         <div class="container">
                             <div class="row">
@@ -385,7 +391,8 @@
                                     Select Main
                                     <span class="position-relative main-category-info-icon">
                                         <i class="las la-question-circle fs-18 text-info"></i>
-                                        <span class="main-category-info bg-info p-2 position-absolute d-none border">These
+                                        <span
+                                            class="main-category-info bg-info p-2 position-absolute d-none border">These
                                             will be used for Affiliate System.</span>
                                     </span>
                                 </h6>
@@ -426,7 +433,7 @@
                                                             <label>{{$sub_cat->name}}</label>
                                                         </span>
                                                     </div>
-                                                    @endforeach 
+                                                    @endforeach
                                                 </div>
                                             </li>
                                             @endforeach
@@ -751,21 +758,7 @@
         if (subCatList.style.display = "block")
             subCatList.style.display = "none";
     } 
-</script>
-
-
-<script>
-    function openPopup()
-    {
-        document.getElementById("popup_container").style.display = "block";
-    }
-    function closePopup(event)
-    {
-        event.preventDefault();
-        document.getElementById("popup_container").style.display = "none";
-    }
-</script>
-
+</script> 
 
 @endsection
 @endsection
