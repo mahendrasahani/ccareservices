@@ -66,6 +66,8 @@ Route::post('/admin/product/store', [ProductController::class, 'store'])->name('
 Route::post('/admin/product/add-attribute', [ProductController::class, 'addAttribute'])->name('backend.product.add_attribute');
 Route::post('/admin/product/get-attribte-value', [ProductController::class, 'getAttributeValue'])->name('backend.product.get-attribte-value');
 Route::post('/admin/product/get-attribte-value', [ProductController::class, 'getAttributeValue'])->name('backend.product.get-attribte-value');
+Route::get('/admin/product/get-option-list', [ProductController::class, 'getOptionList'])->name('backend.product.get_option_list');
+
 Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit'])->name('backend.product.edit');
 Route::post('/admin/product/update/{id}', [ProductController::class, 'update'])->name('backend.product.update');
 Route::get('admin/product/view/{id}', [ProductController::class, 'view'])->name('backend.product.view');
@@ -74,5 +76,6 @@ Route::get('/admin/product/destroy', [ProductController::class, 'destroy'])->nam
 Route::get('/admin/product/change-status', [ProductController::class, 'changeStatus'])->name('backend.product.change_status');
 Route::get('/admin/product/multi-destroy', [ProductController::class, 'multiDestroy'])->name('backend.product.multi_destroy');
 Route::get('/admin/product/search', [ProductController::class, 'search'])->name('backend.product.search');
+
 });
 // -------------------------After Admin login (end) ------------------------------------------------------------

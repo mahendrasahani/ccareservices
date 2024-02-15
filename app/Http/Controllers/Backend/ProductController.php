@@ -38,8 +38,9 @@ class ProductController extends Controller
     public function create(){  
         $brand_list = Brand::where('status', 1)->get();
         $main_category_list = MainCategory::with('subCategory')->where('status', 1)->get();
+        $attribute_list = Attribute::where('status', 1)->get();
         
-        return view('backend.product.create', compact('brand_list', 'main_category_list'));
+        return view('backend.product.create', compact('brand_list', 'main_category_list', 'attribute_list'));
     }
 
     public function addAttribute(Request $request){  
@@ -422,5 +423,16 @@ class ProductController extends Controller
             $product_detail = Product::where('slug', $slug)->first();
             return view('frontend.product.single_product', compact('product_detail', 'main_category', 'sub_category'));
 
+        }
+
+
+        public function getOptionList(Request $request){
+            $ids = $request->ids;
+            $newOptionList = Attribute::whereIn('id', $ids)->get();
+            return response()->json([
+                "status" => 200,
+                "message" => "success",
+                "data" => $newOptionList
+            ]);
         }
 }

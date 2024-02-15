@@ -210,47 +210,21 @@
                             </div>
                             <div class="card-body">
                                 <div class="alert alert-info">Add Option</div>
+                                <div class="row" id="option_list_row"></div>
                                 <div class="row">
-                                    <label class="col-md-3 col-form-label" for="product-dropdown">Select an option:</label>
+                                    <label class="col-md-3 col-form-label" for="product_option">Select an option:</label>
                                     <div class="col-md-9">
-                                        <select class="form-control" name="product-dropdown" id="product-dropdown">
-                                            <option value="option1">Option 1</option>
-                                            <option value="option2">Option 2</option>
-                                            <option value="option3">Option 3</option>
-                                            <option value="option4">Option 4</option>
-                                            <option value="option5">Option 5</option>
+                                        <select class="form-control" name="product_option_select" id="product_option_select">
+                                        <option value="">--Select--</option> 
+                                        @if(count($attribute_list) > 0)
+                                            @foreach($attribute_list as $attribute)
+                                            <option value="{{$attribute->id}}">{{$attribute->name}}</option> 
+                                            @endforeach
+                                            @endif
                                         </select>
                                     </div>
 
-                                    <table class="product-option">
-                                        <thead>
-                                            <tr>
-                                                <th>Option Value</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>Weight</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td style="text-align:end"><i class="fa fa-plus-circle"
-                                                onclick="openPopup()"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td style="text-align:end"><i class="fa fa-minus-circle"
-                                                        aria-hidden="true"></i><i class="fa fa-pencil-square mx-2"></i>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -605,7 +579,7 @@
                 var add_to_html = '<div class="row gutters-5" id="">' +
                     '<div class="col-md-3">' +
                     '<div class="form-group">' +
-                    '<select onchange="get_attributes_values(this, ' + rowId + ')"  class="asf selectpicker form-control"  data-live-search="true" title="Main Category"name="product_attributes[]">';
+                    '<select onchange="get_attributes_values(this, ' + rowId + ')"  class="asf selectpicker form-control"  data-live-search="true" title="Attribute Name"name="product_attributes[]">';
                 response.attributes.forEach(function (item)
                 {
                     add_to_html += '<option value="' + item.id + '">' + item.name + '</option>';
@@ -764,6 +738,73 @@
         event.preventDefault();
         document.getElementById("popup_container").style.display = "none";
     }
+</script>
+
+<script>
+    $(document).on('change', '#product_option_select', function(){
+
+        var selected_id = $(this).val();
+        var unselected_ids  = [];
+        $("#product_option_select option:not(:selected)").each(function(){ 
+            if($(this).val() != ''){
+            unselected_ids.push($(this).val());
+            }
+        }); 
+
+      
+
+        var html_to_append = `<table class="product-option">
+                                        <thead>
+                                            <tr>
+                                                <th>Option Value</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Weight</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style="text-align:end"><i class="fa fa-plus-circle"
+                                                onclick="openPopup()"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style="text-align:end"><i class="fa fa-minus-circle"
+                                                        aria-hidden="true"></i><i class="fa fa-pencil-square mx-2"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>`; 
+                                    document.getElementById('option_list_row').insertAdjacentHTML('beforeend', html_to_append);
+                                    var add_to_html = '';
+        if(unselected_ids.length > 0){
+        $.ajax({
+            url: "{{route('backend.product.get_option_list')}}",
+            data: {'ids':unselected_ids},
+            type: "GET",
+            success: function(response){   
+                add_to_html += '<option value="">--Select--</option>';
+                $("#product_option_select").empty(); 
+                response.data.forEach(function (item){
+                    add_to_html += '<option value="' + item.id + '">' + item.name + '</option>';
+                }); 
+                $("#product_option_select").append(add_to_html);  
+            }
+    });
+}else{
+    $("#product_option_select").empty();
+}
+      
+         
+
+    });
 </script>
 
 
