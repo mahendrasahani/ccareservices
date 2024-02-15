@@ -52,7 +52,7 @@
 
     .single-review {
         display: flex;
-            align-items: center;
+        align-items: center;
     }
 
     .single-review .rev-img {
@@ -74,7 +74,7 @@
         display: inline-block;
         position: relative;
         height: 30px;
-         direction: rtl;
+        direction: rtl;
     }
 
     .rating input[type="checkbox"] {
@@ -96,8 +96,9 @@
     .rating input[type="checkbox"]:checked~label .fas {
         color: #FFD43B;
     }
-    fieldset{
-        display:flex !important ;
+
+    fieldset {
+        display: flex !important;
     }
 </style>
 
@@ -110,9 +111,12 @@
                 <nav aria-label="breadcrumb" style="margin: 0 auto;">
                     <ol class="breadcrumb d-flex justify-content-center">
                         <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#" class="text-white">{{Str::title($main_category)}}</a></li>
-                        <li class="breadcrumb-item"><a href="#" class="text-white">{{Str::title($sub_category)}}</a></li>
-                        <li class="breadcrumb-item active pt-1" aria-current="page" style="color: #01b7e0; font-size: 14px;">{{$product_detail->product_name}}</li>
+                        <li class="breadcrumb-item"><a href="#" class="text-white">{{Str::title($main_category)}}</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#" class="text-white">{{Str::title($sub_category)}}</a>
+                        </li>
+                        <li class="breadcrumb-item active pt-1" aria-current="page"
+                            style="color: #01b7e0; font-size: 14px;">{{$product_detail->product_name}}</li>
                     </ol>
                 </nav>
             </div>
@@ -127,17 +131,17 @@
             <div class="col-md-6">
 
                 <div class="wrapper">
-                    <section class="mainImage"> 
-                    <img src="{{url('public/'.$product_detail->product_images[0])}}" alt="">
+                    <section class="mainImage">
+                        <img src="{{url('public/'.$product_detail->product_images[0])}}" alt="">
                     </section>
-                    <section class="thumbnail">  
-                        <div> 
+                    <section class="thumbnail">
+                        <div>
                             @foreach($product_detail->product_images as $key => $images)
-                            <div class="thumbnailBox {{$key == 0 ? "active":""}}">
-                            <img src="{{url('public/'.$images)}}" alt="">
-                        </div>
+                            <div class="thumbnailBox {{$key == 0 ? " active":""}}">
+                                <img src="{{url('public/'.$images)}}" alt="">
+                            </div>
                             @endforeach
-                    </div>
+                        </div>
                     </section>
                 </div>
             </div>
@@ -166,22 +170,22 @@
                                     <p class="mx-2">Availability:</p>
                                     @if($product_detail->stock_status == 0)
                                     <p class="text-danger"> Out of Stock</p>
-                                    @else 
+                                    @else
                                     <p class="text-success"> In Stock</p>
                                     @endif
                                 </div>
                             </div>
                             <div class="prpduct-price">
-                            @if($product_detail->discount_type == 'flat')
-                               <div class="aprice d-flex">  
-                               <h4>₹ {{number_format($product_detail->regular_price -
-                                       $product_detail->discount, 2)}} / Month</h4>
-                               </div> 
-                               @elseif($product_detail->discount_type == 'percent') 
-                               <h4>₹ {{number_format($product_detail->regular_price -
-                                   ($product_detail->regular_price * $product_detail->discount)/100, 2)}} 
-                                   / Month</h4>
-                               @endif 
+                                @if($product_detail->discount_type == 'flat')
+                                <div class="aprice d-flex">
+                                    <h4>₹ {{number_format($product_detail->regular_price -
+                                        $product_detail->discount, 2)}} / Month</h4>
+                                </div>
+                                @elseif($product_detail->discount_type == 'percent')
+                                <h4>₹ {{number_format($product_detail->regular_price -
+                                    ($product_detail->regular_price * $product_detail->discount)/100, 2)}}
+                                    / Month</h4>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -215,7 +219,7 @@
                                     <div class="mx-2 d-flex">
                                         <p class="mx-2 m-auto"> Qty</p>
                                         <input type="number" id="quantity" value="0" min="0"
-                                            style="width: 18%; height: 30px;">
+                                            style="width: 20%; height: 30px;">
                                         <button type="button" class="btn btn-warning animation  mx-2 "
                                             onclick="addToCart()">Add
                                             to Cart</button>
@@ -232,7 +236,7 @@
                                     <input type="radio" id="category2" name="category" value="180">
                                     <label for="category2">180-200 l</label>
                                     <input type="radio" id="category3" name="category" value="200">
-                                    <label for="category3">200-220 l</label>
+                                    <label for="category3">200-220 l</label>Z
                                 </div>
                                 <div class="calculator card">
                                     <label>Choose Tenure</label>
@@ -296,10 +300,11 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h6>Leave a review</h6>
-                        <form id="reviewForm">
-                            
-                            <div class="reviews d-flex"> 
-                                <label for="review" style="display: flex;justify-content: center;align-items: center;">Your Review:</label>
+                        <form id="reviewForm"> 
+                            <div class="reviews d-flex">
+                                <label for="review"
+                                    style="display: flex;justify-content: center;align-items: center;">Your
+                                    Review:</label>
                                 <fieldset class="rating">
                                     <input type="checkbox" id="star5" name="rating" value="5">
                                     <label class="full" for="star5"><i class="fas fa-star"></i></label>
@@ -311,10 +316,10 @@
                                     <label class="full" for="star2"><i class="fas fa-star"></i></label>
                                     <input type="checkbox" id="star1" name="rating" value="1">
                                     <label class="full" for="star1"><i class="fas fa-star"></i></label>
-                                </fieldset> 
-                            </div> 
-                            <textarea id="review" name="review" placeholder="Write your review here..."
-                                cols="50" class="mt-2 p-2"></textarea><br>
+                                </fieldset>
+                            </div>
+                            <textarea id="review" name="review" placeholder="Write your review here..." cols="50"
+                                class="mt-2 p-2"></textarea><br>
                             <button type="button" class="btn btn-warning animation  mx-2">Submit Review</button>
                         </form>
                     </div>
@@ -337,7 +342,9 @@
 
                                 </div>
                                 <div class="rev-name"><b>Kartik Sharma</b></div>
-                                <div class="rev-content"><p>vguihdfvherwiofgvoierwjfgiojriogjrhvknhfrigjtjgopkreokglemko</p></div>
+                                <div class="rev-content">
+                                    <p>vguihdfvherwiofgvoierwjfgiojriogjrhvknhfrigjtjgopkreokglemko</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -349,44 +356,49 @@
     </div>
 </section>
 
-<script> 
-var datePicker = document.getElementById("delivery_date"); 
-function setMinMaxAttributes() {
-    var today = new Date().toISOString().split("T")[0];
-    datePicker.setAttribute("min", today);
-} 
-datePicker.addEventListener("input", function() {
-    if (isDateDisabled(this.value)) {
-        this.value = "";
-        alert("This date is disabled.");
+<script>
+    var datePicker = document.getElementById("delivery_date");
+    function setMinMaxAttributes()
+    {
+        var today = new Date().toISOString().split("T")[0];
+        datePicker.setAttribute("min", today);
     }
-}); 
-setMinMaxAttributes();
+    datePicker.addEventListener("input", function ()
+    {
+        if (isDateDisabled(this.value))
+        {
+            this.value = "";
+            alert("This date is disabled.");
+        }
+    });
+    setMinMaxAttributes();
 </script>
-<script> 
-    function addToCart(){
-        event.preventDefault(); 
-        var currentItemCount = parseInt(document.getElementById('cartItemCount').innerText);  
-        var quantity = parseInt(document.getElementById('quantity').value); 
-        var newItemCount = currentItemCount + quantity; 
+<script>
+    function addToCart()
+    {
+        event.preventDefault();
+        var currentItemCount = parseInt(document.getElementById('cartItemCount').innerText);
+        var quantity = parseInt(document.getElementById('quantity').value);
+        var newItemCount = currentItemCount + quantity;
         document.getElementById('cartItemCount').innerText = newItemCount;
     }
 </script>
 
-<script> 
-    const thumbnailWrapper = document.querySelector(".thumbnail"); 
-    const mainImage = document.querySelector(".mainImage"); 
-    mainImage.addEventListener("mousemove", (e) =>{
+<script>
+    const thumbnailWrapper = document.querySelector(".thumbnail");
+    const mainImage = document.querySelector(".mainImage");
+    mainImage.addEventListener("mousemove", (e) =>
+    {
         const containerWidth = mainImage.offsetWidth;
-        const containerHeight = mainImage.offsetHeight; 
+        const containerHeight = mainImage.offsetHeight;
         const image = mainImage.querySelector("img");
         const imageWidth = image.offsetWidth;
-        const imageHeight = image.offsetHeight; 
+        const imageHeight = image.offsetHeight;
         const x = e.pageX - mainImage.offsetLeft;
-        const y = e.pageY - mainImage.offsetTop; 
+        const y = e.pageY - mainImage.offsetTop;
         const translateX = (containerWidth / 2 - x) * 2;
-        const translateY = (containerHeight / 2 - y) * 2; 
-        const scale = 3; 
+        const translateY = (containerHeight / 2 - y) * 2;
+        const scale = 3;
         image.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
     });
     mainImage.addEventListener("mouseleave", (e) =>
@@ -394,11 +406,14 @@ setMinMaxAttributes();
         const image = mainImage.querySelector("img");
         image.style.transform = "translate(0%, 0%) scale(1)";
     });
-   
-    thumbnailWrapper.querySelectorAll(".thumbnailBox").forEach((thumbnail) =>{
-        thumbnail.addEventListener("click", (e) =>{
+
+    thumbnailWrapper.querySelectorAll(".thumbnailBox").forEach((thumbnail) =>
+    {
+        thumbnail.addEventListener("click", (e) =>
+        {
             const activeThumbnail = document.querySelector(".thumbnailBox.active");
-            if (activeThumbnail){
+            if (activeThumbnail)
+            {
                 activeThumbnail.classList.remove("active");
             }
             thumbnail.classList.add("active");
@@ -413,7 +428,8 @@ setMinMaxAttributes();
     const priceDisplay = document.getElementById("price");
     const radioButtons = document.querySelectorAll("input[type='radio'][name='category']");
 
-    function updatePrice(){
+    function updatePrice()
+    {
         const sliderValue = slider.value;
         const selectedRadio = document.querySelector("input[type='radio'][name='category']:checked");
         const radioValue = selectedRadio ? selectedRadio.value : 0;
@@ -422,9 +438,10 @@ setMinMaxAttributes();
     }
 
     slider.addEventListener("input", updatePrice);
-    radioButtons.forEach(radioButton =>{
+    radioButtons.forEach(radioButton =>
+    {
         radioButton.addEventListener("change", updatePrice);
-    }); 
+    });
     updatePrice();  
 </script>
 
@@ -446,18 +463,23 @@ setMinMaxAttributes();
     {
         radioButton.addEventListener("change", updatePrice)
     })
-</script> 
+</script>
 
- <script>
-    const ratingInputs = document.querySelectorAll('input[name="rating"]'); 
-    ratingInputs.forEach(input => {
-        input.addEventListener('click', function() {
+<script>
+    const ratingInputs = document.querySelectorAll('input[name="rating"]');
+    ratingInputs.forEach(input =>
+    {
+        input.addEventListener('click', function ()
+        {
             const clickedValue = parseInt(this.value);
-            ratingInputs.forEach(input => {
+            ratingInputs.forEach(input =>
+            {
                 const inputValue = parseInt(input.value);
-                if (inputValue <= clickedValue) {
+                if (inputValue <= clickedValue)
+                {
                     input.checked = true;
-                } else {
+                } else
+                {
                     input.checked = false;
                 }
             });
