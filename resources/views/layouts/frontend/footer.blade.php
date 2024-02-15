@@ -140,8 +140,10 @@
 <a id="back-top" class="text-decoration-none"></a>
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="{{url('public/assets/frontend/js/custom.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
+<script src="{{url('public/assets/frontend/js/custom.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script src="{{url('public/assets/frontend/js/bootstrap.bundle.min.js')}}"></script>

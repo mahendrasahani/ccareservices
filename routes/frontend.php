@@ -42,4 +42,5 @@ Route::middleware(['auth', 'user_check'])->group(function () {
 
 // -------------------------product page (start) ------------------------------------------------------------
 Route::get('/category/{main_category}/{sub_category?}', [ProductController::class, 'productListFrontView'])->name('frontend.product.product_list');
+Route::get('/category/{main_category?}/{sub_category?}/{product_slug}', [ProductController::class, 'singleProductFrontView'])->name('frontend.product.single_product');
 // -------------------------product page (end) --------------------------------------------------------------

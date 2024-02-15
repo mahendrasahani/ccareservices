@@ -88,8 +88,7 @@
     }
 </style>
  
-<section id="banner-image">
-    <!-- breadcrumb strat -->
+<section id="banner-image"> 
     <div class="container">
         <div class="row">
             <div class="col-md-12 mt-2">
@@ -103,10 +102,8 @@
                 </nav>
             </div>
         </div>
-    </div>
-    <!-- breadcrumb end -->
-</section>
-<!-- form-->
+    </div> 
+</section> 
 <section>
     <div class="container mt-5">
         <div class="row">
@@ -124,7 +121,7 @@
                         <input type="text" class="form-control form-control-sm" id="search" name="search"
                             placeholder="Type & Enter">
                     </div>
-                    <div class="ms-md-3"> <!-- Added ms-md-3 class for spacing -->
+                    <div class="ms-md-3"> 
                         <input class="form-control" type="text" style="border-radius: 0;" placeholder="Search">
                     </div>
                     <a href="" class="" style="font-size: 10px;"><button type="button"
@@ -134,8 +131,7 @@
         </div>
     </div>
 </section>
-<!-- form end-->
-<!-- catagory strat-->
+ 
 <section>
     <div class="container">
         <div class="row">
@@ -161,8 +157,7 @@
                                 <a href="#" class="text-decoration-none text-dark" style="font-size: 13px;">Heater</a>
                                 <i class="fa-solid fa-caret-down mx-2" onclick="toggleMenu('menu2')"></i>
                                 <ul class="hide">
-                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark"
-                                            style="font-size: 13px;">Heater On Rent</a></li>
+                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark" style="font-size: 13px;">Heater On Rent</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -218,18 +213,14 @@
                             </div>
                             <div class="card-body">
                                 <h6 class="fw-bold"> <a href="single-product.html" class="text-decoration-none" style="color: black;">{{$product->product_name}}</h6></a>
-                                 
                                 @if($product->discount_type == 'flat')
                                 <p class="fw-bold">₹{{number_format($product->regular_price - $product->discount, 2)}}</p>
                                 @elseif($product->discount_type == 'percent')
                                 <p class="fw-bold">₹{{number_format($product->regular_price - ($product->regular_price * $product->discount)/100, 2)}}</p>
                                 @endif 
                                 <p class="" style="font-size: 11px; color: gray;">{!! Str::limit($product->product_description, 40) !!}</p>
-                                <hr>
-                                <button class="animate-btx">
-                                    <a href="{{route('frontend.single_product.view')}}"><button type="button"
-                                            class="btn btn-warning animation">View More</button></a>
-                                </button>
+                                <hr> 
+                                <a href="{{route('frontend.product.single_product', [$main_category, $sub_category, $product->slug])}}" class="animate-btx btn btn-warning animation">View More</a>
                             </div>
                         </div>
                     </div>
@@ -237,45 +228,34 @@
 
                     
                 </div>
-                <div class="col-md-3" class="content" id="">
-                    <button id="load_more">Load More</button>
+                <div class="col-md-12" class="my_pagination">
+                    {{$product_list->links('pagination::bootstrap-5')}}
                 </div>
+
             </div>
             <div class="col-md-12 mt-5 p-tag">
-                <p>
-                    Although renting a laptop may be unfamiliar to us, successful businesses are no strangers to making
+                <p>Although renting a laptop may be unfamiliar to us, successful businesses are no strangers to making
                     this wise option in the first place. With the advent of work-from-home culture and online schooling
                     during the epidemic, it is undeniable that firms are struggling from the surge in demand for laptops
                     and other portable devices. Everyone, of course, wants to invest in cutting-edge technology to
                     attain peak performance, but what should you do if your budget is a little restricted? It's possible
                     that renting a laptop for your team or simply renting IT equipment, in general, will solve your
                     problem. For your convenience, we've compiled a summary of some of the benefits of this popular
-                    option to assist you in making an informed decision.
-                </p>
-                <p>
-                    Purchasing laptops or any other IT equipment is not a simple decision - you must first establish
+                    option to assist you in making an informed decision.</p>
+
+                <p>Purchasing laptops or any other IT equipment is not a simple decision - you must first establish
                     budgets, then examine the different brands available on the market, and lastly, determine what
                     connects with your needs and what is currently trendy! After all, purchasing information technology
                     gear is a significant financial commitment in most circumstances. A laptop rental is an easy answer
                     in this situation, as it provides greater flexibility and room for error. If you plan on renting a
-                    laptop from Cool Care Services, you should be aware of the following:
-                </p>
+                    laptop from Cool Care Services, you should be aware of the following:</p>
+
                 <ul class="list-inline">
-                    <li>
-                        - There are no up-front fees associated with your rent.
-                    </li>
-                    <li>
-                        - Get the same high-quality results at a low cost with our simple, cheap pricing!
-                    </li>
-                    <li>
-                        - Renting a laptop eliminates the need for ongoing maintenance.
-                    </li>
-                    <li>
-                        - Preventing technological obsolescence is essential.
-                    </li>
-                    <li>
-                        - You can customize it.
-                    </li>
+                    <li>- There are no up-front fees associated with your rent.</li>
+                    <li>- Get the same high-quality results at a low cost with our simple, cheap pricing!</li>
+                    <li>- Renting a laptop eliminates the need for ongoing maintenance.</li>
+                    <li>- Preventing technological obsolescence is essential.</li>
+                    <li>- You can customize it.</li>
                 </ul>
                 <p>We are well-versed in the subject of paradigm shifts. It is nearly hard to perform any work without
                     using a laptop computer. It has evolved into a social and professional prerequisite that will assist
@@ -287,21 +267,20 @@
         </div>
     </div>
 </section>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+@section('javascript-section')
+ 
 
 <script>
-    function toggleMenu(menuId)
-    {
+    function toggleMenu(menuId){
         var submenu = document.querySelector("#" + menuId + " ul");
         submenu.classList.toggle("hide");
     }
 </script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const checkboxes = document.querySelectorAll('.filter');
         const items = document.querySelectorAll('.item');
-
         checkboxes.forEach(function (checkbox) {
             checkbox.addEventListener('change', function () {
                 const filterValue = this.getAttribute('data-filter');
@@ -318,30 +297,8 @@
     });
 </script>
 
-<script>
- $(document).on('click', '#load_more', function(){ 
-    console.log('test tss');
-            $('#loader').show();
- 
-            // $.ajax({
-            //     url: 'your-backend-endpoint',  
-            //     type: 'GET',
-            //     success: function(data) { 
-            //         $('#content').append(data); 
-            //         $('#loader').hide();
-            //     }
-            // });
- });
     
-         
-         
-        
-   
+
  
-
-
-</script>
-
-
-
+@endsection
 @endsection

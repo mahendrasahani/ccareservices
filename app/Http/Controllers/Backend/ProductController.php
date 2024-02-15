@@ -415,6 +415,12 @@ class ProductController extends Controller
             $main_cat_id = MainCategory::where('slug', $main_category)->first()->id;
             $sub_cat_id = SubCategory::where('slug', $sub_category)->first()->id;
             $product_list = Product::whereJsonContains('sub_category', $sub_cat_id)->orderBy('id', 'desc')->paginate(12);
-            return view('frontend.product.index', compact('product_list')); 
+            return view('frontend.product.index', compact('product_list', 'main_category', 'sub_category')); 
+        }
+
+        public function singleProductFrontView($main_category, $sub_category, $slug){
+            $product_detail = Product::where('slug', $slug)->first();
+            return view('frontend.product.single_product', compact('product_detail', 'main_category', 'sub_category'));
+
         }
 }
