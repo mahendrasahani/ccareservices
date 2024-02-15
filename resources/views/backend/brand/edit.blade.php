@@ -24,7 +24,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label" for="name">Name <i class="las la-language text-danger"></i></label>
                                             <div class="col-sm-9">
-                                                <input type="text" placeholder="Enter Name" id="name" name="name" value="{{$brand_detail->name}}" class="form-control" required>
+                                                <input type="text" placeholder="Enter Name" id="name" name="name" value="{{$brand_detail->name}}" class="form-control" required >
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -32,7 +32,8 @@
                                                 <label class=" control-label" for="name">Logo <small>(120x80)</small></label>
                                             </div>
                                             <div class="col-md-9"> 
-                                                    <input type="file" name="logo">
+                                                    <input type="file"  class="form-control" name="logo" onchange="displaySelectedImages(event)" > 
+                                                    <div id="imagePreview"></div>
                                                 </div>
                                             </div>
                                         </div>

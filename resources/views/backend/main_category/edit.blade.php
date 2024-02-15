@@ -77,7 +77,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Meta description</label>
                                         <div class="col-md-9">
-                                            <textarea name="meta_description" rows="5" class="form-control" required>{{$main_cat_detail->meta_description}}</textarea>
+                                            <textarea name="meta_description" rows="5" cols="50" required style="width:100%;padding:7px;border: 1px solid #ced4da;">{{$main_cat_detail->meta_description}}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -85,7 +85,7 @@
                                             <small>(200x200)</small>
                                         </label>
                                         <div class="col-md-9"> 
-                                                <input type="file" name="meta_image" class="selected-files">
+                                                <input type="file" class="form-control" name="meta_image" class="selected-files">
                                             <div class="file-preview box sm">
                                                 <div class="d-flex justify-content-between align-items-center mt-2 file-preview-item" data-id="83" title="Sports-&amp;-outdoor.png">
                                                     <div class="align-items-center align-self-stretch d-flex justify-content-center thumb">

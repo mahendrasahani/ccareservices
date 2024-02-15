@@ -28,7 +28,7 @@
                                                 <label class="control-label" for="date">Ordering Number</label>
                                             </div>
                                             <div class="col-md-9">
-                                                <input type="number" placeholder="Order Number" name="order_number" class="form-control" required>
+                                                <input type="number" placeholder="Order Number" name="order_number" class="form-control" min="0" required>
                                                 <small>Higher number has high priority</small>
                                             </div>
                                         </div>
@@ -38,7 +38,8 @@
                                                 <label class="control-label" for="password">Thumbnail<small>(200x300)</small></label>
                                             </div>
                                             <div class="col-md-9">
-                                                    <input type="file" name="thumbnail_img">
+                                                    <input type="file" name="thumbnail_img" class="form-control" onchange="displaySelectedImagesSec(event)">
+                                                    <div id="imagePreviewSec"></div>
                                             </div>
                                         </div>
                             
@@ -77,7 +78,8 @@
                                                 <label class="control-label" for="password">Meta Image</label>
                                             </div>
                                             <div class="col-md-9"> 
-                                                    <input type="file" name="meta_img">
+                                                    <input type="file" name="meta_img" class="form-control" onchange="displaySelectedImages(event)" >
+                                                    <div id="imagePreview"></div>
                                             </div>
                                         </div>
                             

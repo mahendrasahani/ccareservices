@@ -117,9 +117,9 @@
                                             </div>
                                         </td>
                                         <td style="display: table-cell;">
-                                            <div class="d-flex align-items-center">
+                                            <div class="  ">
                                                 <a href="#" target="_blank" class="">
-                                                    <div class="pro-img d-flex align-items-center">
+                                                    <div class="pro-img  ">
                                                         <img
                                                             src="{{$product->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->product_images[0])}}">
                                                     </div>
@@ -341,11 +341,11 @@
                 <a href="" target="_blank" class="text-reset d-block">
                     <div class="d-flex align-items-center">
                         <a href="#" target="_blank" class="">
-                            <div class="d-flex align-items-center">
+                            <div class="pro-img">
                                 <img src="${product.product_images == null ? domainURL + '/assets/both/placeholder/product.jpg' : domainURL + '/' + product.product_images[0]}" width="50%">
                                 <span class="flex-grow-1 minw-0">
                                     <div class=" text-truncate-2">
-                                        <p class="font-s">${product.product_name}</p>
+                                        <p class="font-s mt-3"><b>${product.product_name}</b></p>
                                     </div>
                                 </span>
                             </div>
