@@ -1,6 +1,17 @@
 @extends('layouts/backend/main')
 @section('main-section')
 
+<style>
+    .product_img{
+        width: 200px;
+        height:200px;
+    }
+    .product_img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
 <div class="content-body">
             <div class="top-set">
                 <div class="container">
@@ -10,7 +21,11 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-lg-auto"> 
-                                            <img src="{{$product_detail->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product_detail->product_images[0])}}" class="img-fluid" width="5%"> 
+                                            <div class="product_img">
+                                                <img src="{{$product_detail->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product_detail->product_images[0])}}"
+                                                    class="img-fluid">
+                                            </div>
+                                             
                                         </div>
                                         <div class="col-lg">
                                             <h1 class="h5 fw-700">{{$product_detail->product_name}}</h1>
