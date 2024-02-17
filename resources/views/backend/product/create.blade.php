@@ -13,6 +13,24 @@
     font-size: 22px;
     width: 100%;
 }
+.table_tag{
+    margin: 0;
+    font-size: 17px;
+    background: #CE2B23;
+    color: #fff;
+    padding: 7px;
+    border-radius: 5px;
+}
+.append_table i{
+    color:#000;
+        font-size: 22px;
+            margin-right: 10px;
+}
+.append_table{
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+}
 </style>
 
 <div class="content-body">
@@ -222,7 +240,7 @@
                                 <h5 class="mb-0 pt-2">Product Option</h5>
                             </div>
                             <div class="card-body">
-                                <div class="alert alert-info">Add Option</div>
+                                <div class="alert alert-info">Add Option</div> 
                                 <div class="row" id="option_list_row"></div>
                                 <div class="row">
                                     <label class="col-md-3 col-form-label" for="product_option">Select an
@@ -787,7 +805,11 @@
                 unselected_ids.push($(this).val());
             }
         });
-        var html_to_append = `<table class="product-option" id="option_table_${selected_id}">
+        var html_to_append = `<div class="append_table">
+         <p class="table_tag"><b>size</b></p>
+         <i class="fa fa-minus-circle" aria-hidden="true"></i>
+         </div> 
+        <table class="product-option" id="option_table_${selected_id}">
                                         <thead>
                                             <tr>
                                                 <th>Option Value</th>
@@ -822,7 +844,17 @@
         }
     });
 </script>
+<script>
+    // Add an event listener to the select element
+    document.getElementById('product_option_select').addEventListener('change', function ()
+    {
+        // Get the selected option element
+        var selectedOption = this.options[this.selectedIndex];
 
+        // Log the HTML of the selected option
+        console.log(selectedOption.innerHTML);
+    });
+</script>
 
 @endsection
 @endsection
