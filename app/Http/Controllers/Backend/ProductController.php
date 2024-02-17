@@ -424,4 +424,18 @@ class ProductController extends Controller
                 "data" => $newOptionList
             ]);
         }
+
+
+        
+        public function getOptionValueList(Request $request){
+            $id = $request->id;
+            $OptionValueList = AttributeValue::where('attribute_id', $id)->get();
+            return response()->json([
+                "status" => 200,
+                "message" => "success",
+                "data" => $OptionValueList
+            ]);
+        }
+
+
 }

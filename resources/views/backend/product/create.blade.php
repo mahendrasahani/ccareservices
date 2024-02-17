@@ -261,12 +261,8 @@
                                                 <div class="product-details">
                                                     <input type="hidden" name="table_id" id="table_id">
                                                     <label for="option_value" class="popup_label">Option Value</label>
-                                                    <select class="form-control" name="option_value" id="option_value">
-                                                        <option value="option1">Option 1</option>
-                                                        <option value="option2">Option 2</option>
-                                                        <option value="option3">Option 3</option>
-                                                        <option value="option4">Option 4</option>
-                                                        <option value="option5">Option 5</option>
+                                                    <select class="form-control" name="modal_option_value" id="modal_option_value">
+                                                     
                                                     </select>
                                                 </div>
                                             </div>
@@ -480,37 +476,54 @@
 
 @section('javascript-section')
 <script>
-    function showOptionModal(table_id){
-        console.log(table_id)
-        var modal = document.getElementById('product_modal');
-        console.log(modal)
-        $('#table_id').val(table_id)
+    function showOptionModal(table_id, option_id){ 
+        var modal = document.getElementById('product_modal'); 
+        var option_modal = document.getElementById('modal_option_value');
+        var option_list ='';
+            $.ajax({
+                url: "{{route('backend.product.get_option_value_list')}}",
+                data: {'id':option_id},
+                type: "GET",
+                success:function(response){
+                     response.data.forEach(function(item){
+                        option_list += `<option value="${item.name}" data-id="${item.id}">${item.name}</option>`
+                     });
+                     option_modal.innerHTML = option_list;
+                    }
+            });
+
+        $('#table_id').val(table_id);
         modal.style.display = "block";
     }
 </script>
 <script>
     function validateOptionModal(){
         var tableId = document.getElementById('table_id').value;
-        var optionVal = document.getElementById('option_value').value;
-        var product_qty = document.getElementById('product_qty').value;
+        var optionVal = document.getElementById('modal_option_value');
+        var selectedOption = optionVal.options[optionVal.selectedIndex];
+        var dataId = selectedOption.getAttribute('data-id');
+         
         
         var product_qty = document.getElementById('product_qty').value;
+        var product_qty = document.getElementById('product_qty').value;
+
         var html_to_append = `<tr>
-                                <td>${optionVal}</td>
-                                <td>${product_qty}</td> 
-                                <td style="text-align:end"><i class="fa fa-minus-circle" aria-hidden="true"></i><i class="fa fa-pencil-square mx-2"></i>
-                                </td>
-                            </tr>
-                            <input type="hidden" value="" id="price" name="price">
-                            <input type="hidden" value="" id="month" name="price">
-                            `;
-                        document.getElementById(tableId).insertAdjacentHTML('beforeend', html_to_append);
-                        var modal = document.getElementById('product_modal');  
-                        var inputs = modal.querySelectorAll('input[type="number"]');  
-                        inputs.forEach(function(input) {
-                        input.value = '';
-                        }); 
-                        $('#product_modal').modal('hide');
+                              <td>${optionVal.value}</td>
+                              <td><input type="text" value="${dataId}"></td> 
+                              <td>${product_qty}</td> 
+                             
+                              <td style="text-align:end"><i class="fa fa-minus-circle" aria-hidden="true"></i><i class="fa fa-pencil-square mx-2"></i>
+                              </td>
+                              </tr>
+                              <input type="hidden" value="" id="price" name="price">
+                              <input type="hidden" value="" id="month" name="price">`;
+            document.getElementById(tableId).insertAdjacentHTML('beforeend', html_to_append);
+            var modal = document.getElementById('product_modal');  
+            var inputs = modal.querySelectorAll('input[type="number"]');  
+            inputs.forEach(function(input){
+            input.value = '';
+            }); 
+            $('#product_modal').modal('hide');
     }
 </script>
 
@@ -778,6 +791,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Option Value</th>
+                                                <th>Option id</th>
                                                 <th>Quantity</th> 
                                             </tr>
                                         </thead>
@@ -786,7 +800,7 @@
                                             
                                         </tbody>
                                     </table>  
-                                        <i class="fa fa-plus-circle product-option-add-btn" data-toggle="modal" data-target="#product_modal" onclick="showOptionModal('option_table_${selected_id}')"></i>`;
+                                        <i class="fa fa-plus-circle product-option-add-btn" data-toggle="modal" data-target="#product_modal" onclick="showOptionModal('option_table_${selected_id}', ${selected_id})"></i>`;
         document.getElementById('option_list_row').insertAdjacentHTML('beforeend', html_to_append);
         var add_to_html = '';
         if (unselected_ids.length > 0) {

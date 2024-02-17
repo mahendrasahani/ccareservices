@@ -258,8 +258,7 @@
     </script>
 
     <script src="{{url('public/assets/backend/plugins/common/common.min.js')}}"></script>
-    <script src="{{url('public/assets/backend/js/custom.min.js')}}"></script>
-    <script src="{{url('public/assets/backend/js/backend_custom.js')}}"></script>
+    <script src="{{url('public/assets/backend/js/custom.min.js')}}"></script> 
     <script src="{{url('public/assets/backend/js/settings.js')}}"></script>
     <script src="{{url('public/assets/backend/js/gleek.js')}}"></script>
     <script src="{{url('public/assets/backend/js/styleSwitcher.js')}}"></script>
@@ -283,6 +282,7 @@
     <script src="{{url('public/assets/backend/plugins/chartist/js/chartist.min.js')}}"></script>
     <script src="{{url('public/assets/backend/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js')}}"></script>
     <script src="{{url('public/assets/backend/js/dashboard/dashboard-1.js')}}"></script>
+    <script src="{{url('public/assets/backend/js/backend_custom.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"
         integrity="sha512-eP8DK17a+MOcKHXC5Yrqzd8WI5WKh6F1TIk5QZ/8Lbv+8ssblcz7oGC8ZmQ/ZSAPa7ZmsCU4e/hcovqR8jfJqA=="

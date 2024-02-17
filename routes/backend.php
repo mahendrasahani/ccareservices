@@ -67,6 +67,7 @@ Route::post('/admin/product/add-attribute', [ProductController::class, 'addAttri
 Route::post('/admin/product/get-attribte-value', [ProductController::class, 'getAttributeValue'])->name('backend.product.get-attribte-value');
 Route::post('/admin/product/get-attribte-value', [ProductController::class, 'getAttributeValue'])->name('backend.product.get-attribte-value');
 Route::get('/admin/product/get-option-list', [ProductController::class, 'getOptionList'])->name('backend.product.get_option_list');
+Route::get('/admin/product/get-option-value-list', [ProductController::class, 'getOptionValueList'])->name('backend.product.get_option_value_list');
 
 Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit'])->name('backend.product.edit');
 Route::post('/admin/product/update/{id}', [ProductController::class, 'update'])->name('backend.product.update');
