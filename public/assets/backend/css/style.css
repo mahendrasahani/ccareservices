@@ -15764,8 +15764,7 @@ font-size: 10px;
 }
  .product-option {
         width: 100%;
-        border-collapse: collapse;
-        margin-top: 15px;
+        border-collapse: collapse; 
     }
 
     .product-option,
