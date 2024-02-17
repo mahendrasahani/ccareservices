@@ -118,7 +118,7 @@
                                         </td>
                                         <td style="display: table-cell;">
                                             <div class="  ">
-                                                <a href="#" target="_blank" class="">
+                                                <a href="#" target="_blank" >
                                                     <div class="pro-img  ">
                                                         <img
                                                             src="{{$product->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->product_images[0])}}">
@@ -138,8 +138,7 @@
                                                         <i class="fa-solid fa-star"></i>
                                                         <i class="fa-regular fa-star"></i>
                                                         <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-
+                                                        <i class="fa-regular fa-star"></i> 
                                                     </span>
                                                 </div>
                                                 <!-- <div><span>Total Sold</span>: <span class="fw-600">2</span></div> -->
@@ -179,7 +178,7 @@
                                         <td>
                                             <div class=" brand d-flex align-items-center justify-content-center">
                                                 <img src="{{$product->getBrand->logo == '' ? url('public/assets/both/placeholder/brand.jpg') : url($product->getBrand->logo)}}"
-                                                    width="15%">
+                                                  style= "width:50%">
                                             </div>
                                         </td>
                                         <td><label class="switch">
@@ -204,7 +203,7 @@
                                                 <i class="fa-regular fa-copy"></i>
                                             </a>
                                             <button value="{{$product->id}}" class="btn btn-icon btn-sm delete_ico"
-                                                id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
+                                            id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -433,14 +432,9 @@
                         });
                         $("#row_id_" + id).hide();
                     }
-                })
-
-
+                }) 
             }
-        });
-
-
-
+        }); 
     });
 </script>
 

@@ -231,24 +231,24 @@
                                                 <th>Weight</th>
                                             </tr>
                                         </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td style="text-align:end"><i class="fa fa-plus-circle product-option" data-toggle="modal" data-target="#product_modal" ></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td style="text-align:end"><i class="fa fa-minus-circle"
-                                                            aria-hidden="true"></i><i class="fa fa-pencil-square mx-2"></i>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style="text-align:end"><i class="fa fa-plus-circle product-option" data-toggle="modal" data-target="#product_modal" ></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style="text-align:end"><i class="fa fa-minus-circle"
+                                                        aria-hidden="true"></i><i class="fa fa-pencil-square mx-2"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
