@@ -1,6 +1,20 @@
 @extends('layouts/backend/main')
 @section('main-section')
 
+<style>
+    .price {
+        display: flex !important;
+        justify-content: space-around;
+    }
+    .product-option-add-btn {
+    padding: 8px;
+    text-align: end;
+    color: #000;
+    font-size: 22px;
+    width: 100%;
+}
+</style>
+
 <div class="content-body">
     <div class="top-set">
         <div class="container">
@@ -205,28 +219,30 @@
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header d-flex justify-content-between"
                                 style="border-bottom : 1px solid #e8e8e8;">
-                                <h5 class="mb-0 pt-2">Product Option</h5> 
+                                <h5 class="mb-0 pt-2">Product Option</h5>
                             </div>
                             <div class="card-body">
                                 <div class="alert alert-info">Add Option</div>
                                 <div class="row" id="option_list_row"></div>
                                 <div class="row">
-                                    <label class="col-md-3 col-form-label" for="product_option">Select an option:</label>
+                                    <label class="col-md-3 col-form-label" for="product_option">Select an
+                                        option:</label>
                                     <div class="col-md-9">
-                                        <select class="form-control" name="product_option_select" id="product_option_select">
-                                        <option value="">--Select--</option> 
-                                        @if(count($attribute_list) > 0)
+                                        <select class="form-control" name="product_option_select"
+                                            id="product_option_select">
+                                            <option value="">--Select--</option>
+                                            @if(count($attribute_list) > 0)
                                             @foreach($attribute_list as $attribute)
-                                            <option value="{{$attribute->id}}">{{$attribute->name}}</option> 
+                                            <option value="{{$attribute->id}}">{{$attribute->name}}</option>
                                             @endforeach
                                             @endif
                                         </select>
                                     </div>
 
-                                    
+
                                 </div>
                             </div>
-                        </div> 
+                        </div>
 
                         <!------------------------------------ Modal start -------------------------------->
                         <div class="modal fade" id="product_modal" tabindex="-1" role="dialog"
@@ -243,6 +259,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="product-details">
+                                                    <input type="hidden" name="table_id" id="table_id">
                                                     <label for="option_value" class="popup_label">Option Value</label>
                                                     <select class="form-control" name="option_value" id="option_value">
                                                         <option value="option1">Option 1</option>
@@ -256,71 +273,79 @@
                                             <div class="col-md-6">
                                                 <div class="product-details">
                                                     <label for="option_value" class="popup_label">Quantity</label><br>
-                                                    <input type="number" min="1" style="width:100%"
-                                                        class="form-control">
+                                                    <input type="number" min="1" style="width:100%" class="form-control" id="product_qty">
                                                 </div>
                                             </div>
+
+
                                             <div class="col-md-6">
                                                 <div class="product-details">
-                                                    <label for="subtract_stock" class="popup_label">Subtract
-                                                        Stock</label>
-                                                    <select class="form-control" name="subtract_stock"
-                                                        id="subtract_stock">
-                                                        <option value="yes">Yes</option>
-                                                        <option value="no">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="product-details">
-                                                    <label for="subtract_stock" class="popup_label">Subtract
-                                                        Stock</label>
-                                                    <select class="form-control" name="subtract_stock"
-                                                        id="subtract_stock">
-                                                        <option value="yes">Yes</option>
-                                                        <option value="no">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="product-details">
-                                                    <label for="price" class="popup_label">Price</label>
-                                                    <div class="price d-flex">
-                                                        <select class="form-control" name="price" id="price">
-                                                            <option value="plus">+</option>
-                                                            <option value="minus">-</option>
-                                                        </select>
-                                                        <input type="number" min="0" style="width:100%"
-                                                        class="form-control">
+                                                    <!-- <label for="price" class="popup_label">Month</label> -->
+
+                                                    <div class="price ">
+                                                        <label for="price" class="popup_label">Month</label>
+                                                        <label for="price" class="popup_label">Price</label>
                                                     </div>
+                                                    <div class="price ">
+                                                        <div class="month">
+                                                            <input type="text" class="form-control" style="width:100%" disabled value="1" id="month_1"> 
+                                                            <input type="text" class="form-control" style="width:100%" disabled value="2" id="month_2"> 
+                                                            <input type="text" class="form-control" style="width:100%" disabled value="3" id="month_3"> 
+                                                            <input type="text" class="form-control" style="width:100%" disabled value="4" id="month_4"> 
+                                                            <input type="text" class="form-control" style="width:100%" disabled value="5" id="month_5"> 
+                                                            <input type="text" class="form-control" style="width:100%" disabled value="6" id="month_6">  
+                                                        </div>
+                                                        <div class="price_input">
+                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_1">
+                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_2">
+                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_3">
+                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_4">
+                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_5"> 
+                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_6"> 
+                                                        </div> 
+                                                    </div>
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="product-details">
-                                                    <label for="weight" class="popup_label">Weight</label>
-                                                    <div class="weight d-flex">
-                                                        <select class="form-control" name="weight" id="weight">
-                                                            <option value="plus">+</option>
-                                                            <option value="minus">-</option>
-                                                        </select>
-                                                        <input type="number" min="0" style="width:100%"
-                                                        class="form-control">
+                                                <div class="product-details"> 
+                                                    <div class="price ">
+                                                        <label for="price" class="popup_label">Month</label>
+                                                        <label for="price" class="popup_label">Price</label>
                                                     </div>
+                                                    <div class="price ">
+                                                    <div class="month">
+                                                            <input type="text" class="form-control" style="width:100%" disabled value="7" id="month_7"> 
+                                                            <input type="text" class="form-control" style="width:100%" disabled value="8" id="month_8"> 
+                                                            <input type="text" class="form-control" style="width:100%" disabled value="9" id="month_9"> 
+                                                            <input type="text" class="form-control" style="width:100%" disabled value="10" id="month_10"> 
+                                                            <input type="text" class="form-control" style="width:100%" disabled value="11" id="month_11"> 
+                                                            <input type="text" class="form-control" style="width:100%" disabled value="12" id="month_12">  
+                                                        </div>
+                                                        <div class="price_input">
+                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_7">
+                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_8">
+                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_9">
+                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_10">
+                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_11"> 
+                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_12"> 
+                                                        </div>
+                                                        
+                                                    </div>
+
                                                 </div>
                                             </div>
+                                             
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary ">Save changes</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" onclick="validateOptionModal()">Save changes</button>
                                     </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <!------------------------------ Modal End --------------------->
- 
-
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
@@ -366,8 +391,7 @@
                                     <span class="position-relative main-category-info-icon">
                                         <i class="las la-question-circle fs-18 text-info"></i>
                                         <span
-                                            class="main-category-info bg-info p-2 position-absolute d-none border">These
-                                            will be used for Affiliate System.</span>
+                                            class="main-category-info bg-info p-2 position-absolute d-none border">These will be used for Affiliate System.</span>
                                     </span>
                                 </h6>
                             </div>
@@ -429,23 +453,20 @@
                                         <label for="amount">Amount:</label>
                                         <input type="number" class="form-control" id="amount" placeholder="Enter amount"
                                             required>
-                                    </div>
-
+                                    </div> 
                                     <div class="form-group">
                                         <label for="vatRate">VAT Rate (%):</label>
                                         <input type="number" class="form-control" id="vatRate"
                                             placeholder="Enter VAT rate" required>
-                                    </div>
-
+                                    </div> 
                                     <div class="form-group">
                                         <label for="taxRate">Tax Rate (%):</label>
                                         <input type="number" class="form-control" id="taxRate"
                                             placeholder="Enter Tax rate" required>
-                                    </div>
-
+                                    </div> 
                                     <button type="button" class="btn btn-primary"
                                         onclick="calculate()">Calculate</button>
-
+                                </form> 
                             </div>
                             <div id="result" class="mt-4 mx-4"></div>
                         </div>
@@ -459,33 +480,64 @@
 
 @section('javascript-section')
 <script>
+    function showOptionModal(table_id){
+        console.log(table_id)
+        var modal = document.getElementById('product_modal');
+        console.log(modal)
+        $('#table_id').val(table_id)
+        modal.style.display = "block";
+    }
+</script>
+<script>
+    function validateOptionModal(){
+        var tableId = document.getElementById('table_id').value;
+        var optionVal = document.getElementById('option_value').value;
+        var product_qty = document.getElementById('product_qty').value;
+        
+        var product_qty = document.getElementById('product_qty').value;
+        var html_to_append = `<tr>
+                                <td>${optionVal}</td>
+                                <td>${product_qty}</td> 
+                                <td style="text-align:end"><i class="fa fa-minus-circle" aria-hidden="true"></i><i class="fa fa-pencil-square mx-2"></i>
+                                </td>
+                            </tr>
+                            <input type="hidden" value="" id="price" name="price">
+                            <input type="hidden" value="" id="month" name="price">
+                            `;
+                        document.getElementById(tableId).insertAdjacentHTML('beforeend', html_to_append);
+                        var modal = document.getElementById('product_modal');  
+                        var inputs = modal.querySelectorAll('input[type="number"]');  
+                        inputs.forEach(function(input) {
+                        input.value = '';
+                        }); 
+                        $('#product_modal').modal('hide');
+    }
+</script>
+
+
+<script>
     let myEditor;
 
     ClassicEditor
         .create(document.querySelector('#editor'))
-        .then(editor =>
-        {
+        .then(editor => {
             myEditor = editor;
 
         })
-        .catch(error =>
-        {
+        .catch(error => {
             console.error(error);
         });
 
-    function validateAndSubmit(event)
-    {
+    function validateAndSubmit(event) {
         event.preventDefault();
         var errorFields = document.getElementsByClassName('formFiedllerror');
-        for (var i = 0; i < errorFields.length; i++)
-        {
+        for (var i = 0; i < errorFields.length; i++) {
             errorFields[i].innerText = '';
         }
 
         var formData = new FormData($('#create_product_form')[0]);
         var CatCheckboxes = document.querySelectorAll('.main_checkbox:checked');
-        if (CatCheckboxes.length < 1)
-        {
+        if (CatCheckboxes.length < 1) {
             var EmptyCatCheckboxes = document.querySelectorAll('.main_checkbox');
             document.getElementById('categoryError').innerText = 'Select category.';
             EmptyCatCheckboxes[0].focus();
@@ -493,34 +545,29 @@
         }
 
         const editorValue = myEditor.getData();
-        if (editorValue == '')
-        {
+        if (editorValue == '') {
             document.getElementById('editorError').innerText = 'Enter product description';
             myEditor.focus();
             return;
-        } else
-        {
+        } else {
             formData.append('product_description', editorValue);
         }
 
         // Append additional data to formData
         var attributeName = $('#add_on select[name^="product_attributes"]');
-        attributeName.each(function (index, element)
-        {
+        attributeName.each(function (index, element) {
             formData.append(element.name, $(element).val());
         });
 
         var attributeValue = $('#add_on select[name^="filtering_attributes"]');
-        attributeValue.each(function (index, element)
-        {
+        attributeValue.each(function (index, element) {
             formData.append(element.name, $(element).val());
         });
 
         // Append productImagesValue to formData
         var productImagesInput = document.getElementById('product_images');
         var productImagesValue = productImagesInput.files;
-        for (var i = 0; i < productImagesValue.length; i++)
-        {
+        for (var i = 0; i < productImagesValue.length; i++) {
             formData.append('product_images[]', productImagesValue[i].name);
         }
         $.ajaxSetup({
@@ -534,10 +581,8 @@
             data: formData,
             contentType: false,
             processData: false,
-            success: function (response)
-            {
-                if (response.status == 200 && response.message == "success")
-                {
+            success: function (response) {
+                if (response.status == 200 && response.message == "success") {
                     localStorage.setItem('product_create', 'success');
                     window.location.href = "{{route('backend.admin.product.index')}}";
                 }
@@ -547,8 +592,7 @@
 </script>
 
 <script>
-    function addAttribute()
-    {
+    function addAttribute() {
 
         var imageInput = document.getElementById('product_images');
         $.ajaxSetup({
@@ -558,16 +602,14 @@
         });
         var formData = $('#create_product_form').serializeArray();
         var attributeName = $('#add_on select[name^="product_attributes"]');
-        attributeName.each(function (index, element)
-        {
+        attributeName.each(function (index, element) {
             formData.push({
                 name: element.name,
                 value: $(element).val()
             });
         });
         var attributeValue = $('#add_on select[name^="filtering_attributes"]');
-        attributeValue.each(function (index, element)
-        {
+        attributeValue.each(function (index, element) {
             formData.push({
                 name: element.name,
                 value: $(element).val()
@@ -577,8 +619,7 @@
             url: "{{route('backend.product.add_attribute')}}",
             type: "POST",
             data: formData,
-            success: function (response)
-            {
+            success: function (response) {
                 console.log(response);
                 // if(response.message == 'empty'){ 
                 var appendIn = document.getElementById('add_on');
@@ -587,20 +628,16 @@
                     '<div class="col-md-3">' +
                     '<div class="form-group">' +
                     '<select onchange="get_attributes_values(this, ' + rowId + ')"  class="asf selectpicker form-control"  data-live-search="true" title="Attribute Name"name="product_attributes[]">';
-                response.attributes.forEach(function (item)
-                {
+                response.attributes.forEach(function (item) {
                     add_to_html += '<option value="' + item.id + '">' + item.name + '</option>';
                 });
                 add_to_html += '</select>' +
                     '</div>' +
                     '</div>' +
                     '<div class="col">' +
-                    '<div class="form-group">' +
-
+                    '<div class="form-group">' + 
                     '<select class="form-control selectpicker" name="filtering_attributes[]" id="' + rowId + '" data-toggle="select2" data-placeholder="Choose ..." data-live-search="true" multiple="">' +
-
                     '</select>' +
-
                     '</div>' +
                     '</div>' +
                     '<div class="col-auto">' +
@@ -610,15 +647,13 @@
                     '</div>' +
                     '</div>';
                 appendIn.insertAdjacentHTML('beforeend', add_to_html);
-
                 $('.selectpicker').selectpicker('refresh');
                 // }
             }
         });
     }
 
-    function get_attributes_values(e, selectId)
-    {
+    function get_attributes_values(e, selectId) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -630,11 +665,9 @@
                 attribute_id: $(e).val()
             },
             url: '{{route('backend.product.get-attribte-value')}}',
-            success: function (response)
-            {
+            success: function (response) {
                 var add_to_html = '';
-                response.attributes_value.forEach(function (item)
-                {
+                response.attributes_value.forEach(function (item) {
                     add_to_html += '<option value="' + item.id + '">' + item.name + '</option>';
                 });
                 var selectFields = document.getElementById(selectId);
@@ -645,8 +678,7 @@
     }
 </script>
 <script>
-    $(document).ready(function ()
-    {
+    $(document).ready(function () {
         $('.aiz-date-range').datepicker({
             format: 'dd-mm-yyyy',
             autoclose: true,
@@ -658,17 +690,12 @@
         });
     });
 </script>
-
-
-
 <script>
-    function calculate()
-    {
+    function calculate() {
         var amount = parseFloat(document.getElementById('amount').value);
         var vatRate = parseFloat(document.getElementById('vatRate').value);
         var taxRate = parseFloat(document.getElementById('taxRate').value);
-        if (isNaN(amount) || isNaN(vatRate) || isNaN(taxRate))
-        {
+        if (isNaN(amount) || isNaN(vatRate) || isNaN(taxRate)) {
             alert('Please enter valid numeric values.');
             return;
         }
@@ -683,35 +710,28 @@
     }
 </script>
 <script>
-    $(document).ready(function ()
-    {
+    $(document).ready(function () {
         $('.selectpicker').selectpicker();
     });
 </script>
 <script>
-    function checkAllBox(main, sub)
-    {
+    function checkAllBox(main, sub) {
         var mainCheckboxs = document.getElementById(main);
         var subCheckboxes = document.querySelectorAll('.' + sub);
-        for (var i = 0; i < subCheckboxes.length; i++)
-        {
+        for (var i = 0; i < subCheckboxes.length; i++) {
             subCheckboxes[i].checked = mainCheckboxs.checked;
         }
     }
-    function removeAllCheckBox(main, sub)
-    {
+    function removeAllCheckBox(main, sub) {
         var mainCheckboxs = document.getElementById(main);
         var subCheckboxes = document.querySelectorAll('.' + sub + ':checked');
-        if (subCheckboxes.length > 0)
-        {
+        if (subCheckboxes.length > 0) {
             mainCheckboxs.checked = true;
-        } else
-        {
+        } else {
             mainCheckboxs.checked = false;
         }
     }
-    function showOptions(event, option, show, hide)
-    {
+    function showOptions(event, option, show, hide) {
         event.preventDefault();
         const subCatList = document.getElementById(option);
         const showBtn = document.getElementById(show);
@@ -721,8 +741,7 @@
         if (subCatList.style.display = "none")
             subCatList.style.display = "block";
     }
-    function hideOptions(event, option, show, hide)
-    {
+    function hideOptions(event, option, show, hide) {
         event.preventDefault();
         const subCatList = document.getElementById(option);
         const showBtn = document.getElementById(show);
@@ -736,80 +755,57 @@
 
 
 <script>
-    function openPopup()
-    {
+    function openPopup() {
         document.getElementById("popup_container").style.display = "block";
     }
-    function closePopup(event)
-    {
+    function closePopup(event) {
         event.preventDefault();
         document.getElementById("popup_container").style.display = "none";
     }
 </script>
 
 <script>
-    $(document).on('change', '#product_option_select', function(){
+    $(document).on('change', '#product_option_select', function () {
 
         var selected_id = $(this).val();
-        var unselected_ids  = [];
-        $("#product_option_select option:not(:selected)").each(function(){ 
-            if($(this).val() != ''){
-            unselected_ids.push($(this).val());
+        var unselected_ids = [];
+        $("#product_option_select option:not(:selected)").each(function () {
+            if ($(this).val() != '') {
+                unselected_ids.push($(this).val());
             }
-        }); 
-
-      
-
-        var html_to_append = `<table class="product-option">
+        });
+        var html_to_append = `<table class="product-option" id="option_table_${selected_id}">
                                         <thead>
                                             <tr>
                                                 <th>Option Value</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>Weight</th>
+                                                <th>Quantity</th> 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td style="text-align:end"><i class="fa fa-plus-circle product-option" data-toggle="modal" data-target="#product_modal" ></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td style="text-align:end"><i class="fa fa-minus-circle"
-                                                        aria-hidden="true"></i><i class="fa fa-pencil-square mx-2"></i>
-                                                </td>
-                                            </tr>
+                                           
+                                            
                                         </tbody>
-                                    </table>`; 
-                                    document.getElementById('option_list_row').insertAdjacentHTML('beforeend', html_to_append);
-                                    var add_to_html = '';
-        if(unselected_ids.length > 0){
-        $.ajax({
-            url: "{{route('backend.product.get_option_list')}}",
-            data: {'ids':unselected_ids},
-            type: "GET",
-            success: function(response){   
-                add_to_html += '<option value="">--Select--</option>';
-                $("#product_option_select").empty(); 
-                response.data.forEach(function (item){
-                    add_to_html += '<option value="' + item.id + '">' + item.name + '</option>';
-                }); 
-                $("#product_option_select").append(add_to_html);  
-            }
-    });
-}else{
-    $("#product_option_select").empty();
-}
-      
-         
-
+                                    </table>  
+                                        <i class="fa fa-plus-circle product-option-add-btn" data-toggle="modal" data-target="#product_modal" onclick="showOptionModal('option_table_${selected_id}')"></i>`;
+        document.getElementById('option_list_row').insertAdjacentHTML('beforeend', html_to_append);
+        var add_to_html = '';
+        if (unselected_ids.length > 0) {
+            $.ajax({
+                url: "{{route('backend.product.get_option_list')}}",
+                data: { 'ids': unselected_ids },
+                type: "GET",
+                success: function (response) {
+                    add_to_html += '<option value="">--Select--</option>';
+                    $("#product_option_select").empty();
+                    response.data.forEach(function (item) {
+                        add_to_html += '<option value="' + item.id + '">' + item.name + '</option>';
+                    });
+                    $("#product_option_select").append(add_to_html);
+                }
+            });
+        }else {
+            $("#product_option_select").empty();
+        }
     });
 </script>
 

@@ -338,9 +338,7 @@ class ProductController extends Controller
                     $html .= '<div class="d-flex align-items-center">';
                     $html .= '<a href="#" target="_blank" class="">';
                     $html .= '<div class="d-flex align-items-center">';
-
                     $html .= '<img src="'.($search_data->product_images == null ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$search_data->product_images[0])).'" width="50%">';
-                    
                     $html .= '<span class="flex-grow-1 minw-0">';
                     $html .= '<div class=" text-truncate-2">';
                     $html .= '<p class="font-s">'.$search_data->product_name.'</p>';
@@ -351,7 +349,6 @@ class ProductController extends Controller
                     $html .= '</div>';
                     $html .= '</a>';
                     $html .= '</td>';
-
                     $html .= '<td style="display: table-cell;">';
                     $html .= '<div>';
                     $html .= '<div>';
@@ -368,7 +365,6 @@ class ProductController extends Controller
                     $html .= '</div>';
                     $html .= '</div>';
                     $html .= '</td>';                                     
-                
                     $html .= '<td style="display: table-cell;">'; 
                     $main_cat = MainCategory::whereIn('id', $search_data->main_category)->get();
                     foreach($main_cat as $main){
@@ -380,31 +376,24 @@ class ProductController extends Controller
                     $html .= '<img src="'.($search_data->getBrand->logo == '' ? url('public/assets/both/placeholder/brand.jpg') : url($search_data->getBrand->logo)).'" width="15%">';
                     $html .= '</div>';
                     $html .= '</td>';
-
                     $html .= '<td><label class="switch">';
                     $html .= '<input type="checkbox"'. ($search_data->product_status == 1 ? 'checked':'').' id="product_status" name="product_status" value="'.$search_data->product_status.'" data-id="'.$search_data->id.'">';
                     $html .= '<span class="slider"></span></label>';
                     $html .= '</td>';
-
                     $html .= '<td class="text-right footable-last-visible ">';
-
                     $html .= '<a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage"';
                     $html .= 'href="'.route('backend.product.view', [$search_data->id]).'" title="View">';
                     $html .= '<i class="fa-regular fa-eye"></i>';
                     $html .= '</a>';
-                    
                     $html .= '<a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2"';
                     $html .= 'href="'.route('backend.product.edit', [$search_data->id]).'" title="Edit">';
                     $html .= '<i class="fa-regular fa-pen-to-square text-white"></i>';
-                    $html .= '</a>';
-
-                     
+                    $html .= '</a>';                     
                     $html .= '<a class="btn btn-soft-success btn-icon btn-circle btn-sm eye_3"';
                     $html .= 'href="javascript:void()" title="Duplicate" onclick="cloneRow('.$search_data->id.')">';
                     $html .= '<i class="fa-regular fa-copy"></i>';
                     $html .= '</a> ';
                     $html .= '<button value="'.$search_data->id.'" class="btn btn-icon btn-sm delete_ico" id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>';
-
                     $html .= '</td>';
                 }
             }
