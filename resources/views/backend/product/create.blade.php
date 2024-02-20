@@ -12,25 +12,7 @@
     color: #000;
     font-size: 22px;
     width: 100%;
-}
-.table_tag{
-    margin: 0;
-    font-size: 17px;
-    background: #CE2B23;
-    color: #fff;
-    padding: 7px;
-    border-radius: 5px;
-}
-.append_table i{
-    color:#000;
-        font-size: 22px;
-            margin-right: 10px;
-}
-.append_table{
-    display:flex;
-    justify-content:space-between;
-    width:100%;
-}
+} 
 </style>
 
 <div class="content-body">
@@ -792,11 +774,7 @@
                 unselected_ids.push($(this).val());
             }
         });
-        var html_to_append = `<div class="append_table">
-         <p class="table_tag"><b>size</b></p>
-         <i class="fa fa-minus-circle" aria-hidden="true"></i>
-         </div> 
-        <table class="product-option" id="option_table_${selected_id}">
+        var html_to_append = ` <table class="product-option" id="option_table_${selected_id}">
                                         <thead>
                                             <tr>
                                                 <th>Option Value</th>
