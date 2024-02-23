@@ -61,7 +61,7 @@
                                                 title="Translatable"></i></label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" name="product_name"
-                                                placeholder="Product Name" id="product_name" required>
+                                                placeholder="Product Name" id="product_name" >
                                             <span id="productNameError" class="formFiedllerror"></span>
                                         </div>
                                     </div>
@@ -117,14 +117,14 @@
 
                             <div class="card-body hidden">
                                 <div class="no_product_variant">
-                                    <div class="form-group row">
+                                    <!-- <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Regular price <span
                                                 class="text-danger">*</span></label>
                                         <div class="col-md-9">
                                             <input type="number" step="1" min="1" placeholder="Product Price"
-                                                name="product_price" id="product_price" class="form-control" required>
+                                                name="product_price" id="product_price" class="form-control">
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">SKU</label>
                                         <div class="col-md-9">
@@ -135,7 +135,7 @@
                                         <label class="col-md-3 col-from-label">In Stock <span
                                                 class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <select class="form-control" id="stock_status" name="stock_status" required>
+                                            <select class="form-control" id="stock_status" name="stock_status">
                                                 <option value="1" selected>In Stock</option>
                                                 <option value="0">Out of Stock</option>
                                             </select>
@@ -144,7 +144,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card" style="border: 1px solid #e8e8e8;">
+                        <!-- <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
                                 <h5 class="mb-0 h6">Product Discount</h5>
                             </div>
@@ -163,7 +163,7 @@
                                             class="text-danger">*</span></label>
                                     <div class="col-md-6">
                                         <input type="number" lang="en" min="1" step="1" placeholder="Discount"
-                                            name="discount" class="form-control" required>
+                                            name="discount" class="form-control">
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -175,7 +175,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
                                 <h5 class="h6">Product Description</h5>
@@ -241,24 +241,22 @@
                             </div>
                             <div class="card-body">
                                 <div class="alert alert-info">Add Option</div> 
-                                <div class="row" id="option_list_row"></div>
+                        
                                 <div class="row">
-                                    <label class="col-md-3 col-form-label" for="product_option">Select an
-                                        option:</label>
+                                    <label class="col-md-3 col-form-label" for="product_option">Select an option:</label>
                                     <div class="col-md-9">
-                                        <select class="form-control" name="product_option_select"
-                                            id="product_option_select">
+                                        <select class="form-control" name="product_option_name"
+                                            id="product_option_name">
                                             <option value="">--Select--</option>
                                             @if(count($attribute_list) > 0)
                                             @foreach($attribute_list as $attribute)
-                                            <option value="{{$attribute->id}}">{{$attribute->name}}</option>
+                                            <option value="{{$attribute->id}}" data-name="{{$attribute->name}}">{{$attribute->name}}</option>
                                             @endforeach
                                             @endif
                                         </select>
-                                    </div>
-
-
+                                    </div> 
                                 </div>
+                                <div class="row" id="option_list_row"></div>
                             </div>
                         </div>
 
@@ -273,7 +271,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body crete_option_modal">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="product-details">
@@ -288,6 +286,7 @@
                                                 <div class="product-details">
                                                     <label for="option_value" class="popup_label">Quantity</label><br>
                                                     <input type="number" min="1" style="width:100%" class="form-control" id="product_qty">
+                                                    <p class="input_error" id="qty_error"></p>
                                                 </div>
                                             </div>
 
@@ -300,23 +299,47 @@
                                                         <label for="price" class="popup_label">Month</label>
                                                         <label for="price" class="popup_label">Price</label>
                                                     </div>
-                                                    <div class="price ">
+                                                    <div class="">
                                                         <div class="month">
-                                                            <input type="text" class="form-control" style="width:100%" disabled value="1" id="month_1"> 
-                                                            <input type="text" class="form-control" style="width:100%" disabled value="2" id="month_2"> 
-                                                            <input type="text" class="form-control" style="width:100%" disabled value="3" id="month_3"> 
-                                                            <input type="text" class="form-control" style="width:100%" disabled value="4" id="month_4"> 
-                                                            <input type="text" class="form-control" style="width:100%" disabled value="5" id="month_5"> 
-                                                            <input type="text" class="form-control" style="width:100%" disabled value="6" id="month_6">  
+                                                            <div class="price">
+                                                            <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="1" id="month_1"> 
+                                                            <input type="number" min="0" style="width:100%" class="form-control" id="price_1" name="price[]">
+                                                            </div>
+                                                            <p class="input_error" id="price_1_error" ></p>
+
+                                                            <div class="price">
+                                                            <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="2" id="month_2"> 
+                                                            <input type="number" min="0" style="width:100%" class="form-control" id="price_2" name="price[]">
+                                                            </div>
+                                                            <p class="input_error" id="price_2_error"></p>
+
+                                                            
+                                                            <div class="price">
+                                                            <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="3" id="month_3"> 
+                                                            <input type="number" min="0" style="width:100%" class="form-control" id="price_3" name="price[]">                                                            </div>
+                                                            <p class="input_error" id="price_3_error"></p>
+
+                                                            
+                                                            <div class="price">
+                                                            <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="4" id="month_4"> 
+                                                            <input type="number" min="0" style="width:100%" class="form-control" id="price_4" name="price[]"> 
+                                                             </div>
+                                                            <p class="input_error" id="price_4_error"></p>
+
+                                                            <div class="price">
+                                                            <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="5" id="month_5"> 
+                                                            <input type="number" min="0" style="width:100%" class="form-control" id="price_5" name="price[]"> 
+                                                             </div>
+                                                            <p class="input_error" id="price_5_error"></p>
+
+                                                            <div class="price">
+                                                            <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="6" id="month_6">  
+                                                            <input type="number" min="0" style="width:100%" class="form-control" id="price_6" name="price[]"> 
+                                                             </div>
+                                                            <p class="input_error" id="price_6_error"></p>
+ 
                                                         </div>
-                                                        <div class="price_input">
-                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_1">
-                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_2">
-                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_3">
-                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_4">
-                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_5"> 
-                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_6"> 
-                                                        </div> 
+                                                          
                                                     </div>
 
                                                 </div>
@@ -327,23 +350,48 @@
                                                         <label for="price" class="popup_label">Month</label>
                                                         <label for="price" class="popup_label">Price</label>
                                                     </div>
-                                                    <div class="price ">
+
+                                                    <div class="">
                                                     <div class="month">
-                                                            <input type="text" class="form-control" style="width:100%" disabled value="7" id="month_7"> 
-                                                            <input type="text" class="form-control" style="width:100%" disabled value="8" id="month_8"> 
-                                                            <input type="text" class="form-control" style="width:100%" disabled value="9" id="month_9"> 
-                                                            <input type="text" class="form-control" style="width:100%" disabled value="10" id="month_10"> 
-                                                            <input type="text" class="form-control" style="width:100%" disabled value="11" id="month_11"> 
-                                                            <input type="text" class="form-control" style="width:100%" disabled value="12" id="month_12">  
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="7" id="month_7"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="price_7" name="price[]">
+                                                    </div>
+                                                    <p class="input_error" id="price_7_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="8" id="month_8"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="price_8" name="price[]">
+                                                    </div>
+                                                    <p class="input_error" id="price_8_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="9" id="month_9"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="price_9" name="price[]">
+                                                    </div>
+                                                    <p class="input_error" id="price_9_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="10" id="month_10"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="price_10" name="price[]">
+                                                    </div>
+                                                    <p class="input_error" id="price_10_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="11" id="month_11"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="price_11" name="price[]"> 
+                                                    </div>
+                                                    <p class="input_error" id="price_11_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="12" id="month_12">  
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="price_12" name="price[]"> 
+                                                    </div>
+                                                    <p class="input_error" id="price_12_error"></p>
+
+ 
                                                         </div>
-                                                        <div class="price_input">
-                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_7">
-                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_8">
-                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_9">
-                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_10">
-                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_11"> 
-                                                        <input type="number" min="0" style="width:100%" class="form-control" id="price_12"> 
-                                                        </div>
+                                                         
                                                         
                                                     </div>
 
@@ -491,11 +539,162 @@
         </section>
     </div>
 </div>
+ <!------------------------------------Edit Modal start -------------------------------->
+ <div class="modal fade" id="edit_product_modal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Product Options</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                   <input type="hidden" id="edit_row_id">
+                                    <div class="modal-body edit_option_modal">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="product-details"> 
+                                                    <label for="option_value" class="popup_label">Option Value</label>
+                                                    <select class="form-control" name="edit_modal_option_value" id="edit_modal_option_value">
+                                                     
+                                                    </select>
+                                                </div>
+                                            </div>
+                                         
+                                            <div class="col-md-6">
+                                                <div class="product-details">
+                                                    <label for="option_value" class="popup_label">Quantity</label><br>
+                                                    <input type="number" min="1" style="width:100%" class="form-control" id="edit_product_qty">
+                                                    <p class="input_error" id="edit_qty_error"></p>
+                                                </div>
+                                            </div>
 
+                                            <div class="col-md-6">
+                                                <div class="product-details">  
+                                                    <div class="price ">
+                                                        <label for="price" class="popup_label">Month</label>
+                                                        <label for="price" class="popup_label">Price</label>
+                                                    </div>
+                                                    <div class=" ">
+                                                        <div class="month">
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="1" id="month_1"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="edit_price_1" name="edit_price[]">
+                                                    </div>
+                                                    <p class="input_error" id="edit_price_1_error"></p>
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="2" id="month_2"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="edit_price_2" name="edit_price[]">
+                                                    </div>
+                                                    <p class="input_error" id="edit_price_2_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="3" id="month_3"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="edit_price_3" name="edit_price[]">
+                                                    </div>
+                                                    <p class="input_error" id="edit_price_3_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="4" id="month_4"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="edit_price_4" name="edit_price[]">
+                                                    </div>
+                                                    <p class="input_error" id="edit_price_4_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="5" id="month_5"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="edit_price_5" name="edit_price[]"> 
+                                                    </div>
+                                                    <p class="input_error" id="edit_price_5_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="6" id="month_6">  
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="edit_price_6" name="edit_price[]"> 
+                                                    </div>
+                                                    <p class="input_error" id="edit_price_6_error"></p> 
+                                                    </div> 
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="product-details"> 
+                                                    <div class="price ">
+                                                        <label for="price" class="popup_label">Month</label>
+                                                        <label for="price" class="popup_label">Price</label>
+                                                    </div>
+                                                    <div class="">
+                                                    <div class="month">
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="7" id="month_7"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="edit_price_7" name="edit_price[]">
+                                                    </div>
+                                                    <p class="input_error" id="edit_price_7_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="8" id="month_8"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="edit_price_8" name="edit_price[]">
+                                                    </div>
+                                                    <p class="input_error" id="edit_price_8_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="9" id="month_9"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="edit_price_9" name="edit_price[]">
+                                                    </div>
+                                                    <p class="input_error" id="edit_price_9_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="10" id="month_10"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="edit_price_10" name="edit_price[]">
+                                                    </div>
+                                                    <p class="input_error" id="edit_price_10_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="11" id="month_11"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="edit_price_11" name="edit_price[]"> 
+                                                    </div>
+                                                    <p class="input_error" id="edit_price_11_error"></p>
+
+                                                    <div class="price">
+                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="12" id="month_12">  
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="edit_price_12" name="edit_price[]"> 
+                                                    </div>
+                                                    <p class="input_error" id="edit_price_12_error"></p> 
+                                                        </div>
+                                                         
+                                                        
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                             
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" onclick="validateEditOptionModal()">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!------------------------------Edit Modal End --------------------->
 @section('javascript-section')
 <script>
+    var optionValueListRoute = "{{ route('backend.product.get_option_value_list') }}";
+</script>
+
+<script>
+    
     function showOptionModal(table_id, option_id){ 
-        var modal = document.getElementById('product_modal'); 
+
+        var modal = document.getElementById('product_modal');  
+            var inputs = modal.querySelectorAll('input[type="number"]');  
+            inputs.forEach(function(input){
+            input.value = '';
+            }); 
+
         var option_modal = document.getElementById('modal_option_value');
         var option_list ='';
             $.ajax({
@@ -507,7 +706,7 @@
                         option_list += `<option value="${item.name}" data-id="${item.id}">${item.name}</option>`
                      });
                      option_modal.innerHTML = option_list;
-                    }
+                }
             });
 
         $('#table_id').val(table_id);
@@ -515,26 +714,55 @@
     }
 </script>
 <script>
-    function validateOptionModal(){
+    function validateOptionModal(){ 
+        var crete_option_modal = document.querySelector('.crete_option_modal'); 
+        var all_errors = crete_option_modal.querySelectorAll('p.input_error');
+        all_errors.forEach(function(error_p){
+            error_p.innerHTML = "";
+        });
+
+        var product_qty = document.getElementById('product_qty').value;
+        if(product_qty <= 0 || product_qty == ''){
+            document.getElementById('qty_error').innerHTML = "Quantity is required.";
+            document.getElementById('product_qty').focus();
+            return false;
+        } 
+      
+        for(var i = 1; i <= 12; i++){
+            var price = document.getElementById('price_'+i).value;
+        if(price <= 0 || price == ''){
+            document.getElementById('price_'+i+'_error').innerHTML = "Price is required.";
+            document.getElementById('price_'+i).focus();
+            return false;
+        }
+    }
+
         var tableId = document.getElementById('table_id').value;
         var optionVal = document.getElementById('modal_option_value');
         var selectedOption = optionVal.options[optionVal.selectedIndex];
-        var dataId = selectedOption.getAttribute('data-id');
-         
-        
-        var product_qty = document.getElementById('product_qty').value;
-        var product_qty = document.getElementById('product_qty').value;
+        var dataId = selectedOption.getAttribute('data-id'); 
+        var product_qty = document.getElementById('product_qty').value; 
+        var min = 100000; 
+        var max = 999999; 
+        var randomSixDigitNumber = Math.floor(Math.random() * (max - min + 1)) + min;
 
-        var html_to_append = `<tr>
-                              <td>${optionVal.value}</td>
-                              <td><input type="text" value="${dataId}"></td> 
-                              <td>${product_qty}</td> 
-                             
-                              <td style="text-align:end"><i class="fa fa-minus-circle" aria-hidden="true"></i><i class="fa fa-pencil-square mx-2"></i>
-                              </td>
-                              </tr>
-                              <input type="hidden" value="" id="price" name="price">
-                              <input type="hidden" value="" id="month" name="price">`;
+        var prices = [];
+            $('input[name="price[]"]').each(function() {
+                prices.push($(this).val());
+            });
+        var html_to_append = `<tr id="option_value_list_${randomSixDigitNumber}">
+                              <td>${optionVal.value}
+                               <input type="hidden" name="option_value[]" value="${dataId}"> 
+                               </td>
+                              <td>${product_qty}
+                              <input type="hidden" name="option_qty[]" value="${product_qty}"> 
+                              </td>  
+                              <td style="text-align:end">
+                              <i class="fa fa-minus-circle" aria-hidden="true" onclick="removeOptionValue('option_value_list_${randomSixDigitNumber}')"></i>
+                              <i class="fa fa-pencil-square mx-2" data-toggle="modal" data-target="#edit_product_modal" onclick="editOptionValue(${dataId}, ${product_qty}, '${prices}', 'option_value_list_${randomSixDigitNumber}')"></i>
+                              </td> 
+                              <input type="hidden" value="${prices}" id="price_list" name="price_list">
+                              </tr>`;
             document.getElementById(tableId).insertAdjacentHTML('beforeend', html_to_append);
             var modal = document.getElementById('product_modal');  
             var inputs = modal.querySelectorAll('input[type="number"]');  
@@ -545,19 +773,18 @@
     }
 </script>
 
-
 <script>
-    let myEditor;
+    //  product description editor (start)
+        let myEditor; 
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .then(editor => {
+                myEditor = editor;
 
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => {
-            myEditor = editor;
-
-        })
-        .catch(error => {
-            console.error(error);
-        });
+            }).catch(error => {
+                console.error(error);
+            });
+    //  product description editor (start)
 
     function validateAndSubmit(event) {
         event.preventDefault();
@@ -565,8 +792,9 @@
         for (var i = 0; i < errorFields.length; i++) {
             errorFields[i].innerText = '';
         }
+        var formData = new FormData($('#create_product_form')[0]);  
 
-        var formData = new FormData($('#create_product_form')[0]);
+        // commented for testing purpose (start)
         var CatCheckboxes = document.querySelectorAll('.main_checkbox:checked');
         if (CatCheckboxes.length < 1) {
             var EmptyCatCheckboxes = document.querySelectorAll('.main_checkbox');
@@ -574,13 +802,12 @@
             EmptyCatCheckboxes[0].focus();
             return;
         }
-
         const editorValue = myEditor.getData();
         if (editorValue == '') {
             document.getElementById('editorError').innerText = 'Enter product description';
             myEditor.focus();
             return;
-        } else {
+        }else {
             formData.append('product_description', editorValue);
         }
 
@@ -600,7 +827,23 @@
         var productImagesValue = productImagesInput.files;
         for (var i = 0; i < productImagesValue.length; i++) {
             formData.append('product_images[]', productImagesValue[i].name);
-        }
+        } 
+        // commented for testing purpose (end)
+
+        var option_value = $('input[name="option_value[]"]'); 
+        for (var i = 0; i < option_value.length; i++) { 
+            formData.append('option_value[]', option_value[i].value);
+        } 
+
+        var option_qty = $('input[name="option_qty[]"]'); 
+        for (var i = 0; i < option_qty.length; i++) { 
+            formData.append('option_qty[]', option_qty[i].value);
+        } 
+
+        var price_list = $('input[name="price_list"]'); 
+        for (var i = 0; i < price_list.length; i++) { 
+            formData.append('price_list[]', price_list[i].value);
+        }  
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -613,6 +856,7 @@
             contentType: false,
             processData: false,
             success: function (response) {
+                console.log(response);
                 if (response.status == 200 && response.message == "success") {
                     localStorage.setItem('product_create', 'success');
                     window.location.href = "{{route('backend.admin.product.index')}}";
@@ -623,9 +867,24 @@
 </script>
 
 <script>
-    function addAttribute() {
+    function addAttribute() { 
+        var parentElement = document.getElementById('add_on');   
+        var numberOfChildNodes = parentElement.childNodes.length; 
 
-        var imageInput = document.getElementById('product_images');
+        
+        // if(numberOfChildNodes > 0){
+        //     var lastChild = numberOfChildNodes.lastElementChild; 
+        //     if (lastChild.tagName.toLowerCase() === 'select') {
+        //     if (lastChild.options.length > 0) {
+        //         console.log("The select element is not empty.");
+        //     } else {
+        //         console.log("The select element is empty.");
+        //     }
+        //     } else {
+        //         console.log("The last child is not a select element.");
+        //     }
+        // }
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -646,12 +905,16 @@
                 value: $(element).val()
             });
         });
+
+        var min = 100000;
+        var max = 999999;
+        var randomSixDigitNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        
         $.ajax({
             url: "{{route('backend.product.add_attribute')}}",
             type: "POST",
             data: formData,
-            success: function (response) {
-                console.log(response);
+            success: function (response) {  
                 // if(response.message == 'empty'){ 
                 var appendIn = document.getElementById('add_on');
                 var rowId = Date.now();
@@ -659,9 +922,9 @@
                     '<div class="col-md-3">' +
                     '<div class="form-group">' +
                     '<select onchange="get_attributes_values(this, ' + rowId + ')"  class="asf selectpicker form-control"  data-live-search="true" title="Attribute Name"name="product_attributes[]">';
-                response.attributes.forEach(function (item) {
-                    add_to_html += '<option value="' + item.id + '">' + item.name + '</option>';
-                });
+                    response.attributes.forEach(function (item) {
+                        add_to_html += '<option value="' + item.id + '">' + item.name + '</option>';
+                    });
                 add_to_html += '</select>' +
                     '</div>' +
                     '</div>' +
@@ -673,10 +936,10 @@
                     '</div>' +
                     '<div class="col-auto">' +
                     '<button type="button" onclick="" class="mt-1 btn btn-icon btn-circle btn-sm btn-soft-danger" style="background-color :#ef486a26; border-radius: 55px; color: #ef486a;">' +
-                    '<i class="fa-solid fa-xmark"></i>' +
+                    '<i class="fa-solid fa-xmark" onclick="removeAttribute()"></i>' +
                     '</button>' +
                     '</div>' +
-                    '</div>';
+                    '</div>';   
                 appendIn.insertAdjacentHTML('beforeend', add_to_html);
                 $('.selectpicker').selectpicker('refresh');
                 // }
@@ -707,154 +970,20 @@
             }
         });
     }
-</script>
-<script>
-    $(document).ready(function () {
-        $('.aiz-date-range').datepicker({
-            format: 'dd-mm-yyyy',
-            autoclose: true,
-            todayHighlight: true,
-            showMeridian: true,
-            forceParse: false,
-            minuteStep: 1,
-            startDate: new Date()
-        });
-    });
-</script>
-<script>
-    function calculate() {
-        var amount = parseFloat(document.getElementById('amount').value);
-        var vatRate = parseFloat(document.getElementById('vatRate').value);
-        var taxRate = parseFloat(document.getElementById('taxRate').value);
-        if (isNaN(amount) || isNaN(vatRate) || isNaN(taxRate)) {
-            alert('Please enter valid numeric values.');
-            return;
-        }
-        var vatAmount = (amount * vatRate) / 100;
-        var taxAmount = (amount * taxRate) / 100;
-        var totalAmount = amount + vatAmount + taxAmount;
-        var resultHTML = '<h4>Result:</h4>' +
-            '<p>VAT Amount: ₹' + vatAmount.toFixed(2) + '</p>' +
-            '<p>Tax Amount: ₹ ' + taxAmount.toFixed(2) + '</p>' +
-            '<p>Total Amount (including VAT and Tax): ₹ ' + totalAmount.toFixed(2) + '</p>';
-        document.getElementById('result').innerHTML = resultHTML;
-    }
-</script>
+</script> 
 <script>
     $(document).ready(function () {
         $('.selectpicker').selectpicker();
     });
-</script>
+</script> 
 <script>
-    function checkAllBox(main, sub) {
-        var mainCheckboxs = document.getElementById(main);
-        var subCheckboxes = document.querySelectorAll('.' + sub);
-        for (var i = 0; i < subCheckboxes.length; i++) {
-            subCheckboxes[i].checked = mainCheckboxs.checked;
-        }
-    }
-    function removeAllCheckBox(main, sub) {
-        var mainCheckboxs = document.getElementById(main);
-        var subCheckboxes = document.querySelectorAll('.' + sub + ':checked');
-        if (subCheckboxes.length > 0) {
-            mainCheckboxs.checked = true;
-        } else {
-            mainCheckboxs.checked = false;
-        }
-    }
-    function showOptions(event, option, show, hide) {
-        event.preventDefault();
-        const subCatList = document.getElementById(option);
-        const showBtn = document.getElementById(show);
-        const hideBtn = document.getElementById(hide)
-        showBtn.style.display = "none";
-        hideBtn.style.display = "inline"
-        if (subCatList.style.display = "none")
-            subCatList.style.display = "block";
-    }
-    function hideOptions(event, option, show, hide) {
-        event.preventDefault();
-        const subCatList = document.getElementById(option);
-        const showBtn = document.getElementById(show);
-        const hideBtn = document.getElementById(hide)
-        showBtn.style.display = "inline";
-        hideBtn.style.display = "none"
-        if (subCatList.style.display = "block")
-            subCatList.style.display = "none";
-    } 
-</script>
-
-
-<script>
-    function openPopup() {
-        document.getElementById("popup_container").style.display = "block";
-    }
-    function closePopup(event) {
-        event.preventDefault();
-        document.getElementById("popup_container").style.display = "none";
-    }
-</script>
-
-<script>
-    $(document).on('change', '#product_option_select', function () {
-
-        var selected_id = $(this).val();
-        var unselected_ids = [];
-        $("#product_option_select option:not(:selected)").each(function () {
-            if ($(this).val() != '') {
-                unselected_ids.push($(this).val());
-            }
-        });
-        var html_to_append = `<div class="append_table">
-         <p class="table_tag"><b>size</b></p>
-         <i class="fa fa-minus-circle" aria-hidden="true"></i>
-         </div> 
-        <table class="product-option" id="option_table_${selected_id}">
-                                        <thead>
-                                            <tr>
-                                                <th>Option Value</th>
-                                                <th>Option id</th>
-                                                <th>Quantity</th> 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-                                            
-                                        </tbody>
-                                    </table>  
-                                        <i class="fa fa-plus-circle product-option-add-btn" data-toggle="modal" data-target="#product_modal" onclick="showOptionModal('option_table_${selected_id}', ${selected_id})"></i>`;
-        document.getElementById('option_list_row').insertAdjacentHTML('beforeend', html_to_append);
-        var add_to_html = '';
-        if (unselected_ids.length > 0) {
-            $.ajax({
-                url: "{{route('backend.product.get_option_list')}}",
-                data: { 'ids': unselected_ids },
-                type: "GET",
-                success: function (response) {
-                    add_to_html += '<option value="">--Select--</option>';
-                    $("#product_option_select").empty();
-                    response.data.forEach(function (item) {
-                        add_to_html += '<option value="' + item.id + '">' + item.name + '</option>';
-                    });
-                    $("#product_option_select").append(add_to_html);
-                }
-            });
-        }else {
-            $("#product_option_select").empty();
-        }
-    });
-</script>
-<script>
-    // Add an event listener to the select element
-    document.getElementById('product_option_select').addEventListener('change', function ()
-    {
-        // Get the selected option element
-        var selectedOption = this.options[this.selectedIndex];
-
-        // Log the HTML of the selected option
-        console.log(selectedOption.innerHTML);
-    });
-</script>
-
+    // function openPopup() {
+    //     document.getElementById("popup_container").style.display = "block";
+    // }
+    // function closePopup(event) {
+    //     event.preventDefault();
+    //     document.getElementById("popup_container").style.display = "none";
+    // }
+</script> 
 @endsection
 @endsection

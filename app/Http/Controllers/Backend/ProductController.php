@@ -7,9 +7,11 @@ use App\Models\Backend\Attribute;
 use App\Models\Backend\AttributeValue;
 use App\Models\Backend\Brand;
 use App\Models\Backend\MainCategory;
+use App\Models\Backend\Stock;
 use App\Models\Backend\SubCategory;
 use Illuminate\Http\Request;
 use App\Models\Backend\Product;
+ 
 use Str;
 
 class ProductController extends Controller
@@ -84,6 +86,8 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){ 
+        
+
         $product_name = $request->product_name;
         $min_qty = $request->min_qty;
         $max_qty = $request->max_qty;  
@@ -149,6 +153,24 @@ class ProductController extends Controller
                 'product_images' => json_encode($imagePaths, JSON_UNESCAPED_SLASHES)
             ]);
         }
+        $priceListMainArray = [];
+        foreach($request->price_list as $price_list){
+            $priceListNewMainArray =  explode(",", $price_list);
+            array_push($priceListMainArray, $priceListNewMainArray); 
+        }
+
+         Stock::create([
+            'product_id' => $newProductId,
+            'option_name' => $request->product_option_name,
+            'option_value' => $request->option_value,
+            'quantity' => $request->option_qty,
+            'month' => [1,2,3,4,5,6,7,8,9,10,11,12],
+            'price' => $priceListMainArray,
+            'status' => 1,
+             
+         ]);
+
+
 
         return response()->json([
             "status" => 200,
