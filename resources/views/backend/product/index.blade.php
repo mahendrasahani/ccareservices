@@ -15,7 +15,7 @@
     }
 
     .brand {
-        width: 200px;
+        width: 150px;
         height: 100px;
     }
 

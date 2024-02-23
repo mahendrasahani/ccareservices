@@ -3,12 +3,14 @@
 
 <style>
     .edit-img {
-        width: 200px;
-        height: 200px;
+        width: 150px; 
+        height:150px;
+         margin: 10px 10px;
     }
 
     .edit-img img {
-        width: 100%;
+        width: 100%; 
+        height:100%; 
     }
 </style>
 
@@ -40,7 +42,7 @@
                                         <label class="col-md-3 col-from-label">Product Name <span
                                                 class="text-danger">*</span> <i class="las la-language text-danger"
                                                 title="Translatable"></i></label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="text" class="form-control" name="product_name"
                                                 placeholder="Product Name" id="product_name"
                                                 value="{{$product_detail->product_name ?? ''}}" required>
@@ -50,7 +52,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Minimum Purchase Qty <span
                                                 class="text-danger">*</span></label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="number" class="form-control" name="min_qty" min="1"
                                                 value="{{$product_detail->min_purchase_qty ?? '1'}}" id="min_qty"
                                                 placeholder="Product Minimum Purchase Qty." required>
@@ -61,7 +63,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Maximum Purchase Qty</label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="number" class="form-control" name="max_qty" min="1"
                                                 value="{{$product_detail->max_purchase_qty ?? '1'}}" id="max_qty"
                                                 placeholder="Product Maximum Purchase Qty." required>
@@ -81,7 +83,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="signinSrEmail">Product
                                         Images<small>(600x600)</small></label>
-                                    <div class="col-md-8">
+                                    <div class="col-md-9">
                                         <div class="input-group" data-toggle="" data-type="image" data-multiple="true"> 
                                                 <input type="file" class="form-control" id="product_images" name="product_images[]" multiple
                                                     onchange="displaySelectedImages(event)"> 
@@ -114,15 +116,14 @@
                         </div>
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
-                                <h5 class="h6">Product price, stock
-                                </h5>
+                                <h5 class="h6">Product price, stock</h5>
                             </div>
                             <div class="card-body hidden">
                                 <div class="no_product_variant">
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Regular price <span
                                                 class="text-danger">*</span></label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="number" step="1" min="1"
                                                 value="{{$product_detail->regular_price}}" placeholder="Product Price"
                                                 name="product_price" id="product_price" class="form-control" required>
@@ -130,7 +131,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">SKU</label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input type="text" placeholder="SKU" name="sku" class="form-control"
                                                 value="{{$product_detail->sku ?? ''}}">
                                         </div>
@@ -138,14 +139,13 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">In Stock <span
                                                 class="text-danger">*</span></label>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <select class="form-control" id="stock_status" name="stock_status" required>
                                                 <option value="1" {{$product_detail->stock_status == 1 ? 'selected' :
                                                     ''}}>In Stock</option>
                                                 <option value="0" {{$product_detail->stock_status == 0 ? 'selected' :
                                                     ''}}>Out of Stock</option>
-                                            </select>
-
+                                            </select> 
                                         </div>
                                     </div>
                                 </div>
@@ -258,12 +258,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    @endforeach
-
-
-
-
-
+                                    @endforeach 
                                 </div>
                             </div>
                         </div>
@@ -274,7 +269,7 @@
                             <div class="card-body">
                                 <div class="form-group row">
                                     <label class="col-md-3 col-from-label">Meta Title</label>
-                                    <div class="col-md-8">
+                                    <div class="col-md-9">
                                         <input type="text" class="form-control" name="meta_title"
                                             placeholder="Meta Title" value="{{$product_detail->meta_title ?? ''}}">
                                     </div>
@@ -282,13 +277,13 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-from-label">Description</label>
                                     <div class="col-md-9">
-                                        <textarea name="meta_description" id="meta_description"
+                                        <textarea class="form-control" name="meta_description" id="meta_description"
                                             row="8">{{$product_detail->meta_description ?? ''}}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">Slug</label>
-                                    <div class="col-md-8">
+                                    <div class="col-md-9">
                                         <input type="text" placeholder="Slug" id="slug" name="slug" class="form-control"
                                             value="{{$product_detail->slug ?? ''}}">
                                     </div>
@@ -387,8 +382,7 @@
                                                             <label>{{$sub_cat->name}}</label>
                                                         </span>
                                                     </div>
-                                                    @endforeach
-
+                                                    @endforeach 
                                                 </div>
                                             </li>
                                             @endforeach
@@ -425,8 +419,7 @@
                                     </div>
 
                                     <button type="button" class="btn btn-primary"
-                                        onclick="calculate()">Calculate</button>
-
+                                        onclick="calculate()">Calculate</button> 
                             </div>
                             <div id="result" class="mt-4 mx-4"></div>
                         </div>

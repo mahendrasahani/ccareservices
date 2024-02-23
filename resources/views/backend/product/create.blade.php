@@ -12,25 +12,7 @@
     color: #000;
     font-size: 22px;
     width: 100%;
-}
-.table_tag{
-    margin: 0;
-    font-size: 17px;
-    background: #CE2B23;
-    color: #fff;
-    padding: 7px;
-    border-radius: 5px;
-}
-.append_table i{
-    color:#000;
-        font-size: 22px;
-            margin-right: 10px;
-}
-.append_table{
-    display:flex;
-    justify-content:space-between;
-    width:100%;
-}
+} 
 </style>
 
 <div class="content-body">
