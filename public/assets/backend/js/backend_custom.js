@@ -187,9 +187,9 @@ $(document).on('change', '#product_option_name', function () {
     var dataName = selectedOption.getAttribute('data-name'); 
     var html_to_append = `<div id="append_table_div_${selected_id}" class="w-100">
     <input type="hidden" name="product_option_id" id="product_option_id" value="${selected_id}">
+    <i class="fa fa-minus-circle product-option-add-btn" aria-hidden="true" onclick="removeMainOption('append_table_div_${selected_id}')"></i>
     <div class="append_table">
-     <p class="table_tag"><b>${dataName}</b></p> 
-     <i class="fa fa-minus-circle" aria-hidden="true" onclick="removeMainOption('append_table_div_${selected_id}')"></i>
+     <p class="table_tag"><b>${dataName}</b></p>  
      </div> 
     <table class="product-option" id="option_table_${selected_id}">
                                     <thead>

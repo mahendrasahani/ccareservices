@@ -11,6 +11,7 @@
     .edit-img img {
         width: 100%; 
         height:100%; 
+        object-fit:cover;
     }
 </style>
 
@@ -312,7 +313,7 @@
                                     <option value="0" {{$product_detail->product_detail == 0 ? 'selected' : ''}}>Draft
                                     </option>
                                 </select>
-                            </div>
+                                </div>
                         </div>
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
@@ -337,8 +338,7 @@
                                     Select Main
                                     <span class="position-relative main-category-info-icon">
                                         <i class="las la-question-circle fs-18 text-info"></i>
-                                        <span
-                                            class="main-category-info bg-info p-2 position-absolute d-none border">These
+                                        <span class="main-category-info bg-info p-2 position-absolute d-none border">These
                                             will be used for Affiliate System.</span>
                                     </span>
                                 </h6>
