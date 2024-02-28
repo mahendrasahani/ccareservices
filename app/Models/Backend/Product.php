@@ -43,4 +43,9 @@ class Product extends Model
     public function getBrand(){
         return $this->belongsTo(Brand::class, 'brand');
     }
+
+    public function getStock(){
+        return $this->hasOne(Stock::class, 'product_id');
+    }
+
 }

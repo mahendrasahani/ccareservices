@@ -2,17 +2,7 @@
 @section('main-section')
 
 <style>
-    .price {
-        display: flex !important;
-        justify-content: space-around;
-    }
-    .product-option-add-btn {
-    padding: 8px;
-    text-align: end;
-    color: #000;
-    font-size: 22px;
-    width: 100%;
-} 
+
 </style>
 
 <div class="content-body">
@@ -84,6 +74,8 @@
                                             <input type="file" id="product_images" class="form-control"
                                                 name="product_images[]" multiple
                                                 onchange="displaySelectedImages(event)">
+
+                                               
                                         </div>
 
                                         <div id="imagePreview"></div>
@@ -184,6 +176,7 @@
                                     <div class="row gutters-5" id="home"></div>
                                 </div>
                                 <div id="add_on"></div>
+                                <p class="input_error" id="attribute_error"></p>
                             </div>
                         </div>
                         <div class="card" style="border: 1px solid #e8e8e8;">
@@ -849,24 +842,28 @@
 </script>
 
 <script>
+ function removeAttr(selected_row){ 
+     var removeble_row = document.getElementById(selected_row);
+     removeble_row.remove();
+ }
+    
     function addAttribute() { 
-        var parentElement = document.getElementById('add_on');   
-        var numberOfChildNodes = parentElement.childNodes.length; 
+        var parentElement = document.getElementById('add_on');  
+        var numberOfChildNodes = parentElement.childNodes.length;
+        var lastChild = parentElement.lastElementChild;  
 
-        
-        // if(numberOfChildNodes > 0){
-        //     var lastChild = numberOfChildNodes.lastElementChild; 
-        //     if (lastChild.tagName.toLowerCase() === 'select') {
-        //     if (lastChild.options.length > 0) {
-        //         console.log("The select element is not empty.");
-        //     } else {
-        //         console.log("The select element is empty.");
-        //     }
-        //     } else {
-        //         console.log("The last child is not a select element.");
-        //     }
-        // }
-
+        if(numberOfChildNodes > 0){
+        document.getElementById('attribute_error').innerHTML = ""; 
+            var lastChild = parentElement.lastElementChild;  
+            var selectElement = lastChild.querySelector('select[name="filtering_attributes[]"]');
+            var selectedOptions = selectElement.selectedOptions;
+                if (selectedOptions.length === 0) {
+                    document.getElementById('attribute_error').innerHTML = "Please select attribute value";
+                    // console.log("Error: No options selected in filtering attributes.");
+                    return false;
+                } 
+        } 
+ 
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -890,8 +887,8 @@
 
         var min = 100000;
         var max = 999999;
-        var randomSixDigitNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-        
+        var randomSixDigitNumber = Math.floor(Math.random() * (max - min + 1)) + min; 
+        var attribute_row_id = 'attribute_row_'+randomSixDigitNumber;
         $.ajax({
             url: "{{route('backend.product.add_attribute')}}",
             type: "POST",
@@ -900,14 +897,14 @@
                 // if(response.message == 'empty'){ 
                 var appendIn = document.getElementById('add_on');
                 var rowId = Date.now();
-                var add_to_html = '<div class="row gutters-5" id="">' +
+                var add_to_html = '<div class="row gutters-5" id="'+attribute_row_id+'">' +
                     '<div class="col-md-3">' +
                     '<div class="form-group">' +
                     '<select onchange="get_attributes_values(this, ' + rowId + ')"  class="asf selectpicker form-control"  data-live-search="true" title="Attribute Name"name="product_attributes[]">';
                     response.attributes.forEach(function (item) {
                         add_to_html += '<option value="' + item.id + '">' + item.name + '</option>';
                     });
-                add_to_html += '</select>' +
+                    add_to_html += '</select>' +
                     '</div>' +
                     '</div>' +
                     '<div class="col">' +
@@ -918,9 +915,9 @@
                     '</div>' +
                     '<div class="col-auto">' +
                     '<button type="button" onclick="" class="mt-1 btn btn-icon btn-circle btn-sm btn-soft-danger" style="background-color :#ef486a26; border-radius: 55px; color: #ef486a;">' +
-                    '<i class="fa-solid fa-xmark" onclick="removeAttribute()"></i>' +
+                    '<i class="fa-solid fa-xmark" onclick="removeAttr(\'' + attribute_row_id + '\')"></i>' +
                     '</button>' +
-                    '</div>' +
+                    '</div>' + 
                     '</div>';   
                 appendIn.insertAdjacentHTML('beforeend', add_to_html);
                 $('.selectpicker').selectpicker('refresh');
@@ -952,6 +949,8 @@
             }
         });
     }
+
+
 </script> 
 <script>
     $(document).ready(function () {

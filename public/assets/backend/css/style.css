@@ -15809,5 +15809,15 @@ font-size: 10px;
         margin: 10px 0;
     }
   
-
+    .price {
+      display: flex !important;
+      justify-content: space-around;
+  }
+  .product-option-add-btn {
+  padding: 8px;
+  text-align: end;
+  color: #000;
+  font-size: 22px;
+  width: 100%;
+} 
     /* ------------------------ create product css end by pro ---------------------------- */

@@ -142,28 +142,24 @@
                                                     </span>
                                                 </div>
                                                 <!-- <div><span>Total Sold</span>: <span class="fw-600">2</span></div> -->
-                                                <div>
+                                                <!-- <div>
                                                     <div class="dprice d-flex">
                                                         <span>Price</span>: <span
                                                             class="fw-600">₹<strike>{{number_format($product->regular_price,
                                                                 2)}}</strike></span>
-                                                    </div>
-
+                                                    </div> 
                                                     @if($product->discount_type == 'flat')
-                                                    <div class="aprice d-flex">
-
+                                                    <div class="aprice d-flex"> 
                                                         <span>Price</span>: <span
                                                             class="fw-600">₹{{number_format($product->regular_price -
                                                             $product->discount, 2)}}</span>
                                                     </div>
-
-
                                                     @elseif($product->discount_type == 'percent')
                                                     <span>Price</span>: <span
                                                         class="fw-600">₹{{number_format($product->regular_price -
                                                         ($product->regular_price * $product->discount)/100, 2)}}</span>
                                                     @endif
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </td>
                                         <td style="display: table-cell;">

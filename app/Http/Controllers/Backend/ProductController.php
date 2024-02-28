@@ -179,10 +179,17 @@ class ProductController extends Controller
     }
 
         public function edit($id){
-            $product_detail = Product::where('id', $id)->first();
+            $product_detail = Product::select('*')->with('getStock')->where('id', $id)->first();
+
             $brand_list = Brand::where('status', 1)->get();
+            
             $main_category_list = MainCategory::where('status', 1)->get();
-            return view('backend.product.edit', compact('product_detail', 'brand_list', 'main_category_list'));
+            $attribute_list = Attribute::where('status', 1)->get();
+
+ 
+            
+
+            return view('backend.product.edit', compact('product_detail', 'brand_list', 'main_category_list', 'attribute_list'));
         }
 
         public function update($id, Request $request){

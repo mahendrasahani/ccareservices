@@ -291,6 +291,31 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card" style="border: 1px solid #e8e8e8;">
+                            <div class="card-header d-flex justify-content-between"
+                                style="border-bottom : 1px solid #e8e8e8;">
+                                <h5 class="mb-0 pt-2">Product Option</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-info">Add Option</div> 
+                        
+                                <div class="row">
+                                    <label class="col-md-3 col-form-label" for="product_option">Select an option:</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" name="product_option_name"
+                                            id="product_option_name">
+                                            <option value="">--Select--</option>
+                                            @if(count($attribute_list) > 0)
+                                            @foreach($attribute_list as $attribute)
+                                            <option value="{{$attribute->id}}" data-name="{{$attribute->name}}">{{$attribute->name}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                    </div> 
+                                </div>
+                                <div class="row" id="option_list_row"></div>
+                            </div>
+                        </div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">

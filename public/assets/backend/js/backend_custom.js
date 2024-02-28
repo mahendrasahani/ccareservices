@@ -206,3 +206,63 @@ $(document).on('change', '#product_option_name', function () {
                              </div>`;
     document.getElementById('option_list_row').innerHTML = html_to_append;
 });
+
+ 
+ 
+        function displaySelectedImages(event){
+            const input = event.target;
+            const preview = document.getElementById('imagePreview');
+ 
+            for (let i = 0; i < input.files.length; i++){
+                const file = input.files[i];
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function (){
+                    const imgContainer = document.createElement('div');
+                    imgContainer.classList.add('image-container');
+
+                    const img = document.createElement('img');
+                    img.src = reader.result;
+                    img.style.maxWidth = '100px';  
+
+                    const closeButton = document.createElement('button');
+                    closeButton.innerHTML = '<i class="fas fa-times"></i>';  
+                    closeButton.classList.add('close-button');
+                    closeButton.onclick = function (){
+                        imgContainer.remove(); 
+                    }; 
+                    imgContainer.appendChild(img);
+                    imgContainer.appendChild(closeButton);
+                    preview.appendChild(imgContainer);
+                }
+            }
+        }
+    
+        
+        function displaySelectedImagesSec(event){
+            const input = event.target;
+            const preview = document.getElementById('imagePreviewSec'); 
+            for (let i = 0; i < input.files.length; i++){
+                const file = input.files[i];
+                const reader = new FileReader(); 
+                reader.readAsDataURL(file); 
+                reader.onload = function (){
+                    const imgContainer = document.createElement('div');
+                    imgContainer.classList.add('image-container'); 
+                    const img = document.createElement('img');
+                    img.src = reader.result;
+                    img.style.maxWidth = '100px';  
+
+                    const closeButton = document.createElement('button');
+                    closeButton.innerHTML = '<i class="fas fa-times"></i>'; 
+                    closeButton.classList.add('close-button');
+                    closeButton.onclick = function (){
+                        imgContainer.remove(); 
+                    }; 
+                    imgContainer.appendChild(img);
+                    imgContainer.appendChild(closeButton);
+                    preview.appendChild(imgContainer);
+                }
+            }
+        }
+  

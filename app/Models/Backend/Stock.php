@@ -25,4 +25,9 @@ class Stock extends Model
         'month' => 'array',
         'price' => 'array',
     ];
+
+public function getProduct(){
+    return $this->belongsTo(Product::class, 'product_id');
+}
+
 }
