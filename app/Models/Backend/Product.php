@@ -44,8 +44,12 @@ class Product extends Model
         return $this->belongsTo(Brand::class, 'brand');
     }
 
+    // public function getStock(){
+    //     return $this->hasOne(Stock::class, 'product_id');
+    // }
+
     public function getStock(){
-        return $this->hasOne(Stock::class, 'product_id');
+        return $this->hasMany(Stock::class, 'product_id');
     }
 
 }

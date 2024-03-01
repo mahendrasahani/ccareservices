@@ -229,14 +229,16 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h6>Capacity</h6>
+                                <h6>{{$option_name}}</h6>
                                 <div class="cap-btns">
-                                    <input type="radio" id="category1" name="category" value="160">
-                                    <label for="category1">160-180 l</label>
-                                    <input type="radio" id="category2" name="category" value="180">
-                                    <label for="category2">180-200 l</label>
-                                    <input type="radio" id="category3" name="category" value="200">
-                                    <label for="category3">200-220 l</label>Z
+                                @foreach($product_detail->getStock as $attribute_value)
+                                        @php
+                                            $attribute_value_name = App\Models\Backend\AttributeValue::where('id', $attribute_value->attribute_value_id)->first()->name;
+                                        @endphp
+                                        <input type="radio" id="option_{{$attribute_value->attribute_value_id}}" name="option_value" value="{{$attribute_value->attribute_value_id}}">
+                                        <label for="option_{{$attribute_value->attribute_value_id}}">{{$attribute_value_name}}</label>
+                                    @endforeach
+ 
                                 </div>
                                 <div class="calculator card">
                                     <label>Choose Tenure</label>
@@ -423,15 +425,15 @@
     }); 
 </script>
 
-<script>
+<!-- <script>
     const slider = document.getElementById("slider");
     const priceDisplay = document.getElementById("price");
-    const radioButtons = document.querySelectorAll("input[type='radio'][name='category']");
+    const radioButtons = document.querySelectorAll("input[type='radio'][name='option_value']");
 
     function updatePrice()
     {
         const sliderValue = slider.value;
-        const selectedRadio = document.querySelector("input[type='radio'][name='category']:checked");
+        const selectedRadio = document.querySelector("input[type='radio'][name='option_value']:checked");
         const radioValue = selectedRadio ? selectedRadio.value : 0;
         const price = sliderValue * 2 + parseInt(radioValue);
         priceDisplay.textContent = `$${price}`;
@@ -443,27 +445,21 @@
         radioButton.addEventListener("change", updatePrice);
     });
     updatePrice();  
-</script>
+</script> -->
 
 <script>
-    const slider = document.getElementById("slider");
-    const priceDisplay = document.getElementById("price");
-    const radioButtons = document.querySelectorAll("input[type='radio'][name='category']");
+    const slider = document.getElementById('slider');
+    const numbers = document.querySelectorAll('.number');
 
-    function updatePrice()
-    {
-        const sliderValue = slider.value;
-        const selectedRadio = document.querySelector("input[type='radio'][name='category']:checked");
-        const radioValue = selectedRadio ? selectedRadio.value : 0;
-        const price = sliderValue * 2 + parseInt(radioValue);
-        priceDisplay.textContent = `$${price}`;
-    }
-    slider.addEventListener("input", updatePrice);
-    radioButtons.forEach(radioButton =>
-    {
-        radioButton.addEventListener("change", updatePrice)
-    })
+    slider.addEventListener('input', function() {
+        const value = parseInt(this.value);
+        var option_value = document.querySelector('input[name="option_value"]:checked').value;
+        console.log(value +' - '+option_value);
+        
+    });
 </script>
+
+ 
 
 <script>
     const ratingInputs = document.querySelectorAll('input[name="rating"]');

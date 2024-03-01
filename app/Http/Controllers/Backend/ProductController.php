@@ -87,6 +87,7 @@ class ProductController extends Controller
 
     public function store(Request $request){ 
         
+        // return $request->all();
 
         $product_name = $request->product_name;
         $min_qty = $request->min_qty;
@@ -153,21 +154,45 @@ class ProductController extends Controller
                 'product_images' => json_encode($imagePaths, JSON_UNESCAPED_SLASHES)
             ]);
         }
-        $priceListMainArray = [];
-        foreach($request->price_list as $price_list){
-            $priceListNewMainArray =  explode(",", $price_list);
-            array_push($priceListMainArray, $priceListNewMainArray); 
-        }
+        // $priceListMainArray = [];
+        // foreach($request->price_list as $price_list){
+        //     $priceListNewMainArray =  explode(",", $price_list);
+        //     array_push($priceListMainArray, $priceListNewMainArray); 
+        // }
 
-         Stock::create([
+        //  Stock::create([
+        //     'product_id' => $newProductId,
+        //     'option_name' => $request->product_option_name,
+        //     'option_value' => $request->option_value,
+        //     'quantity' => $request->option_qty,
+        //     'month' => [1,2,3,4,5,6,7,8,9,10,11,12],
+        //     'price' => $priceListMainArray,
+        //     'status' => 1, 
+        //  ]);
+
+        foreach($request->option_qty as $index => $qty)
+        {
+        Stock::create([
             'product_id' => $newProductId,
-            'option_name' => $request->product_option_name,
-            'option_value' => $request->option_value,
-            'quantity' => $request->option_qty,
-            'month' => [1,2,3,4,5,6,7,8,9,10,11,12],
-            'price' => $priceListMainArray,
+            'attribute_id' => $request->product_option_name,
+            'attribute_value_id' => $request->option_value[$index],
+            'quantity' => $qty,
+            'month' => '',
+            'price_1' => $request->price_1[$index],
+            'price_2' => $request->price_2[$index],
+            'price_3' => $request->price_3[$index],
+            'price_4' => $request->price_4[$index],
+            'price_5' => $request->price_5[$index],
+            'price_6' => $request->price_6[$index],
+            'price_7' => $request->price_7[$index],
+            'price_8' => $request->price_8[$index],
+            'price_9' => $request->price_9[$index],
+            'price_10' => $request->price_10[$index],
+            'price_11' => $request->price_11[$index],
+            'price_12' => $request->price_12[$index],
             'status' => 1, 
-         ]);
+        ]);
+    }
 
 
 
@@ -189,8 +214,7 @@ class ProductController extends Controller
             return view('backend.product.edit', compact('product_detail', 'brand_list', 'main_category_list', 'attribute_list', 'option_name'));
         }
 
-        public function update($id, Request $request){
-             return $request->all();
+        public function update($id, Request $request){ 
 
             $product_name = $request->product_name;
             $min_qty = $request->min_qty;
@@ -436,8 +460,13 @@ class ProductController extends Controller
         }
 
         public function singleProductFrontView($main_category, $sub_category, $slug){
-            $product_detail = Product::where('slug', $slug)->first();
-            return view('frontend.product.single_product', compact('product_detail', 'main_category', 'sub_category'));
+            $product_detail = Product::where('slug', $slug)->with('getStock')->first();
+            $option_id = $product_detail->getStock[0]->attribute_id;
+            $option_name = Attribute::where('id', $option_id)->first()->name;
+             
+
+            return view('frontend.product.single_product', compact('product_detail', 'main_category',
+             'sub_category', 'option_name'));
 
         }
 
@@ -462,6 +491,24 @@ class ProductController extends Controller
                 "message" => "success",
                 "data" => $OptionValueList
             ]);
+        }
+
+        public function getMonthPrice(Request $request){
+            $product_id = $request->product_id;
+            $option_value_id = $request->option_value_id;
+            $data = Stock::where('product_id', $product_id)->where('attribute_value_id', $option_value_id)->first();
+            if($data){
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'success',
+                    'data' => $data
+                ]);
+            }else{
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'failed'
+                ]);
+            }
         }
 
 

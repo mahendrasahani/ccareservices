@@ -278,38 +278,38 @@
                                                         <div class="month">
                                                             <div class="price">
                                                             <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="1" id="month_1"> 
-                                                            <input type="number" min="0" style="width:100%" class="form-control" id="price_1" name="price[]">
+                                                            <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_1" name="price_1">
                                                             </div>
                                                             <p class="input_error" id="price_1_error" ></p>
 
                                                             <div class="price">
                                                             <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="2" id="month_2"> 
-                                                            <input type="number" min="0" style="width:100%" class="form-control" id="price_2" name="price[]">
+                                                            <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_2" name="price_2">
                                                             </div>
                                                             <p class="input_error" id="price_2_error"></p>
 
                                                             
                                                             <div class="price">
                                                             <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="3" id="month_3"> 
-                                                            <input type="number" min="0" style="width:100%" class="form-control" id="price_3" name="price[]">                                                            </div>
+                                                            <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_3" name="price_3">                                                            </div>
                                                             <p class="input_error" id="price_3_error"></p>
 
                                                             
                                                             <div class="price">
                                                             <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="4" id="month_4"> 
-                                                            <input type="number" min="0" style="width:100%" class="form-control" id="price_4" name="price[]"> 
+                                                            <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_4" name="price_4"> 
                                                              </div>
                                                             <p class="input_error" id="price_4_error"></p>
 
                                                             <div class="price">
                                                             <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="5" id="month_5"> 
-                                                            <input type="number" min="0" style="width:100%" class="form-control" id="price_5" name="price[]"> 
+                                                            <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_5" name="price_5"> 
                                                              </div>
                                                             <p class="input_error" id="price_5_error"></p>
 
                                                             <div class="price">
                                                             <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="6" id="month_6">  
-                                                            <input type="number" min="0" style="width:100%" class="form-control" id="price_6" name="price[]"> 
+                                                            <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_6" name="price_6"> 
                                                              </div>
                                                             <p class="input_error" id="price_6_error"></p>
  
@@ -330,37 +330,37 @@
                                                     <div class="month">
                                                     <div class="price">
                                                     <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="7" id="month_7"> 
-                                                    <input type="number" min="0" style="width:100%" class="form-control" id="price_7" name="price[]">
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_7" name="price_7">
                                                     </div>
                                                     <p class="input_error" id="price_7_error"></p>
 
                                                     <div class="price">
                                                     <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="8" id="month_8"> 
-                                                    <input type="number" min="0" style="width:100%" class="form-control" id="price_8" name="price[]">
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_8" name="price_8">
                                                     </div>
                                                     <p class="input_error" id="price_8_error"></p>
 
                                                     <div class="price">
                                                     <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="9" id="month_9"> 
-                                                    <input type="number" min="0" style="width:100%" class="form-control" id="price_9" name="price[]">
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_9" name="price_9">
                                                     </div>
                                                     <p class="input_error" id="price_9_error"></p>
 
                                                     <div class="price">
                                                     <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="10" id="month_10"> 
-                                                    <input type="number" min="0" style="width:100%" class="form-control" id="price_10" name="price[]">
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_10" name="price_10">
                                                     </div>
                                                     <p class="input_error" id="price_10_error"></p>
 
                                                     <div class="price">
                                                     <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="11" id="month_11"> 
-                                                    <input type="number" min="0" style="width:100%" class="form-control" id="price_11" name="price[]"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_11" name="price_11"> 
                                                     </div>
                                                     <p class="input_error" id="price_11_error"></p>
 
                                                     <div class="price">
                                                     <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="12" id="month_12">  
-                                                    <input type="number" min="0" style="width:100%" class="form-control" id="price_12" name="price[]"> 
+                                                    <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_12" name="price_12"> 
                                                     </div>
                                                     <p class="input_error" id="price_12_error"></p>
 
@@ -703,20 +703,34 @@
             return false;
         } 
       
-        for(var i = 1; i <= 12; i++){
-            var price = document.getElementById('price_'+i).value;
-        if(price <= 0 || price == ''){
-            document.getElementById('price_'+i+'_error').innerHTML = "Price is required.";
-            document.getElementById('price_'+i).focus();
-            return false;
-        }
-    }
+
+        // commented for new price system
+    //     for(var i = 1; i <= 12; i++){
+    //         var price = document.getElementById('price_'+i).value;
+    //     if(price <= 0 || price == ''){
+    //         document.getElementById('price_'+i+'_error').innerHTML = "Price is required.";
+    //         document.getElementById('price_'+i).focus();
+    //         return false;
+    //     }
+    // }
 
         var tableId = document.getElementById('table_id').value;
         var optionVal = document.getElementById('modal_option_value');
         var selectedOption = optionVal.options[optionVal.selectedIndex];
         var dataId = selectedOption.getAttribute('data-id'); 
         var product_qty = document.getElementById('product_qty').value; 
+        var price_1 = document.getElementById('modal_price_1').value; 
+        var price_2 = document.getElementById('modal_price_2').value; 
+        var price_3 = document.getElementById('modal_price_3').value; 
+        var price_4 = document.getElementById('modal_price_4').value; 
+        var price_5 = document.getElementById('modal_price_5').value; 
+        var price_6 = document.getElementById('modal_price_6').value; 
+        var price_7 = document.getElementById('modal_price_7').value; 
+        var price_8 = document.getElementById('modal_price_8').value; 
+        var price_9 = document.getElementById('modal_price_9').value; 
+        var price_10 = document.getElementById('modal_price_10').value; 
+        var price_11 = document.getElementById('modal_price_11').value; 
+        var price_12 = document.getElementById('modal_price_12').value; 
         var min = 100000; 
         var max = 999999; 
         var randomSixDigitNumber = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -736,7 +750,20 @@
                               <i class="fa fa-minus-circle" aria-hidden="true" onclick="removeOptionValue('option_value_list_${randomSixDigitNumber}')"></i>
                               <i class="fa fa-pencil-square mx-2" data-toggle="modal" data-target="#edit_product_modal" onclick="editOptionValue(${dataId}, ${product_qty}, '${prices}', 'option_value_list_${randomSixDigitNumber}')"></i>
                               </td> 
-                              <input type="hidden" value="${prices}" id="price_list" name="price_list">
+                             
+                              <input type="hidden" value="${price_1}" id="price_1" name="price_1[]">
+                              <input type="hidden" value="${price_2}" id="price_2" name="price_2[]">
+                              <input type="hidden" value="${price_3}" id="price_3" name="price_3[]">
+                              <input type="hidden" value="${price_4}" id="price_4" name="price_4[]">
+                              <input type="hidden" value="${price_5}" id="price_5" name="price_5[]">
+                              <input type="hidden" value="${price_6}" id="price_6" name="price_6[]">
+                              <input type="hidden" value="${price_7}" id="price_7" name="price_7[]">
+                              <input type="hidden" value="${price_8}" id="price_8" name="price_8[]">
+                              <input type="hidden" value="${price_9}" id="price_9" name="price_9[]">
+                              <input type="hidden" value="${price_10}" id="price_10" name="price_10[]">
+                              <input type="hidden" value="${price_11}" id="price_11" name="price_11[]">
+                              <input type="hidden" value="${price_12}" id="price_12" name="price_12[]"> 
+
                               </tr>`;
             document.getElementById(tableId).insertAdjacentHTML('beforeend', html_to_append);
             var modal = document.getElementById('product_modal');  
@@ -815,10 +842,66 @@
             formData.append('option_qty[]', option_qty[i].value);
         } 
 
-        var price_list = $('input[name="price_list"]'); 
-        for (var i = 0; i < price_list.length; i++) { 
-            formData.append('price_list[]', price_list[i].value);
-        }  
+        var price_1 = $('input[name="price_1[]"]'); 
+        for (var i = 0; i < price_1.length; i++) { 
+            formData.append('price_1[]', price_1[i].value);
+        } 
+
+        var price_2 = $('input[name="price_2[]"]'); 
+        for (var i = 0; i < price_2.length; i++) { 
+            formData.append('price_2[]', price_2[i].value);
+        } 
+
+        var price_3 = $('input[name="price_3[]"]'); 
+        for (var i = 0; i < price_3.length; i++) { 
+            formData.append('price_3[]', price_3[i].value);
+        } 
+
+        var price_4 = $('input[name="price_4[]"]'); 
+        for (var i = 0; i < price_4.length; i++) { 
+            formData.append('price_4[]', price_4[i].value);
+        } 
+
+        var price_5 = $('input[name="price_5[]"]'); 
+        for (var i = 0; i < price_5.length; i++) { 
+            formData.append('price_5[]', price_5[i].value);
+        } 
+        var price_6 = $('input[name="price_6[]"]'); 
+        for (var i = 0; i < price_6.length; i++) { 
+            formData.append('price_6[]', price_6[i].value);
+        } 
+        var price_7 = $('input[name="price_7[]"]'); 
+        for (var i = 0; i < price_7.length; i++) { 
+            formData.append('price_7[]', price_7[i].value);
+        } 
+        var price_8 = $('input[name="price_8[]"]'); 
+        for (var i = 0; i < price_8.length; i++) { 
+            formData.append('price_8[]', price_8[i].value);
+        } 
+        var price_9 = $('input[name="price_9[]"]'); 
+        for (var i = 0; i < price_9.length; i++) { 
+            formData.append('price_9[]', price_9[i].value);
+        } 
+        var price_10 = $('input[name="price_10[]"]'); 
+        for (var i = 0; i < price_10.length; i++) { 
+            formData.append('price_10[]', price_10[i].value);
+        } 
+        var price_11 = $('input[name="price_11[]"]'); 
+        for (var i = 0; i < price_11.length; i++) { 
+            formData.append('price_11[]', price_11[i].value);
+        } 
+        var price_12 = $('input[name="price_12[]"]'); 
+        for (var i = 0; i < price_12.length; i++) { 
+            formData.append('price_12[]', price_12[i].value);
+        } 
+
+
+        // commented for new changes
+        // var price_list = $('input[name="price_list"]'); 
+        // for (var i = 0; i < price_list.length; i++) { 
+        //     formData.append('price_list[]', price_list[i].value);
+        // }  
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -830,12 +913,12 @@
             data: formData,
             contentType: false,
             processData: false,
-            success: function (response) {
-                console.log(response);
+            success: function (response) { 
                 if (response.status == 200 && response.message == "success") {
                     localStorage.setItem('product_create', 'success');
                     window.location.href = "{{route('backend.admin.product.index')}}";
                 }
+                console.log(response);
             }
         });
     }    
