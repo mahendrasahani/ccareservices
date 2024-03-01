@@ -823,7 +823,34 @@
     }
 </script>
 
+ <script>
+    
+    function productEditSOptionModal(table_id, option_id){ 
 
+        var modal = document.getElementById('edit_product_modal');  
+            var inputs = modal.querySelectorAll('input[type="number"]');  
+            inputs.forEach(function(input){
+            input.value = '';
+            }); 
+
+        var option_modal = document.getElementById('modal_option_value');
+        var option_list ='';
+            $.ajax({
+                url: "{{route('backend.product.get_option_value_list')}}",
+                data: {'id':option_id},
+                type: "GET",
+                success:function(response){
+                     response.data.forEach(function(item){
+                        option_list += `<option value="${item.name}" data-id="${item.id}">${item.name}</option>`
+                     });
+                     option_modal.innerHTML = option_list;
+                }
+            });
+
+        $('#table_id').val(table_id);
+        modal.style.display = "block";
+    }
+</script>
 
 
 

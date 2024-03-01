@@ -73,9 +73,7 @@
                                         <div class="input-group" data-toggle="" data-type="image" data-multiple="true">
                                             <input type="file" id="product_images" class="form-control"
                                                 name="product_images[]" multiple
-                                                onchange="displaySelectedImages(event)">
-
-                                               
+                                                onchange="displaySelectedImages(event)">   
                                         </div>
 
                                         <div id="imagePreview"></div>
@@ -682,7 +680,7 @@
                      });
                      option_modal.innerHTML = option_list;
                 }
-            });
+            }); 
 
         $('#table_id').val(table_id);
         modal.style.display = "block";
@@ -771,6 +769,7 @@
             inputs.forEach(function(input){
             input.value = '';
             }); 
+
             $('#product_modal').modal('hide');
     }
 </script>
