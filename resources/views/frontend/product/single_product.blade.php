@@ -194,6 +194,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="select-box">
+                                    <input type="hidden" value="{{$product_detail->id}}" name="product_id" id="product_id">
                                     <label for="select-option" class="month-select">Select Month:</label> <br>
                                     <select name="select-option" id="select-option"
                                         aria-placeholder="---Please Select---">
@@ -307,7 +308,7 @@
                                 <label for="review"
                                     style="display: flex;justify-content: center;align-items: center;">Your
                                     Review:</label>
-                                <fieldset class="rating">
+                                <fieldset class="rating"> 
                                     <input type="checkbox" id="star5" name="rating" value="5">
                                     <label class="full" for="star5"><i class="fas fa-star"></i></label>
                                     <input type="checkbox" id="star4" name="rating" value="4">
@@ -357,6 +358,39 @@
         </div>
     </div>
 </section>
+
+
+@section('javascript-section')
+<script>
+    function getProductPrice() {
+        let product_id = document.getElementById("product_id").value;
+        let option_value_id = document.querySelector('input[name="option_value"]:checked').value;
+        
+        $.ajax({
+            url: "{{ route('frontend.product.single_product.get_month_price') }}",
+            type: "GET", 
+            data: {
+                "product_id": product_id,
+                "option_value_id": option_value_id  
+            },
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
+
+     
+    document.addEventListener('DOMContentLoaded', function() {
+        let radioButtons = document.querySelectorAll('.cap-btns input[name="option_value"]');
+        radioButtons.forEach(function(radioButton) {
+            radioButton.addEventListener('click', getProductPrice);
+        });
+    });
+</script>
+
 
 <script>
     var datePicker = document.getElementById("delivery_date");
@@ -483,4 +517,7 @@
     });
 </script>
 
+
+
+@endsection
 @endsection
