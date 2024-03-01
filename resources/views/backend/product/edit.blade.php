@@ -121,7 +121,7 @@
                             </div>
                             <div class="card-body hidden">
                                 <div class="no_product_variant">
-                                    <div class="form-group row">
+                                    <!-- <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Regular price <span
                                                 class="text-danger">*</span></label>
                                         <div class="col-md-9">
@@ -129,7 +129,7 @@
                                                 value="{{$product_detail->regular_price}}" placeholder="Product Price"
                                                 name="product_price" id="product_price" class="form-control" required>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">SKU</label>
                                         <div class="col-md-9">
@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card" style="border: 1px solid #e8e8e8;">
+                        <!-- <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
                                 <h5 class="mb-0 h6">Product Discount</h5>
                             </div>
@@ -188,7 +188,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
                                 <h5 class="h6">Product Description</h5>
@@ -307,20 +307,65 @@
                                             <option value="">--Select--</option>
                                             @if(count($attribute_list) > 0)
                                             @foreach($attribute_list as $attribute)
-                                            <option value="{{$attribute->id}}" data-name="{{$attribute->name}}">{{$attribute->name}}</option>
+                                            <option value="{{$attribute->id}}" data-name="{{$attribute->name}}" {{$attribute->id == $product_detail->getStock->option_name ?'selected':''}}>{{$attribute->name}}</option>
                                             @endforeach
                                             @endif
                                         </select>
                                     </div> 
                                 </div>
-                                <div class="row" id="option_list_row"></div>
+                                <div class="row" id="option_list_row">
+                                <div id="append_table_div_${selected_id}" class="w-100">
+                                 <input type="hidden" name="product_option_id" id="product_option_id" value="${selected_id}">
+                                 <i class="fa fa-minus-circle product-option-add-btn" aria-hidden="true" onclick="removeMainOption('append_table_div_${selected_id}')"></i>
+                                 <div class="append_table">
+                                  <p class="table_tag"><b>{{$option_name}}</b></p>  
+                                  </div> 
+                                 <table class="product-option" id="option_table_${selected_id}">
+                                    <thead>
+                                        <tr>
+                                            <th>Option Value</th>
+                                            <th>Quantity</th>
+                                            <th>Action</th> 
+                                        </tr>
+                                      
+                                        @foreach($product_detail->getStock->option_value as $index => $stock)
+                                        <tr id="option_value_list_${randomSixDigitNumber}">
+                                        <td>
+                                        @php
+                                            $option_value = App\Models\Backend\AttributeValue::where('id', $stock)->first();
+                                        @endphp
+                                        {{$option_value->name}}
+                                        <input type="hidden" name="option_value[]" value="{{$option_value->id}}"> 
+                                        </td>
+                                        <td>{{$product_detail->getStock->quantity[$index]}}
+                                        <input type="hidden" name="option_qty[]" value="{{$product_detail->getStock->quantity[$index]}}"> 
+                                        </td>  
+                                        <td style="text-align:end">
+                                        <i class="fa fa-minus-circle" aria-hidden="true" onclick="removeOptionValue('option_value_list_${randomSixDigitNumber}')"></i>
+                                        <i class="fa fa-pencil-square mx-2" data-toggle="modal" data-target="#edit_product_modal" onclick="editOptionValue(${dataId}, ${product_qty}, '${prices}', 'option_value_list_${randomSixDigitNumber}')"></i>
+                                        </td> 
+                                        @php  
+                                        $price_string = implode(',', $product_detail->getStock->price[$index]); 
+                                        @endphp
+                                        <input type="hidden" value="{{$price_string}}" id="price_list" name="price_list[]">
+                                        </tr>
+                                        @endforeach
+                                      
+                                    </thead>
+                                    <tbody> 
+                                    </tbody>
+                                </table>  
+                             <i class="fa fa-plus-circle product-option-add-btn" data-toggle="modal" data-target="#product_modal" onclick="showOptionModal('option_table_${selected_id}', ${selected_id})"></i>
+                             </div>
+
+                                </div>
                             </div>
                         </div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="mar-all  mb-3">
-                                        <button class="btn btn-primary">Add Product</button>
+                                    <div class="mar-all mb-3">
+                                        <button class="btn btn-primary">Update Product</button>
                                     </div>
                                 </div>
                             </div>
@@ -462,29 +507,23 @@
 
     ClassicEditor
         .create(document.querySelector('#editor'))
-        .then(editor =>
-        {
-            myEditor = editor;
-
+        .then(editor => {
+            myEditor = editor; 
         })
-        .catch(error =>
-        {
+        .catch(error => {
             console.error(error);
         });
 
-    function validateAndSubmit(event)
-    {
+    function validateAndSubmit(event){
         event.preventDefault();
         var errorFields = document.getElementsByClassName('formFiedllerror');
-        for (var i = 0; i < errorFields.length; i++)
-        {
+        for (var i = 0; i < errorFields.length; i++){
             errorFields[i].innerText = '';
         }
 
         var formData = new FormData($('#create_product_form')[0]);
         var CatCheckboxes = document.querySelectorAll('.main_checkbox:checked');
-        if (CatCheckboxes.length < 1)
-        {
+        if (CatCheckboxes.length < 1){
             var EmptyCatCheckboxes = document.querySelectorAll('.main_checkbox');
             document.getElementById('categoryError').innerText = 'Select category.';
             EmptyCatCheckboxes[0].focus();
@@ -492,36 +531,35 @@
         }
 
         const editorValue = myEditor.getData();
-        if (editorValue == '')
-        {
+        if (editorValue == ''){
             document.getElementById('editorError').innerText = 'Enter product description';
             myEditor.focus();
             return;
-        } else
-        {
+        } else{
             formData.append('product_description', editorValue);
         }
 
         // Append additional data to formData
         var attributeName = $('#add_on select[name^="product_attributes"]');
-        attributeName.each(function (index, element)
-        {
+        attributeName.each(function (index, element){
             formData.append(element.name, $(element).val());
         });
 
         var attributeValue = $('#add_on select[name^="filtering_attributes"]');
-        attributeValue.each(function (index, element)
-        {
+        attributeValue.each(function (index, element){
             formData.append(element.name, $(element).val());
         });
 
         // Append productImagesValue to formData
         var productImagesInput = document.getElementById('product_images');
         var productImagesValue = productImagesInput.files;
-        for (var i = 0; i < productImagesValue.length; i++)
-        {
+        for (var i = 0; i < productImagesValue.length; i++){
             formData.append('product_images[]', productImagesValue[i].name);
         }
+
+       
+
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -533,17 +571,14 @@
             data: formData,
             contentType: false,
             processData: false,
-            success: function (response)
-            {
+            success: function (response){
                 console.log(response);
-                if (response.status == 200 && response.message == "success")
-                {
+                if (response.status == 200 && response.message == "success"){
                     localStorage.setItem('product_create', 'success');
                     window.location.href = "{{route('backend.admin.product.index')}}";
                 }
             }
-        });
-
+        }); 
     }    
 </script>
 

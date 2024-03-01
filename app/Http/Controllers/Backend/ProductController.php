@@ -166,8 +166,7 @@ class ProductController extends Controller
             'quantity' => $request->option_qty,
             'month' => [1,2,3,4,5,6,7,8,9,10,11,12],
             'price' => $priceListMainArray,
-            'status' => 1,
-             
+            'status' => 1, 
          ]);
 
 
@@ -179,21 +178,20 @@ class ProductController extends Controller
     }
 
         public function edit($id){
-            $product_detail = Product::select('*')->with('getStock')->where('id', $id)->first();
-
-            $brand_list = Brand::where('status', 1)->get();
-            
+            $product_detail = Product::select('*')->with('getStock')->where('id', $id)->first(); 
+            $brand_list = Brand::where('status', 1)->get(); 
             $main_category_list = MainCategory::where('status', 1)->get();
-            $attribute_list = Attribute::where('status', 1)->get();
+            $attribute_list = Attribute::where('status', 1)->get(); 
+            $option_name = Attribute::where('id', $product_detail->getStock->option_name)->first()->name;
 
- 
-            
-
-            return view('backend.product.edit', compact('product_detail', 'brand_list', 'main_category_list', 'attribute_list'));
+            // return $option_name;
+            // return $product_detail;
+            return view('backend.product.edit', compact('product_detail', 'brand_list', 'main_category_list', 'attribute_list', 'option_name'));
         }
 
         public function update($id, Request $request){
-        
+             return $request->all();
+
             $product_name = $request->product_name;
             $min_qty = $request->min_qty;
             $max_qty = $request->max_qty;  
