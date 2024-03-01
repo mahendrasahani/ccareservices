@@ -186,6 +186,8 @@ class ProductController extends Controller
             $main_category_list = MainCategory::where('status', 1)->get();
             $attribute_list = Attribute::where('status', 1)->get();
 
+            // return $product_detail;
+            // dd($product_detail);
  
             
 
