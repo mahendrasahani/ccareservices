@@ -36,8 +36,8 @@
 
         .mainImage {
             overflow: hidden;
-            /* min-width: 500px; */
-            /* max-width: 500px; */
+            min-width: 500px;
+            max-width: 500px;
             border-radius: 10px;
             cursor: crosshair;
 
@@ -45,7 +45,7 @@
                 width: 100%;
                 height: 100%;
                 aspect-ratio: 1/1;
-                object-fit: cover;
+                object-fit: cover; 
             }
         }
     }
