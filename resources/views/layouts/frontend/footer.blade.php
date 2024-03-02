@@ -147,6 +147,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script src="{{url('public/assets/frontend/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{url('public/assets/backend/js/backend_custom.js')}}"></script>
 <script>
     $(document).ready(function ()
     {

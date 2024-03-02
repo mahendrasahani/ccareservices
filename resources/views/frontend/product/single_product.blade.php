@@ -195,7 +195,7 @@
                             <div class="col-md-6">
                                 <div class="select-box">
                                     <input type="hidden" value="{{$product_detail->id}}" name="product_id" id="product_id">
-                                    <label for="select-option" class="month-select">Select Month:</label> <br>
+                                    <!-- <label for="select-option" class="month-select">Select Month:</label> <br>
                                     <select name="select-option" id="select-option"
                                         aria-placeholder="---Please Select---">
                                         <option value="">---Please Select---</option>
@@ -212,7 +212,7 @@
                                         <option value="11">11 Months</option>
                                         <option value="12">12 Months</option>
                                     </select>
-                                    <br>
+                                    <br> -->
                                     <label for="select-option" class="month-select mt-2">Delivery Date:</label> <br>
                                     <input type="date" id="delivery_date" name="delivery_date">
                                 </div>
@@ -221,29 +221,27 @@
                                         <p class="mx-2 m-auto"> Qty</p>
                                         <input type="number" id="quantity" value="0" min="0"
                                             style="width: 20%; height: 30px;">
-                                        <button type="button" class="btn btn-warning animation  mx-2 "
-                                            onclick="addToCart()">Add
-                                            to Cart</button>
-                                        <button type="button" class="btn btn-warning animation ">Add to
-                                            Wishlist</button>
+                                            
+                                        <button type="button" class="btn btn-warning animation mx-2" id="add_to_cart_btn">Add to Cart</button>
+                                        <button type="button" class="btn btn-warning animation ">Add to Wishlist</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <h6>{{$option_name}}</h6>
                                 <div class="cap-btns">
-                                @foreach($product_detail->getStock as $attribute_value)
+                                @foreach($product_detail->getStock as $index => $attribute_value)
                                         @php
                                             $attribute_value_name = App\Models\Backend\AttributeValue::where('id', $attribute_value->attribute_value_id)->first()->name;
                                         @endphp
-                                        <input type="radio" id="option_{{$attribute_value->attribute_value_id}}" name="option_value" value="{{$attribute_value->attribute_value_id}}">
+                                        <input type="radio" id="option_{{$attribute_value->attribute_value_id}}" name="option_value" value="{{$attribute_value->attribute_value_id}}" {{$index == 0 ? 'checked':''}}>
                                         <label for="option_{{$attribute_value->attribute_value_id}}">{{$attribute_value_name}}</label>
                                     @endforeach
  
                                 </div>
                                 <div class="calculator card">
                                     <label>Choose Tenure</label>
-                                    <input type="range" min="1" max="12" value="1" id="slider">
+                                    <input type="range" min="1" max="12" value="1" id="slider" class="range_slider">
                                     <div class="numbers-container mt-2">
                                         <div class="number">1</div>
                                         <div class="number">2</div>
@@ -258,7 +256,8 @@
                                         <div class="number">11</div>
                                         <div class="number">12</div>
                                     </div>
-                                    <p>Price: <span id="price">$50</span></p>
+                                    <p>Price: <span id="show_price"></p>
+                                     <input type="hidden" id="price" id="price">
                                 </div>
                             </div>
                         </div>
@@ -361,8 +360,9 @@
 
 
 @section('javascript-section')
-<script>
+<!-- <script>
     function getProductPrice() {
+        
         let product_id = document.getElementById("product_id").value;
         let option_value_id = document.querySelector('input[name="option_value"]:checked').value;
         
@@ -375,9 +375,6 @@
             },
             success: function(data) {
                 console.log(data);
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
             }
         });
     }
@@ -389,7 +386,93 @@
             radioButton.addEventListener('click', getProductPrice);
         });
     });
-</script>
+</script> -->
+
+ <script>
+     document.addEventListener('DOMContentLoaded', function() {
+        let radioButtons = document.querySelectorAll('.cap-btns input[name="option_value"]');
+        let month = 1;
+        console.log(document.getElementsByClassName('range_slider').value );
+        radioButtons.forEach(function(radioButton) {
+            radioButton.addEventListener('click', function(){
+                let product_id = document.getElementById("product_id").value;
+                let option_value_id = document.querySelector('input[name="option_value"]:checked').value;
+               
+                $.ajax({
+            url: "{{ route('frontend.product.single_product.get_month_price') }}",
+            type: "GET", 
+            data: {"product_id": product_id, "option_value_id": option_value_id},
+            success: function(response) {
+                if(month == 1){
+                    $('#price').val(response.data.price_1); 
+                    document.getElementById('show_price').innerHTML = response.data.price_1; 
+                    $('#slider').val(1); 
+                } 
+            }
+            });
+            });
+        });
+    });
+
+
+    const slider = document.getElementById('slider');
+    const numbers = document.querySelectorAll('.number');
+   
+    
+    slider.addEventListener('input', function() {
+        const month = parseInt(this.value);
+        let option_value = document.querySelector('input[name="option_value"]:checked').value;  
+        let product_id = document.getElementById("product_id").value;
+        let option_value_id = document.querySelector('input[name="option_value"]:checked').value;
+       
+        $.ajax({
+            url: "{{ route('frontend.product.single_product.get_month_price') }}",
+            type: "GET", 
+            data: {"product_id": product_id, "option_value_id": option_value_id},
+            success: function(response) {
+                if(month == 1){
+                    $('#price').val(response.data.price_1); 
+                    document.getElementById('show_price').innerHTML = response.data.price_1; 
+                }else if(month == 2){
+                    $('#price').val(response.data.price_2);
+                    document.getElementById('show_price').innerHTML = response.data.price_2;
+                }else if(month == 3){
+                    $('#price').val(response.data.price_3); 
+                    document.getElementById('show_price').innerHTML = response.data.price_3;
+                }else if(month == 4){
+                    $('#price').val(response.data.price_4); 
+                    document.getElementById('show_price').innerHTML = response.data.price_4;
+                }else if(month == 5){
+                    $('#price').val(response.data.price_5); 
+                    document.getElementById('show_price').innerHTML = response.data.price_5;
+                }else if(month == 6){
+                    $('#price').val(response.data.price_6); 
+                    document.getElementById('show_price').innerHTML = response.data.price_6;
+                }else if(month == 7){
+                   $('#price').val(response.data.price_7); 
+                   document.getElementById('show_price').innerHTML = response.data.price_7;
+                }else if(month == 8){
+                    $('#price').val(response.data.price_8); 
+                    document.getElementById('show_price').innerHTML = response.data.price_8;
+                }else if(month == 9){
+                    $('#price').val(response.data.price_9); 
+                    document.getElementById('show_price').innerHTML = response.data.price_9;
+                }else if(month == 10){
+                    $('#price').val(response.data.price_10); 
+                    document.getElementById('show_price').innerHTML = response.data.price_10;
+                }else if(month == 11){
+                    $('#price').val(response.data.price_11); 
+                    document.getElementById('show_price').innerHTML = response.data.price_11;
+                }else if(month == 12){
+                    $('#price').val(response.data.price_12); 
+                    document.getElementById('show_price').innerHTML = response.data.price_12;
+                }
+            }
+        });
+
+        
+    });
+</script>  
 
 
 <script>
@@ -409,16 +492,7 @@
     });
     setMinMaxAttributes();
 </script>
-<script>
-    function addToCart()
-    {
-        event.preventDefault();
-        var currentItemCount = parseInt(document.getElementById('cartItemCount').innerText);
-        var quantity = parseInt(document.getElementById('quantity').value);
-        var newItemCount = currentItemCount + quantity;
-        document.getElementById('cartItemCount').innerText = newItemCount;
-    }
-</script>
+ 
 
 <script>
     const thumbnailWrapper = document.querySelector(".thumbnail");
@@ -481,17 +555,7 @@
     updatePrice();  
 </script> -->
 
-<script>
-    const slider = document.getElementById('slider');
-    const numbers = document.querySelectorAll('.number');
 
-    slider.addEventListener('input', function() {
-        const value = parseInt(this.value);
-        var option_value = document.querySelector('input[name="option_value"]:checked').value;
-        console.log(value +' - '+option_value);
-        
-    });
-</script>
 
  
 

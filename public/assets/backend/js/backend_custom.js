@@ -286,4 +286,12 @@ function displaySelectedImages(event)
                 }
             }
         }
+
+
+       $(document).on('click', '#add_to_cart_btn', function(){ 
+            console.log('added to cart'); 
+       });
+
+ 
+
   
