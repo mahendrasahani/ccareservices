@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 class CartController extends Controller
 {
     public function showCart(){ 
-        return view('frontend.cart', compact('cart'));
+        return view('frontend.cart');
     }
 
     public function addToCart(Request $request){
