@@ -29,7 +29,7 @@
                     aspect-ratio: 1/1;
                     width: 100%;
                     height: 100%;
-                    object-fit: cover;
+                    /* object-fit: cover; */
                 }
             }
         }
@@ -45,7 +45,7 @@
                 width: 100%;
                 height: 100%;
                 aspect-ratio: 1/1;
-                object-fit: cover; 
+                /* object-fit: cover;  */
             }
         }
     }
@@ -332,17 +332,14 @@
                                 <img src="https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg"
                                     alt="">
                             </div>
-                            <div class="full-rev">
-                                <div class="reviews d-flex">
+                            <div class="full-rev"> 
                                     <div class="star mx-2">
                                         <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                         <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                         <i class="fa-regular fa-star"></i>
                                         <i class="fa-regular fa-star"></i>
                                         <i class="fa-regular fa-star"></i>
-                                    </div>
-
-                                </div>
+                                    </div>  
                                 <div class="rev-name"><b>Kartik Sharma</b></div>
                                 <div class="rev-content">
                                     <p>vguihdfvherwiofgvoierwjfgiojriogjrhvknhfrigjtjgopkreokglemko</p>
@@ -354,7 +351,7 @@
                 </div>
 
             </div>
-        </div>
+        </div>  
     </div>
 </section>
 

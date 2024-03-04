@@ -75,8 +75,32 @@ function removeMainOption(divSection){
             document.getElementById('edit_price_'+i).focus();
             return false;
         }
-}
+    }
+     
+     
+     var edit_price_1 = document.getElementById('edit_price_1').value;
+     var edit_price_2 = document.getElementById('edit_price_2').value;
+     var edit_price_3 = document.getElementById('edit_price_3').value;
+     var edit_price_4 = document.getElementById('edit_price_4').value;
+     var edit_price_5 = document.getElementById('edit_price_5').value;
+     var edit_price_6 = document.getElementById('edit_price_6').value;
+     var edit_price_7 = document.getElementById('edit_price_7').value;
+     var edit_price_8 = document.getElementById('edit_price_8').value;
+     var edit_price_9 = document.getElementById('edit_price_9').value;
+     var edit_price_10 = document.getElementById('edit_price_10').value;
+     var edit_price_11 = document.getElementById('edit_price_11').value;
+     var edit_price_12 = document.getElementById('edit_price_12').value;   
    
+     for (var i = 1; i <= 12; i++)
+     {
+         var edit_price = document.getElementById('edit_price_' + i).value;
+         if (edit_price <= 0 || edit_price == '')
+         {
+             document.getElementById('edit_price_' + i + '_error').innerHTML = "Price is required.";
+             document.getElementById('edit_price_' + i).focus();
+             return false;
+         }
+     }
  
         var optionVal = document.getElementById('edit_modal_option_value');
         var selectedOption = optionVal.options[optionVal.selectedIndex];
@@ -291,7 +315,3 @@ function displaySelectedImages(event)
        $(document).on('click', '#add_to_cart_btn', function(){ 
             console.log('added to cart'); 
        });
-
- 
-
-  

@@ -656,7 +656,8 @@
 @section('javascript-section')
 <script>
     var optionValueListRoute = "{{ route('backend.product.get_option_value_list') }}";
-</script>
+</script> 
+ 
 
 <script>
     
@@ -701,16 +702,16 @@
             return false;
         } 
       
+ 
+        for(var i = 1; i <= 12; i++){
+            var price = document.getElementById('modal_price_'+i).value;
+        if(price <= 0 || price == ''){
+            document.getElementById('price_'+i+'_error').innerHTML = "Price is required.";
+            document.getElementById('modal_price_'+i).focus();
+            return false;
+        }
+    }
 
-        // commented for new price system
-    //     for(var i = 1; i <= 12; i++){
-    //         var price = document.getElementById('price_'+i).value;
-    //     if(price <= 0 || price == ''){
-    //         document.getElementById('price_'+i+'_error').innerHTML = "Price is required.";
-    //         document.getElementById('price_'+i).focus();
-    //         return false;
-    //     }
-    // }
 
         var tableId = document.getElementById('table_id').value;
         var optionVal = document.getElementById('modal_option_value');
@@ -728,7 +729,9 @@
         var price_9 = document.getElementById('modal_price_9').value; 
         var price_10 = document.getElementById('modal_price_10').value; 
         var price_11 = document.getElementById('modal_price_11').value; 
-        var price_12 = document.getElementById('modal_price_12').value; 
+        var price_12 = document.getElementById('modal_price_12').value;   
+
+        
         var min = 100000; 
         var max = 999999; 
         var randomSixDigitNumber = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -1048,5 +1051,8 @@
     //     document.getElementById("popup_container").style.display = "none";
     // }
 </script> 
+
+ 
+
 @endsection
 @endsection
