@@ -14,9 +14,10 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="{{url('public/assets/frontend/font/MarlinGeo-ExtraBold.ttf')}}">
-
+    <meta name="base-url" content="http://localhost/ccareservices">
     <!-- Head title -->
     <title>Home Appliances On Rent In Gurgaon- Appliance Rental Services</title>
+    
 
     <style>
          
@@ -94,7 +95,7 @@
                                         <input type="submit" class="search-submit" value="Search" />
                                     </form> 
                             </a>
-                            <a href="{{route('frontend.cart.view')}}" class="d-flex align-items-center">
+                            <a href="{{route('frontend.show.cart')}}" class="d-flex align-items-center">
                                 <i class="fa-solid fa-cart-shopping px-2" style="color: #676767;"></i><span
                                     class="cart-count" id="cartItemCount">0</span></a>
                             <li class="dropdown d-inline" id="dropdownUser1" data-bs-toggle="dropdown"
@@ -159,6 +160,9 @@
                                     @endif
                                 </li>
                                 @endforeach
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="{{route('testing_flush_cart')}}">Flush Cart</a>
+                                </li>
  
                             </ul>
                         </div>

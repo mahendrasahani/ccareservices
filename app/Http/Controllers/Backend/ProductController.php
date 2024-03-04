@@ -11,6 +11,7 @@ use App\Models\Backend\Stock;
 use App\Models\Backend\SubCategory;
 use Illuminate\Http\Request;
 use App\Models\Backend\Product;
+use Illuminate\Support\Facades\Crypt;
  
 use Str;
 
@@ -462,9 +463,7 @@ class ProductController extends Controller
         public function singleProductFrontView($main_category, $sub_category, $slug){
             $product_detail = Product::where('slug', $slug)->with('getStock')->first();
             $option_id = $product_detail->getStock[0]->attribute_id;
-            $option_name = Attribute::where('id', $option_id)->first()->name;
-             
-
+            $option_name = Attribute::where('id', $option_id)->first()->name; 
             return view('frontend.product.single_product', compact('product_detail', 'main_category',
              'sub_category', 'option_name'));
 
@@ -494,14 +493,17 @@ class ProductController extends Controller
         }
 
         public function getMonthPrice(Request $request){
-            $product_id = $request->product_id;
+
+
+            $product_id = Crypt::decryptString($request->product_id);
             $option_value_id = $request->option_value_id;
             $data = Stock::where('product_id', $product_id)->where('attribute_value_id', $option_value_id)->first();
             if($data){
                 return response()->json([
                     'status' => 200,
                     'message' => 'success',
-                    'data' => $data
+                    'data' => $data,
+                    'id' => $product_id
                 ]);
             }else{
                 return response()->json([

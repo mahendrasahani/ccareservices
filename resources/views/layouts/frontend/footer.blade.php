@@ -148,6 +148,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script src="{{url('public/assets/frontend/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{url('public/assets/backend/js/backend_custom.js')}}"></script>
+<script src="{{url('public/assets/frontend/js/cart.js')}}"></script>
+<script src="{{url('public/assets/frontend/js/single_product.js')}}"></script>
+
 <script>
     $(document).ready(function ()
     {
@@ -158,7 +161,6 @@
         });
     });
 </script>
-
 <script>
     $(document).ready(function () {
         $('#show-hidden-menu').click(function (e) {
@@ -172,9 +174,6 @@
         });
     });
 </script>
-
-
-
 <script>
     $(document).ready(function ()
     {
@@ -192,8 +191,6 @@
         });
     });
 </script>
-
-
 <script>
     $(document).ready(function ()
     {
@@ -266,8 +263,6 @@
         });
     });
 </script>
-
-
 <script>
     $(document).ready(function ()
     {

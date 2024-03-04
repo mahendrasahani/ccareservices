@@ -5,13 +5,14 @@ use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\UserDashboardController;
+use App\Http\Controllers\UserController;
 
 // ------------------------ Home page route (start) --------------------------------------------------------
 Route::get('/', [HomeController::class, 'homePageView'])->name('frontend.home.view');
 // ------------------------ Home page route (end) --------------------------------------------------------
 
 // ------------------------ Cart page route (end) --------------------------------------------------------
-Route::get('/cart', [CartController::class, 'cartPageView'])->name('frontend.cart.view');
+Route::get('/cart', [CartController::class, 'showCart'])->name('frontend.show.cart');
 // ------------------------ Cart page route (end) --------------------------------------------------------
 
 // ------------------------ Checkout page route (end) --------------------------------------------------------
@@ -49,3 +50,10 @@ Route::get('/category/{main_category?}/{sub_category?}/{product_slug}', [Product
 // -------------------------single product page (start) --------------------------------------------------------------
 Route::get('/single-product/get-month-price', [ProductController::class, 'getMonthPrice'])->name('frontend.product.single_product.get_month_price');
 // -------------------------single product page (end) --------------------------------------------------------------
+
+// -------------------------add to cart page (start) --------------------------------------------------------------
+Route::get('/verify-user', [UserController::class, 'verifyUser'])->name('verify_user');
+Route::get('/add-to-cart', [CartController::class, 'addToCart'])->name('add_to_cart');
+Route::get('/update-cart-on-load', [CartController::class, 'updateCartOnLoad'])->name('update_cart_on_load');
+Route::get('/testing-flush-cart', [CartController::class, 'testingFlushCart'])->name('testing_flush_cart');
+// -------------------------add to cart page (end) --------------------------------------------------------------
