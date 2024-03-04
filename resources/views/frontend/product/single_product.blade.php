@@ -188,29 +188,27 @@
                     </div>
                     <div class="col-md-6">
                         <h6>Reviews by customers</h6>
-                        <div class="single-review ">
+                        <div class="single-review">
                             <div class="rev-img">
                                 <img src="https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg" alt="">
                             </div>
-                            <div class="full-rev"> 
-                                    <div class="star mx-2">
+                            <div class="full-rev">  
+                                    <div class="star ">
                                         <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                         <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                         <i class="fa-regular fa-star"></i>
                                         <i class="fa-regular fa-star"></i>
                                         <i class="fa-regular fa-star"></i>
                                     </div>  
-                                </div>
-                                <div class="rev-name"><b>Kartik Sharma</b></div>
-                                <div class="rev-content">
-                                    <p>One of the standout features of the LunarGlow is its customizable lighting options. With adjustable brightness and color settings, you can easily tailor the nightlight to suit your preferences and create the perfect ambiance for relaxation.</p>
-                                </div>
+                                    <div class="rev-name"><b>Kartik Sharma</b></div>
+                                    <div class="rev-content">
+                                        <p>One of the standout features of the LunarGlow is its customizable lighting options. With adjustable brightness and color settin</p>
+                                     </div> 
+                             </div> 
                             </div>
                         </div>
-                    </div>
-
-                </div>
-
+                    </div> 
+                </div> 
             </div>
         </div>  
     </div>
