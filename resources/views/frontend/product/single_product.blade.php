@@ -192,8 +192,7 @@
                             <div class="rev-img">
                                 <img src="https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg" alt="">
                             </div>
-                            <div class="full-rev">
-                                <div class="reviews d-flex">
+                            <div class="full-rev"> 
                                     <div class="star mx-2">
                                         <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                         <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
@@ -213,7 +212,7 @@
                 </div>
 
             </div>
-        </div>
+        </div>  
     </div>
 </section> 
 @section('javascript-section')
