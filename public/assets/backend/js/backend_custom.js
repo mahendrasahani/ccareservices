@@ -302,7 +302,7 @@ function displaySelectedImages(event)
                     closeButton.classList.add('close-button');
                     closeButton.onclick = function (){
                         imgContainer.remove(); 
-                    }; 
+                    };
                     imgContainer.appendChild(img);
                     imgContainer.appendChild(closeButton);
                     preview.appendChild(imgContainer);

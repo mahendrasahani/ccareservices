@@ -2,6 +2,7 @@
 
 namespace App\Models\Frontend;
 
+use App\Models\Backend\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,10 @@ class Cart extends Model
         "price",
         "status", 
     ];
+
+    public function getProduct(){
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }
 
 

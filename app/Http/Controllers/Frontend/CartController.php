@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Stock;
 use App\Models\Frontend\Cart;
 use Auth;
 use Crypt;
@@ -11,7 +12,12 @@ use Illuminate\Support\Facades\Session;
 class CartController extends Controller
 {
     public function showCart(){ 
-        return view('frontend.cart');
+        if(Auth::check()){
+            $cart_product = Cart::where('user_id', Auth::user()->id)->with(['getProduct:id,product_name,product_images'])->get();
+        }
+
+        
+        return view('frontend.cart', compact('cart_product'));
     }
 
     public function addToCart(Request $request){
