@@ -14,8 +14,11 @@ class CartController extends Controller
     public function showCart(){ 
         if(Auth::check()){
             $cart_product = Cart::where('user_id', Auth::user()->id)->with(['getProduct:id,product_name,product_images'])->get();
+        }else{
+            $cart_product = Session::get('cart');
         }
 
+        // return $cart_product;
         
         return view('frontend.cart', compact('cart_product'));
     }

@@ -39,11 +39,13 @@
                     <th class="footable-first-visible">Product Image</th>
                     <th>Product</th>
                     <th>Price</th>
+                    <th>Month</th>
                     <th>Quantity</th>
                     <th class="text-right">Subtotal</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @if(Auth::check())
                   @php
                   $final_price = 0;
                   @endphp
@@ -54,9 +56,8 @@
                   <tr>
                     <td class="footable-first-visible">
                       <a href="#" target="_blank">
-                        <div>
-                          <img src="{{url('public')}}/{{$product->getProduct->product_images[0]}}" alt=""
-                            style="width: 204px">  
+                        <div> 
+                        <img src="{{$product->getProduct->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->getProduct->product_images[0])}}" alt="" style="width: 204px">  
                         </div>
                       </a>
                     </td>
@@ -65,28 +66,56 @@
                         {{$product->getProduct->product_name}}
                       </a>
                     </td>
-                    <td>
-                      Rs. {{number_format($product->price, 2)}}/-
-                    </td>
+                    <td> ₹ {{number_format($product->price, 2)}}/- </td>
+                    <td>{{$product->month}} Month </td>
                     <td>
                       <div class="col-lg-4">
                         <input type="number" min="0" step="1" class="form-control" name="commisson_amounts_2" value="{{$product->quantity}}">
                       </div>
-                    </td>
-                    <td>
-                      Rs.  {{number_format($product->price * $product->quantity, 2)}}/-
-                    </td>
+                    </td> 
+                    
+                    <td>₹ {{number_format($product->price * $product->quantity, 2)}}/-</td>
                   </tr>
                   @endforeach
 
+                  @else
+                  @php
+                  $final_price = 0;
+                  @endphp
+                  @foreach($cart_product as $product) 
+                  @php
+                   $final_price += $product['price'] * $product['quantity'];
+                  $product_detail = App\Models\Backend\Product::where('id', $product['product_id'])->first();
+                  @endphp
+                  <tr>
+                    <td class="footable-first-visible">
+                      <a href="#" target="_blank">
+                        <div>
+                        <img src="{{$product_detail->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product_detail->product_images[0])}}" alt="" style="width: 204px">  
+                        </div>
+                      </a>
+                    </td>
+                    <td>
+                      <a href="single-product.html" target="_blank" class="product-name-default">{{$product_detail->product_name}}</a>
+                    </td>
+                    <td>₹ {{number_format($product['price'], 2)}}/-</td>
+                    <td>{{$product['month']}} Month</td>
+                    <td>
+                      <div class="col-lg-4">
+                        <input type="number" min="0" step="1" class="form-control" name="commisson_amounts_2" value="{{$product['quantity']}}">
+                      </div>
+                    </td> 
+                    <td>₹ {{number_format($product['price'] * $product['quantity'], 2)}}/-</td>
+                  </tr>
+                  @endforeach
+                  @endif
 
 
                 </tbody>
               </table>
               <br>
-              <div class="col-md-12">
-                <div class="row">
-                
+              <!-- <div class="col-md-12">
+                <div class="row"> 
                     <div class="col-md-6">
                       <div class="form-group row">
                         <div class="col-md-3">
@@ -104,7 +133,7 @@
                     </div>
                   
                 </div>
-              </div>
+              </div> -->
 
           </div>
         </div>
@@ -117,6 +146,7 @@
             <h5 class="mb-0">Cart totals</h5>
           </div>
           <div class="card-body">
+            @if(Auth::check())
             <ul class="list-group list-group-flush">
               <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                 Products
@@ -135,6 +165,26 @@
                 <span><strong>₹{{number_format($final_price + 50, 2)}}/-</strong></span>
               </li>
             </ul>
+            @else
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                Products
+                <span>₹{{number_format($final_price, 2)}}/-</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                Shipping <span>₹ {{number_format(50, 2)}}/-</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total amount</strong>
+                  <strong>
+                    <p class="mb-0">(including VAT)</p>
+                  </strong>
+                </div>
+                <span><strong>₹{{number_format($final_price + 50, 2)}}/-</strong></span>
+              </li>
+            </ul> 
+            @endif
 
             <a href="{{route('frontend.checkout.view')}}" class="btn btn-checkout btn-primary  "
               style="background-color: #213854; border: none;">

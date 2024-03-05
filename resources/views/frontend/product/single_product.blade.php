@@ -23,17 +23,26 @@
             <div class="col-md-6"> 
                 <div class="wrapper">
                     <section class="mainImage">
-                        <img src="{{url('public/'.$product_detail->product_images[0])}}" alt="">
+                        <img src="{{$product_detail->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product_detail->product_images[0])}}" alt="">
                     </section>
+                    
                     <section class="thumbnail">
                         <div>
+                        @if($product_detail->product_images != '')
+
                             @foreach($product_detail->product_images as $key => $images)
                             <div class="thumbnailBox {{$key == 0 ? " active":""}}">
                                 <img src="{{url('public/'.$images)}}" alt="">
                             </div>
-                            @endforeach
+                            @endforeach 
+                            @else
+                            <div class="thumbnailBox active">
+                                <img src="{{url('public/assets/both/placeholder/product.jpg')}}" alt="">
+                            </div>
+                            @endif
                         </div>
                     </section>
+                   
                 </div>
             </div>
             <div class="col-md-6">

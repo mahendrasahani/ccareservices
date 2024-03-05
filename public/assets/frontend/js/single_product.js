@@ -161,7 +161,8 @@
 // ------------------------------- rating ---------------------------------------
 
 
-$(document).on('click', '#add_to_cart_btn', function(){ 
+$(document).on('click', '#add_to_cart_btn', function(){
+    console.log('test') ;
     let product_id = $('#product_id').val();
     let delivery_date = $('#delivery_date').val(); 
     let quantity = $('#quantity').val(); 
