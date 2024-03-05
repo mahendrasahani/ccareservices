@@ -92,8 +92,8 @@
                                         <p class="mx-2 m-auto"> Qty</p>
                                         <input type="number" id="quantity" value="1" min="1"
                                             style="width: 20%; height: 30px;"> 
-                                            <button type="button" class="btn btn-warning animation mx-2" id="add_to_cart_btn">Add to Cart</button>
-                                            <button type="button" class="btn btn-warning animation ">Add to Wishlist</button>
+                                            <button type="button" class="single_product_btn" id="add_to_cart_btn">Add to Cart</button>
+                                            <button type="button" class="single_product_btn ">Add to Wishlist</button>
                                         </div>
                                     </div>
                                     <p  style="color:red; font-weight:bold;" id="quantity_error"></p>
@@ -214,7 +214,7 @@
     </div>
 </section> 
 @section('javascript-section')
- 
+  
 
 @endsection
 @endsection

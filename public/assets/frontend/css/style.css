@@ -1758,3 +1758,47 @@ input[type=range]:focus::-ms-fill-upper {
 fieldset {
   display: flex !important;
 }
+
+.single_product_btn{
+      background-color: #01316b;
+    color: white;
+    border: none;
+    padding: 5px 18px;
+    border-radius: 0;
+    font-size: 10px;
+    margin: 0 3px;
+    transition:.2s
+}
+.single_product_btn:hover{
+  background-color: #01b7e0;
+}
+.add_to_cart_btn_success{
+  background-color: green;
+}
+
+.cart_img_wrap {
+    width: 200px;
+    height: 150px;
+}
+.cart_img_wrap img{ 
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+.remover_cart {
+    font-size: 14px;
+    border: 0;
+    border-radius: 7px;
+    background-color: #d9534f;
+    color: #fff;
+    margin: 5px;
+    padding: 5px;
+}
+.cart_table{
+  text-align: center;
+  vertical-align: middle;
+}
+
+.swal2-confirm .swal2-styled{
+  background-color: #01b7e0 !important;
+}
