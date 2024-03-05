@@ -201,7 +201,17 @@ $(document).on('click', '#add_to_cart_btn', function(){
                         console.log(response);
                         let item_count = response.data.length; 
                         $('#cartItemCount').html(item_count);
-                         
+                        let update_btn_text = $('#add_to_cart_btn'); 
+                        update_btn_text.html("Added to Cart"); 
+                        update_btn_text.addClass("add_to_cart_btn_success");
+                        
+                        // Show SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Added to Cart',
+                            text: 'The item has been successfully added to your cart.',
+                        });
+                        
                     }
                  });
         }

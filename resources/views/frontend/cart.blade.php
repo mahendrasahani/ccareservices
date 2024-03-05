@@ -42,6 +42,7 @@
                     <th>Month</th>
                     <th>Quantity</th>
                     <th class="text-right">Subtotal</th>
+                     
                   </tr>
                 </thead>
                 <tbody>
@@ -53,15 +54,15 @@
                   @php
                   $final_price += $product->price * $product->quantity;
                   @endphp
-                  <tr>
+                  <tr class="cart_table">
                     <td class="footable-first-visible">
-                      <a href="#" target="_blank">
-                        <div> 
-                        <img src="{{$product->getProduct->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->getProduct->product_images[0])}}" alt="" style="width: 204px">  
+                      <a href="#" target="_blank"> 
+                          <div class="cart_img_wrap">
+                          <img src="{{$product->getProduct->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->getProduct->product_images[0])}}" alt="">  
                         </div>
                       </a>
                     </td>
-                    <td>
+                    <td >
                       <a href="single-product.html" target="_blank" class="product-name-default">
                         {{$product->getProduct->product_name}}
                       </a>
@@ -74,7 +75,7 @@
                       </div>
                     </td> 
                     
-                    <td>₹ {{number_format($product->price * $product->quantity, 2)}}/-</td>
+                    <td>₹ {{number_format($product->price * $product->quantity, 2)}}/- <br><button class="remover_cart">Delete</button></td>
                   </tr>
                   @endforeach
 
@@ -105,7 +106,8 @@
                         <input type="number" min="0" step="1" class="form-control" name="commisson_amounts_2" value="{{$product['quantity']}}">
                       </div>
                     </td> 
-                    <td>₹ {{number_format($product['price'] * $product['quantity'], 2)}}/-</td>
+                    <td>₹ {{number_format($product['price'] * $product['quantity'], 2)}}/- <br><button class="remover_cart">Delete</button></td>
+                      
                   </tr>
                   @endforeach
                   @endif
@@ -130,16 +132,15 @@
                     <div class="col-md-6 d-flex justify-content-end">
                       <button type="button" class="btn btn-submit btn-primary btn-md"
                         style="background-color: #213854; border: none;">Update cart</button>
-                    </div>
+                    </div> -->
                   
                 </div>
-              </div> -->
+              </div>  
 
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row"> 
+
+        <div class="row"> 
       <div class="col-md-6">
         <div class="card ">
           <div class="card-header py-3">
@@ -195,6 +196,11 @@
         </div>
       </div>
     </div>
+
+
+      </div>
+    </div>
+    
   </div>
 </section>
 

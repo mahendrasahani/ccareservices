@@ -150,6 +150,8 @@
 <script src="{{url('public/assets/backend/js/backend_custom.js')}}"></script>
 <script src="{{url('public/assets/frontend/js/cart.js')}}"></script>
 <script src="{{url('public/assets/frontend/js/single_product.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <script>
     $(document).ready(function ()
