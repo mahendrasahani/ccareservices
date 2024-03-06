@@ -61,9 +61,9 @@
                           <img src="{{$product->getProduct->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->getProduct->product_images[0])}}" alt="">  
                         </div>
                       </a>
-                    </td>
-                    <td >
-                      <a href="single-product.html" target="_blank" class="product-name-default">
+                    </td> 
+                    <td>
+                      <a href="" target="_blank" class="product-name-default">
                         {{$product->getProduct->product_name}}
                       </a>
                     </td>
@@ -73,9 +73,8 @@
                       <div class="col-lg-4">
                         <input type="number" min="0" step="1" class="form-control" name="commisson_amounts_2" value="{{$product->quantity}}">
                       </div>
-                    </td>
-                    
-                    <td>₹ {{number_format($product->price * $product->quantity, 2)}}/- <br><button class="remover_cart">Delete</button></td>
+                    </td> 
+                    <td>₹ {{number_format($product->price * $product->quantity, 2)}}/- <br><button class="remover_cart" id="remove_cart_item" data-product_id="{{$product->product_id}}">Delete</button></td>
                   </tr>
                   @endforeach
 

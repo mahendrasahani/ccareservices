@@ -12,14 +12,13 @@ use Illuminate\Support\Facades\Session;
 class CartController extends Controller
 {
     public function showCart(){ 
+
         if(Auth::check()){
             $cart_product = Cart::where('user_id', Auth::user()->id)->with(['getProduct:id,product_name,product_images'])->get();
         }else{
             $cart_product = Session::get('cart');
-        }
-
-        // return $cart_product;
-        
+        } 
+        // return $cart_product; 
         return view('frontend.cart', compact('cart_product'));
     }
 
@@ -111,12 +110,10 @@ class CartController extends Controller
                     'price' => $price,
                     'status' => 1
                 ]); 
-            } 
             }
-            
-            
+            }
             $data = Cart::where('user_id', Auth::user()->id)->get();
-        } 
+        }
 
         return response()->json([
             'status' => 200,

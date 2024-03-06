@@ -58,5 +58,6 @@ Route::get('/update-cart-on-load', [CartController::class, 'updateCartOnLoad'])-
 Route::get('/check-product-in-cart', [CartController::class, 'checkProductInCart'])->name('check_product_in_cart');
 Route::get('/get-product-id', [ProductController::class, 'decryptProductId'])->name('decrypt_product_id');
 Route::get('/check-stock', [ProductController::class, 'checkStock'])->name('check_stock');
+Route::get('/remove-from-cart', [ProductController::class, 'removeFromCart'])->name('remove_from_cart');
 Route::get('/testing-flush-cart', [CartController::class, 'testingFlushCart'])->name('testing_flush_cart');
 // -------------------------add to cart page (end) --------------------------------------------------------------

@@ -9,6 +9,8 @@ use App\Models\Backend\Brand;
 use App\Models\Backend\MainCategory;
 use App\Models\Backend\Stock;
 use App\Models\Backend\SubCategory;
+use App\Models\Frontend\Cart;
+use Auth;
 use Illuminate\Http\Request;
 use App\Models\Backend\Product;
 use Illuminate\Support\Facades\Crypt;
@@ -194,9 +196,7 @@ class ProductController extends Controller
             'status' => 1, 
         ]);
     }
-
-
-
+ 
         return response()->json([
             "status" => 200,
             "message" => "success"
@@ -466,7 +466,6 @@ class ProductController extends Controller
             $option_name = Attribute::where('id', $option_id)->first()->name; 
             return view('frontend.product.single_product', compact('product_detail', 'main_category',
              'sub_category', 'option_name'));
-
         }
 
 
@@ -532,5 +531,19 @@ class ProductController extends Controller
                 "message" => "success",
                 "quantity" => $stock_qty
             ]); 
+        }
+
+
+        function removeFromCart(Request $request){
+            $product_id = $request->product_id;
+            $remove_product = Cart::where('product_id', $product_id)->where('user_id', Auth::user()->id)->delete();
+            $cart_item = Cart::where('user_id', Auth::user()->id)->count(); 
+            if($remove_product){
+            return response()->json([
+                "status" => 200,
+                "message" => "removed",
+                "cart_item" => $cart_item
+            ]);
+        }
         }
 }

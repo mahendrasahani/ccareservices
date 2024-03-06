@@ -144,6 +144,7 @@
                 </div>
 
             </div>
+            
             <div class="col-md-12 mt-5 p-tag">
                 <p>Although renting a laptop may be unfamiliar to us, successful businesses are no strangers to making
                     this wise option in the first place. With the advent of work-from-home culture and online schooling
