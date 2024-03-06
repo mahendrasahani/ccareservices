@@ -248,11 +248,11 @@ function checkStock(){
         success:function(response){
             if(response.quantity < quantity || response.quantity == 0){
                 $('#add_to_cart_btn').prop('disabled', true);
-                $('#add_to_cart_btn').html('Out of Stock');
                 $("#stock_status").html("Out Of Stock");
                 $("#stock_status").removeClass("text-success");
                 $("#stock_status").addClass("text-danger"); 
-                $("#add_to_cart_btn").addClass("text-danger"); 
+                $("#add_to_cart_btn").addClass("bg-danger");  
+                $('#add_to_cart_btn').html('Out of Stock');
             }else{
                 $('#add_to_cart_btn').prop('disabled', false);
                 $("#stock_status").html("In Stock");
@@ -277,6 +277,7 @@ $(document).on("change", "#option_value_radio", function ()
 {
     updateCart();
     checkStock();
+    
 });
 $(document).on("change", "#range_slider_section", function ()
 {

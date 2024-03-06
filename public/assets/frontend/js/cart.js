@@ -29,7 +29,7 @@ $(document).ready(function(){
                     $('#show_price').html(item.price);
                     $('#add_to_cart_btn').html('Added');
                     $('#add_to_cart_btn').addClass("add_to_cart_btn_success");
-                    // checkStock();
+                    checkStock();
                     found = true;   
                 }
             });
