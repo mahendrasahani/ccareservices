@@ -26,70 +26,242 @@
 // ------------------------------- select option ---------------------------------------
 
 // ------------------------------- update month slider ------------------------------------
-    const slider = document.getElementById('slider');
-    const numbers = document.querySelectorAll('.number');
-    slider.addEventListener('input', function() {
-        const month = parseInt(this.value);
-        let option_value = document.querySelector('input[name="option_value"]:checked').value;  
-        let product_id = document.getElementById("product_id").value;
-        let option_value_id = document.querySelector('input[name="option_value"]:checked').value;
-        $.ajax({
-            url: baseUrl+"/single-product/get-month-price",
-            type: "GET", 
-            data: {"product_id": product_id, "option_value_id": option_value_id},
-            success: function(response) {
-                if(month == 1){
-                    $('#price').val(response.data.price_1); 
-                    $('#month').val(1); 
-                    document.getElementById('show_price').innerHTML = response.data.price_1; 
-                }else if(month == 2){
-                    $('#price').val(response.data.price_2);
-                    $('#month').val(2); 
-                    document.getElementById('show_price').innerHTML = response.data.price_2;
-                }else if(month == 3){
-                    $('#price').val(response.data.price_3); 
-                    $('#month').val(3); 
-                    document.getElementById('show_price').innerHTML = response.data.price_3;
-                }else if(month == 4){
-                    $('#price').val(response.data.price_4); 
-                    $('#month').val(4); 
-                    document.getElementById('show_price').innerHTML = response.data.price_4;
-                }else if(month == 5){
-                    $('#price').val(response.data.price_5); 
-                    $('#month').val(5); 
-                    document.getElementById('show_price').innerHTML = response.data.price_5;
-                }else if(month == 6){
-                    $('#price').val(response.data.price_6); 
-                    $('#month').val(6); 
-                    document.getElementById('show_price').innerHTML = response.data.price_6;
-                }else if(month == 7){
-                    $('#price').val(response.data.price_7); 
-                    $('#month').val(7); 
-                document.getElementById('show_price').innerHTML = response.data.price_7;
-                }else if(month == 8){
-                    $('#price').val(response.data.price_8); 
-                    $('#month').val(8); 
-                    document.getElementById('show_price').innerHTML = response.data.price_8;
-                }else if(month == 9){
-                    $('#price').val(response.data.price_9); 
-                    $('#month').val(9); 
-                    document.getElementById('show_price').innerHTML = response.data.price_9;
-                }else if(month == 10){
-                    $('#price').val(response.data.price_10); 
-                    $('#month').val(10); 
-                    document.getElementById('show_price').innerHTML = response.data.price_10;
-                }else if(month == 11){
-                    $('#price').val(response.data.price_11); 
-                    $('#month').val(11); 
-                    document.getElementById('show_price').innerHTML = response.data.price_11;
-                }else if(month == 12){
-                    $('#price').val(response.data.price_12); 
-                    $('#month').val(12); 
-                    document.getElementById('show_price').innerHTML = response.data.price_12;
-                } 
-            }
-        });  
-    }); 
+const slider = document.getElementById('slider');
+const numbers = document.querySelectorAll('.number');
+
+slider.addEventListener('input', async function ()
+{
+    const month = parseInt(this.value);
+    const option_value = document.querySelector('input[name="option_value"]:checked').value;
+    const product_id = document.getElementById("product_id").value;
+    const option_value_id = document.querySelector('input[name="option_value"]:checked').value;
+    const range_slider_section_color = document.getElementById('range_slider_section')
+
+    try
+    {
+        const response = await fetch(`${baseUrl}/single-product/get-month-price?product_id=${product_id}&option_value_id=${option_value_id}`);
+        if (!response.ok)
+        {
+            throw new Error('Network response was not ok');
+        }
+
+        const responseData = await response.json();
+        let price;
+
+        switch (month)
+        {
+            case 1:
+                slider.disabled = true;
+                range_slider_section_color.style.filter = 'blur(1px)'; 
+                range_slider_section_color.style.color = '#deecfc'; 
+                price = responseData.data.price_1; 
+                slider.disabled = false;
+                setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';  
+                }, 700);
+                range_slider_section_color.style.color = ''; 
+                break;
+            case 2:
+                slider.disabled = true;
+                range_slider_section_color.style.filter = 'blur(1px)';
+                price = responseData.data.price_2;
+                slider.disabled = false;
+                setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';  
+                }, 700);
+                break;
+            case 3:
+                slider.disabled = true;
+                range_slider_section_color.style.filter = 'blur(1px)';
+                price = responseData.data.price_3;
+                slider.disabled = false;
+                setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';
+                }, 700);
+                break;
+            case 4:
+                slider.disabled = true;
+                range_slider_section_color.style.filter = 'blur(1px)';
+                price = responseData.data.price_4;
+                slider.disabled = false;
+                setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';  
+                }, 700);
+                break;
+            case 5:
+                slider.disabled = true;
+                 range_slider_section_color.style.filter = 'blur(1px)';
+                price = responseData.data.price_5;
+                slider.disabled = false;
+                setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';  
+                }, 700);
+                break;
+            case 6:
+                slider.disabled = true;
+                 range_slider_section_color.style.filter = 'blur(1px)';
+                price = responseData.data.price_6;
+                slider.disabled = false;
+                setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';  
+                }, 700);
+                break;
+            case 7:
+                slider.disabled = true;
+                 range_slider_section_color.style.filter = 'blur(1px)';
+                price = responseData.data.price_7;
+                slider.disabled = false;
+                setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';  
+                }, 700);
+                break;
+            case 8:
+                slider.disabled = true;
+                 range_slider_section_color.style.filter = 'blur(1px)';
+                price = responseData.data.price_8;
+                slider.disabled = false;
+                setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';  
+                }, 700);
+                break;
+            case 9:
+                slider.disabled = true;
+                 range_slider_section_color.style.filter = 'blur(1px)';
+                price = responseData.data.price_9;
+                slider.disabled = false;
+                setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';  
+                }, 700);
+                break;
+            case 10:
+                slider.disabled = true;
+                 range_slider_section_color.style.filter = 'blur(1px)';
+                price = responseData.data.price_10;
+                slider.disabled = false;
+                setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';  
+                }, 700);
+                break;
+            case 11:
+                slider.disabled = true;
+                 setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';  
+                }, 700);
+                price = responseData.data.price_11;
+                slider.disabled = false;
+                setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';  
+                }, 700);
+                break;
+            case 12:
+                slider.disabled = true;
+                 range_slider_section_color.style.filter = 'blur(1px)';
+                price = responseData.data.price_12;
+                slider.disabled = false;
+                setTimeout(() =>
+                {
+                    slider.disabled = false;
+                    range_slider_section_color.style.filter = 'blur(0px)';  
+                }, 700);
+                break;
+            default:
+                console.error('Invalid month value');
+                return;
+        }   
+
+        $('#price').val(price);
+        $('#month').val(month);
+        document.getElementById('show_price').innerHTML = price;
+
+    } catch (error)
+    {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+});
+
+
+
+        // $.ajax({
+        //     url: baseUrl+"/single-product/get-month-price",
+        //     type: "GET", 
+        //     data: {"product_id": product_id, "option_value_id": option_value_id},
+        //     success: function(response) {
+        //         if(month == 1){
+        //             $('#price').val(response.data.price_1); 
+        //             $('#month').val(1); 
+        //             document.getElementById('show_price').innerHTML = response.data.price_1; 
+        //         }else if(month == 2){
+        //             $('#price').val(response.data.price_2);
+        //             $('#month').val(2); 
+        //             document.getElementById('show_price').innerHTML = response.data.price_2;
+        //         }else if(month == 3){
+        //             $('#price').val(response.data.price_3); 
+        //             $('#month').val(3); 
+        //             document.getElementById('show_price').innerHTML = response.data.price_3;
+        //         }else if(month == 4){
+        //             $('#price').val(response.data.price_4); 
+        //             $('#month').val(4); 
+        //             document.getElementById('show_price').innerHTML = response.data.price_4;
+        //         }else if(month == 5){
+        //             $('#price').val(response.data.price_5); 
+        //             $('#month').val(5); 
+        //             document.getElementById('show_price').innerHTML = response.data.price_5;
+        //         }else if(month == 6){
+        //             $('#price').val(response.data.price_6); 
+        //             $('#month').val(6); 
+        //             document.getElementById('show_price').innerHTML = response.data.price_6;
+        //         }else if(month == 7){
+        //             $('#price').val(response.data.price_7); 
+        //             $('#month').val(7); 
+        //         document.getElementById('show_price').innerHTML = response.data.price_7;
+        //         }else if(month == 8){
+        //             $('#price').val(response.data.price_8); 
+        //             $('#month').val(8); 
+        //             document.getElementById('show_price').innerHTML = response.data.price_8;
+        //         }else if(month == 9){
+        //             $('#price').val(response.data.price_9); 
+        //             $('#month').val(9); 
+        //             document.getElementById('show_price').innerHTML = response.data.price_9;
+        //         }else if(month == 10){
+        //             $('#price').val(response.data.price_10); 
+        //             $('#month').val(10); 
+        //             document.getElementById('show_price').innerHTML = response.data.price_10;
+        //         }else if(month == 11){
+        //             $('#price').val(response.data.price_11); 
+        //             $('#month').val(11); 
+        //             document.getElementById('show_price').innerHTML = response.data.price_11;
+        //         }else if(month == 12){
+        //             $('#price').val(response.data.price_12); 
+        //             $('#month').val(12); 
+        //             document.getElementById('show_price').innerHTML = response.data.price_12;
+        //         } 
+        //     }
+        // });  
+        // }); 
 // ------------------------------- update month slider ------------------------------------
 
 // ------------------------------- datepicker ---------------------------------------
@@ -248,12 +420,13 @@ try {
             $("#stock_status").html("Out Of Stock");
             $("#stock_status").removeClass("text-success");
             $("#stock_status").addClass("text-danger");
-            $("#add_to_cart_btn").addClass("text-danger");
+            $("#add_to_cart_btn").addClass("bg-danger");
         } else {
             $('#add_to_cart_btn').prop('disabled', false);
             $("#stock_status").html("In Stock");
             $("#stock_status").removeClass("text-danger");
             $("#stock_status").addClass("text-success");
+            $("#add_to_cart_btn").removeClass("bg-danger"); 
         }
     } else {
         console.log(response.status);
