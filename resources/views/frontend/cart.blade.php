@@ -30,7 +30,7 @@
       <div class="col-md-12">
         <div class="card mb-4">
           <div class="card-header py-3">
-            <h5 class="mb-0">Cart - {{count($cart_product)}} items</h5>
+            <h5 class="mb-0">Cart - {{$cart_product == '' ? 0:count($cart_product)}} items</h5>
           </div>
           <div class="card-body"> 
               <table class="table aiz-table mb-0 footable footable-1 breakpoint-lg">
@@ -73,7 +73,7 @@
                       <div class="col-lg-4">
                         <input type="number" min="0" step="1" class="form-control" name="commisson_amounts_2" value="{{$product->quantity}}">
                       </div>
-                    </td> 
+                    </td>
                     
                     <td>₹ {{number_format($product->price * $product->quantity, 2)}}/- <br><button class="remover_cart">Delete</button></td>
                   </tr>
@@ -83,6 +83,7 @@
                   @php
                   $final_price = 0;
                   @endphp
+                  @if($cart_product != null)
                   @foreach($cart_product as $product) 
                   @php
                    $final_price += $product['price'] * $product['quantity'];
@@ -110,6 +111,7 @@
                       
                   </tr>
                   @endforeach
+                  @endif
                   @endif
 
 

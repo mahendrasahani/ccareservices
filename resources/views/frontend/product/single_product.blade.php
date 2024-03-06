@@ -65,9 +65,9 @@
                                 <h1 class="fs-3">{{$product_detail->product_name}}</h1> 
                                 <div class="available d-flex">
                                     <p class="mx-2">Availability:</p>
-                                    @if($product_detail->stock_status == 0)<p class="text-danger"> Out of Stock</p>
+                                    @if($product_detail->getStock[0]['quantity'] == 0)<p class="text-danger" id="stock_status"> Out of Stock</p>
                                     @else
-                                    <p class="text-success"> In Stock</p>
+                                    <p class="text-success" id="stock_status"> In Stock</p>
                                     @endif
                                 </div>
                             </div>
@@ -109,18 +109,17 @@
                             </div>
                             <div class="col-md-6">
                                 <h6>{{$option_name}}</h6>
-                                <div class="cap-btns">
+                                <div class="cap-btns" id="option_value_radio">
                                 @foreach($product_detail->getStock as $index => $attribute_value)
                                         @php
                                             $attribute_value_name = App\Models\Backend\AttributeValue::where('id', $attribute_value->attribute_value_id)->first()->name;
-                                        
                                         @endphp
                                         <input type="radio" id="option_{{$attribute_value->attribute_value_id}}" name="option_value" value="{{$attribute_value->attribute_value_id}}" {{$index == 0 ? 'checked':''}}>
                                         <label for="option_{{$attribute_value->attribute_value_id}}">{{$attribute_value_name}}</label>
                                     @endforeach
  
                                 </div>
-                                <div class="calculator card">
+                                <div class="calculator card" id="range_slider_section">
                                     <label>Choose Tenure</label>
                                     <input type="range" min="1" max="12" value="1" id="slider" class="range_slider">
                                     <div class="numbers-container mt-2">
@@ -136,9 +135,8 @@
                                         <div class="number">10</div>
                                         <div class="number">11</div>
                                         <div class="number">12</div>
-                                    </div>
-                                    
-                                    <p>Price: <span id="show_price">{{$product_detail->getStock[0]['price_1']}}</p>
+                                    </div> 
+                                    <p>Price: <span id="show_price">{{number_format($product_detail->getStock[0]['price_1'], 2)}}/-</p>
                                     <input type="hidden" name="month" id="month" value="1">
                                      <input type="hidden" id="price" value="{{$product_detail->getStock[0]['price_1']}}">
                                 </div>

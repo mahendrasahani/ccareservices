@@ -159,6 +159,26 @@ class CartController extends Controller
     
     }
     
+    function checkProductInCart(Request $request){
+        $product_id = Crypt::decryptString($request->product_id);
+        $user_id = Auth::user()->id; 
+        $checkCart = Cart::where('user_id', $user_id)->where('product_id', $product_id)->first();
+        if($checkCart){
+            return response()->json([
+                "status" => 200,
+                "message" => "success",
+                "product_status" => "already_exist"
+            ]);
+        }else{
+            return response()->json([   
+                "status" => 200,
+                "message" => "success",
+                "product_status" => "not_exist"
+            ]);
+        }
+
+    }
+    
     function testingFlushCart(Request $request){
         $request->session()->flush(); 
         return redirect()->back();

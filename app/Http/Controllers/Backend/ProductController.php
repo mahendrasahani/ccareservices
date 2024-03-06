@@ -461,7 +461,7 @@ class ProductController extends Controller
         }
 
         public function singleProductFrontView($main_category, $sub_category, $slug){
-            $product_detail = Product::where('slug', $slug)->with('getStock')->first();
+            $product_detail = Product::where('slug', $slug)->with('getStock')->first(); 
             $option_id = $product_detail->getStock[0]->attribute_id;
             $option_name = Attribute::where('id', $option_id)->first()->name; 
             return view('frontend.product.single_product', compact('product_detail', 'main_category',
@@ -492,9 +492,7 @@ class ProductController extends Controller
             ]);
         }
 
-        public function getMonthPrice(Request $request){
-
-
+        public function getMonthPrice(Request $request){ 
             $product_id = Crypt::decryptString($request->product_id);
             $option_value_id = $request->option_value_id;
             $data = Stock::where('product_id', $product_id)->where('attribute_value_id', $option_value_id)->first();
@@ -513,5 +511,26 @@ class ProductController extends Controller
             }
         }
 
+        public function decryptProductId(Request $request){
+            $encryptId = $request->encrypt_id;
+            $decryptId = Crypt::decryptString($encryptId);
+            return response()->json([
+                "status" => 200,
+                "message" => "success",
+                "product_id" => $decryptId
+            ]);
+        }
 
+        public function checkStock(Request $request){
+
+            $product_id = Crypt::decryptString($request->product_id);
+            $quantity = $request->quantity;
+            $option_value_id = $request->option_value_id; 
+            $stock_qty = Stock::where('product_id', $product_id)->where('attribute_value_id', $option_value_id)->first()->quantity;
+            return response()->json([
+                "status" => 200,
+                "message" => "success",
+                "quantity" => $stock_qty
+            ]); 
+        }
 }

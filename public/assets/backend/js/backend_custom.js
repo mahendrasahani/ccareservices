@@ -133,17 +133,7 @@ function removeMainOption(divSection){
  }
  
 
- $(document).ready(function () {
-    $('.aiz-date-range').datepicker({
-        format: 'dd-mm-yyyy',
-        autoclose: true,
-        todayHighlight: true,
-        showMeridian: true,
-        forceParse: false,
-        minuteStep: 1,
-        startDate: new Date()
-    });
-});
+ 
 
 function calculate() {
     var amount = parseFloat(document.getElementById('amount').value);

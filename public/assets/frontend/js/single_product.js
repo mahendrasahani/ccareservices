@@ -1,5 +1,4 @@
- 
-
+  
 // ------------------------------- select option ---------------------------------------
     document.addEventListener('DOMContentLoaded', function() {
         let radioButtons = document.querySelectorAll('.cap-btns input[name="option_value"]');
@@ -98,13 +97,7 @@
     function setMinMaxAttributes(){
         var today = new Date().toISOString().split("T")[0];
         datePicker.setAttribute("min", today);
-    }
-    datePicker.addEventListener("input", function (){
-        if (isDateDisabled(this.value)){
-            this.value = "";
-            alert("This date is disabled.");
-        }
-    });
+    } 
     setMinMaxAttributes(); 
 // ------------------------------- datepicker ---------------------------------------
 
@@ -160,10 +153,9 @@
     });
 // ------------------------------- rating ---------------------------------------
 
-
-$(document).on('click', '#add_to_cart_btn', function(){
-    console.log('test') ;
-    let product_id = $('#product_id').val();
+// ------------------------------- cart button ---------------------------------------
+$(document).on('click', '#add_to_cart_btn', function(){  
+    let product_id = $('#product_id').val(); 
     let delivery_date = $('#delivery_date').val(); 
     let quantity = $('#quantity').val(); 
     let option_value_id = document.querySelector('input[name="option_value"]:checked').value;
@@ -202,7 +194,7 @@ $(document).on('click', '#add_to_cart_btn', function(){
                         let item_count = response.data.length; 
                         $('#cartItemCount').html(item_count);
                         let update_btn_text = $('#add_to_cart_btn'); 
-                        update_btn_text.html("Added to Cart"); 
+                        update_btn_text.html("Added"); 
                         update_btn_text.addClass("add_to_cart_btn_success");
                         
                         // Show SweetAlert
@@ -216,5 +208,74 @@ $(document).on('click', '#add_to_cart_btn', function(){
                  });
         }
     })
-
 });
+// ------------------------------- cart button ---------------------------------------
+
+
+$(document).on("change", "#delivery_date", function(){
+    updateCart();
+});
+$(document).on("change", "#quantity", function(){
+    updateCart();
+    checkStock();
+});
+$(document).on("change", "#option_value_radio", function(){
+    updateCart();
+    checkStock();
+});
+$(document).on("change", "#range_slider_section", function(){
+    updateCart();
+});
+
+function updateCart(){
+    let product_id = $("#product_id").val();  
+    $.ajax({
+        url:baseUrl+"/verify-user",
+        type: "GET", 
+        success:function(response){
+               if(response.authentication == true){ 
+                $.ajax({
+                    url: baseUrl+"/check-product-in-cart",
+                    type: "GET",
+                    data: {'product_id': product_id},
+                    success:function(response){
+                         if(response.product_status == "already_exist"){
+                           $('#add_to_cart_btn').html('Update Cart');
+                           $('#add_to_cart_btn').removeClass("add_to_cart_btn_success");
+                         }
+                    }
+                });
+               }else{
+                console.log('logged out');
+               }   
+        }
+    }); 
+}
+
+function checkStock(){
+    let product_id = $("#product_id").val();  
+    let quantity = $("#quantity").val();  
+    let option_value_id = document.querySelector('input[name="option_value"]:checked').value; 
+    $.ajax({
+        url:baseUrl+"/check-stock",
+        type:"GET",
+        data:{'product_id':product_id, 'quantity':quantity, 'option_value_id':option_value_id},
+        success:function(response){
+            if(response.quantity < quantity || response.quantity == 0){
+                $('#add_to_cart_btn').prop('disabled', true);
+                $('#add_to_cart_btn').html('Out of Stock');
+                $("#stock_status").html("Out Of Stock");
+                $("#stock_status").removeClass("text-danger");
+                $("#stock_status").removeClass("text-success");
+                $("#stock_status").addClass("text-danger");
+            }else{
+                $('#add_to_cart_btn').prop('disabled', false);
+                $("#stock_status").html("In Stock");
+                $("#stock_status").removeClass("text-success");
+                $("#stock_status").removeClass("text-danger");
+                $("#stock_status").addClass("text-success");
+            }
+
+        }
+    })
+}

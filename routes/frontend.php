@@ -55,5 +55,8 @@ Route::get('/single-product/get-month-price', [ProductController::class, 'getMon
 Route::get('/verify-user', [UserController::class, 'verifyUser'])->name('verify_user');
 Route::get('/add-to-cart', [CartController::class, 'addToCart'])->name('add_to_cart');
 Route::get('/update-cart-on-load', [CartController::class, 'updateCartOnLoad'])->name('update_cart_on_load');
+Route::get('/check-product-in-cart', [CartController::class, 'checkProductInCart'])->name('check_product_in_cart');
+Route::get('/get-product-id', [ProductController::class, 'decryptProductId'])->name('decrypt_product_id');
+Route::get('/check-stock', [ProductController::class, 'checkStock'])->name('check_stock');
 Route::get('/testing-flush-cart', [CartController::class, 'testingFlushCart'])->name('testing_flush_cart');
 // -------------------------add to cart page (end) --------------------------------------------------------------

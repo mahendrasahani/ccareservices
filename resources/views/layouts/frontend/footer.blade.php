@@ -140,6 +140,8 @@
 <a id="back-top" class="text-decoration-none"></a>
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
+ 
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
@@ -151,6 +153,7 @@
 <script src="{{url('public/assets/frontend/js/cart.js')}}"></script>
 <script src="{{url('public/assets/frontend/js/single_product.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 
 <script>
