@@ -134,8 +134,7 @@ class CartController extends Controller
             $cart = Cart::where('user_id', Auth::user()->id)->get(); 
             return response()->json([
                 'status' => 200,
-                'message' => "Added into cart", 
-                'authentication' => $request->authentication,
+                'message' => "Added into cart",  
                 'data' => $cart, 
         ]); 
         }else{ 
@@ -143,15 +142,13 @@ class CartController extends Controller
             if (!$cart) {
                 return response()->json([
                     'status' => 200,
-                    'message' => "Added into cart", 
-                    'authentication' => $request->authentication, 
+                    'message' => "Added into cart",  
                     'data' => ''
             ]);
             } else{ 
             return response()->json([
                 'status' => 200,
-                'message' => "Added into cart", 
-                'authentication' => $request->authentication,
+                'message' => "Added into cart",  
                 'data' => $cart, 
         ]);
         }

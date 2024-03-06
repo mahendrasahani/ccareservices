@@ -2,15 +2,15 @@
 
 $(document).ready(function(){
     let product_id = $('#product_id').val(); 
-    $.ajax({
-        url: baseUrl + "/verify-user",
-        type: "GET", 
-        success: function(response){ 
+    
             $.ajax({
                 url: baseUrl+"/update-cart-on-load",
-                type: "GET",
-                data: {'authentication': response.authentication},  
+                type: "GET", 
+                beforeSend: function() { 
+                    $('#add_to_cart_btn').html('<i class="fa-solid fa-spinner"></i>');
+                },
                 success: function(response){
+                    console.log(response);
                     if(response.data == ''){
                         $('#cartItemCount').html('0');
                     }else{
@@ -28,13 +28,15 @@ $(document).ready(function(){
                                 $('#show_price').html(item.price);
                                 $('#add_to_cart_btn').html('Added');
                                 $('#add_to_cart_btn').addClass("add_to_cart_btn_success");
-                                checkStock();
+                                // checkStock();
+                            } else{
+                                $('#add_to_cart_btn').html('Add to cart');
                             }
                         });
                     }
                 }
-            });
-        }
+            
+         
     });
  
 });

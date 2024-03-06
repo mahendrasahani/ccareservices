@@ -101,7 +101,7 @@
                                         <p class="mx-2 m-auto"> Qty</p>
                                         <input type="number" id="quantity" value="1" min="1"
                                             style="width: 20%; height: 30px;"> 
-                                            <button type="button" class="single_product_btn" id="add_to_cart_btn">Add to Cart</button>
+                                            <button type="button" class="single_product_btn" id="add_to_cart_btn"><i class="fa-solid fa-spinner"></i>'</button>
                                             <button type="button" class="single_product_btn ">Add to Wishlist</button>
                                         </div>
                                     </div>
