@@ -93,9 +93,9 @@
                                     <input type="hidden" value="{{Crypt::encryptString($product_detail->id)}}" name="product_id" id="product_id">
                                     <label for="select-option" class="month-select mt-2">Delivery Date:</label> <br>
                                     <input type="date" id="delivery_date" name="delivery_date">
-                                    <p  style="color:red; font-weight:bold;" id="date_error"></p>
-
+                                    <p  style="color:red; font-weight:bold;" id="date_error"></p> 
                                 </div>
+                                
                                 <div class="product-quantity d-flex mt-3">
                                     <div class="mx-2 d-flex">
                                         <p class="mx-2 m-auto"> Qty</p>

@@ -116,11 +116,10 @@
                 <div class="row">
                     @foreach($product_list as $product)
                     <div class="col-md-3 all laptop" class="content" id="all">
-                        <div class="card item ">
-                            <div class="card-header">
+                        <div class="card ">
+                            <div class="cart_img_wrap">
                                 <a href="single-product.html"><img
-                                        src="{{$product->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->product_images[0])}}"
-                                        class="w-100"></a>
+                                        src="{{$product->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->product_images[0])}}"></a>
                             </div>
                             <div class="card-body">
                                 <h6 class="fw-bold"><a href="single-product.html" class="text-decoration-none"

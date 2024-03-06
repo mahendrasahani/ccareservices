@@ -35,7 +35,7 @@
           <div class="card-body"> 
               <table class="table aiz-table mb-0 footable footable-1 breakpoint-lg">
                 <thead>
-                  <tr class="">
+                  <tr class="cart_table">
                     <th class="footable-first-visible">Product Image</th>
                     <th>Product</th>
                     <th>Price</th>
@@ -88,7 +88,7 @@
                    $final_price += $product['price'] * $product['quantity'];
                   $product_detail = App\Models\Backend\Product::where('id', $product['product_id'])->first();
                   @endphp
-                  <tr>
+                  <tr class="cart_table">
                     <td class="footable-first-visible">
                       <a href="#" target="_blank">
                         <div>
