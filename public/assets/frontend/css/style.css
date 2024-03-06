@@ -1776,6 +1776,9 @@ fieldset {
 .add_to_cart_btn_success{
   background-color: green;
 }
+.add_to_cart_btn_danger{
+  background-color: red;
+}
 
 .cart_img_wrap {
     /* width: 200px; */
