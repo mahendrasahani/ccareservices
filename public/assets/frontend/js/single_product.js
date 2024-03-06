@@ -211,74 +211,76 @@ $(document).on('click', '#add_to_cart_btn', function(){
 });
 // ------------------------------- cart button ---------------------------------------
 
+async function updateCart() {
+    try {
+        let product_id = document.getElementById("product_id").value;
 
-function updateCart(){
-    let product_id = $("#product_id").val();  
-    $.ajax({
-        url:baseUrl+"/verify-user",
-        type: "GET", 
-        success:function(response){
-               if(response.authentication == true){ 
-                $.ajax({
-                    url: baseUrl+"/check-product-in-cart",
-                    type: "GET",
-                    data: {'product_id': product_id},
-                    success:function(response){
-                         if(response.product_status == "already_exist"){
-                           $('#add_to_cart_btn').html('Update Cart');
-                           $('#add_to_cart_btn').removeClass("add_to_cart_btn_success");
-                         }  
-                    }
-                });
-               }else{
-                console.log('logged out');
-               }   
+        const response = await fetch(baseUrl + "/verify-user");
+        const userData = await response.json();
+
+        if (userData.authentication === true) {
+            const productResponse = await fetch(baseUrl + "/check-product-in-cart?product_id=" + product_id);
+            const productData = await productResponse.json();
+
+            if (productData.product_status === "already_exist") {
+                document.getElementById('add_to_cart_btn').innerHTML = 'Update Cart';
+                document.getElementById('add_to_cart_btn').classList.remove("add_to_cart_btn_success");
+            }
+        } else {
+            console.log('logged out');
         }
-    }); 
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
-function checkStock(){
-    let product_id = $("#product_id").val();  
+async function checkStock(){
+try {
+    let product_id = $("#product_id").val(); 
     let quantity = parseInt($("#quantity").val());  
     let option_value_id = document.querySelector('input[name="option_value"]:checked').value; 
-    $.ajax({
-        url:baseUrl+"/check-stock",
-        type:"GET",
-        data:{'product_id':product_id, 'quantity':quantity, 'option_value_id':option_value_id},
-        success:function(response){
-            if(response.quantity < quantity || response.quantity == 0){
-                $('#add_to_cart_btn').prop('disabled', true);
-                $('#add_to_cart_btn').html('Out of Stock');
-                $("#stock_status").html("Out Of Stock");
-                $("#stock_status").removeClass("text-success");
-                $("#stock_status").addClass("text-danger"); 
-                $("#add_to_cart_btn").addClass("text-danger"); 
-            }else{
-                $('#add_to_cart_btn').prop('disabled', false);
-                $("#stock_status").html("In Stock");
-                $("#stock_status").removeClass("text-danger");
-                $("#stock_status").addClass("text-success"); 
-            } 
+    const response = await fetch(baseUrl+"/check-stock?product_id="+product_id+"&quantity="+quantity+"&option_value_id="+option_value_id)
+    if (response.ok) {
+        const data = await response.json();
+        if (data.quantity < quantity || data.quantity == 0) {
+            $('#add_to_cart_btn').prop('disabled', true);
+            $('#add_to_cart_btn').html('Out of Stock');
+            $("#stock_status").html("Out Of Stock");
+            $("#stock_status").removeClass("text-success");
+            $("#stock_status").addClass("text-danger");
+            $("#add_to_cart_btn").addClass("text-danger");
+        } else {
+            $('#add_to_cart_btn').prop('disabled', false);
+            $("#stock_status").html("In Stock");
+            $("#stock_status").removeClass("text-danger");
+            $("#stock_status").addClass("text-success");
         }
-    })
+    } else {
+        console.log(response.status);
+        console.error('Failed to fetch data from server');
+    }
+     
+}catch(error){
+    console.log("Erro: ", error);
+}
 }
 
 
-$(document).on("change", "#delivery_date", function ()
+$(document).on("change", "#delivery_date", async function ()
 {
-    updateCart();
+    await updateCart();
 });
-$(document).on("change", "#quantity", function ()
+$(document).on("change", "#quantity", async function ()
 {
-    updateCart();
-    checkStock();
+    await  updateCart();
+    await checkStock();
 });
-$(document).on("change", "#option_value_radio", function ()
+$(document).on("change", "#option_value_radio", async function ()
 {
-    updateCart();
-    checkStock();
+    await updateCart();
+    await checkStock();
 });
-$(document).on("change", "#range_slider_section", function ()
+$(document).on("change", "#range_slider_section", async function ()
 {
-    updateCart();
+    await updateCart();
 });

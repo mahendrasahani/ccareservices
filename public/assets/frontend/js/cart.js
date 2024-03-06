@@ -1,10 +1,9 @@
-$(document).ready(function(){
+$(document).ready(async function(){
+    try{
     let product_id = $('#product_id').val(); 
-    let updateCartOnLoad = fetch(baseUrl+"/update-cart-on-load");
-    updateCartOnLoad.then(response => {
-        return response.json();
-    }).then(async response =>{
-        console.log(response.data);
+    let updateCartOnLoad = await fetch(baseUrl+"/update-cart-on-load");
+    const response = await updateCartOnLoad.json();
+    
         if(response.data == ''){
             $('#cartItemCount').html('0');
             $('#add_to_cart_btn').html('Add to cart');
@@ -12,14 +11,10 @@ $(document).ready(function(){
         let item_count = response.data.length;   
         $('#cartItemCount').html(item_count);   
         let decryptId = await getDecryptId(product_id);   
-        let decryptIdParse = parseInt(decryptId);
-        console.log(decryptIdParse);
-        console.log(typeof decryptIdParse);
-        console.log(response.data); 
+        let decryptIdParse = parseInt(decryptId); 
         let found = false; 
             response.data.forEach(function(item){
-                if(decryptIdParse == item.product_id){
-                    console.log('hello');
+                if(decryptIdParse == item.product_id){ 
                     $('#delivery_date').val(item.delivery_date);
                     $('#option_' + item.option_value_id).prop('checked', true);
                     $('#slider').val(item.month);
@@ -29,18 +24,17 @@ $(document).ready(function(){
                     $('#show_price').html(item.price);
                     $('#add_to_cart_btn').html('Added');
                     $('#add_to_cart_btn').addClass("add_to_cart_btn_success");
-                    // checkStock();
+                    checkStock();
                     found = true;   
                 }
             });
             if (!found) { 
-                $('#add_to_cart_btn').html('Add to cart');
-                console.log("my test");
+                $('#add_to_cart_btn').html('Add to cart'); 
             }
         }
-    }).catch(error => {
-        console.log('There was a problem with the fetch operation:', error);
-      });
+    } catch (error) {
+        console.log(error);
+      }
 });
 
 async function getDecryptId(encryptId) {
