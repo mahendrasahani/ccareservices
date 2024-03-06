@@ -252,6 +252,7 @@ function checkStock(){
                 $("#stock_status").html("Out Of Stock");
                 $("#stock_status").removeClass("text-success");
                 $("#stock_status").addClass("text-danger"); 
+                $("#add_to_cart_btn").addClass("text-danger"); 
             }else{
                 $('#add_to_cart_btn').prop('disabled', false);
                 $("#stock_status").html("In Stock");
