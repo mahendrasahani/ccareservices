@@ -1767,7 +1767,8 @@ fieldset {
     border-radius: 0;
     font-size: 10px;
     margin: 0 3px;
-    transition:.2s
+    transition:.2s;
+    border-radius:5px;
 }
 .single_product_btn:hover{
   background-color: #01b7e0;
@@ -1777,7 +1778,7 @@ fieldset {
 }
 
 .cart_img_wrap {
-    width: 200px;
+    /* width: 200px; */
     height: 150px;
 }
 .cart_img_wrap img{ 
@@ -1794,11 +1795,15 @@ fieldset {
     margin: 5px;
     padding: 5px;
 }
-.cart_table{
+.cart_table td{
+  text-align: center;
+  vertical-align: middle;
+}
+.cart_table th{
   text-align: center;
   vertical-align: middle;
 }
 
-.swal2-confirm .swal2-styled{
-  background-color: #01b7e0 !important;
+button.swal2-confirm.swal2-styled{
+  background-color: #01b7e0 !important; 
 }

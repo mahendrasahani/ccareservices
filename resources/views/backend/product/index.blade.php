@@ -184,7 +184,8 @@
                                                 <span class="slider"></span></label>
                                         </td>
 
-                                        <td class="text-right footable-last-visible ">
+                                        <td class="text-left footable-last-visible ">
+                                            <div class="d-flex justify-content-center ">
                                             <a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage"
                                                 href="{{route('backend.product.view', [$product->id])}}" title="View">
                                                 <i class="fa-regular fa-eye"></i>
@@ -200,6 +201,7 @@
                                             </a>
                                             <button value="{{$product->id}}" class="btn btn-icon btn-sm delete_ico"
                                             id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
+                                            </div>
                                         </td>
                                     </tr>
                                     @endforeach
