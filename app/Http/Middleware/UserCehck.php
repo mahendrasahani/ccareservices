@@ -17,7 +17,7 @@ class UserCehck
     public function handle(Request $request, Closure $next): Response
     {
         $user_type = Auth::user()->user_type;
-        if($user_type != 0 && $user_type != 1){
+        if($user_type == 0 || $user_type == 1 || $user_type == 2 ){
             return $next($request);
         } 
         

@@ -21,10 +21,8 @@
   <!-- breadcrumb end -->
 </section>
 <!----------------------------------------------------- -Cart checkout-------------------------- -->
-<section class=" "> 
-  <!-- <h4>Shoping Cart is Empty</h4> -->
-
-
+<section class=""> 
+  <!-- <h4>Shoping Cart is Empty</h4> --> 
   <div class="container"> 
     <div class="row d-flex justify-content-center my-4">
       <div class="col-md-12">
@@ -56,16 +54,14 @@
                   @endphp
                   <tr class="cart_table">
                     <td class="footable-first-visible">
-                      <a href="#" target="_blank"> 
+                      <a href="{{route('frontend.product.single_product', [$product->getProduct->slug])}}" target="_blank"> 
                           <div class="cart_img_wrap">
                           <img src="{{$product->getProduct->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->getProduct->product_images[0])}}" alt="">  
                         </div>
                       </a>
                     </td> 
                     <td>
-                      <a href="" target="_blank" class="product-name-default">
-                        {{$product->getProduct->product_name}}
-                      </a>
+                      <a href="{{route('frontend.product.single_product', [$product->getProduct->slug])}}" target="_blank" class="product-name-default">{{$product->getProduct->product_name}}</a>
                     </td>
                     <td> ₹ {{number_format($product->price, 2)}}/- </td>
                     <td>{{$product->month}} Month </td>
@@ -90,14 +86,14 @@
                   @endphp
                   <tr class="cart_table">
                     <td class="footable-first-visible">
-                      <a href="#" target="_blank">
+                      <a href="{{route('frontend.product.single_product', [Str::slug($product_detail->product_name)])}}" target="_blank">
                         <div>
                         <img src="{{$product_detail->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product_detail->product_images[0])}}" alt="" style="width: 204px">  
                         </div>
                       </a>
                     </td>
                     <td>
-                      <a href="single-product.html" target="_blank" class="product-name-default">{{$product_detail->product_name}}</a>
+                      <a href="{{route('frontend.product.single_product', [Str::slug($product_detail->product_name)])}}" target="_blank" class="product-name-default">{{$product_detail->product_name}}</a>
                     </td>
                     <td>₹ {{number_format($product['price'], 2)}}/-</td>
                     <td>{{$product['month']}} Month</td>
@@ -105,9 +101,8 @@
                       <div class="col-lg-4">
                         <input type="number" min="0" step="1" class="form-control" name="commisson_amounts_2" value="{{$product['quantity']}}">
                       </div>
-                    </td> 
-                    <td>₹ {{number_format($product['price'] * $product['quantity'], 2)}}/- <br><button class="remover_cart">Delete</button></td>
-                      
+                    </td>
+                    <td>₹ {{number_format($product['price'] * $product['quantity'], 2)}}/- <br><button class="remover_cart" id="remove_cart_item" data-product_id="{{$product['product_id']}}">Delete</button></td>
                   </tr>
                   @endforeach
                   @endif
@@ -152,7 +147,7 @@
             <ul class="list-group list-group-flush">
               <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                 Products
-                <span>₹{{number_format($final_price, 2)}}/-</span>
+                <span>₹ {{number_format($final_price, 2)}}/-</span>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Shipping <span>₹ {{number_format(50, 2)}}/-</span>
@@ -164,14 +159,14 @@
                     <p class="mb-0">(including VAT)</p>
                   </strong>
                 </div>
-                <span><strong>₹{{number_format($final_price + 50, 2)}}/-</strong></span>
+                <span><strong>₹ {{number_format($final_price + 50, 2)}}/-</strong></span>
               </li>
             </ul>
             @else
             <ul class="list-group list-group-flush">
               <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                 Products
-                <span>₹{{number_format($final_price, 2)}}/-</span>
+                <span>₹ {{number_format($final_price, 2)}}/-</span>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Shipping <span>₹ {{number_format(50, 2)}}/-</span>
@@ -183,7 +178,7 @@
                     <p class="mb-0">(including VAT)</p>
                   </strong>
                 </div>
-                <span><strong>₹{{number_format($final_price + 50, 2)}}/-</strong></span>
+                <span><strong>₹ {{number_format($final_price + 50, 2)}}/-</strong></span>
               </li>
             </ul> 
             @endif

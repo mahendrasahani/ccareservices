@@ -1810,3 +1810,6 @@ fieldset {
 button.swal2-confirm.swal2-styled{
   background-color: #01b7e0 !important; 
 }
+.order-paymnent td{
+  text-align:left;
+}

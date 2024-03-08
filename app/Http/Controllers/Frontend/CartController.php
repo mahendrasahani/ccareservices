@@ -14,7 +14,7 @@ class CartController extends Controller
     public function showCart(){ 
 
         if(Auth::check()){
-            $cart_product = Cart::where('user_id', Auth::user()->id)->with(['getProduct:id,product_name,product_images'])->get();
+            $cart_product = Cart::where('user_id', Auth::user()->id)->with(['getProduct:id,product_name,product_images,slug'])->get();
         }else{
             $cart_product = Session::get('cart');
         } 
@@ -29,10 +29,11 @@ class CartController extends Controller
         $option_value_id = $request->option_value_id;
         $month = $request->month;
         $price = $request->price;
+        $stock_id = $request->stock_id;
         $authentication = $request->authentication; 
         // $cart = session()->get('cart'); 
         if($authentication == "false"){
-        $cart = session()->get('cart');  
+            $cart = session()->get('cart');  
             if ($quantity == 0){
                 echo json_encode(array());
                 die;
@@ -40,7 +41,7 @@ class CartController extends Controller
             if (!$cart){
                 $cart = array();
             }  
-            if($cart != '') { 
+            if($cart != ''){ 
                 $updated = false;
                 foreach($cart as $index => $item) {
                     if($item['product_id'] == $product_id) { 
@@ -49,84 +50,81 @@ class CartController extends Controller
                         $cart[$index]['price'] = $price;
                         $cart[$index]['delivery_date'] = $delivery_date;
                         $cart[$index]['month'] = $month;
+                        $cart[$index]['stock_id'] = $stock_id;
                         $updated = true;
                         break;
                     }
-                }
-
-                if (!$updated){ 
+                } 
+                if (!$updated){
                     $newItem = array(
-                                     'product_id' => $product_id,
-                                     'quantity' => $quantity,
-                                     'price' => $price,
-                                     'delivery_date' => $delivery_date,
-                                     'option_value_id' => $option_value_id,
-                                     'month' => $month, 
+                                'product_id' => $product_id,
+                                'quantity' => $quantity,
+                                'price' => $price,
+                                'delivery_date' => $delivery_date,
+                                'option_value_id' => $option_value_id,
+                                'month' => $month, 
+                                'stock_id' => $stock_id, 
                     );
                     $cart[] = $newItem;
-                }
-
                 } 
-
+            }
             session()->put('cart', $cart); 
             $data = session()->get('cart'); 
-        } else{ 
-        $cart = session()->get('cart'); 
-            if($cart != '') {
-                foreach($cart as $index => $item) {
+        }else{ 
+            $cart = session()->get('cart'); 
+                if($cart != '') {
+                    foreach($cart as $index => $item) {
+                        Cart::create([
+                            'user_id' => Auth::user()->id,
+                            'product_id' => $cart[$index]['product_id'],
+                            'quantity' => $cart[$index]['quantity'],  
+                            'delivery_date' => $cart[$index]['delivery_date'],
+                            'option_value_id' => $cart[$index]['option_value_id'],
+                            'month' => $cart[$index]['month'],
+                            'price' => $cart[$index]['price'],
+                            'stock_id' => $cart[$index]['stock_id'],
+                            'status' => 1
+                        ]); 
+                    } 
+                }else{
+                    $product = Cart::where('product_id', $product_id)->where('user_id', Auth::user()->id)->first();
+                    if($product){
+                        Cart::where('user_id', Auth::user()->id)->where('product_id', $product_id)->update([
+                            'user_id' => Auth::user()->id,
+                            'product_id' => $product_id,
+                            'quantity' => $quantity,
+                            'delivery_date' => $delivery_date,
+                            'option_value_id' => $option_value_id,
+                            'month' => $month,
+                            'price' => $price,
+                            'stock_id' => $stock_id,
+                            'status' => 1
+                        ]); 
+                }else{
                     Cart::create([
                         'user_id' => Auth::user()->id,
-                        'product_id' => $cart[$index]['product_id'],
-                        'quantity' => $cart[$index]['quantity'],  
-                        'delivery_date' => $cart[$index]['delivery_date'],
-                        'option_value_id' => $cart[$index]['option_value_id'],
-                        'month' => $cart[$index]['month'],
-                        'price' => $cart[$index]['price'],
+                        'product_id' => $product_id,
+                        'quantity' => $quantity,
+                        'delivery_date' => $delivery_date,
+                        'option_value_id' => $option_value_id,
+                        'month' => $month,
+                        'price' => $price,
+                        'stock_id' => $stock_id,
                         'status' => 1
                     ]); 
-                } 
-            }else{
-
-                $product = Cart::where('product_id', $product_id)->where('user_id', Auth::user()->id)->first();
-                if($product){
-                    Cart::where('user_id', Auth::user()->id)->where('product_id', $product_id)->update([
-                    'user_id' => Auth::user()->id,
-                    'product_id' => $product_id,
-                    'quantity' => $quantity,
-                    'delivery_date' => $delivery_date,
-                    'option_value_id' => $option_value_id,
-                    'month' => $month,
-                    'price' => $price,
-                    'status' => 1
-                    ]); 
-                }else{
-                Cart::create([
-                    'user_id' => Auth::user()->id,
-                    'product_id' => $product_id,
-                    'quantity' => $quantity,
-                    'delivery_date' => $delivery_date,
-                    'option_value_id' => $option_value_id,
-                    'month' => $month,
-                    'price' => $price,
-                    'status' => 1
-                ]); 
+                }
             }
-            }
-            $data = Cart::where('user_id', Auth::user()->id)->get();
-        }
-
+                $data = Cart::where('user_id', Auth::user()->id)->get();
+        } 
         return response()->json([
             'status' => 200,
             'message' => "Added into cart", 
             'authentication' => $authentication,
             'data' => $data, 
-    ]);
-    
-
+        ]); 
     }
 
-    public function updateCartOnLoad(Request $request){
-       
+    public function updateCartOnLoad(Request $request){ 
         if(Auth::check()){ 
             $cart = Cart::where('user_id', Auth::user()->id)->get(); 
             return response()->json([
@@ -134,48 +132,66 @@ class CartController extends Controller
                 'message' => "Added into cart",  
                 'data' => $cart, 
         ]); 
-        }else{ 
+        }else{
             $cart = session()->get('cart'); 
             if (!$cart) {
                 return response()->json([
                     'status' => 200,
                     'message' => "Added into cart",  
                     'data' => ''
-            ]);
-            } else{ 
-            return response()->json([
-                'status' => 200,
-                'message' => "Added into cart",  
-                'data' => $cart, 
-        ]);
+                ]);
+            }else{ 
+                return response()->json([
+                    'status' => 200,
+                    'message' => "Added into cart",  
+                    'data' => $cart, 
+                ]);
+            }
         }
-}
     
     }
     
     function checkProductInCart(Request $request){
-        $product_id = Crypt::decryptString($request->product_id);
-        $user_id = Auth::user()->id; 
-        $checkCart = Cart::where('user_id', $user_id)->where('product_id', $product_id)->first();
-        if($checkCart){
-            return response()->json([
-                "status" => 200,
-                "message" => "success",
-                "product_status" => "already_exist"
-            ]);
+        $product_id = Crypt::decryptString($request->product_id); 
+        if(Auth::check()){
+            $user_id = Auth::user()->id; 
+            $checkCart = Cart::where('user_id', $user_id)->where('product_id', $product_id)->first();
+            if($checkCart){
+                return response()->json([
+                    "status" => 200,
+                    "message" => "success",
+                    "product_status" => "already_exist"
+                ]);
+            }else{
+                return response()->json([   
+                    "status" => 200,
+                    "message" => "success",
+                    "product_status" => "not_exist"
+                ]);
+            }
         }else{
-            return response()->json([   
-                "status" => 200,
-                "message" => "success",
-                "product_status" => "not_exist"
-            ]);
-        }
-
+            $cart = session()->get('cart');  
+            if(count($cart) != 0){
+                foreach ($cart as $key => $item) {
+                    if ($item['product_id'] == $product_id) {
+                        return response()->json([
+                            "status" => 200,
+                            "message" => "success",
+                            "product_status" => "already_exist"
+                        ]);
+                    } 
+                }  
+            }
+                return response()->json([   
+                    "status" => 200,
+                    "message" => "success",
+                    "product_status" => "not_exist"
+                ]); 
+        } 
     }
     
     function testingFlushCart(Request $request){
         $request->session()->flush(); 
         return redirect()->back();
-    }
-
+    } 
 }

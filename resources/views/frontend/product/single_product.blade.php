@@ -8,8 +8,8 @@
                 <nav aria-label="breadcrumb" style="margin: 0 auto;">
                     <ol class="breadcrumb d-flex justify-content-center">
                         <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#" class="text-white">{{Str::title($main_category)}}</a></li>
-                        <li class="breadcrumb-item"><a href="#" class="text-white">{{Str::title($sub_category)}}</a></li>
+                        {{-- <li class="breadcrumb-item"><a href="#" class="text-white">{{Str::title($main_category)}}</a></li>
+                        <li class="breadcrumb-item"><a href="#" class="text-white">{{Str::title($sub_category)}}</a></li> --}}
                         <li class="breadcrumb-item active pt-1" aria-current="page" style="color: #01b7e0; font-size: 14px;">{{$product_detail->product_name}}</li>
                     </ol>
                 </nav>
@@ -25,7 +25,6 @@
                     <section class="mainImage">
                         <img src="{{$product_detail->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product_detail->product_images[0])}}" alt="">
                     </section>
-                    
                     <section class="thumbnail">
                         <div>
                         @if($product_detail->product_images != '')
@@ -114,10 +113,10 @@
                                         @php
                                             $attribute_value_name = App\Models\Backend\AttributeValue::where('id', $attribute_value->attribute_value_id)->first()->name;
                                         @endphp
-                                        <input type="radio" id="option_{{$attribute_value->attribute_value_id}}" name="option_value" value="{{$attribute_value->attribute_value_id}}" {{$index == 0 ? 'checked':''}}>
+                                        <input type="radio" id="option_{{$attribute_value->attribute_value_id}}" name="option_value" value="{{$attribute_value->attribute_value_id}}" data-stock-id="{{$attribute_value->id}}" {{$index == 0 ? 'checked':''}}>
                                         <label for="option_{{$attribute_value->attribute_value_id}}">{{$attribute_value_name}}</label>
                                     @endforeach
- 
+                                    <!-- <input type="text" id="stock_id" value="{{$product_detail->getStock[0]['id']}}"> -->
                                 </div>
                                 <div class="calculator card" id="range_slider_section">
                                     <label>Choose Tenure</label>
@@ -135,9 +134,9 @@
                                         <div class="number">10</div>
                                         <div class="number">11</div>
                                         <div class="number">12</div>
-                                    </div> 
+                                    </div>
                                     <p>Price: <span id="show_price">{{number_format($product_detail->getStock[0]['price_1'], 2)}}/-</p>
-                                    <input type="hidden" name="month" id="month" value="1">
+                                     <input type="hidden" name="month" id="month" value="1">
                                      <input type="hidden" id="price" value="{{$product_detail->getStock[0]['price_1']}}">
                                 </div>
                             </div>

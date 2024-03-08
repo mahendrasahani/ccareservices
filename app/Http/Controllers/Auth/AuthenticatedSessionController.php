@@ -44,6 +44,7 @@ class AuthenticatedSessionController extends Controller
                         'option_value_id' => $cart[$index]['option_value_id'],
                         'month' => $cart[$index]['month'],
                         'price' => $cart[$index]['price'],
+                        'stock_id' => $cart[$index]['stock_id'],
                         'status' => 1
                     ]); 
                 }else{
@@ -55,6 +56,7 @@ class AuthenticatedSessionController extends Controller
                     'option_value_id' => $cart[$index]['option_value_id'],
                     'month' => $cart[$index]['month'],
                     'price' => $cart[$index]['price'],
+                    'stock_id' => $cart[$index]['stock_id'],
                     'status' => 1
                 ]); 
             }

@@ -36,28 +36,21 @@ slider.addEventListener('input', async function ()
     const product_id = document.getElementById("product_id").value;
     const option_value_id = document.querySelector('input[name="option_value"]:checked').value;
     const range_slider_section_color = document.getElementById('range_slider_section')
-
-    try
-    {
+    try{
         const response = await fetch(`${baseUrl}/single-product/get-month-price?product_id=${product_id}&option_value_id=${option_value_id}`);
-        if (!response.ok)
-        {
+        if (!response.ok){
             throw new Error('Network response was not ok');
         }
-
         const responseData = await response.json();
         let price;
-
-        switch (month)
-        {
+        switch (month){
             case 1:
                 slider.disabled = true;
                 range_slider_section_color.style.filter = 'blur(1px)'; 
                 range_slider_section_color.style.color = '#deecfc'; 
                 price = responseData.data.price_1; 
                 slider.disabled = false;
-                setTimeout(() =>
-                {
+                setTimeout(() =>{
                     slider.disabled = false;
                     range_slider_section_color.style.filter = 'blur(0px)';  
                 }, 700);
@@ -203,65 +196,7 @@ slider.addEventListener('input', async function ()
     }
 });
 
-
-
-        // $.ajax({
-        //     url: baseUrl+"/single-product/get-month-price",
-        //     type: "GET", 
-        //     data: {"product_id": product_id, "option_value_id": option_value_id},
-        //     success: function(response) {
-        //         if(month == 1){
-        //             $('#price').val(response.data.price_1); 
-        //             $('#month').val(1); 
-        //             document.getElementById('show_price').innerHTML = response.data.price_1; 
-        //         }else if(month == 2){
-        //             $('#price').val(response.data.price_2);
-        //             $('#month').val(2); 
-        //             document.getElementById('show_price').innerHTML = response.data.price_2;
-        //         }else if(month == 3){
-        //             $('#price').val(response.data.price_3); 
-        //             $('#month').val(3); 
-        //             document.getElementById('show_price').innerHTML = response.data.price_3;
-        //         }else if(month == 4){
-        //             $('#price').val(response.data.price_4); 
-        //             $('#month').val(4); 
-        //             document.getElementById('show_price').innerHTML = response.data.price_4;
-        //         }else if(month == 5){
-        //             $('#price').val(response.data.price_5); 
-        //             $('#month').val(5); 
-        //             document.getElementById('show_price').innerHTML = response.data.price_5;
-        //         }else if(month == 6){
-        //             $('#price').val(response.data.price_6); 
-        //             $('#month').val(6); 
-        //             document.getElementById('show_price').innerHTML = response.data.price_6;
-        //         }else if(month == 7){
-        //             $('#price').val(response.data.price_7); 
-        //             $('#month').val(7); 
-        //         document.getElementById('show_price').innerHTML = response.data.price_7;
-        //         }else if(month == 8){
-        //             $('#price').val(response.data.price_8); 
-        //             $('#month').val(8); 
-        //             document.getElementById('show_price').innerHTML = response.data.price_8;
-        //         }else if(month == 9){
-        //             $('#price').val(response.data.price_9); 
-        //             $('#month').val(9); 
-        //             document.getElementById('show_price').innerHTML = response.data.price_9;
-        //         }else if(month == 10){
-        //             $('#price').val(response.data.price_10); 
-        //             $('#month').val(10); 
-        //             document.getElementById('show_price').innerHTML = response.data.price_10;
-        //         }else if(month == 11){
-        //             $('#price').val(response.data.price_11); 
-        //             $('#month').val(11); 
-        //             document.getElementById('show_price').innerHTML = response.data.price_11;
-        //         }else if(month == 12){
-        //             $('#price').val(response.data.price_12); 
-        //             $('#month').val(12); 
-        //             document.getElementById('show_price').innerHTML = response.data.price_12;
-        //         } 
-        //     }
-        // });  
-        // }); 
+ 
 // ------------------------------- update month slider ------------------------------------
 
 // ------------------------------- datepicker ---------------------------------------
@@ -333,6 +268,8 @@ $(document).on('click', '#add_to_cart_btn', function(){
     let option_value_id = document.querySelector('input[name="option_value"]:checked').value;
     let month = $('#month').val(); 
     let price = $('#price').val();  
+    let stock_id = document.querySelector('input[name="option_value"]:checked').getAttribute('data-stock-id'); 
+    console.log(stock_id);
     $("#quantity_error").html("");
     $("#date_error").html("");
     
@@ -359,6 +296,7 @@ $(document).on('click', '#add_to_cart_btn', function(){
                         'option_value_id':option_value_id,
                         'month':month,
                         'price':price,
+                        'stock_id':stock_id,
                         'authentication': response.authentication
                     },
                     success:function(response){
@@ -368,14 +306,12 @@ $(document).on('click', '#add_to_cart_btn', function(){
                         let update_btn_text = $('#add_to_cart_btn'); 
                         update_btn_text.html("Added"); 
                         update_btn_text.addClass("add_to_cart_btn_success");
-                        
                         // Show SweetAlert
                         Swal.fire({
                             icon: 'success',
                             title: 'Added to Cart',
                             text: 'The item has been successfully added to your cart.',
-                        });
-                        
+                        }); 
                     }
                  });
         }
@@ -386,11 +322,16 @@ $(document).on('click', '#add_to_cart_btn', function(){
 async function updateCart() {
     try {
         let product_id = document.getElementById("product_id").value;
-
         const response = await fetch(baseUrl + "/verify-user");
         const userData = await response.json();
-
         if (userData.authentication === true) {
+            const productResponse = await fetch(baseUrl + "/check-product-in-cart?product_id=" + product_id);
+            const productData = await productResponse.json();
+            if (productData.product_status === "already_exist") {
+                document.getElementById('add_to_cart_btn').innerHTML = 'Update Cart';
+                document.getElementById('add_to_cart_btn').classList.remove("add_to_cart_btn_success");
+            }
+        } else {
             const productResponse = await fetch(baseUrl + "/check-product-in-cart?product_id=" + product_id);
             const productData = await productResponse.json();
 
@@ -398,8 +339,7 @@ async function updateCart() {
                 document.getElementById('add_to_cart_btn').innerHTML = 'Update Cart';
                 document.getElementById('add_to_cart_btn').classList.remove("add_to_cart_btn_success");
             }
-        } else {
-            console.log('logged out');
+            console.log("loggedout")
         }
     } catch (error) {
         console.error('Error:', error);
@@ -450,8 +390,8 @@ $(document).on("change", "#quantity", async function ()
 });
 $(document).on("change", "#option_value_radio", async function ()
 {
-    await updateCart();
     await checkStock();
+    await updateCart();
 });
 $(document).on("change", "#range_slider_section", async function ()
 {

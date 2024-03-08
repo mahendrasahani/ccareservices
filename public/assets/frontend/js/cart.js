@@ -3,7 +3,6 @@ $(document).ready(async function(){
     let product_id = $('#product_id').val(); 
     let updateCartOnLoad = await fetch(baseUrl+"/update-cart-on-load");
     const response = await updateCartOnLoad.json();
-    
         if(response.data == ''){
             $('#cartItemCount').html('0');
             $('#add_to_cart_btn').html('Add to cart');
@@ -28,7 +27,7 @@ $(document).ready(async function(){
                     found = true;   
                 }
             });
-            if (!found) { 
+            if (!found){ 
                 $('#add_to_cart_btn').html('Add to cart'); 
             }
         }
@@ -49,18 +48,18 @@ async function getDecryptId(encryptId) {
 }
 
 
-    $(document).on("click", "#remove_cart_item", async function(){
+$(document).on("click", "#remove_cart_item", async function(){
     let p_id = $(this).data("product_id"); 
     try{
         let product_remove = await fetch(baseUrl+"/remove-from-cart?product_id="+p_id);
         const response = await product_remove.json();
         var closestTr = $(this).closest("tr");
         closestTr.remove();
-        console.log(response.cart_item);
+        console.log(response);
         $('#cartItemCount').html(response.cart_item); 
     }catch(error){
         console.log("Error: " + error);
     } 
-    })
+})
  
 

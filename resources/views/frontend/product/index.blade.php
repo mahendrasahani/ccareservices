@@ -20,8 +20,7 @@
                 <nav aria-label="breadcrumb" style="margin: 0 auto;">
                     <ol class="breadcrumb d-flex justify-content-center">
                         <li class="breadcrumb-item"><a href="#" class="text-white">Home</a></li>
-                        <li class="breadcrumb-item active pt-1" aria-current="page"
-                            style="color: #01b7e0; font-size: 14px;">Categories</li>
+                        <li class="breadcrumb-item active pt-1" aria-current="page" style="color: #01b7e0; font-size: 14px;">Categories</li>
                     </ol>
                 </nav>
             </div>
@@ -133,7 +132,7 @@
                                 @endif 
                                 <p class="" style="font-size: 11px; color: gray;">{!! Str::limit($product->product_description, 40) !!}</p>
                                 <hr> 
-                                <a href="{{route('frontend.product.single_product', [$main_category, $sub_category, $product->slug])}}" class="animate-btx btn btn-warning animation">View More</a>
+                                <a href="{{route('frontend.product.single_product', [$product->slug])}}" class="animate-btx btn btn-warning animation">View More</a>
                             </div>
                         </div>
                     </div>

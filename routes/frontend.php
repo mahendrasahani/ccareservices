@@ -15,9 +15,6 @@ Route::get('/', [HomeController::class, 'homePageView'])->name('frontend.home.vi
 Route::get('/cart', [CartController::class, 'showCart'])->name('frontend.show.cart');
 // ------------------------ Cart page route (end) --------------------------------------------------------
 
-// ------------------------ Checkout page route (end) --------------------------------------------------------
-Route::get('/checkout', [CheckoutController::class, 'checkoutPageView'])->name('frontend.checkout.view');
-// ------------------------ Checkout page route (end) --------------------------------------------------------
 
 // ------------------------ All Pages route (end) --------------------------------------------------------
 Route::get('/about-us', [PageController::class, 'aboutPageView'])->name('frontend.about.view');
@@ -27,8 +24,6 @@ Route::get('/contact-us', [PageController::class, 'contactUsPageView'])->name('f
 // Route::get('/product', [PageController::class, 'viewProductPageView'])->name('frontend.view_product.view');
 Route::get('/single-product', [PageController::class, 'viewSingleProductView'])->name('frontend.single_product.view');
 // ------------------------ All Pages route (end) --------------------------------------------------------
-
-
 
 // -------------------------After user login (start) ------------------------------------------------------------
 Route::middleware(['auth', 'user_check'])->group(function () {
@@ -40,12 +35,10 @@ Route::middleware(['auth', 'user_check'])->group(function () {
 });
 // -------------------------After user login (end) ------------------------------------------------------------
 
-
 // -------------------------product page (start) ------------------------------------------------------------
 Route::get('/category/{main_category}/{sub_category?}', [ProductController::class, 'productListFrontView'])->name('frontend.product.product_list');
-Route::get('/category/{main_category?}/{sub_category?}/{product_slug}', [ProductController::class, 'singleProductFrontView'])->name('frontend.product.single_product');
+Route::get('/product/{product_slug}', [ProductController::class, 'singleProductFrontView'])->name('frontend.product.single_product');
 // -------------------------product page (end) --------------------------------------------------------------
-
 
 // -------------------------single product page (start) --------------------------------------------------------------
 Route::get('/single-product/get-month-price', [ProductController::class, 'getMonthPrice'])->name('frontend.product.single_product.get_month_price');
@@ -61,3 +54,15 @@ Route::get('/check-stock', [ProductController::class, 'checkStock'])->name('chec
 Route::get('/remove-from-cart', [ProductController::class, 'removeFromCart'])->name('remove_from_cart');
 Route::get('/testing-flush-cart', [CartController::class, 'testingFlushCart'])->name('testing_flush_cart');
 // -------------------------add to cart page (end) --------------------------------------------------------------
+
+
+Route::middleware(['auth'])->group(function () {
+// -------------------------After Both User and Admin login (start) --------------------------------------------------------------
+
+    // ------------------------ Checkout page route (end) ---------------------------------------------------------------------
+       Route::get('/checkout', [CheckoutController::class, 'checkoutPageView'])->name('frontend.checkout.view');
+       Route::get('/checkout-product-list', [ProductController::class, 'productToCheckout'])->name('frontend.checkout.product_list');
+    // ------------------------ Checkout page route (end) ----------------------------------------------------------------------
+
+// -------------------------After Both User and Admin login (end) --------------------------------------------------------------
+});

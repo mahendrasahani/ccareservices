@@ -38,8 +38,7 @@
                     </a>
                     <a href="{{route('frontend.contact_us.view')}}" class="text-decoration-none text-white">
                         <li class="pt-2">Contact Us</li>
-                    </a>
-
+                    </a> 
                 </ul>
             </div>
             <div class="col-md-3">
@@ -53,18 +52,14 @@
                     </a>
                     <a href="" class="text-decoration-none text-white">
                         <li class="pt-2">Returns</li>
-                    </a>
-
+                    </a> 
                 </ul>
             </div>
             <div class="col-md-3">
-                <h6 class="fw-bold  text-white">Need Help
-
-                </h6>
+                <h6 class="fw-bold  text-white">Need Help</h6>
                 <a href="index.html" class="text-decoration-none"><img
                         src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}" class="w-50"></a>
-                <ul class="list-inline hover-animate">
-
+                <ul class="list-inline hover-animate"> 
                     <a href="tel:+9198264525856" class="text-decoration-none text-white ">
                         <li class="pt-2"><i class="fa-solid fa-phone"></i>&nbsp +91 7291917070</li>
                     </a>
@@ -73,9 +68,7 @@
                     </a>
                     <a href="mailto:testing12@gmail.com" class="text-decoration-none text-white">
                         <li class="pt-2"><i class="fa-solid fa-location-dot"></i>&nbsp View on map</li>
-                    </a>
-
-
+                    </a> 
                 </ul>
                 <div class="d-flex list-inline" id="social-media">
                     <a href="https://www.facebook.com/coolcareservicegurgaon/" class="text-decoration-none text-white">
@@ -123,9 +116,7 @@
         <span class="text-white" style="font-size: 13px;"> Powered by</span>
         <a href="https://www.ddtsoftwareandecommerce.com/" class="text-decoration-none" target="_blank"
             style="font-size: 13px; color: rgb(255, 255, 255); ">DDT Software & E-comm Pvt Ltd</a>
-    </div>
-
-    <!-- wpp-btn-mobile -->
+    </div> 
     <div class="phone-call cbh-phone cbh-green cbh-show  cbh-static" id="clbh_phone_div">
         <a id="WhatsApp-button" href="https://wa.me/+919716016098" target="_blank" class="phoneJs"
             title="WhatsApp 360imagem">
@@ -133,15 +124,9 @@
             <div class="cbh-ph-circle-fill"></div>
             <div class="cbh-ph-img-circle1"></div>
         </a>
-    </div>
-    <!-- wpp-btn-mobile -->
-</section>
-<!-- end footer start-->
-<a id="back-top" class="text-decoration-none"></a>
-
-<!-- Option 1: Bootstrap Bundle with Popper -->
- 
-
+    </div> 
+</section> 
+<a id="back-top" class="text-decoration-none"></a> 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
@@ -152,177 +137,8 @@
 <script src="{{url('public/assets/backend/js/backend_custom.js')}}"></script>
 <script src="{{url('public/assets/frontend/js/cart.js')}}"></script>
 <script src="{{url('public/assets/frontend/js/single_product.js')}}"></script>
+<script src="{{url('public/assets/both/js/checkout.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-
-<script>
-    $(document).ready(function ()
-    {
-        // Toggle search bar visibility
-        $("#toggleSearch").click(function ()
-        {
-            $(".search-bar-open").slideToggle();
-        });
-    });
-</script>
-<script>
-    $(document).ready(function () {
-        $('#show-hidden-menu').click(function (e) {
-            e.preventDefault(); // Prevent the default behavior of the anchor link
-            $('#hiddenContent').slideToggle('slow');
-            $('#arrow-icon i').toggleClass('fa-arrow-down fa-arrow-up'); 
-            
-            // Toggle button text
-            var buttonText = $('#show-hidden-menu').text().trim();
-            $('#show-hidden-menu').text(buttonText === 'View More' ? 'View Less' : 'View More');
-        });
-    });
-</script>
-<script>
-    $(document).ready(function ()
-    {
-        var navbar = $(".navbar");
-
-        $(window).scroll(function ()
-        {
-            if ($(window).scrollTop() >= 100)
-            {
-                navbar.addClass("scrolled");
-            } else
-            {
-                navbar.removeClass("scrolled");
-            }
-        });
-    });
-</script>
-<script>
-    $(document).ready(function ()
-    {
-        $('#owl-carousel').owlCarousel({
-            items: 3,
-            loop: true,
-            margin: 10,
-            nav: true,
-            navText: false,
-            autoplay: true,
-            autoplayTimeout: 3000,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 1
-                }
-            }
-        });
-    });
-</script>
-<script>
-    $(document).ready(function ()
-    {
-        $("#my-unique-carousel").owlCarousel({
-            items: 3,
-            loop: true,
-            margin: 30,
-            autoplay: true,
-            autoplayTimeout: 3000,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 4
-                },
-                1000: {
-                    items: 4
-                }
-            }
-        });
-    });
-</script>
-<script>
-    $(document).ready(function ()
-    {
-        $("#brand-slider").owlCarousel({
-            items: 3,
-            loop: true,
-            margin: 30,
-            autoplay: true,
-            slideTransition: 'linear',
-            autoplayTimeout: 2000, // Adjust this value for slower motion
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 4
-                },
-                1000: {
-                    items: 5
-                }
-            }
-        });
-    });
-</script>
-<script>
-    $(document).ready(function ()
-    {
-        $(".icon").on("click", function (e)
-        {
-            e.preventDefault();
-            $(this).toggleClass("selected");
-        })
-    });
-</script>
-<script>
-    $(document).ready(function ()
-    {
-        // Hide the element with the ID "myElement" when the button with ID "closeButton" is clicked
-        $('#closeButton').click(function ()
-        {
-            $('#myElement').hide();
-        });
-    });
-</script>
-<script>
-    var btn = $('#back-top');
-
-    $(window).scroll(function ()
-    {
-        if ($(window).scrollTop() > 300)
-        {
-            btn.addClass('show');
-        } else
-        {
-            btn.removeClass('show');
-        }
-    });
-
-    btn.on('click', function (e)
-    {
-        e.preventDefault();
-        $('html, body').animate({ scrollTop: 0 }, '300');
-    }); 
-</script>
-<script>
-    function setActiveClassByUrl(){
-      var currentUrl = window.location.href;
-    var links = document.querySelectorAll('.sidebar-menu ul li a');
-
-    links.forEach(function (link){
-        if (link.href === currentUrl){
-        link.parentElement.classList.add('active');
-        }else{
-        link.parentElement.classList.remove('active');
-        }
-      });
-    } 
-setActiveClassByUrl();
-</script>
 @yield('javascript-section')
 </body>
 

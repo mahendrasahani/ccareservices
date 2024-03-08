@@ -112,9 +112,13 @@
                                 <li><a class="dropdown-item fw-bold" href="{{route('login')}}"
                                         style=" color: #01316b;">Login</a></li>
                                 @else
+                                @if(Auth::user()->user_type == 1)
+                                <li><a class="dropdown-item fw-bold" href="{{route('backend.admin.dashboard.view')}}" style=" color: #01316b;">Admin Dashboard</a></li>
+                                <li>
+                                @endif
                                 <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}"
                                         style=" color: #01316b;">Dashboard</a></li>
-                                <li>
+                                <li> 
                                     <form action="{{route('logout')}}" method="POST">
                                         @csrf
                                         <button type="submit" class="p-2  dropdown-item fw-bold"

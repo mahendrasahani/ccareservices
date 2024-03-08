@@ -14,6 +14,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Models\Backend\Product;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
  
 use Str;
 
@@ -173,8 +174,7 @@ class ProductController extends Controller
         //     'status' => 1, 
         //  ]);
 
-        foreach($request->option_qty as $index => $qty)
-        {
+    foreach($request->option_qty as $index => $qty){
         Stock::create([
             'product_id' => $newProductId,
             'attribute_id' => $request->product_option_name,
@@ -460,12 +460,11 @@ class ProductController extends Controller
             return view('frontend.product.index', compact('product_list', 'main_category', 'sub_category')); 
         }
 
-        public function singleProductFrontView($main_category, $sub_category, $slug){
-            $product_detail = Product::where('slug', $slug)->with('getStock')->first(); 
+        public function singleProductFrontView($slug){
+            $product_detail = Product::where('slug', $slug)->with('getStock')->first();  
             $option_id = $product_detail->getStock[0]->attribute_id;
             $option_name = Attribute::where('id', $option_id)->first()->name; 
-            return view('frontend.product.single_product', compact('product_detail', 'main_category',
-             'sub_category', 'option_name'));
+            return view('frontend.product.single_product', compact('product_detail', 'option_name'));
         }
 
 
@@ -535,15 +534,48 @@ class ProductController extends Controller
 
 
         function removeFromCart(Request $request){
-            $product_id = $request->product_id;
-            $remove_product = Cart::where('product_id', $product_id)->where('user_id', Auth::user()->id)->delete();
-            $cart_item = Cart::where('user_id', Auth::user()->id)->count(); 
-            if($remove_product){
+            $product_id = $request->product_id; 
+            if(Auth::check()){
+                $remove_product = Cart::where('product_id', $product_id)->where('user_id', Auth::user()->id)->delete();
+                $cart_item = Cart::where('user_id', Auth::user()->id)->count(); 
+                if($remove_product){
+                return response()->json([
+                    "status" => 200,
+                    "message" => "removed",
+                    "cart_item" => $cart_item
+                ]);
+            }
+            }else{
+                $cart = session()->get('cart'); 
+                foreach ($cart as $key => $item) {
+                    if ($item['product_id'] == $product_id) {
+                        unset($cart[$key]);
+                        break;
+                    }
+                }
+                $cart = array_values($cart);
+                session()->put('cart', $cart);
+                return response()->json([
+                    "status" => 200,
+                    "message" => "removed",
+                    "cart_item" => count($cart),
+                    'product_id' => $product_id
+                ]);
+                
+
+            } 
+        }
+
+
+    public function productToCheckout(){
+    $user_id = Auth::user()->id;
+    $cart_item = Cart::with(['getProduct:id,product_name','getStock'])->where('user_id', $user_id)->get(); 
+
             return response()->json([
-                "status" => 200,
-                "message" => "removed",
-                "cart_item" => $cart_item
-            ]);
-        }
-        }
+                "data"=>$cart_item
+            ]); 
+    }
+
+
+
 }
