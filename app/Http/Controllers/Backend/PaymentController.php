@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function paymentMethodShow(){
-        return view('frontend.account.payment_method');
-    }
+ 
+     
 }
+ 

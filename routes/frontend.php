@@ -65,8 +65,11 @@ Route::middleware(['auth'])->group(function () {
        Route::get('/checkout-product-list', [ProductController::class, 'productToCheckout'])->name('frontend.checkout.product_list');
 
        Route::post('/submit_checkout_address', [CheckoutController::class, 'submitCheckoutAddress'])->name('submit_checkout_address');
-       Route::get('/payment-method', [PaymentController::class, 'paymentMethodShow'])->name('payment_method');
+       Route::post('/payment-method', [PaymentController::class, 'paymentMethodShow'])->name('payment_method');
+ 
     // ------------------------ Checkout page route (end) ----------------------------------------------------------------------
+
+
 
 // -------------------------After Both User and Admin login (end) --------------------------------------------------------------
 });

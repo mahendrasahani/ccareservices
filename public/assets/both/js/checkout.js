@@ -67,6 +67,8 @@ $(async function () {
     $('input[name="shipping_rate"]').change(async function() {
       await updateCheckoutPage(); 
   });
+
+ 
   
 async function submitOrderDetails(){ 
   $("#error_shipping_full_name").html("");
@@ -193,13 +195,11 @@ async function submitOrderDetails(){
          'b_country':b_country,
       })
     }); 
-      let response = await submitPostCheckout.json(); 
-      console.log(response);
+      let response = await submitPostCheckout.json();  
     }catch(error){
       console.log("Error: "+ error);
-    } 
-} 
+    }
+}
     $(document).on("click", "#submit_order_detail", submitOrderDetails);
-  
 });
 
