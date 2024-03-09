@@ -1,8 +1,7 @@
 @extends('layouts/frontend/main')
 @section('main-section')
-
-<style>
-        .hh-grayBox {
+ <style>
+            .hh-grayBox {
         background-color: #F8F8F8;
         margin-bottom: 20px;
         padding: 35px;
@@ -99,7 +98,7 @@
     .order-tracking.completed:before {
         background-color: #27aa80;
     }
-</style>
+ </style>
 
 <section class="dahboard-wrapper">
     <div class="container">
