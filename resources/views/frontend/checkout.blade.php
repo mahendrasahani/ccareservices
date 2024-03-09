@@ -141,7 +141,7 @@
                   </tbody>
               </table>
 
-              <table>
+              <table class="table aiz-table mb-0 footable footable-1 breakpoint-lg">
                 <tbody>
                   <tr>
                     <td>Subtotal</td>
@@ -150,13 +150,13 @@
                   <tr>
                     <td>Shipping</td>
                     <td style="text-align: end">
-                      <div class="form-check">
-                        <input type="radio" class="form-check-input" id="flat_rate" name="shipping_rate" value="0" checked>Flat rate Rs 50/-
-                        <label class="form-check-label" for="radio1"></label>
+                      <div class="form_check_checkout">
+                        <input type="radio" class="form-check-input" id="flat_rate" name="shipping_rate" value="0" checked> 
+                        <label class="form-check-label mx-2" for="radio1">Flat rate Rs 50/-</label>
                       </div>
-                      <div class="form-check">
-                        <input type="radio" class="form-check-input" id="free_shipping" name="shipping_rate" value="1">Free shipping
-                        <label class="form-check-label" for="radio2"></label>
+                      <div class="form_check_checkout">
+                        <input type="radio" class="form-check-input" id="free_shipping" name="shipping_rate" value="1">
+                        <label class="form-check-label mx-2" for="radio2">Free shipping</label>
                       </div>
                     </td>
                   </tr>
@@ -165,50 +165,8 @@
                     <td style="text-align: end" id="final_amount_total"></td>
                   </tr>
                   </tbody>
-              </table>
-
-              <table>
-                <tbody>
-                  <tr> 
-                    <td>
-                      <!-- Payment Method -->
-                      <h5 class="mb-3">Payment Method</h5>
-                      <div class="mb-3">
-                        <label class="form-label">Select Payment Method</label>
-                        <div class="form-check">
-                          <input type="radio" class="form-check-input paymentMethod" id="creditCard"
-                            name="paymentMethod" value="creditCard">
-                          <label class="form-check-label" for="creditCard" style="margin-left: 14px;">Razorpay</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="radio" class="form-check-input paymentMethod" id="cashOnDelivery"
-                            name="paymentMethod" value="cashOnDelivery" checked>
-                          <label class="form-check-label" for="cashOnDelivery" style="margin-left: 14px;">Cash on
-                            Delivery (COD)</label>
-                        </div> 
-                      </div> 
-                      <div id="creditCardInfo" style="display: none;">
-                        <h5 class="mb-3">Razorpay Information</h5>
-                        <div class="mb-3">
-                          <label for="cardNumber" class="form-label">ID</label>
-                          <input type="text" class="form-control" id="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX">
-                        </div>
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <label for="expiryDate" class="form-label">Expiry Date</label>
-                            <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY">
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <label for="cvv" class="form-label">CVV</label>
-                            <input type="text" class="form-control" id="cvv" placeholder="123">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  </tbody>
-            </table>
-            <button type="submit" class="btn btn-success" id="submit_order_detail">Place Order</button>
+              </table> 
+               <div class="text-end mt-2"><button type="submit" class="btn btn-success" id="submit_order_detail">Place Order</button></div> 
             </form>
           </div>
         </div> 

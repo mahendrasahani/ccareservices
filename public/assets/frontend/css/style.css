@@ -22,6 +22,12 @@ body {
   padding: 2px 31px;
   font-size: 12px;
 }
+.form_check_checkout {
+    align-items: center;
+    display: flex;
+    justify-content: end;
+}
+
 
 #closeButton i.fa-solid.fa-x {
   font-size: 8px !important;
