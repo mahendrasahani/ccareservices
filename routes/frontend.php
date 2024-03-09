@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Backend\PaymentController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
@@ -62,6 +63,9 @@ Route::middleware(['auth'])->group(function () {
     // ------------------------ Checkout page route (end) ---------------------------------------------------------------------
        Route::get('/checkout', [CheckoutController::class, 'checkoutPageView'])->name('frontend.checkout.view');
        Route::get('/checkout-product-list', [ProductController::class, 'productToCheckout'])->name('frontend.checkout.product_list');
+
+       Route::post('/submit_checkout_address', [CheckoutController::class, 'submitCheckoutAddress'])->name('submit_checkout_address');
+       Route::get('/payment-method', [PaymentController::class, 'paymentMethodShow'])->name('payment_method');
     // ------------------------ Checkout page route (end) ----------------------------------------------------------------------
 
 // -------------------------After Both User and Admin login (end) --------------------------------------------------------------

@@ -27,34 +27,46 @@
             <h4>Checkout</h4>
           </div>
           <div class="card-body">
-            <h5 class="mb-3">Billing details</h5>
+            <h5 class="mb-3">Shipping details</h5>
             <form>
+              @csrf
               <div class="mb-3">
                 <label for="forName">Full Name<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" placeholder="Enter your full name" id="billing_full_name" name="billing_full_name" required>
+                <input type="text" class="form-control" placeholder="Enter your full name" id="shipping_full_name" name="shipping_full_name" value="{{$shipping_address->name ?? ''}}" required>
+                <p class="input_error" id="error_shipping_full_name"></p>
               </div>
               <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="billing_email" name="billing_email" placeholder="Enter your email" required>
+                <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="shipping_email" name="shipping_email" placeholder="Enter your email" value="{{$shipping_address->email ?? ''}}" required>
+                <p class="input_error" id="error_shipping_email"></p>
               </div>
               <div class="mb-3">
-                <label for="region" class="form-label">Country / Region </label>
-                <select class="form-control aiz-selectpicker" name="billing_country" id="billing_country">
+                <label for="email" class="form-label">Phone<span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="shipping_phone" name="shipping_phone" placeholder="Enter your phone" value="{{$shipping_address->phone ?? ''}}" required>
+                <p class="input_error" id="error_shipping_phone"></p>
+              </div>
+              <div class="mb-3">
+                <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="shipping_address" name="shipping_address" placeholder="Enter full address" value="{{$shipping_address->address ?? ''}}" required>
+                <p class="input_error" id="error_shipping_address"></p>
+              </div>
+              <div class="mb-3">
+                <label for="city" class="form-label">City<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="shipping_city" name="shipping_city" placeholder="Enter City" value="{{$shipping_address->city ?? ''}}" required>
+                <p class="input_error" id="error_shipping_city"></p>
+              </div>
+              <div class="mb-3">
+                <label for="zipCode" class="form-label">Zip Code<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="shipping_zip_code" name="shipping_zip_code" placeholder="Enter Zip Code" value="{{$shipping_address->zip_code ?? ''}}" required>
+                <p class="input_error" id="error_shipping_zip_code"></p>
+              </div> 
+              <div class="mb-3">
+                <label for="region" class="form-label">Country / Region<span class="text-danger">*</span></label>
+                <select class="form-control aiz-selectpicker" name="shipping_country" id="shipping_country">
                   <option value="India" selected>India</option> 
                 </select> 
-              </div> 
-              <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="billing_address" name="billing_address" placeholder="Enter full address" required>
-              </div>
-              <div class="mb-3">
-                <label for="city" class="form-label">City</label>
-                <input type="text" class="form-control" id="billing_city" name="billing_city" placeholder="Enter City" required>
-              </div>
-              <div class="mb-3">
-                <label for="zipCode" class="form-label">Zip Code</label>
-                <input type="text" class="form-control" id="billing_zip_code" name="billing_zip_code" placeholder="Enter Zip Code" required>
-              </div> 
+                <p class="input_error" id="error_shipping_country"></p>
+              </div>  
             </form>
           </div>
         </div>
@@ -63,38 +75,49 @@
           <div class="card-header d-flex">
             <div class="aiz-checkbox-inline" data-id="one">
               <label class="aiz-checkbox">
-                <input type="checkbox" id="toggleButton"> 
+                <input type="checkbox" id="addressToggle" > 
               </label>
             </div>
-            <h3 class="h5" style="margin-left: 13px;">Ship to a different address?</h3>
+            <h3 class="h5" style="margin-left: 13px;">Billing address is different?</h3>
           </div>
           <div class="card-body" id="content" style="display: none;">
           <form>
               <div class="mb-3">
                 <label for="forName">Full Name<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" placeholder="Enter your full name" name="shipping_full_name"  id="shipping_full_name" required>
+                <input type="text" class="form-control" placeholder="Enter your full name" name="billing_full_name" value="{{$billing_address->name ?? ''}}"  id="billing_full_name" required>
+                <p class="input_error" id="error_billing_full_name"></p>
               </div>
               <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="shipping_email" name="shipping_email" placeholder="Enter your email" required>
+                <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="billing_email" name="billing_email" placeholder="Enter your email" value="{{$billing_address->email ?? ''}}" required>
+                <p class="input_error" id="error_billing_email"></p>
               </div>
               <div class="mb-3">
-                <label for="region" class="form-label">Country / Region </label>
-                <select class="form-control aiz-selectpicker" name="shipping_country" id="shipping_country">
-                  <option value="India" selected>India</option> 
-                </select> 
+                <label for="" class="form-label">Phone<span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="billing_phone" name="billing_phone" placeholder="Enter your phone" value="{{$billing_address->phone ?? ''}}" required>
+                <p class="input_error" id="error_billing_phone"></p>
+              </div>
+              <div class="mb-3">
+                <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="billing_address" name="billing_address" placeholder="Enter full address" value="{{$billing_address->address ?? ''}}" required>
+                <p class="input_error" id="error_billing_address"></p>
+              </div>
+              <div class="mb-3">
+                <label for="city" class="form-label">City<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="billing_city" name="billing_city" placeholder="Enter City" value="{{$billing_address->city ?? ''}}" required>
+                <p class="input_error" id="error_billing_city"></p>
+              </div>
+              <div class="mb-3">
+                <label for="zipCode" class="form-label">Zip Code<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="billing_zip_code" name="billing_zip_code" placeholder="Enter Zip Code" value="{{$billing_address->zip_code ?? ''}}" required>
+                <p class="input_error" id="error_billing_zip_code"></p>
               </div> 
               <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="shipping_address" name="shipping_address" placeholder="Enter full address" required>
-              </div>
-              <div class="mb-3">
-                <label for="city" class="form-label">City</label>
-                <input type="text" class="form-control" id="shipping_city" name="shipping_city" placeholder="Enter City" required>
-              </div>
-              <div class="mb-3">
-                <label for="zipCode" class="form-label">Zip Code</label>
-                <input type="text" class="form-control" id="shipping_zip_code" name="shipping_zip_code" placeholder="Enter Zip Code" required>
+                <label for="region" class="form-label">Country / Region <span class="text-danger">*</span></label>
+                <select class="form-control aiz-selectpicker" name="billing_country" id="billing_country">
+                  <option value="India" selected>India</option> 
+                </select> 
+                <p class="input_error" id="error_billing_country"></p>
               </div> 
             </form>
           </div>
@@ -114,28 +137,7 @@
                     <th style="text-align: end">Subtotal</th>
                   </tr>
                 </thead>
-                <tbody class="order-paymnent" id="product_on_checkout">
-                  <tr>
-                    <td class="footable-first-visible">
-                      <a href="single-product.html" target="_blank" class="product-name-default">2 Ton Window Ac On Rent</a>
-                      <strong>× 1</strong>
-                    </td>
-                    <td style="text-align: end">₹3,300.00</td>
-                  </tr>
-                  <tr>
-                    <td class="footable-first-visible">
-                      <a href="single-product.html" target="_blank" class="product-name-default">2 Ton Window Ac On Rent</a>
-                      <strong>× 1</strong>
-                    </td>
-                    <td style="text-align: end">₹3,300.00</td>
-                  </tr>
-                  <tr>
-                    <td class="footable-first-visible">
-                      <a href="single-product.html" target="_blank" class="product-name-default">2 Ton Window Ac On Rent</a>
-                      <strong>× 1</strong>
-                    </td>
-                    <td style="text-align: end">₹3,300.00</td>
-                  </tr>
+                <tbody class="order-paymnent" id="product_on_checkout"> 
                   </tbody>
               </table>
 
@@ -143,26 +145,24 @@
                 <tbody>
                   <tr>
                     <td>Subtotal</td>
-                    <td style="text-align: end">₹3,300.00</td>
+                    <td style="text-align: end" id="sub_total">₹</td>
                   </tr>
                   <tr>
                     <td>Shipping</td>
                     <td style="text-align: end">
                       <div class="form-check">
-                        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1"
-                          checked>Flat rate
+                        <input type="radio" class="form-check-input" id="flat_rate" name="shipping_rate" value="0" checked>Flat rate Rs 50/-
                         <label class="form-check-label" for="radio1"></label>
                       </div>
                       <div class="form-check">
-                        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Free
-                        shipping
+                        <input type="radio" class="form-check-input" id="free_shipping" name="shipping_rate" value="1">Free shipping
                         <label class="form-check-label" for="radio2"></label>
                       </div>
                     </td>
                   </tr>
                   <tr>
                     <td>Total</td>
-                    <td style="text-align: end"> ₹3,300.00</td>
+                    <td style="text-align: end" id="final_amount_total"></td>
                   </tr>
                   </tbody>
               </table>
@@ -207,12 +207,8 @@
                     </td>
                   </tr>
                   </tbody>
-</table>
-                    
-                      <button type="button" class="btn btn-checkout " style="background-color: #213854; border: none; color:#fff;">Place
-                        Order</button>
-                    
-
+            </table>
+            <button type="button" class="btn btn-success" id="submit_order_detail">Place Order</button>
             </form>
           </div>
         </div> 

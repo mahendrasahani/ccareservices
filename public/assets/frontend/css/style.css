@@ -1813,3 +1813,7 @@ button.swal2-confirm.swal2-styled{
 .order-paymnent td{
   text-align:left;
 }
+.input_error{
+  color:red;
+  font-weight:bold;
+}
