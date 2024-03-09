@@ -64,8 +64,9 @@ Route::middleware(['auth'])->group(function () {
        Route::get('/checkout', [CheckoutController::class, 'checkoutPageView'])->name('frontend.checkout.view');
        Route::get('/checkout-product-list', [ProductController::class, 'productToCheckout'])->name('frontend.checkout.product_list');
 
-       Route::post('/submit_checkout_address', [CheckoutController::class, 'submitCheckoutAddress'])->name('submit_checkout_address');
-       Route::post('/payment-method', [PaymentController::class, 'paymentMethodShow'])->name('payment_method');
+       Route::post('/payment-method', [CheckoutController::class, 'submitCheckoutAddress'])->name('submit_checkout_address');
+    //    Route::get('/payment-method', [PaymentController::class, 'paymentMethodShow'])->name('payment_method'); 
+       Route::get('/get-address-payment-detail', [PaymentController::class, 'getAddressDetail'])->name('get_address_payment_detail');
  
     // ------------------------ Checkout page route (end) ----------------------------------------------------------------------
 

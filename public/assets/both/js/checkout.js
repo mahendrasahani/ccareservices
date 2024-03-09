@@ -168,37 +168,40 @@ async function submitOrderDetails(){
             return false;
           }
     }
+
+
   //-------------- billing details validation (end) -----------------------
-  var csrf_token = $('input[name="_token"]').val();
-  try{
-     let submitPostCheckout = await fetch(baseUrl+"/submit_checkout_address", {
-      method:"POST",
-      headers:{
-          'Content-Type':'application/json',
-          'X-CSRF-Token':csrf_token
-      },
-      body:JSON.stringify({
-        's_name':s_name,
-         's_email':s_email,
-         's_phone':s_phone,
-         's_address':s_address,
-         's_city':s_city,
-         's_zip_code':s_zip_code,
-         's_country':s_country,
-         'both_address':$('#addressToggle').prop('checked'),
-         'b_name':b_name,
-         'b_email':b_email,
-         'b_phone':b_phone,
-         'b_address':b_address,
-         'b_city':b_city,
-         'b_zip_code':b_zip_code,
-         'b_country':b_country,
-      })
-    }); 
-      let response = await submitPostCheckout.json();  
-    }catch(error){
-      console.log("Error: "+ error);
-    }
+  // var csrf_token = $('input[name="_token"]').val();
+  // try{
+  //    let submitPostCheckout = await fetch(baseUrl+"/submit_checkout_address", {
+  //     method:"POST",
+  //     headers:{
+  //         'Content-Type':'application/json',
+  //         'X-CSRF-Token':csrf_token
+  //     },
+  //     body:JSON.stringify({
+  //       's_name':s_name,
+  //        's_email':s_email,
+  //        's_phone':s_phone,
+  //        's_address':s_address,
+  //        's_city':s_city,
+  //        's_zip_code':s_zip_code,
+  //        's_country':s_country,
+  //        'both_address':$('#addressToggle').prop('checked'),
+  //        'b_name':b_name,
+  //        'b_email':b_email,
+  //        'b_phone':b_phone,
+  //        'b_address':b_address,
+  //        'b_city':b_city,
+  //        'b_zip_code':b_zip_code,
+  //        'b_country':b_country,
+  //     })
+  //   }); 
+  //     let response = await submitPostCheckout.json(); 
+  //     window.open(baseUrl+'/payment-method');
+  //   }catch(error){
+  //     console.log("Error: "+ error);
+  //   }
 }
     $(document).on("click", "#submit_order_detail", submitOrderDetails);
 });

@@ -17,6 +17,7 @@ class CheckoutController extends Controller
     }
 
     public function submitCheckoutAddress(Request $request){
+       
        $s_name = $request->s_name;
        $s_email = $request->s_email;
        $s_phone = $request->s_phone;
@@ -104,11 +105,17 @@ class CheckoutController extends Controller
             }
             }
        }  
+       if ($request->method() == 'POST') {
+        return view('frontend.account.payment_method'); 
+       }else{
+        return redirect("404");
+       }
 
-        return response()->json([
-            "status" => 200,
-            "message" => "success",
-            "data" => "address_updated_successfully"
-        ]);
+        // return response()->json([
+        //     "status" => 200,
+        //     "message" => "success",
+        //     "data" => "address_updated_successfully"
+        // ]);
+
     }
 }

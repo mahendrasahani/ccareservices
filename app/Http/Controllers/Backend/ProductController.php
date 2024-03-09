@@ -566,7 +566,6 @@ class ProductController extends Controller
             } 
         }
 
-
     public function productToCheckout(){
     $user_id = Auth::user()->id;
     $cart_item = Cart::with(['getProduct:id,product_name','getStock'])->where('user_id', $user_id)->get(); 

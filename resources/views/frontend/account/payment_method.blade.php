@@ -23,75 +23,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8"> 
-             <table class="payment_method_table">
-                            <tbody>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>Kartik</td>
-                                </tr>
-                                <tr>
-                                <th>Shipping address</th>
-                                <td> C4B 331B jankpuri 2nd floor <br>NEW DELHI, <br>DELHI 110058</td> 
-                                </tr>
-                                <tr>
-                                <th>Billing address</th>
-                                <td> C4B 331B jankpuri 2nd floor <br>NEW DELHI, <br>DELHI 110058</td> 
-                                </tr>
-                                <tr>
-                                <th>Payment Method</th>
-                                <td> 
-                      <!-- Payment Method --> 
-                      <div class="mb-3"> 
-                          <div class="form-check">
-                              <input type="radio" class="form-check-input paymentMethod" id="cashOnDelivery"
-                              name="paymentMethod" value="cashOnDelivery" checked>
-                              <label class="form-check-label" for="cashOnDelivery" style="margin-left: 14px;">Cash on
-                                Delivery (COD)</label>
-                            </div> 
-                        </div> 
-                        <div class="form-check">
-                          <input type="radio" class="form-check-input paymentMethod" id="creditCard"
-                            name="paymentMethod" value="creditCard">
-                          <label class="form-check-label" for="creditCard" style="margin-left: 14px;">Razorpay</label>
-                        </div> 
-                    </td>
-                                </tr>
-                                 
-                            </tbody>
+             <table class="payment_method_table" id="payment_method_table">
+                             
                 </table>
             </div>
-            <div class="col-md-4 card justify-content-center"> 
-                                <div class="final-order-details">
-                                    <div class="single-order-final">
-                                        <p><b>Sub Total:</b></p>
-                                        <p><b>$224.10</b></p>
-                                    </div>
-                                </div>
-                                <div class="final-order-details">
-                                    <div class="single-order-final">
-                                        <p><b>Tax :</b></p>
-                                        <p><b>$224.10</b></p>
-                                    </div>
-                                </div>
-                                <div class="final-order-details">
-                                    <div class="single-order-final">
-                                        <p><b>Shipping Charge :</b></p>
-                                        <p><b>$224.10</b></p>
-                                    </div>
-                                </div>
-                                <div class="final-order-details">
-                                    <div class="single-order-final">
-                                        <p><b>Coupon discount :</b></p>
-                                        <p><b>$224.10</b></p>
-                                    </div>
-                                </div>
-                                <div class="final-order-details total-final">
-                                    <div class="single-order-final text-danger">
-                                        <p><b>Total :</b></p>
-                                        <p><b>$224.10</b></p>
-                                    </div> 
-                                </div> 
-                                <div class="text-center mt-2"><button type="button" class="btn btn-success text-center" id="submit_order_detail">Place Order</button></div>
+            <div class="col-md-4 card justify-content-center" id="payble_amount_detail"> 
+                               
             </div>
         </div>
     </div>
@@ -99,6 +36,6 @@
 
 
 @section('javascript-section')
- 
+<script src="{{url('public/assets/both/js/payment-page.js')}}"></script>
 @endsection
 @endsection
