@@ -56,18 +56,10 @@
         <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header" id="navToggle-header">
-            <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="{{url('public/assets/backend/images/logo.png')}}" alt=""> </b>
-                    <span class="logo-compact"><img src="{{url('public/assets/backend/logo.img/logo.png')}}" alt=""></span>
-                    <span class="brand-title">
-                        <img src="{{url('public/assets/backend/images/coolcarelogo-1.jpg')}}" alt="">
-                    </span>
-                </a>
-            </div>
+        <!-- <div class="nav-header" id="navToggle-header">
+            
 
-        </div>
+        </div> -->
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -183,6 +175,16 @@
             Sidebar start
         ***********************************-->
         <div class="nk-sidebar" id="nmk-sidebar">
+            <div class="brand-logo">
+                <a href="index.html">
+                    <b class="logo-abbr"><img src="{{url('public/assets/backend/images/logo.png')}}" alt=""> </b>
+                     
+                    <span class="brand-title">
+                        <img src="{{url('public/assets/backend/images/coolcarelogo-1.jpg')}}" alt="">
+                    </span>
+                </a>
+            </div>
+            <hr>
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
 

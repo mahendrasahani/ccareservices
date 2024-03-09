@@ -157,11 +157,7 @@ slider.addEventListener('input', async function ()
                 break;
             case 11:
                 slider.disabled = true;
-                 setTimeout(() =>
-                {
-                    slider.disabled = false;
-                    range_slider_section_color.style.filter = 'blur(0px)';  
-                }, 700);
+                range_slider_section_color.style.filter = 'blur(1px)';
                 price = responseData.data.price_11;
                 slider.disabled = false;
                 setTimeout(() =>
