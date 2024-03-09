@@ -43,14 +43,14 @@
                       <!-- Payment Method --> 
                       <div class="mb-3"> 
                           <div class="form-check">
-                              <input type="radio" class="form-check-input paymentMethod" id="cashOnDelivery"
+                              <input type="radio" class="form-check-input paymentMethod " id="cashOnDelivery"
                               name="paymentMethod" value="cashOnDelivery" checked>
                               <label class="form-check-label" for="cashOnDelivery" style="margin-left: 14px;">Cash on
                                 Delivery (COD)</label>
                             </div> 
                         </div> 
                         <div class="form-check">
-                          <input type="radio" class="form-check-input paymentMethod" id="creditCard"
+                          <input type="radio" class="form-check-input paymentMethod " id="creditCard"
                             name="paymentMethod" value="creditCard">
                           <label class="form-check-label" for="creditCard" style="margin-left: 14px;">Razorpay</label>
                         </div> 
