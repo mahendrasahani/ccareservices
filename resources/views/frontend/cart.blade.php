@@ -203,7 +203,14 @@
 </section>
 @else
 
-<h3>Your cart is empty</h3>
+<div class="container mt-5">
+  <div class="row">
+    <div class="card p-5">
+      <h3 class="text-center">Your cart is empty</h3>
+    </div> 
+  </div>
+</div>
+
 
 @endif
 @endsection
