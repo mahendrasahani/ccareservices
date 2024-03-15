@@ -65,7 +65,7 @@ async function paymentPage(){
         <p><b>${formatter.format(sub_total + parseInt(response.shipping_charge))}</b></p>
     </div> 
 </div> 
-<div class="text-center mt-2"><button type="submit" class="btn btn-success text-center" id="submit_order_detail">Place Order</button></div>`;
+<div class="text-end mt-2"><button type="submit" class="btn btn-success" id="submit_order_detail">Place Order</button></div>`;
 $("#payble_amount_detail").html(amount_detail);
 }
 await paymentPage(); 

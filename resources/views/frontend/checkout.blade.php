@@ -174,7 +174,7 @@
                   </tr>
                   </tbody>
               </table> 
-               <div class="text-end mt-2"><button type="submit" class="btn btn-success" id="submit_order_detail">Place Order</button></div> 
+               <div class="text-end mt-2"><button type="submit" class="btn btn-success" id="submit_order_detail">Order Now</button></div> 
             </form>
           </div>
         </div> 

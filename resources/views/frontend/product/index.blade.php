@@ -116,7 +116,7 @@
                     @foreach($product_list as $product)
                     <div class="col-md-3 all laptop" class="content" id="all">
                         <div class="card ">
-                            <div class="cart_img_wrap">
+                            <div class="cart_img_wrap mt-2">
                                 <a href="single-product.html"><img
                                         src="{{$product->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->product_images[0])}}"></a>
                             </div>
