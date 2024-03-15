@@ -1,29 +1,6 @@
 @extends('layouts/backend/main')
 @section('main-section')
-
-<style>
-    .pro-img {
-        width: 200px; 
-        height:200px;
-        
-    }
-
-    .pro-img img {
-            width: 100%;
-    height: 100%;
-    object-fit: cover;
-    }
-
-    .brand {
-        width: 150px;
-        height: 100px;
-    }
-
-    .brand img {
-        width: 100%;
-        object-fit: cover;
-    }
-</style>
+ 
 <!--**********************************
             Content body start
         ***********************************-->
@@ -173,8 +150,7 @@
                                         </td>
                                         <td>
                                             <div class=" brand d-flex align-items-center justify-content-center">
-                                                <img src="{{$product->getBrand->logo == '' ? url('public/assets/both/placeholder/brand.jpg') : url($product->getBrand->logo)}}"
-                                                  style= "width:50%">
+                                                <img src="{{$product->getBrand->logo == '' ? url('public/assets/both/placeholder/brand.jpg') : url($product->getBrand->logo)}}">
                                             </div>
                                         </td>
                                         <td><label class="switch">

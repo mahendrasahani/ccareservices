@@ -99,9 +99,9 @@
                                     <div class="mx-2 d-flex">
                                         <p class="mx-2 m-auto"> Qty</p>
                                         <input type="number" id="quantity" value="1" min="1"
-                                            style="width: 20%; height: 30px;"> 
+                                            style="width: 20%;"> 
                                             <button type="button" class="single_product_btn" id="add_to_cart_btn"><i class="fa-solid fa-spinner"></i></button>
-                                            <button type="button" class="single_product_btn ">Add to Wishlist</button>
+                                            <button type="button" class="single_product_btn">Add to Wishlist</button>
                                         </div>
                                     </div>
                                     <p  style="color:red; font-weight:bold;" id="quantity_error"></p>
@@ -119,7 +119,7 @@
                                     <!-- <input type="text" id="stock_id" value="{{$product_detail->getStock[0]['id']}}"> -->
                                 </div>
                                 <div class="calculator card" id="range_slider_section">
-                                    <label>Choose Tenure</label>
+                                    <label>Select Month</label>
                                     <input type="range" min="1" max="12" value="1" id="slider" class="range_slider">
                                     <div class="numbers-container mt-2">
                                         <div class="number">1</div>
@@ -170,27 +170,27 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h6>Leave a review</h6>
-                        <form id="reviewForm"> 
-                            <div class="reviews d-flex">
-                                <label for="review"
-                                    style="display: flex;justify-content: center;align-items: center;">Your Review:</label>
-                                <fieldset class="rating"> 
-                                    <input type="checkbox" id="star5" name="rating" value="5">
-                                    <label class="full" for="star5"><i class="fas fa-star"></i></label>
-                                    <input type="checkbox" id="star4" name="rating" value="4">
-                                    <label class="full" for="star4"><i class="fas fa-star"></i></label>
-                                    <input type="checkbox" id="star3" name="rating" value="3">
-                                    <label class="full" for="star3"><i class="fas fa-star"></i></label>
-                                    <input type="checkbox" id="star2" name="rating" value="2">
-                                    <label class="full" for="star2"><i class="fas fa-star"></i></label>
-                                    <input type="checkbox" id="star1" name="rating" value="1">
-                                    <label class="full" for="star1"><i class="fas fa-star"></i></label>
-                                </fieldset>
-                            </div>
-                            <textarea id="review" name="review" placeholder="Write your review here..." cols="50"
-                                class="mt-2 p-2"></textarea><br>
-                            <button type="button" class="btn btn-warning animation  mx-2">Submit Review</button>
-                        </form>
+                            <form id="reviewForm"> 
+                                <div class="reviews d-flex">
+                                    <label for="review"
+                                        style="display: flex;justify-content: center;align-items: center;">Your Review:</label>
+                                    <fieldset class="rating"> 
+                                        <input type="checkbox" id="star5" name="rating" value="5">
+                                        <label class="full" for="star5"><i class="fas fa-star"></i></label>
+                                        <input type="checkbox" id="star4" name="rating" value="4">
+                                        <label class="full" for="star4"><i class="fas fa-star"></i></label>
+                                        <input type="checkbox" id="star3" name="rating" value="3">
+                                        <label class="full" for="star3"><i class="fas fa-star"></i></label>
+                                        <input type="checkbox" id="star2" name="rating" value="2">
+                                        <label class="full" for="star2"><i class="fas fa-star"></i></label>
+                                        <input type="checkbox" id="star1" name="rating" value="1">
+                                        <label class="full" for="star1"><i class="fas fa-star"></i></label>
+                                    </fieldset>
+                                </div>
+                                <textarea id="review" name="review" placeholder="Write your review here..." cols="50"
+                                    class="mt-2 p-2"></textarea><br>
+                                <button type="button" class="btn btn-warning animation  mx-2">Submit Review</button>
+                            </form>
                     </div>
                     <div class="col-md-6">
                         <h6>Reviews by customers</h6>
@@ -208,7 +208,7 @@
                                     </div>  
                                     <div class="rev-name"><b>Kartik Sharma</b></div>
                                     <div class="rev-content">
-                                        <p>One of the standout features of the LunarGlow is its customizable lighting options. With adjustable brightness and color settin</p>
+                                        <p>One of the standout features of the LunarGlow is its customizable lighting options. With adjustable brightness and color setting</p>
                                      </div> 
                              </div> 
                             </div>

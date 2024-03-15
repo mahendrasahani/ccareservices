@@ -40,8 +40,8 @@
                                         <tr>
                                             <td class="" style="display: table-cell;">{{$count++}}</td>
                                             <td style="display: table-cell;">{{$brand->name}}</td>
-                                            <td style="display: table-cell; text-align: center;"><img class="brand-page " src="{{url($brand->logo)}}" width="30%"></td>
-                                            <td class="pull-right d-flex">
+                                            <td style="display: table-cell; text-align: center;"><div class="brand"><img src="{{url($brand->logo)}}" ></div></td>
+                                            <td class="">
                                                 <a href="{{route('backend.brand.edit', [$brand->id])}}"><i class="fa-regular fa-pen-to-square text-white edit_icon"></i></a>
                                                 <button value="{{$brand->id}}" class="btn btn-sm delete_ico delete_button"><i class="fa fa-trash-o"></i></button>
                                                 <!-- <a href="javascript:void(0)" class="btn btn-sm delete_ico delete_button"><i class="fa-solid fa-trash-can"></i></a> -->
