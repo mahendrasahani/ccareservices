@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Frontend\CartController;
@@ -65,9 +66,14 @@ Route::middleware(['auth'])->group(function () {
        Route::get('/checkout-product-list', [ProductController::class, 'productToCheckout'])->name('frontend.checkout.product_list');
 
        Route::post('/payment-method', [CheckoutController::class, 'submitCheckoutAddress'])->name('submit_checkout_address');
-    //    Route::get('/payment-method', [PaymentController::class, 'paymentMethodShow'])->name('payment_method'); 
+       Route::get('/payment-method', [CheckoutController::class, 'redirectOnCart'])->name('redirect_on_cart');
+     
+    // Route::get('/payment-method', [PaymentController::class, 'paymentMethodShow'])->name('payment_method'); 
        Route::get('/get-address-payment-detail', [PaymentController::class, 'getAddressDetail'])->name('get_address_payment_detail');
- 
+       
+       
+       
+       Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('place_order');
     // ------------------------ Checkout page route (end) ----------------------------------------------------------------------
 
 

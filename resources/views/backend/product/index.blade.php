@@ -220,56 +220,44 @@
 
 @section('javascript-section')
 <script>
-    $(document).ready(function ()
-    {
-        $(document).on('keydown', '#search', function ()
-        {
+    $(document).ready(function (){
+        $(document).on('keydown', '#search', function (){
             const search_val = $(this).val();
-            if (search_val === '')
-            {
+            if (search_val === ''){
                 $('#my_pagination').show();
-            } else
-            {
+            } else{
                 $.ajax({
                     url: "{{route('backend.product.search')}}",
                     method: "GET",
                     data: { 'search_val': search_val },
-                    success: function (result)
-                    {
-                        // console.log(result);
+                    success: function (result){ 
                         $("#main_table_body").html(result);
                         $('#my_pagination').hide();
                     }
                 });
             }
-
         });
     }); 
 </script>
 
 <script>
-    function deleteSelection()
-    {
+    function deleteSelection(){
         let selectedIds = [];
-        document.querySelectorAll('input[name="product_ids[]"]:checked').forEach(function (checkbox)
-        {
+        document.querySelectorAll('input[name="product_ids[]"]:checked').forEach(function (checkbox){
             selectedIds.push(checkbox.value);
         });
         $.ajax({
             url: "{{route('backend.product.multi_destroy')}}",
             type: "GET",
             data: { "selectedIds": selectedIds },
-            success: function (response)
-            {
-                if (response.status == 200 && response.message == "success")
-                {
+            success: function (response){
+                if (response.status == 200 && response.message == "success"){
                     Swal.fire({
                         title: "Success",
                         text: "Main Category has been deleted !",
                         icon: "success",
                         button: "Ok"
-                    }).then(function ()
-                    {
+                    }).then(function (){
                         window.location.reload();
                     });
                 }
@@ -280,8 +268,7 @@
 
 
 <script>
-    function formatIndianRupee(number)
-    {
+    function formatIndianRupee(number){
         var formattedNumber = number.toLocaleString('en-IN', {
             style: 'currency',
             currency: 'INR',
@@ -291,11 +278,9 @@
         return formattedNumber;
     }
 
-    document.addEventListener("DOMContentLoaded", function ()
-    {
+    document.addEventListener("DOMContentLoaded", function (){
         var projectStatus = localStorage.getItem('product_create');
-        if (projectStatus == 'success')
-        {
+        if (projectStatus == 'success'){
             Swal.fire({
                 icon: 'success',
                 title: 'Success!',
@@ -305,8 +290,7 @@
             localStorage.removeItem('product_create');
         }
     });
-    function cloneRow(id)
-    {
+    function cloneRow(id){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -316,8 +300,7 @@
             url: "{{route('backend.product.clone')}}",
             type: "POST",
             data: { 'id': id },
-            success: function (response)
-            {
+            success: function (response){
                 var product = response.new_product;
                 var old_tr = document.getElementById('row_id_' + id);
                 var new_tr = document.createElement('tr');
@@ -400,10 +383,8 @@
 </script>
 
 <script>
-    $(document).on('click', '#delete_btn', function ()
-    {
-        const id = $(this).val();
-
+    $(document).on('click', '#delete_btn', function (){
+        const id = $(this).val(); 
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -414,14 +395,12 @@
             confirmButtonText: "Yes, delete it!"
         }).then((result) =>
         {
-            if (result.isConfirmed)
-            {
+            if (result.isConfirmed){
                 $.ajax({
                     url: "{{route('backend.product.destroy')}}",
                     data: { 'id': id },
                     type: "GET",
-                    success: function (response)
-                    {
+                    success: function (response){
                         console.log(id);
                         Swal.fire({
                             title: "Deleted!",
@@ -438,8 +417,7 @@
 
 
 <script>
-    $(document).on('change', '#product_status', function ()
-    {
+    $(document).on('change', '#product_status', function (){
         var $toggleButton = $(this);
         var status = $toggleButton.prop('checked') ? '1' : '0';
         var product_id = $(this).data('id');
@@ -447,10 +425,8 @@
             url: "{{route('backend.product.change_status')}}",
             data: { 'product_status': status, 'product_id': product_id },
             type: "GET",
-            success: function (response)
-            {
-                if (response.status == 200)
-                {
+            success: function (response){
+                if (response.status == 200){
                     Swal.fire({
                         title: "Success!",
                         text: "Status successfully updated.",
@@ -464,36 +440,27 @@
 
 
 <script>
-    $(document).ready(function ()
-    {
-        $('.check-all').click(function ()
-        {
-            if ($(this).is(':checked'))
-            {
+    $(document).ready(function (){
+        $('.check-all').click(function (){
+            if ($(this).is(':checked')){
                 $('.check-one').prop('checked', true);
                 $('#multiSelectActionBtn').show();
-            } else
-            {
+            } else{
                 $('.check-one').prop('checked', false);
                 $('#multiSelectActionBtn').hide();
             }
         });
 
-        $('.check-one').click(function ()
-        {
+        $('.check-one').click(function (){
             let checkedCount = 0;
-            document.querySelectorAll('input[name="product_ids[]"]').forEach(function (checkbox)
-            {
-                if (checkbox.checked)
-                {
+            document.querySelectorAll('input[name="product_ids[]"]').forEach(function (checkbox){
+                if (checkbox.checked){
                     checkedCount++;
                 }
             });
-            if (checkedCount > 0)
-            {
+            if (checkedCount > 0){
                 $('#multiSelectActionBtn').show();
-            } else
-            {
+            } else{
                 $('#multiSelectActionBtn').hide();
             }
         });
@@ -504,12 +471,10 @@
 <script>
 
 
-    $(document).on('change', '#sort_by', function ()
-    {
+    $(document).on('change', '#sort_by', function (){
         const sortBy = $(this).val();
         var current_url = "{{route('backend.admin.product.index')}}";
         window.location.replace(current_url + '?sortBy=' + sortBy);
-
     });
 
 </script>

@@ -5,6 +5,8 @@ use App\Http\Controllers\Backend\AttributeValueController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\MainCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ShippingChargeController;
+use App\Http\Controllers\Backend\ShippingMethodCntroller;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Models\Backend\MainCategory;
 
@@ -75,5 +77,14 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/product/change-status', [ProductController::class, 'changeStatus'])->name('backend.product.change_status');
     Route::get('/admin/product/multi-destroy', [ProductController::class, 'multiDestroy'])->name('backend.product.multi_destroy');
     Route::get('/admin/product/search', [ProductController::class, 'search'])->name('backend.product.search');
+
+    Route::get('/admin/shipping-charge', [ShippingChargeController::class, 'index'])->name('backend.shipping_charge.index');
+    Route::post('/admin/shipping-charge/store', [ShippingChargeController::class, 'store'])->name('backend.shipping_charge.store');
+    Route::get('/admin/shipping-method/change_status', [ShippingChargeController::class, 'changeStatus'])->name('backend.shipping_charge.change_status');
+    Route::get('/admin/shipping-method/edit/{id}', [ShippingChargeController::class, 'edit'])->name('backend.shipping_charge.edit');
+    Route::post('/admin/shipping-method/update/{id}', [ShippingChargeController::class, 'update'])->name('backend.shipping_charge.update');
+    Route::get('/admin/shipping-method/destroy', [ShippingChargeController::class, 'destroy'])->name('backend.shipping_charge.destroy');
+
+
 });
 // -------------------------After Admin login (end) ------------------------------------------------------------

@@ -30,14 +30,12 @@ $(async function () {
         currency: 'INR',
       });
 
-      async function updateCheckoutPage(){
-        let shipping_rate = 0;
-        var selected_shipping_method= $('input[name="shipping_rate"]:checked').val();
-        if(selected_shipping_method == 0){
-          shipping_rate = 50;
+      async function updateCheckoutPage(){ 
+        if($('input[name="shipping_rate"]:checked').length > 0){
+          shipping_rate = parseInt($('input[name="shipping_rate"]:checked').val());
         }else{
           shipping_rate = 0;
-        }
+        } 
         const product_list = await fetch(baseUrl+"/checkout-product-list"); 
         if(product_list.ok){
             const response = await product_list.json();
@@ -63,7 +61,6 @@ $(async function () {
             }   
         } 
     await updateCheckoutPage(); 
-
     $('input[name="shipping_rate"]').change(async function() {
       await updateCheckoutPage(); 
   });
@@ -135,6 +132,8 @@ async function submitOrderDetails(){
         $("#shipping_country").focus();
         return false;
       }
+    
+
   //-------------- shipping details validation (end) -----------------------
 
   //-------------- billing details validation (start) -----------------------
@@ -167,10 +166,15 @@ async function submitOrderDetails(){
             $("#error_billing_country").html("This field is required.");
             return false;
           }
-    }
-
-
+    } 
   //-------------- billing details validation (end) -----------------------
+
+        if($('input[name="shipping_rate"]:checked').length <= 0){
+          $("#shipping_charge_error").html("This field is required.");
+          return false;
+        }
+
+
   // var csrf_token = $('input[name="_token"]').val();
   // try{
   //    let submitPostCheckout = await fetch(baseUrl+"/submit_checkout_address", {

@@ -21,6 +21,7 @@
   <!-- breadcrumb end -->
 </section>
 <!----------------------------------------------------- -Cart checkout-------------------------- -->
+@if($cart_product != '')
 <section class=""> 
   <!-- <h4>Shoping Cart is Empty</h4> --> 
   <div class="container"> 
@@ -135,7 +136,7 @@
 
           </div>
         </div>
-
+       
         <div class="row"> 
       <div class="col-md-6">
         <div class="card ">
@@ -143,23 +144,24 @@
             <h5 class="mb-0">Cart totals</h5>
           </div>
           <div class="card-body">
+           
             @if(Auth::check())
             <ul class="list-group list-group-flush">
               <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                 Products
                 <span>₹ {{number_format($final_price, 2)}}/-</span>
               </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+              <!-- <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Shipping <span>₹ {{number_format(50, 2)}}/-</span>
-              </li>
+              </li> -->
               <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                 <div>
                   <strong>Total amount</strong>
-                  <strong>
+                  <!-- <strong>
                     <p class="mb-0">(including VAT)</p>
-                  </strong>
+                  </strong> -->
                 </div>
-                <span><strong>₹ {{number_format($final_price + 50, 2)}}/-</strong></span>
+                <span><strong>₹ {{number_format($final_price, 2)}}/-</strong></span>
               </li>
             </ul>
             @else
@@ -168,17 +170,17 @@
                 Products
                 <span>₹ {{number_format($final_price, 2)}}/-</span>
               </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+              <!-- <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Shipping <span>₹ {{number_format(50, 2)}}/-</span>
-              </li>
+              </li> -->
               <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                 <div>
                   <strong>Total amount</strong>
-                  <strong>
+                  <!-- <strong>
                     <p class="mb-0">(including VAT)</p>
-                  </strong>
+                  </strong> -->
                 </div>
-                <span><strong>₹ {{number_format($final_price + 50, 2)}}/-</strong></span>
+                <span><strong>₹ {{number_format($final_price, 2)}}/-</strong></span>
               </li>
             </ul> 
             @endif
@@ -192,12 +194,16 @@
         </div>
       </div>
     </div>
-
+    
 
       </div>
     </div>
     
   </div>
 </section>
+@else
 
+<h3>Your cart is empty</h3>
+
+@endif
 @endsection

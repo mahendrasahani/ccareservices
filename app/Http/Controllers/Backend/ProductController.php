@@ -7,6 +7,7 @@ use App\Models\Backend\Attribute;
 use App\Models\Backend\AttributeValue;
 use App\Models\Backend\Brand;
 use App\Models\Backend\MainCategory;
+use App\Models\Backend\ShippingCharge;
 use App\Models\Backend\Stock;
 use App\Models\Backend\SubCategory;
 use App\Models\Frontend\Cart;
@@ -16,6 +17,7 @@ use App\Models\Backend\Product;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
  
+use Illuminate\Support\Facades\Session;
 use Str;
 
 class ProductController extends Controller
@@ -566,12 +568,13 @@ class ProductController extends Controller
             } 
         }
 
-    public function productToCheckout(){
+    public function productToCheckout(Request $request){
+        // $shipping_charge = intval(Session::get('shipping_charge'));
     $user_id = Auth::user()->id;
+    // $shipping_charge = ShippingCharge::where('id', $request->shipping_charge_id);
     $cart_item = Cart::with(['getProduct:id,product_name','getStock'])->where('user_id', $user_id)->get(); 
-
             return response()->json([
-                "data"=>$cart_item
+                "data"=>$cart_item, 
             ]); 
     }
 

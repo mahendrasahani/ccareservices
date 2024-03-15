@@ -113,7 +113,7 @@
                                         style=" color: #01316b;">Login</a></li>
                                 @else
                                 @if(Auth::user()->user_type == 1)
-                                <li><a class="dropdown-item fw-bold" href="{{route('backend.admin.dashboard.view')}}" style=" color: #01316b;">Admin Dashboard</a></li>
+                                <li><a class="dropdown-item fw-bold" href="{{route('backend.admin.dashboard.view')}}" style=" color: #01316b;" target="_blank">Admin Dashboard</a></li>
                                 <li>
                                 @endif
                                 <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}"

@@ -5,19 +5,24 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\BillingAddress;
 use App\Models\Backend\ShippingAddress;
+use App\Models\Backend\ShippingCharge;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
     public function checkoutPageView(){
         $shipping_address = ShippingAddress::where('user_id', Auth::user()->id)->first();
-        $billing_address = BillingAddress::where('user_id', Auth::user()->id)->first();
-        return view('frontend.checkout', compact('shipping_address', 'billing_address'));
+        $billing_address = BillingAddress::where('user_id', Auth::user()->id)->first(); 
+        $paid_shipping_charges = ShippingCharge::where('status', 1)->where('id', '!=', 1)->get();  
+        $free_shipping_charges = ShippingCharge::where('status', 1)->where('id', 1)->first();  
+
+        return view('frontend.checkout', compact('shipping_address', 'billing_address', 'free_shipping_charges', 'paid_shipping_charges'));
     }
 
     public function submitCheckoutAddress(Request $request){
-       
+        $shipping_charge = $request->shipping_rate; 
        $s_name = $request->s_name;
        $s_email = $request->s_email;
        $s_phone = $request->s_phone;
@@ -104,18 +109,13 @@ class CheckoutController extends Controller
                 ]);
             }
             }
-       }  
-       if ($request->method() == 'POST') {
-        return view('frontend.account.payment_method'); 
-       }else{
-        return redirect("404");
        }
-
-        // return response()->json([
-        //     "status" => 200,
-        //     "message" => "success",
-        //     "data" => "address_updated_successfully"
-        // ]);
-
+       Session::put('shipping_charge', $shipping_charge);
+       
+        return view('frontend.account.payment_method', compact('shipping_charge'));  
     }
+
+   public function redirectOnCart(){
+    return redirect('/cart');
+   }
 }

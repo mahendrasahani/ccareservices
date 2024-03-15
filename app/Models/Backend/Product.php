@@ -52,4 +52,8 @@ class Product extends Model
         return $this->hasMany(Stock::class, 'product_id');
     }
 
+    public function getOrderProduct(){
+        return $this->hasMany(OrderProduct::class, 'product_id');
+    }
+
 }

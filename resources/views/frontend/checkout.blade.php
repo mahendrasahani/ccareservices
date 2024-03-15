@@ -150,16 +150,24 @@
                   <tr>
                     <td>Shipping</td>
                     <td style="text-align: end">
+                      @if($free_shipping_charges != '')
                       <div class="form_check_checkout">
-                        <input type="radio" class="form-check-input" id="flat_rate" name="shipping_rate" value="0" checked> 
-                        <label class="form-check-label mx-2" for="radio1">Flat rate Rs 50/-</label>
+                        <input type="radio" class="form-check-input" id="shipping_charge_{{$free_shipping_charges->id}}" name="shipping_rate" data-shipping-id="{{$free_shipping_charges->id}}" value="{{$free_shipping_charges->amount}}" required>
+                        <label class="form-check-label mx-2" for="radio2">{{$free_shipping_charges->name}}</label>
                       </div>
+                      @endif
+                      @if($paid_shipping_charges != '')
+                      @foreach($paid_shipping_charges as $paid_charge)
                       <div class="form_check_checkout">
-                        <input type="radio" class="form-check-input" id="free_shipping" name="shipping_rate" value="1">
-                        <label class="form-check-label mx-2" for="radio2">Free shipping</label>
+                        <input type="radio" class="form-check-input" id="shipping_charge_{{$paid_charge->id}}" name="shipping_rate" value="{{$paid_charge->amount}}" data-shipping-id="{{$paid_charge->id}}" required> 
+                        <label class="form-check-label mx-2" for="radio1">{{$paid_charge->name}} {{number_format($paid_charge->amount, 2)}}/-</label>
                       </div>
+                      @endforeach
+                      @endif
+                      <p class="input_error" id="shipping_charge_error"></p>
                     </td>
                   </tr>
+              
                   <tr>
                     <td>Total</td>
                     <td style="text-align: end" id="final_amount_total"></td>

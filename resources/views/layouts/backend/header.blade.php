@@ -152,10 +152,9 @@
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                        <li>
-                                            <a href="registration.html"><i class="icon-user"></i>
-                                                <span>Edit Profile</span></a>
-                                        </li>
+                                        <li><a href="registration.html"><i class="icon-user"></i><span>Edit Profile</span></a></li>
+                                        <hr class="my-2">
+                                        <li><a href="http://localhost/ccareservices/"><i class="icon-user" target="_blank"></i><span>Go To Website</span></a></li>
                                         <hr class="my-2">
                                         <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a>
                                         </li>
@@ -342,6 +341,7 @@
 
                         </a>
                         <ul aria-expanded="false">
+                            <li><a href="{{route('backend.shipping_charge.index')}}">Shipping Charge</a></li>
                             <li><a href="shop-setting.html">Shop Settings</a></li>
                             <li><a href="general-setting.html">General Settings</a></li>
                             <li><a href="otp-settings.html">OTP Settings</a></li>
