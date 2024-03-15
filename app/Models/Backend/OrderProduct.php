@@ -24,4 +24,11 @@ class OrderProduct extends Model
     public function getProduct(){
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    public function getOrder(){
+        return $this->belongsTo(Order::class, 'order_id');
+    }
+
+    
+     
 }

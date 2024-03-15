@@ -59,11 +59,10 @@
                                     @foreach($recent_purchase_history as $recent_purchase)
                                     <div class="recent-products">
                                         <div class="recent-products-img">
-                                            <img src="https://shop.activeitzone.com/public/uploads/all/eAyjUaOrohoDCUY4tR9SxpkcaqEBCxWw0uNjCSqi.png"
-                                                alt="">
+                                            <img src="{{url($recent_purchase->getProduct->product_images == '' ? 'public/assets/both/placeholder/product.jpg' : 'public/'.$recent_purchase->getProduct->product_images[0])}}"alt="{{$recent_purchase->getProduct->product_name ?? ''}}">
                                         </div>
                                         <div class="recent-products-content">
-                                            <a href=""><p>{{$recent_purchase->product_name}}</p></a>
+                                            <a href=""><p>{{$recent_purchase->getProduct->product_name}}</p></a>
                                             <span>₹{{number_format($recent_purchase->price, 2)}}/-</span>
                                         </div>
                                     </div> 

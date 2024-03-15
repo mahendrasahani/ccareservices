@@ -62,7 +62,7 @@
               </div> 
               <div class="mb-3">
                 <label for="region" class="form-label">Country / Region<span class="text-danger">*</span></label>
-                <select class="form-control aiz-selectpicker" name="shipping_country" id="s_country">
+                <select class="form-control aiz-selectpicker" name="s_country" id="s_country">
                   <option value="India" selected>India</option> 
                 </select> 
                 <p class="input_error" id="error_shipping_country"></p>

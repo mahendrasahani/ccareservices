@@ -32,8 +32,6 @@ Route::middleware(['auth', 'user_check'])->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'userDashboardPageView'])->name('frontend.user.dashboar.view');
     Route::get('/manage-profile', [UserDashboardController::class, 'manageProfilePageView'])->name('frontend.user.manage_profile.view');
     Route::get('/discount', [UserDashboardController::class, 'discountPageView'])->name('frontend.user.discount.view');
-    Route::get('/purchase-history', [UserDashboardController::class, 'purchaseHistoryPageView'])->name('frontend.user.purchase_history.view');
-    Route::get('/product-detail', [UserDashboardController::class, 'viewProductDetailPageView'])->name('frontend.user.view_product_detail.view');
 });
 // -------------------------After user login (end) ------------------------------------------------------------
 
@@ -74,6 +72,9 @@ Route::middleware(['auth'])->group(function () {
        
        
        Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('place_order');
+       Route::get('/purchase-history', [OrderController::class, 'purchaseHistory'])->name('frontend.user.purchase_history.view');
+       Route::get('/order-detail/{id}', [OrderController::class, 'orderDetail'])->name('frontend.user.view_order_detail');
+ 
     // ------------------------ Checkout page route (end) ----------------------------------------------------------------------
 
 

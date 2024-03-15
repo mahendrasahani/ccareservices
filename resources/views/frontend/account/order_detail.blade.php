@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-answer">
-                                        <p>20221221-16153848</p>
+                                        <p>{{$order->order_id}}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -132,7 +132,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-answer">
-                                        <p>Christina Ashens</p>
+                                        <p>{{$order->shipping_name}}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-answer">
-                                        <p>customer@example.com</p>
+                                        <p>{{$order->shipping_email}}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -152,8 +152,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-answer">
-                                        <p>4471 Nutters Barn Lane Des Moines, IA 50309, 5252 Alabaster, Alabama, United
-                                            States 5156416642</p>
+                                        <p>{{$order->shipping_address}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +166,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-answer">
-                                        <p>$263.81</p>
+                                        <p>₹{{number_format($order->total, 2)}}/-</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -177,10 +176,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-answer">
-                                        <p>Wallet</p>
+                                        <p>{{$order->payment_method == 'cash_on_delivery' ? 'Cash On Delivery' : ''}}</p>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="product-inquery">
                                         <p><b>Delivery type :</b></p>
                                     </div>
@@ -189,7 +188,7 @@
                                     <div class="product-answer">
                                         <p>Standard</p>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-6">
                                     <div class="product-inquery">
                                         <p><b>Billing Address :</b></p>
@@ -197,8 +196,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-answer">
-                                        <p>4471 Nutters Barn Lane Des Moines, IA 50309, 5252 Alabaster, Alabama, United
-                                            States 5156416642</p>
+                                        <p>{{$order->billing_address}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -212,15 +210,24 @@
                     <div class="row p-2">
                         <div class="col-md-12 hh-grayBox pt45 pb20">
                             <div class="row justify-content-between">
-                                <div class="order-tracking completed">
+                                <div class="order-tracking 
+                                @if($order->order_status == 'ordered' || $order->order_status == 'shipped' || $order->order_status == 'delivered')
+                                completed
+                                @endif ">
                                     <span class="is-complete"></span>
                                     <p>Ordered<br><span>Mon, June 24</span></p>
                                 </div>
-                                <div class="order-tracking completed">
+                                <div class="order-tracking 
+                                @if($order->order_status == 'shipped' || $order->order_status == 'delivered')
+                                completed
+                                @endif ">
                                     <span class="is-complete"></span>
                                     <p>Shipped<br><span>Tue, June 25</span></p>
                                 </div>
-                                <div class="order-tracking">
+                                <div class="order-tracking
+                                @if($order->order_status == 'delivered')
+                                completed
+                                @endif  ">
                                     <span class="is-complete"></span>
                                     <p>Delivered<br><span>Fri, June 28</span></p>
                                 </div>
@@ -237,28 +244,23 @@
                                 <th>Unit Price</th>
                                 <th>Total</th>
                             </tr>
+                            @php 
+                                $sn = 1;
+                            @endphp
+                            @foreach($order->getOrderProduct as $order_product)
                             <tr>
-                                <td><b>1</b></td>
-                                <td class="recent-products-img"><img
-                                        src="https://shop.activeitzone.com/public/uploads/all/pXnQ4sMfzCmOXnfOsrqYDwEq3EE0efRcf8X7KB36.png"
-                                        alt=""> </td>
-                                <td class="track-order-name"> Maroon Band Collar Embellished Kurta Set <br> Size :
-                                    <b>Medium</b> </td>
-                                <td><b>1</b></td>
-                                <td><b>$198.90</b></td>
-                                <td><b>$198.90</b></td>
+                                <td><b>{{$sn++}}</b></td>
+                                <td class="recent-products-img">
+                                    <img src="{{url($order_product->getProduct->product_images == '' ? 'public/assets/both/placeholder/product.jpg' : 'public/'.$order_product->getProduct->product_images[0])}}"alt="{{$order_product->getProduct->product_name    }}"
+                                        alt=""> 
+                                     </td>
+ 
+                                <td class="track-order-name"> {{$order_product->product_name}}<br> <b>{{$order_product->option_value_id}}</b> </td>
+                                <td><b>{{$order_product->quantity}}</b></td>
+                                <td><b>₹{{number_format($order_product->price, 2)}}</b></td>
+                                <td><b>₹{{number_format($order_product->total_price, 2)}}</b></td>
                             </tr>
-                            <tr>
-                                <td><b>2</b></td>
-                                <td class="recent-products-img"><img
-                                        src="https://shop.activeitzone.com/public/uploads/all/pXnQ4sMfzCmOXnfOsrqYDwEq3EE0efRcf8X7KB36.png"
-                                        alt=""> </td>
-                                <td class="track-order-name"> Maroon Band Collar Embellished Kurta Set <br> Size :
-                                    <b>Medium</b> </td>
-                                <td><b>1</b></td>
-                                <td><b>$198.90</b></td>
-                                <td><b>$198.90</b></td>
-                            </tr> 
+                              @endforeach
                         </table>
                     </div>
                 </div>
@@ -267,38 +269,42 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="payment-seal" style="text-align: center;">
+                                @if($order->payment_status == 'unpaid')
+
+                                @elseif($order->payment_status == 'paid')
                                     <img src="https://shop.activeitzone.com/public/assets/img/paid_sticker.svg" alt="">
+                                    @endif
                                 </div> 
                             </div>
                             <div class="col-md-6 card p-4">
                                 <div class="final-order-details">
                                     <div class="single-order-final">
                                         <p><b>Sub Total:</b></p>
-                                        <p><b>$224.10</b></p>
+                                        <p><b>₹{{number_format($order->sub_total, 2)}}</b></p>
                                     </div>
                                 </div>
-                                <div class="final-order-details">
+                                <!-- <div class="final-order-details">
                                     <div class="single-order-final">
                                         <p><b>Tax :</b></p>
                                         <p><b>$224.10</b></p>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="final-order-details">
                                     <div class="single-order-final">
                                         <p><b>Shipping Charge :</b></p>
-                                        <p><b>$224.10</b></p>
+                                        <p><b>₹{{number_format($order->delivery_charge, 2)}}</b></p>
                                     </div>
                                 </div>
                                 <div class="final-order-details">
                                     <div class="single-order-final">
                                         <p><b>Coupon discount :</b></p>
-                                        <p><b>$224.10</b></p>
+                                        <p><b>₹{{number_format(0, 2)}}</b></p>
                                     </div>
                                 </div>
                                 <div class="final-order-details total-final">
                                     <div class="single-order-final">
                                         <p><b>Total :</b></p>
-                                        <p><b>$224.10</b></p>
+                                        <p><b>₹{{number_format($order->total, 2)}}</b></p>
                                     </div>
                                 </div>
                                  

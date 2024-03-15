@@ -20,68 +20,19 @@
                             <th>Amount</th>
                             <th>Action</th>
                         </tr>
+                        @if(count($purchase_history) != 0)
+                        @foreach($purchase_history as $p_history)
                         <tr>
-                            <td><b>20230927-05154224</b> <br> <span>Jan 24,2024</span> </td>
-                            <td><b>1 products</b> <br> <span>from 1 shops</span> </td>
-                            <td><b>$186.11</b> </td>
-                            <td><a href="{{route('frontend.user.view_product_detail.view')}}" class="discount-details-btn ">View Details</a> </td>
+                            <td><b>Order No. {{$p_history->order_id}}</b></td>
+                            <td><b>{{count($p_history->getOrderProduct)}} products</b></td>
+                            <td><b>₹{{number_format($p_history->total, 2)}}/-</b> </td>
+                            <td><a href="{{route('frontend.user.view_order_detail', [Crypt::encryptString($p_history->id)])}}" class="discount-details-btn ">View Details</a> </td>
                         </tr>
-                        <tr>
-                            <td><b>20230927-05154224</b> <br> <span>Jan 24,2024</span> </td>
-                            <td><b>1 products</b> <br> <span>from 1 shops</span> </td>
-                            <td><b>$186.11</b> </td>
-                            <td><a href="{{route('frontend.user.purchase_history.view')}}" class="discount-details-btn ">View Details</a> </td>
-                        </tr>
-                        <tr>
-                            <td><b>20230927-05154224</b> <br> <span>Jan 24,2024</span> </td>
-                            <td><b>1 products</b> <br> <span>from 1 shops</span> </td>
-                            <td><b>$186.11</b> </td>
-                            <td><a href="{{route('frontend.user.view_product_detail.view')}}" class="discount-details-btn ">View Details</a> </td>
-                        </tr>
-                        <tr>
-                            <td><b>20230927-05154224</b> <br> <span>Jan 24,2024</span> </td>
-                            <td><b>1 products</b> <br> <span>from 1 shops</span> </td>
-                            <td><b>$186.11</b> </td>
-                            <td><a href="{{route('frontend.user.view_product_detail.view')}}" class="discount-details-btn ">View Details</a> </td>
-                        </tr>
-                        <tr>
-                            <td><b>20230927-05154224</b> <br> <span>Jan 24,2024</span> </td>
-                            <td><b>1 products</b> <br> <span>from 1 shops</span> </td>
-                            <td><b>$186.11</b> </td>
-                            <td><a href="{{route('frontend.user.view_product_detail.view')}}" class="discount-details-btn ">View Details</a> </td>
-                        </tr>
-                        <tr>
-                            <td><b>20230927-05154224</b> <br> <span>Jan 24,2024</span> </td>
-                            <td><b>1 products</b> <br> <span>from 1 shops</span> </td>
-                            <td><b>$186.11</b> </td>
-                            <td><a href="{{route('frontend.user.view_product_detail.view')}}" class="discount-details-btn ">View Details</a> </td>
-                        </tr>
-                          
+                        @endforeach 
+                        @endif
                     </table>
-                </div>
-
-              <div class="pagination mt-3  justify-content-end">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-              </div> 
-            </section>
-
-
+                </div> 
+            </section> 
         </div>
     </div>
 </section>
