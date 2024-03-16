@@ -29,7 +29,11 @@ class Product extends Model
         'main_category',
         'sub_category',
         'attribute_name',
-        'attribute_value'
+        'attribute_value',
+        'vendor_id',
+        'date_of_purchase',
+        'purchase_amount',
+        'invoice_number', 
     ];
 
     protected $casts = [

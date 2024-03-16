@@ -91,14 +91,10 @@ class ProductController extends Controller
           ]); 
     }
 
-    public function store(Request $request){ 
-        
-        // return $request->all();
-
+    public function store(Request $request){   
         $product_name = $request->product_name;
         $min_qty = $request->min_qty;
-        $max_qty = $request->max_qty;  
-
+        $max_qty = $request->max_qty;   
         $product_price = $request->product_price;
         $sku = $request->sku;
         $stock_status = $request->stock_status;
@@ -122,8 +118,7 @@ class ProductController extends Controller
         })->all(); 
         // $attribute_value = collect($request->filtering_attributes)->map(function ($value) {
         //     return intval(trim($value, '"'));
-        // })->all(); 
-
+        // })->all();  
         $newProduct = Product::create([
             'product_name' => $product_name,
             'min_purchase_qty' => $min_qty,
@@ -142,7 +137,7 @@ class ProductController extends Controller
             'main_category' => $main_categories,    
             'sub_category' => $sub_categories,
             'attribute_name' => $attribute_name,
-            'attribute_value' => $request->filtering_attributes
+            'attribute_value' => $request->filtering_attributes,  
         ]); 
         $newProductId = $newProduct->id; 
         $imagePaths = []; 
@@ -176,28 +171,28 @@ class ProductController extends Controller
         //     'status' => 1, 
         //  ]);
 
-    foreach($request->option_qty as $index => $qty){
-        Stock::create([
-            'product_id' => $newProductId,
-            'attribute_id' => $request->product_option_name,
-            'attribute_value_id' => $request->option_value[$index],
-            'quantity' => $qty,
-            'month' => '',
-            'price_1' => $request->price_1[$index],
-            'price_2' => $request->price_2[$index],
-            'price_3' => $request->price_3[$index],
-            'price_4' => $request->price_4[$index],
-            'price_5' => $request->price_5[$index],
-            'price_6' => $request->price_6[$index],
-            'price_7' => $request->price_7[$index],
-            'price_8' => $request->price_8[$index],
-            'price_9' => $request->price_9[$index],
-            'price_10' => $request->price_10[$index],
-            'price_11' => $request->price_11[$index],
-            'price_12' => $request->price_12[$index],
-            'status' => 1, 
-        ]);
-    }
+            // foreach($request->option_qty as $index => $qty){
+            //     Stock::create([
+            //         'product_id' => $newProductId,
+            //         'attribute_id' => $request->product_option_name,
+            //         'attribute_value_id' => $request->option_value[$index],
+            //         'quantity' => $qty,
+            //         'month' => '',
+            //         'price_1' => $request->price_1[$index],
+            //         'price_2' => $request->price_2[$index],
+            //         'price_3' => $request->price_3[$index],
+            //         'price_4' => $request->price_4[$index],
+            //         'price_5' => $request->price_5[$index],
+            //         'price_6' => $request->price_6[$index],
+            //         'price_7' => $request->price_7[$index],
+            //         'price_8' => $request->price_8[$index],
+            //         'price_9' => $request->price_9[$index],
+            //         'price_10' => $request->price_10[$index],
+            //         'price_11' => $request->price_11[$index],
+            //         'price_12' => $request->price_12[$index],
+            //         'status' => 1, 
+            //     ]);
+            // }
  
         return response()->json([
             "status" => 200,
@@ -210,11 +205,8 @@ class ProductController extends Controller
             $brand_list = Brand::where('status', 1)->get(); 
             $main_category_list = MainCategory::where('status', 1)->get();
             $attribute_list = Attribute::where('status', 1)->get(); 
-            $option_name = Attribute::where('id', $product_detail->getStock->option_name)->first()->name;
-
-            // return $option_name;
-            // return $product_detail;
-            return view('backend.product.edit', compact('product_detail', 'brand_list', 'main_category_list', 'attribute_list', 'option_name'));
+            // $option_name = Attribute::where('id', $product_detail->get_stock->attribute_id)->first()->name;
+            return view('backend.product.edit', compact('product_detail', 'brand_list', 'main_category_list', 'attribute_list'));
         }
 
         public function update($id, Request $request){ 
@@ -352,12 +344,12 @@ class ProductController extends Controller
                 "status" => 200,
                 "message" => "success"
             ]);
-        }else{
-            return response()->json([
-                "status" => 400,
-                "message" => "faild"
-            ]);
-        }
+            }else{
+                return response()->json([
+                    "status" => 400,
+                    "message" => "faild"
+                ]);
+            }
         }
 
 

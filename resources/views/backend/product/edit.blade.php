@@ -302,7 +302,7 @@
                                 <div class="row">
                                     <label class="col-md-3 col-form-label" for="product_option">Select an option:</label>
                                     <div class="col-md-9">
-                                        <select class="form-control" name="product_option_name"
+                                       {{-- <select class="form-control" name="product_option_name"
                                             id="product_option_name">
                                             <option value="">--Select--</option>
                                             @if(count($attribute_list) > 0)
@@ -310,7 +310,7 @@
                                             <option value="{{$attribute->id}}" data-name="{{$attribute->name}}" {{$attribute->id == $product_detail->getStock->option_name ?'selected':''}}>{{$attribute->name}}</option>
                                             @endforeach
                                             @endif
-                                        </select>
+                                        </select> --}}
                                     </div> 
                                 </div>
                                 <div class="row" id="option_list_row">
@@ -318,7 +318,7 @@
                                  <input type="hidden" name="product_option_id" id="product_option_id" value="${selected_id}">
                                  <i class="fa fa-minus-circle product-option-add-btn" aria-hidden="true" onclick="removeMainOption('append_table_div_${selected_id}')"></i>
                                  <div class="append_table">
-                                  <p class="table_tag"><b>{{$option_name}}</b></p>  
+                                 {{-- <p class="table_tag"><b>{{$option_name}}</b></p>   --}}
                                   </div> 
                                  <table class="product-option" id="option_table_${selected_id}">
                                     <thead>
@@ -328,7 +328,7 @@
                                             <th>Action</th> 
                                         </tr>
                                       
-                                        @foreach($product_detail->getStock->option_value as $index => $stock)
+                                       {{-- @foreach($product_detail->getStock->option_value as $index => $stock)
                                         <tr id="option_value_list_${randomSixDigitNumber}">
                                         <td>
                                         @php
@@ -350,7 +350,7 @@
                                         <input type="hidden" value="{{$price_string}}" id="price_list" name="price_list[]">
                                         </tr>
                                         @endforeach
-                                      
+                                      --}}
                                     </thead>
                                     <tbody> 
                                     </tbody>

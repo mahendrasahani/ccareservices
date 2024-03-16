@@ -170,11 +170,11 @@
                                                 href="{{route('backend.product.edit', [$product->id])}}" title="Edit">
                                                 <i class="fa-regular fa-pen-to-square text-white"></i>
                                             </a>
-                                            <a class="btn btn-soft-success btn-icon btn-circle btn-sm eye_3"
+                                            <!-- <a class="btn btn-soft-success btn-icon btn-circle btn-sm eye_3"
                                                 href="javascript:void()" title="Duplicate"
                                                 onclick="cloneRow({{$product->id}})">
                                                 <i class="fa-regular fa-copy"></i>
-                                            </a>
+                                            </a> -->
                                             <button value="{{$product->id}}" class="btn btn-icon btn-sm delete_ico"
                                             id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
                                             </div>

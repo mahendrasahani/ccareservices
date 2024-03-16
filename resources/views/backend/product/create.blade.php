@@ -204,54 +204,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
 
+            <!------------- this is  add option cod which has been removed now (start) ------->
 
-
-                        <div class="card" style="border: 1px solid #e8e8e8;">
-                            <div class="card-header d-flex justify-content-between"
-                                style="border-bottom : 1px solid #e8e8e8;">
-                                <h5 class="mb-0 pt-2">Inventory</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="alert alert-info">Inventory Option</div>  
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="vendor_name">Vendor Name:</label>
-                                    <div class="col-md-9">
-                                        <select class="form-control" name="vendor_name" >
-                                            <option value="">--Select--</option> 
-                                            <option value="" data-name="">Options</option> 
-                                            <option value="" data-name="">Options</option> 
-                                            <option value="" data-name="">Options</option> 
-                                        </select>
-                                    </div> 
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="dateInput">Date of Purchase:</label>
-                                    <div class="col-md-9">
-                                        <input type="date" id="dateInput" name="dateInput" class="form-control">
-                                    </div> 
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="amountInput">Purchase Amount:</label>
-                                    <div class="col-md-9">
-                                         <input type="number" id="amountInput" name="amountInput" class="form-control">
-                                    </div> 
-                                </div> 
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="invoice_number">Invoice Number</label>
-                                    <div class="col-md-9">
-                                         <input type="text" id="amountInput" name="invoice_number" class="form-control">
-                                    </div> 
-                                </div>
-                                <div class="row" id="option_list_row"></div>
-                            </div>
-                        </div>
-
-
-
-
-                        <div class="card" style="border: 1px solid #e8e8e8;">
+                    {{--    <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header d-flex justify-content-between"
                                 style="border-bottom : 1px solid #e8e8e8;">
                                 <h5 class="mb-0 pt-2">Product Option</h5>
@@ -275,10 +232,12 @@
                                 </div>
                                 <div class="row" id="option_list_row"></div>
                             </div>
-                        </div>
+                        </div> --}}
+            <!------------- this is  add option cod which has been removed now (end) --------->
 
-                        <!------------------------------------ Modal start -------------------------------->
-                        <div class="modal fade" id="product_modal" tabindex="-1" role="dialog"
+            <!------------------------------------ Modal start -------------------------------->
+                        <!-- this is option modal which has been removed now (start) -->
+                        <!-- <div class="modal fade" id="product_modal" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -310,8 +269,6 @@
 
                                             <div class="col-md-6">
                                                 <div class="product-details">
-                                                    <!-- <label for="price" class="popup_label">Month</label> -->
-
                                                     <div class="price ">
                                                         <label for="price" class="popup_label">Month</label>
                                                         <label for="price" class="popup_label">Price</label>
@@ -423,8 +380,53 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!------------------------------ Modal End --------------------->
+                        </div> -->
+                        <!-- this is option modal which has been removed now (end) -->
+
+            <!------------------------------------ Modal End ---------------------------------->
+
+            <!--------------------------------- inventory code (start) ------------------------->
+                        <!-- <div class="card" style="border: 1px solid #e8e8e8;">
+                            <div class="card-header d-flex justify-content-between"
+                                style="border-bottom : 1px solid #e8e8e8;">
+                                <h5 class="mb-0 pt-2">Inventory</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-info">Inventory Option</div>  
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="vendor_name">Vendor Name:</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" name="vendor_name" required>
+                                            <option value="">--Select--</option> 
+                                            <option value="">Options</option> 
+                                            <option value="">Options</option> 
+                                            <option value="">Options</option> 
+                                        </select>
+                                    </div> 
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="date_of_purchase">Date of Purchase:</label>
+                                    <div class="col-md-9">
+                                        <input type="date" id="date_of_purchase" name="date_of_purchase" class="form-control" required>
+                                    </div> 
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="purchase_amount">Purchase Amount:</label>
+                                    <div class="col-md-9">
+                                         <input type="number" id="purchase_amount" name="purchase_amount" class="form-control" required>
+                                    </div> 
+                                </div> 
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="invoice_number">Invoice Number</label>
+                                    <div class="col-md-9">
+                                         <input type="text" id="invoice_number" name="invoice_number" class="form-control" required>
+                                    </div> 
+                                </div> 
+                            </div>
+                        </div> -->
+            <!-------------------------------- inventory code (end) ------------------------------>
+
+
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
@@ -702,124 +704,123 @@
     var optionValueListRoute = "{{ route('backend.product.get_option_value_list') }}";
 </script> 
  
+<!-- this code is for option modal system which have removed now (start) -->
+        <!-- <script> 
+            function showOptionModal(table_id, option_id){  
+                var modal = document.getElementById('product_modal');  
+                    var inputs = modal.querySelectorAll('input[type="number"]');  
+                    inputs.forEach(function(input){
+                    input.value = '';
+                    }); 
 
-<script>
-    
-    function showOptionModal(table_id, option_id){ 
+                var option_modal = document.getElementById('modal_option_value');
+                var option_list ='';
+                    $.ajax({
+                        url: "{{route('backend.product.get_option_value_list')}}",
+                        data: {'id':option_id},
+                        type: "GET",
+                        success:function(response){
+                            response.data.forEach(function(item){
+                                option_list += `<option value="${item.name}" data-id="${item.id}">${item.name}</option>`
+                            });
+                            option_modal.innerHTML = option_list;
+                        }
+                    }); 
 
-        var modal = document.getElementById('product_modal');  
-            var inputs = modal.querySelectorAll('input[type="number"]');  
-            inputs.forEach(function(input){
-            input.value = '';
-            }); 
+                $('#table_id').val(table_id);
+                modal.style.display = "block";
+            }
+        </script> -->
+        <!-- <script>
+            function validateOptionModal(){ 
+                var crete_option_modal = document.querySelector('.crete_option_modal'); 
+                var all_errors = crete_option_modal.querySelectorAll('p.input_error');
+                all_errors.forEach(function(error_p){
+                    error_p.innerHTML = "";
+                });
 
-        var option_modal = document.getElementById('modal_option_value');
-        var option_list ='';
-            $.ajax({
-                url: "{{route('backend.product.get_option_value_list')}}",
-                data: {'id':option_id},
-                type: "GET",
-                success:function(response){
-                     response.data.forEach(function(item){
-                        option_list += `<option value="${item.name}" data-id="${item.id}">${item.name}</option>`
-                     });
-                     option_modal.innerHTML = option_list;
-                }
-            }); 
-
-        $('#table_id').val(table_id);
-        modal.style.display = "block";
-    }
-</script>
-<script>
-    function validateOptionModal(){ 
-        var crete_option_modal = document.querySelector('.crete_option_modal'); 
-        var all_errors = crete_option_modal.querySelectorAll('p.input_error');
-        all_errors.forEach(function(error_p){
-            error_p.innerHTML = "";
-        });
-
-        var product_qty = document.getElementById('product_qty').value;
-        if(product_qty <= 0 || product_qty == ''){
-            document.getElementById('qty_error').innerHTML = "Quantity is required.";
-            document.getElementById('product_qty').focus();
-            return false;
-        } 
-      
- 
-        for(var i = 1; i <= 12; i++){
-            var price = document.getElementById('modal_price_'+i).value;
-        if(price <= 0 || price == ''){
-            document.getElementById('price_'+i+'_error').innerHTML = "Price is required.";
-            document.getElementById('modal_price_'+i).focus();
-            return false;
-        }
-    }
-
-
-        var tableId = document.getElementById('table_id').value;
-        var optionVal = document.getElementById('modal_option_value');
-        var selectedOption = optionVal.options[optionVal.selectedIndex];
-        var dataId = selectedOption.getAttribute('data-id'); 
-        var product_qty = document.getElementById('product_qty').value; 
-        var price_1 = document.getElementById('modal_price_1').value; 
-        var price_2 = document.getElementById('modal_price_2').value; 
-        var price_3 = document.getElementById('modal_price_3').value; 
-        var price_4 = document.getElementById('modal_price_4').value; 
-        var price_5 = document.getElementById('modal_price_5').value; 
-        var price_6 = document.getElementById('modal_price_6').value; 
-        var price_7 = document.getElementById('modal_price_7').value; 
-        var price_8 = document.getElementById('modal_price_8').value; 
-        var price_9 = document.getElementById('modal_price_9').value; 
-        var price_10 = document.getElementById('modal_price_10').value; 
-        var price_11 = document.getElementById('modal_price_11').value; 
-        var price_12 = document.getElementById('modal_price_12').value;   
-
+                var product_qty = document.getElementById('product_qty').value;
+                if(product_qty <= 0 || product_qty == ''){
+                    document.getElementById('qty_error').innerHTML = "Quantity is required.";
+                    document.getElementById('product_qty').focus();
+                    return false;
+                } 
+            
         
-        var min = 100000; 
-        var max = 999999; 
-        var randomSixDigitNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+                for(var i = 1; i <= 12; i++){
+                    var price = document.getElementById('modal_price_'+i).value;
+                if(price <= 0 || price == ''){
+                    document.getElementById('price_'+i+'_error').innerHTML = "Price is required.";
+                    document.getElementById('modal_price_'+i).focus();
+                    return false;
+                }
+            }
 
-        var prices = [];
-            $('input[name="price[]"]').each(function() {
-                prices.push($(this).val());
-            });
-        var html_to_append = `<tr id="option_value_list_${randomSixDigitNumber}">
-                              <td>${optionVal.value}
-                               <input type="hidden" name="option_value[]" value="${dataId}"> 
-                               </td>
-                              <td>${product_qty}
-                              <input type="hidden" name="option_qty[]" value="${product_qty}"> 
-                              </td>  
-                              <td style="text-align:end">
-                              <i class="fa fa-minus-circle" aria-hidden="true" onclick="removeOptionValue('option_value_list_${randomSixDigitNumber}')"></i>
-                              <i class="fa fa-pencil-square mx-2" data-toggle="modal" data-target="#edit_product_modal" onclick="editOptionValue(${dataId}, ${product_qty}, '${prices}', 'option_value_list_${randomSixDigitNumber}')"></i>
-                              </td> 
-                             
-                              <input type="hidden" value="${price_1}" id="price_1" name="price_1[]">
-                              <input type="hidden" value="${price_2}" id="price_2" name="price_2[]">
-                              <input type="hidden" value="${price_3}" id="price_3" name="price_3[]">
-                              <input type="hidden" value="${price_4}" id="price_4" name="price_4[]">
-                              <input type="hidden" value="${price_5}" id="price_5" name="price_5[]">
-                              <input type="hidden" value="${price_6}" id="price_6" name="price_6[]">
-                              <input type="hidden" value="${price_7}" id="price_7" name="price_7[]">
-                              <input type="hidden" value="${price_8}" id="price_8" name="price_8[]">
-                              <input type="hidden" value="${price_9}" id="price_9" name="price_9[]">
-                              <input type="hidden" value="${price_10}" id="price_10" name="price_10[]">
-                              <input type="hidden" value="${price_11}" id="price_11" name="price_11[]">
-                              <input type="hidden" value="${price_12}" id="price_12" name="price_12[]"> 
 
-                              </tr>`;
-            document.getElementById(tableId).insertAdjacentHTML('beforeend', html_to_append);
-            var modal = document.getElementById('product_modal');  
-            var inputs = modal.querySelectorAll('input[type="number"]');  
-            inputs.forEach(function(input){
-            input.value = '';
-            }); 
+                var tableId = document.getElementById('table_id').value;
+                var optionVal = document.getElementById('modal_option_value');
+                var selectedOption = optionVal.options[optionVal.selectedIndex];
+                var dataId = selectedOption.getAttribute('data-id'); 
+                var product_qty = document.getElementById('product_qty').value; 
+                var price_1 = document.getElementById('modal_price_1').value; 
+                var price_2 = document.getElementById('modal_price_2').value; 
+                var price_3 = document.getElementById('modal_price_3').value; 
+                var price_4 = document.getElementById('modal_price_4').value; 
+                var price_5 = document.getElementById('modal_price_5').value; 
+                var price_6 = document.getElementById('modal_price_6').value; 
+                var price_7 = document.getElementById('modal_price_7').value; 
+                var price_8 = document.getElementById('modal_price_8').value; 
+                var price_9 = document.getElementById('modal_price_9').value; 
+                var price_10 = document.getElementById('modal_price_10').value; 
+                var price_11 = document.getElementById('modal_price_11').value; 
+                var price_12 = document.getElementById('modal_price_12').value;   
 
-            $('#product_modal').modal('hide');
-    }
-</script>
+                
+                var min = 100000; 
+                var max = 999999; 
+                var randomSixDigitNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+
+                var prices = [];
+                    $('input[name="price[]"]').each(function() {
+                        prices.push($(this).val());
+                    });
+                var html_to_append = `<tr id="option_value_list_${randomSixDigitNumber}">
+                                    <td>${optionVal.value}
+                                    <input type="hidden" name="option_value[]" value="${dataId}"> 
+                                    </td>
+                                    <td>${product_qty}
+                                    <input type="hidden" name="option_qty[]" value="${product_qty}"> 
+                                    </td>  
+                                    <td style="text-align:end">
+                                    <i class="fa fa-minus-circle" aria-hidden="true" onclick="removeOptionValue('option_value_list_${randomSixDigitNumber}')"></i>
+                                    <i class="fa fa-pencil-square mx-2" data-toggle="modal" data-target="#edit_product_modal" onclick="editOptionValue(${dataId}, ${product_qty}, '${prices}', 'option_value_list_${randomSixDigitNumber}')"></i>
+                                    </td> 
+                                    
+                                    <input type="hidden" value="${price_1}" id="price_1" name="price_1[]">
+                                    <input type="hidden" value="${price_2}" id="price_2" name="price_2[]">
+                                    <input type="hidden" value="${price_3}" id="price_3" name="price_3[]">
+                                    <input type="hidden" value="${price_4}" id="price_4" name="price_4[]">
+                                    <input type="hidden" value="${price_5}" id="price_5" name="price_5[]">
+                                    <input type="hidden" value="${price_6}" id="price_6" name="price_6[]">
+                                    <input type="hidden" value="${price_7}" id="price_7" name="price_7[]">
+                                    <input type="hidden" value="${price_8}" id="price_8" name="price_8[]">
+                                    <input type="hidden" value="${price_9}" id="price_9" name="price_9[]">
+                                    <input type="hidden" value="${price_10}" id="price_10" name="price_10[]">
+                                    <input type="hidden" value="${price_11}" id="price_11" name="price_11[]">
+                                    <input type="hidden" value="${price_12}" id="price_12" name="price_12[]"> 
+
+                                    </tr>`;
+                    document.getElementById(tableId).insertAdjacentHTML('beforeend', html_to_append);
+                    var modal = document.getElementById('product_modal');  
+                    var inputs = modal.querySelectorAll('input[type="number"]');  
+                    inputs.forEach(function(input){
+                    input.value = '';
+                    }); 
+
+                    $('#product_modal').modal('hide');
+            }
+        </script> -->
+<!-- this code is for option modal system which have removed now (end) -->
 
 <script>
     //  product description editor (start)
@@ -878,68 +879,69 @@
         } 
         // commented for testing purpose (end)
 
-        var option_value = $('input[name="option_value[]"]'); 
-        for (var i = 0; i < option_value.length; i++) { 
-            formData.append('option_value[]', option_value[i].value);
-        } 
+        //option value option removed 
+        // var option_value = $('input[name="option_value[]"]'); 
+        // for (var i = 0; i < option_value.length; i++) { 
+        //     formData.append('option_value[]', option_value[i].value);
+        // } 
 
-        var option_qty = $('input[name="option_qty[]"]'); 
-        for (var i = 0; i < option_qty.length; i++) { 
-            formData.append('option_qty[]', option_qty[i].value);
-        } 
+        // var option_qty = $('input[name="option_qty[]"]'); 
+        // for (var i = 0; i < option_qty.length; i++) { 
+        //     formData.append('option_qty[]', option_qty[i].value);
+        // } 
 
-        var price_1 = $('input[name="price_1[]"]'); 
-        for (var i = 0; i < price_1.length; i++) { 
-            formData.append('price_1[]', price_1[i].value);
-        } 
+        // var price_1 = $('input[name="price_1[]"]'); 
+        // for (var i = 0; i < price_1.length; i++) { 
+        //     formData.append('price_1[]', price_1[i].value);
+        // } 
 
-        var price_2 = $('input[name="price_2[]"]'); 
-        for (var i = 0; i < price_2.length; i++) { 
-            formData.append('price_2[]', price_2[i].value);
-        } 
+        // var price_2 = $('input[name="price_2[]"]'); 
+        // for (var i = 0; i < price_2.length; i++) { 
+        //     formData.append('price_2[]', price_2[i].value);
+        // } 
 
-        var price_3 = $('input[name="price_3[]"]'); 
-        for (var i = 0; i < price_3.length; i++) { 
-            formData.append('price_3[]', price_3[i].value);
-        } 
+        // var price_3 = $('input[name="price_3[]"]'); 
+        // for (var i = 0; i < price_3.length; i++) { 
+        //     formData.append('price_3[]', price_3[i].value);
+        // } 
 
-        var price_4 = $('input[name="price_4[]"]'); 
-        for (var i = 0; i < price_4.length; i++) { 
-            formData.append('price_4[]', price_4[i].value);
-        } 
+        // var price_4 = $('input[name="price_4[]"]'); 
+        // for (var i = 0; i < price_4.length; i++) { 
+        //     formData.append('price_4[]', price_4[i].value);
+        // } 
 
-        var price_5 = $('input[name="price_5[]"]'); 
-        for (var i = 0; i < price_5.length; i++) { 
-            formData.append('price_5[]', price_5[i].value);
-        } 
-        var price_6 = $('input[name="price_6[]"]'); 
-        for (var i = 0; i < price_6.length; i++) { 
-            formData.append('price_6[]', price_6[i].value);
-        } 
-        var price_7 = $('input[name="price_7[]"]'); 
-        for (var i = 0; i < price_7.length; i++) { 
-            formData.append('price_7[]', price_7[i].value);
-        } 
-        var price_8 = $('input[name="price_8[]"]'); 
-        for (var i = 0; i < price_8.length; i++) { 
-            formData.append('price_8[]', price_8[i].value);
-        } 
-        var price_9 = $('input[name="price_9[]"]'); 
-        for (var i = 0; i < price_9.length; i++) { 
-            formData.append('price_9[]', price_9[i].value);
-        } 
-        var price_10 = $('input[name="price_10[]"]'); 
-        for (var i = 0; i < price_10.length; i++) { 
-            formData.append('price_10[]', price_10[i].value);
-        } 
-        var price_11 = $('input[name="price_11[]"]'); 
-        for (var i = 0; i < price_11.length; i++) { 
-            formData.append('price_11[]', price_11[i].value);
-        } 
-        var price_12 = $('input[name="price_12[]"]'); 
-        for (var i = 0; i < price_12.length; i++) { 
-            formData.append('price_12[]', price_12[i].value);
-        } 
+        // var price_5 = $('input[name="price_5[]"]'); 
+        // for (var i = 0; i < price_5.length; i++) { 
+        //     formData.append('price_5[]', price_5[i].value);
+        // } 
+        // var price_6 = $('input[name="price_6[]"]'); 
+        // for (var i = 0; i < price_6.length; i++) { 
+        //     formData.append('price_6[]', price_6[i].value);
+        // } 
+        // var price_7 = $('input[name="price_7[]"]'); 
+        // for (var i = 0; i < price_7.length; i++) { 
+        //     formData.append('price_7[]', price_7[i].value);
+        // } 
+        // var price_8 = $('input[name="price_8[]"]'); 
+        // for (var i = 0; i < price_8.length; i++) { 
+        //     formData.append('price_8[]', price_8[i].value);
+        // } 
+        // var price_9 = $('input[name="price_9[]"]'); 
+        // for (var i = 0; i < price_9.length; i++) { 
+        //     formData.append('price_9[]', price_9[i].value);
+        // } 
+        // var price_10 = $('input[name="price_10[]"]'); 
+        // for (var i = 0; i < price_10.length; i++) { 
+        //     formData.append('price_10[]', price_10[i].value);
+        // } 
+        // var price_11 = $('input[name="price_11[]"]'); 
+        // for (var i = 0; i < price_11.length; i++) { 
+        //     formData.append('price_11[]', price_11[i].value);
+        // } 
+        // var price_12 = $('input[name="price_12[]"]'); 
+        // for (var i = 0; i < price_12.length; i++) { 
+        //     formData.append('price_12[]', price_12[i].value);
+        // } 
 
 
         // commented for new changes
