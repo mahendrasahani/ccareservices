@@ -71,7 +71,7 @@
                                                         @if(count($recent_purchase_history) != 0)
                                     @foreach($recent_purchase_history as $recent_purchase)
                                     <div class="recent-products">
-                                        <div class="recent-products-img">
+                                        <div class="recent-products-img mx-2">
                                             <img src="{{url($recent_purchase->getProduct->product_images == '' ? 'public/assets/both/placeholder/product.jpg' : 'public/'.$recent_purchase->getProduct->product_images[0])}}"alt="{{$recent_purchase->getProduct->product_name ?? ''}}">
                                         </div>
                                         <div class="recent-products-content">

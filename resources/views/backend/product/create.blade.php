@@ -207,6 +207,50 @@
                         </div>
 
 
+
+                        <div class="card" style="border: 1px solid #e8e8e8;">
+                            <div class="card-header d-flex justify-content-between"
+                                style="border-bottom : 1px solid #e8e8e8;">
+                                <h5 class="mb-0 pt-2">Inventory</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-info">Inventory Option</div>  
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="vendor_name">Vendor Name:</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" name="vendor_name" >
+                                            <option value="">--Select--</option> 
+                                            <option value="" data-name="">Options</option> 
+                                            <option value="" data-name="">Options</option> 
+                                            <option value="" data-name="">Options</option> 
+                                        </select>
+                                    </div> 
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="dateInput">Date of Purchase:</label>
+                                    <div class="col-md-9">
+                                        <input type="date" id="dateInput" name="dateInput" class="form-control">
+                                    </div> 
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="amountInput">Purchase Amount:</label>
+                                    <div class="col-md-9">
+                                         <input type="number" id="amountInput" name="amountInput" class="form-control">
+                                    </div> 
+                                </div> 
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="invoice_number">Invoice Number</label>
+                                    <div class="col-md-9">
+                                         <input type="text" id="amountInput" name="invoice_number" class="form-control">
+                                    </div> 
+                                </div>
+                                <div class="row" id="option_list_row"></div>
+                            </div>
+                        </div>
+
+
+
+
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header d-flex justify-content-between"
                                 style="border-bottom : 1px solid #e8e8e8;">
