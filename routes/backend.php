@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\MainCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ShippingChargeController;
 use App\Http\Controllers\Backend\ShippingMethodCntroller;
+use App\Http\Controllers\Backend\StockController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\VendorController;
 use App\Models\Backend\MainCategory;
@@ -90,6 +91,10 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/vendor/create', [VendorController::class, 'create'])->name('backend.vendor.create');
     Route::post('/admin/vendor/store', [VendorController::class, 'store'])->name('backend.vendor.store');
     Route::get('/admin/vendor/edit', [VendorController::class, 'edit'])->name('backend.vendor.edit');
+
+    Route::get('/admin/stock', [StockController::class, 'index'])->name('backend.stock.index');
+    Route::get('/admin/stock/create', [StockController::class, 'create'])->name('backend.stock.create');
+    Route::get('/admin/stock/edit', [StockController::class, 'edit'])->name('backend.stock.edit');
     
 
 });
