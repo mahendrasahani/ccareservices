@@ -15857,3 +15857,18 @@ font-size: 10px;
         height: 100%;
         /* object-fit: cover; */
     }
+
+     .vendor_uploaded_image {
+        max-width: 200px;
+        max-height: 200px;
+        margin: 10px;
+    }
+    .vendor_img{
+      width: 100px;
+      height: 100px;
+    }
+    .vendor_img img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
