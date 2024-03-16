@@ -235,15 +235,20 @@
 
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="orders.html">Orders</a></li>
-                            
-
+                            <li><a href="orders.html">Orders</a></li> 
                         </ul>
                     </li>
                     <li><a href="{{route('backend.vendor.index')}}">
                         <span>
                             <img src="{{url('public/assets/backend/images/png.icon/seller.png')}}" alt="">
                             <p class="sidebar-option">Vendors</p>
+                        </span>
+                        </a>
+                    </li>
+                    <li><a href="{{route('backend.stock.index')}}">
+                        <span>
+                            <img src="{{url('public/assets/backend/images/png.icon/payment-method.png')}}" alt="">
+                            <p class="sidebar-option">Stock</p>
                         </span>
                         </a>
                     </li>

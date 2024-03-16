@@ -327,44 +327,43 @@
 
                                                     <div class="">
                                                     <div class="month">
-                                                    <div class="price">
-                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="7" id="month_7"> 
-                                                    <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_7" name="price_7">
-                                                    </div>
-                                                    <p class="input_error" id="price_7_error"></p>
+                                                                <div class="price">
+                                                                <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="7" id="month_7"> 
+                                                                <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_7" name="price_7">
+                                                                </div>
+                                                                <p class="input_error" id="price_7_error"></p>
 
-                                                    <div class="price">
-                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="8" id="month_8"> 
-                                                    <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_8" name="price_8">
-                                                    </div>
-                                                    <p class="input_error" id="price_8_error"></p>
+                                                                <div class="price">
+                                                                <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="8" id="month_8"> 
+                                                                <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_8" name="price_8">
+                                                                </div>
+                                                                <p class="input_error" id="price_8_error"></p>
 
-                                                    <div class="price">
-                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="9" id="month_9"> 
-                                                    <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_9" name="price_9">
-                                                    </div>
-                                                    <p class="input_error" id="price_9_error"></p>
+                                                                <div class="price">
+                                                                <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="9" id="month_9"> 
+                                                                <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_9" name="price_9">
+                                                                </div>
+                                                                <p class="input_error" id="price_9_error"></p>
 
-                                                    <div class="price">
-                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="10" id="month_10"> 
-                                                    <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_10" name="price_10">
-                                                    </div>
-                                                    <p class="input_error" id="price_10_error"></p>
+                                                                <div class="price">
+                                                                <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="10" id="month_10"> 
+                                                                <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_10" name="price_10">
+                                                                </div>
+                                                                <p class="input_error" id="price_10_error"></p>
 
-                                                    <div class="price">
-                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="11" id="month_11"> 
-                                                    <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_11" name="price_11"> 
-                                                    </div>
-                                                    <p class="input_error" id="price_11_error"></p>
+                                                                <div class="price">
+                                                                <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="11" id="month_11"> 
+                                                                <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_11" name="price_11"> 
+                                                                </div>
+                                                                <p class="input_error" id="price_11_error"></p>
 
-                                                    <div class="price">
-                                                    <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="12" id="month_12">  
-                                                    <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_12" name="price_12"> 
-                                                    </div>
-                                                    <p class="input_error" id="price_12_error"></p>
-
- 
-                                                        </div>
+                                                                <div class="price">
+                                                                <input type="text" class="form-control" style="width:100%" name="month[]" disabled value="12" id="month_12">  
+                                                                <input type="number" min="0" style="width:100%" class="form-control" id="modal_price_12" name="price_12"> 
+                                                                </div>
+                                                                <p class="input_error" id="price_12_error"></p> 
+                                                                
+                                                                    </div>
                                                          
                                                         
                                                     </div>
