@@ -301,8 +301,32 @@ function displaySelectedImages(event)
         }
 
 
-    
+    // ------------vendor js------------------------------
+function previewImages()
+{
+    var preview = document.getElementById('vendor_img_preview');
+    var files = document.getElementById('vendor_image').files;
 
+    preview.innerHTML = '';
+
+    for (var i = 0; i < files.length; i++)
+    {
+        var file = files[i];
+        var reader = new FileReader();
+
+        reader.onload = function (e)
+        {
+            var img = document.createElement('img');
+            img.className = 'vendor_uploaded_image';
+            img.src = e.target.result;
+            preview.appendChild(img);
+        }
+
+        reader.readAsDataURL(file);
+    }
+}
+
+document.getElementById('vendor_image').addEventListener('change', previewImages, false);
  
 
   
