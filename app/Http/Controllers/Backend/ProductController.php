@@ -210,11 +210,9 @@ class ProductController extends Controller
         }
 
         public function update($id, Request $request){ 
-
             $product_name = $request->product_name;
             $min_qty = $request->min_qty;
             $max_qty = $request->max_qty;  
-
             $product_price = $request->product_price;
             $sku = $request->sku;
             $stock_status = $request->stock_status;

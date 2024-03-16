@@ -62,4 +62,9 @@ $(document).on("click", "#remove_cart_item", async function(){
     } 
 })
  
+
+
+ 
+
+
         

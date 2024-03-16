@@ -88,6 +88,7 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
 
     Route::get('/admin/vendor', [VendorController::class, 'index'])->name('backend.vendor.index');
     Route::get('/admin/vendor/create', [VendorController::class, 'create'])->name('backend.vendor.create');
+    Route::post('/admin/vendor/store', [VendorController::class, 'store'])->name('backend.vendor.store');
     Route::get('/admin/vendor/edit', [VendorController::class, 'edit'])->name('backend.vendor.edit');
     
 

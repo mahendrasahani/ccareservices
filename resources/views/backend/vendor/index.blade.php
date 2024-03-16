@@ -70,7 +70,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="main_table_body">
-                                   
+                                   @foreach($vendor_list as $vendor)
                                     <tr >
                                         <td style="display: table-cell;">
                                              1
@@ -81,16 +81,16 @@
                                                     </div>   
                                         </td>
                                         <td style="display: table-cell;">
-                                             dfsghtr    
+                                             {{$vendor->name}}    
                                         </td>
                                         <td style="display: table-cell;"> 
-                                            2587413698 
+                                            {{$vendor->phone}}
                                         </td>
                                         <td>
-                                             dfghjsdhhi@hfdjsn.vfndj
+                                             {{$vendor->email}}
                                         </td>
                                         <td> 
-                                            dgavgef
+                                            {{$vendor->business_name}}
                                         </td>
 
                                         <td class="text-left footable-last-visible ">
@@ -104,6 +104,7 @@
                                             </div>
                                         </td>
                                     </tr> 
+                                    @endforeach
                                 </tbody>
                             </table>
                             <div id="my_pagination">
