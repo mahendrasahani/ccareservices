@@ -63,10 +63,10 @@
                             <div class="product-details">
                                 <h1 class="fs-3">{{$product_detail->product_name}}</h1> 
                                 <div class="available d-flex">
-                                    <p class="mx-2">Availability:</p>
+                                    <p class="mx-2">Availability: {{$product_detail->getStock[0]['quantity']}}</p>
                                     @if($product_detail->getStock[0]['quantity'] == 0)<p class="text-danger" id="stock_status"> Out of Stock</p>
                                     @else
-                                    <p class="text-success" id="stock_status"> In Stock</p>
+                                    <p class="text-success" id="stock_status"> In Stock {{$product_detail->getStock[0]['quantity'] <= 5 ? '(Only'.$product_detail->getStock[0]['quantity'].' left)': ''}}</p>
                                     @endif
                                 </div>
                             </div>

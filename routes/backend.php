@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ShippingChargeController;
 use App\Http\Controllers\Backend\ShippingMethodCntroller;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\VendorController;
 use App\Models\Backend\MainCategory;
 
 // -------------------------After Admin login (start) ------------------------------------------------------------
@@ -85,6 +86,10 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::post('/admin/shipping-method/update/{id}', [ShippingChargeController::class, 'update'])->name('backend.shipping_charge.update');
     Route::get('/admin/shipping-method/destroy', [ShippingChargeController::class, 'destroy'])->name('backend.shipping_charge.destroy');
 
+    Route::get('/admin/vendor', [VendorController::class, 'index'])->name('backend.vendor.index');
+    Route::get('/admin/vendor/create', [VendorController::class, 'create'])->name('backend.vendor.create');
+    Route::get('/admin/vendor/edit', [VendorController::class, 'edit'])->name('backend.vendor.edit');
+    
 
 });
 // -------------------------After Admin login (end) ------------------------------------------------------------

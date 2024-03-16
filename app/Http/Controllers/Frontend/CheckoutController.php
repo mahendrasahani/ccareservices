@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\BillingAddress;
 use App\Models\Backend\ShippingAddress;
 use App\Models\Backend\ShippingCharge;
+use App\Models\Frontend\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -13,12 +14,16 @@ use Illuminate\Support\Facades\Session;
 class CheckoutController extends Controller
 {
     public function checkoutPageView(){
+         $cart_item = Cart::where('user_id', Auth::user()->id)->get();
+         if(count($cart_item) != 0){
         $shipping_address = ShippingAddress::where('user_id', Auth::user()->id)->first();
         $billing_address = BillingAddress::where('user_id', Auth::user()->id)->first(); 
         $paid_shipping_charges = ShippingCharge::where('status', 1)->where('id', '!=', 1)->get();  
-        $free_shipping_charges = ShippingCharge::where('status', 1)->where('id', 1)->first();  
-
+        $free_shipping_charges = ShippingCharge::where('status', 1)->where('id', 1)->first();   
         return view('frontend.checkout', compact('shipping_address', 'billing_address', 'free_shipping_charges', 'paid_shipping_charges'));
+         }else{
+            return redirect('/cart');
+         }
     }
 
     public function submitCheckoutAddress(Request $request){
@@ -111,7 +116,6 @@ class CheckoutController extends Controller
             }
        }
        Session::put('shipping_charge', $shipping_charge);
-       
         return view('frontend.account.payment_method', compact('shipping_charge'));  
     }
 

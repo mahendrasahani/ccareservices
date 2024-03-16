@@ -19,6 +19,7 @@ class OrderProduct extends Model
         "total_price",
         "option_id",
         "option_value_id", 
+        "stock_id", 
     ];
 
     public function getProduct(){

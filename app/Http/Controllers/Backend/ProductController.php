@@ -544,7 +544,7 @@ class ProductController extends Controller
                 return response()->json([
                     "status" => 200,
                     "message" => "removed",
-                    "cart_item" => $cart_item
+                    "cart_item" => $cart_item,
                 ]);
             }
             }else{

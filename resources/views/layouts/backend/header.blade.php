@@ -240,7 +240,7 @@
 
                         </ul>
                     </li>
-                    <li><a href="Vendors.html">
+                    <li><a href="{{route('backend.vendor.index')}}">
                         <span>
                             <img src="{{url('public/assets/backend/images/png.icon/seller.png')}}" alt="">
                             <p class="sidebar-option">Vendors</p>

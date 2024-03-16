@@ -22,8 +22,7 @@
 </section>
 <!----------------------------------------------------- -Cart checkout-------------------------- -->
 @if($cart_product != '')
-<section class=""> 
-  <!-- <h4>Shoping Cart is Empty</h4> --> 
+<section class="">  
   <div class="container"> 
     <div class="row d-flex justify-content-center my-4">
       <div class="col-md-12">
@@ -41,7 +40,6 @@
                     <th>Month</th>
                     <th>Quantity</th>
                     <th class="text-right">Subtotal</th>
-                     
                   </tr>
                 </thead>
                 <tbody>

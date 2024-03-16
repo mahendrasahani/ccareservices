@@ -4,10 +4,12 @@ $(async function () {
         currency: 'INR',
       });
 async function paymentPage(){
+
     let sub_total = 0;
     let final_amount_total = 0; 
     let paymentData = await fetch(baseUrl+"/get-address-payment-detail");
     let response = await paymentData.json()
+    console.log(response);
     let address_table = `
     <tbody>  
         <tr>

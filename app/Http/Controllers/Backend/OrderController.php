@@ -8,6 +8,7 @@ use App\Models\Backend\BillingAddress;
 use App\Models\Backend\Order;
 use App\Models\Backend\OrderProduct;
 use App\Models\Backend\ShippingAddress;
+use App\Models\Backend\Stock;
 use App\Models\Frontend\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,7 @@ class OrderController extends Controller
             $shipping_address = ShippingAddress::where('user_id', Auth::user()->id)->first();
             $billing_address = BillingAddress::where('user_id', Auth::user()->id)->first();
             $latest_order = Order::latest()->first();
-            $new_order_id = $latest_order ? substr($latest_order->order_id, 3) + 1 : 1;
+            $new_order_id = $latest_order ? substr($latest_order->order_id, 3) + 1 : 1000001;
            $new_order_id = Order::create([
                     "user_id" => Auth::user()->id,
                     "order_id" => 'CCS'.$new_order_id,
@@ -61,8 +62,14 @@ class OrderController extends Controller
                         "price" => $item->price,
                         "month" => $item->month,
                         "option_value_id" => $option_value_name,
-                        "total_price" => $item->price * $item->quantity 
-                    ]);
+                        "total_price" => $item->price * $item->quantity,
+                        "stock_id" => $item->stock_id
+                    ]); 
+                    $stock_item = Stock::findOrFail($item->stock_id);
+                    if ($stock_item->quantity >= $item->quantity) { 
+                        $stock_item->quantity -= $item->quantity; 
+                        $stock_item->save(); 
+                    } 
                 } 
                 Session::forget('delivery_charge');
                 $cart_items = Cart::with('getProduct:id,product_name')->where('user_id', Auth::user()->id)->delete(); 
