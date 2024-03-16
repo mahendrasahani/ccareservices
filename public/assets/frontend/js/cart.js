@@ -34,7 +34,7 @@ $(document).ready(async function(){
     } catch (error) {
         console.log(error);
       }
-});
+}); 
 
 async function getDecryptId(encryptId) {
     try {

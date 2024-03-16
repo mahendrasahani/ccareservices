@@ -67,9 +67,7 @@
                     <td> ₹ {{number_format($product->price, 2)}}/- </td>
                     <td>{{$product->month}} Month </td>
                     <td>
-                      <div class="col-lg-4">
-                        <input type="number" min="0" step="1" class="form-control" name="commisson_amounts_2" value="{{$product->quantity}}">
-                      </div>
+                       {{$product->quantity}}
                     </td> 
                     <td>₹ {{number_format($product->price * $product->quantity, 2)}}/- <br><button class="remover_cart" id="remove_cart_item" data-product_id="{{$product->product_id}}">Delete</button></td>
                   </tr>

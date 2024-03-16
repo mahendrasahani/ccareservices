@@ -1334,7 +1334,11 @@ section.dahboard-wrapper {
 }
 
 .recent-products-img {
-  width: 60px;
+    width: 60px;
+    height: 60px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .recent {
@@ -1840,4 +1844,18 @@ button.swal2-confirm.swal2-styled{
     }
     .payment_method_table{
         width:100%; 
+    }
+
+
+    .payment-seal {
+    height: 200px;
+        width: 327px;
+}
+    .payment-seal img{
+      width: 100%;
+      height: 100%;
+    }
+
+    .discount-details td{
+      text-align: center;
     }

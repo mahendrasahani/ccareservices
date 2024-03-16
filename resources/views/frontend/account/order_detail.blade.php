@@ -270,7 +270,7 @@
                             <div class="col-md-6">
                                 <div class="payment-seal" style="text-align: center;">
                                 @if($order->payment_status == 'unpaid')
-
+                                        <img src="https://t3.ftcdn.net/jpg/03/53/98/42/360_F_353984215_cAK0GhSRc5MVzvj2iFljGjJmhs3w5YlY.jpg" alt="">
                                 @elseif($order->payment_status == 'paid')
                                     <img src="https://shop.activeitzone.com/public/assets/img/paid_sticker.svg" alt="">
                                     @endif
