@@ -19,7 +19,7 @@
                                 <h4 class="mb-0 h6">Vendor Information</h4>
                             </div>
                          
-                            <form enctype="multipart/form-data" action="{{route('backend.vendor.store')}}" method="POST">
+                            <form enctype="multipart/form-data" >
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group row">

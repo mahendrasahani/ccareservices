@@ -227,17 +227,17 @@
                     </li>
 
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a href="{{route('backend.order.index')}}" aria-expanded="false">
                             <span class="nav-text">
                                 <img src="{{url('public/assets/backend/images/png.icon/package.png')}}" class="">
                                 <p class="sidebar-option">Orders</p>
                             </span>
 
                         </a>
-                        <ul aria-expanded="false">
+                        <!-- <ul aria-expanded="false">
                             <li><a href="orders.html">Orders</a></li> 
                         </ul>
-                    </li>
+                    </li> -->
                     <li><a href="{{route('backend.vendor.index')}}">
                         <span>
                             <img src="{{url('public/assets/backend/images/png.icon/seller.png')}}" alt="">

@@ -1,17 +1,7 @@
 @extends('layouts/backend/main')
 @section('main-section')
 
-<style>
-    .product_img{
-        width: 200px;
-        height:200px;
-    }
-    .product_img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-</style>
+ 
 <div class="content-body">
             <div class="top-set">
                 <div class="container">
@@ -22,7 +12,7 @@
                                     <div class="row align-items-center">
                                         <div class="col-lg-auto"> 
                                             <div class="product_img">
-                                                <img src="{{$product_detail->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product_detail->product_images[0])}}"
+                                                <img src="{{$product_detail->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/' . $product_detail->product_images[0])}}"
                                                     class="img-fluid">
                                             </div>
                                              
@@ -59,7 +49,7 @@
                                                     @if($product_detail->discount_type == 'flat')
                                                     {{number_format($product_detail->regular_price - $product_detail->discount, 2)}}
                                                     @else
-                                                    {{number_format(($product_detail->regular_price *  $product_detail->discount) / 100, 2)}}
+                                                    {{number_format(($product_detail->regular_price * $product_detail->discount) / 100, 2)}}
 
                                                     @endif 
                                               
@@ -130,9 +120,9 @@
                                     <h5 class="mb-0 h6">Gallery</h5>
                                 </div>
                                 <div class="card-body d-flex justify-content-around">
-                                @if($product_detail->product_images !=  '')
+                                @if($product_detail->product_images != '')
                                 @foreach($product_detail->product_images as $image)
-                                <img src="{{url('public/'.$image)}}" class="img-fluid w-25 m-1">  
+                                <img src="{{url('public/' . $image)}}" class="img-fluid w-25 m-1">  
                                 @endforeach
                                 @else
                                 <p>No Images Available</p>

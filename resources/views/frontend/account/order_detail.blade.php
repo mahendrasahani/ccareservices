@@ -203,10 +203,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="track-order">
-                    <div class="order-details">
-                        <h4>The Shop</h4>
-                    </div>
+                <div class="track-order"> 
                     <div class="row p-2">
                         <div class="col-md-12 hh-grayBox pt45 pb20">
                             <div class="row justify-content-between">

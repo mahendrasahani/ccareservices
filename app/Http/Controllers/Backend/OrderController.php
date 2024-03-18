@@ -17,6 +17,25 @@ use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
+
+      public function index(){
+        return view('backend.order.index');
+    }
+
+    public function edit()
+    {
+        return view('backend.order.edit');
+
+    }
+
+    public function viewProduct()
+    {
+        return view('backend.order.view');
+
+    }
+
+
+
     public function placeOrder(Request $request){
         $payment_mode = $request->paymentMethod;
         if($payment_mode == 'cash_on_delivery'){ 
@@ -100,4 +119,7 @@ class OrderController extends Controller
         // return $order;
         return view('frontend.account.order_detail', compact('order'));
     }
+
+
+  
 }

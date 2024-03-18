@@ -19,23 +19,18 @@
                                 <h4 class="mb-0 h6">Vendor Information</h4>
                             </div>
                          
-                            <form enctype="multipart/form-data" id="create_product_form"
-                                onsubmit="validateAndSubmit(event)">
+                            <form enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-from-label">Vendor Name <span
-                                                class="text-danger">*</span> <i class="las la-language text-danger"
-                                                title="Translatable"></i></label>
+                                        <label class="col-md-3 col-from-label">Vendor Name <span class="text-danger">*</span> <i class="las la-language text-danger" title="Translatable"></i></label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" name="product_name"
-                                                placeholder="Your Name" id="product_name" >
+                                            <input type="text" class="form-control" name="product_name" placeholder="Your Name" id="product_name" >
                                             <span id="productNameError" class="formFiedllerror"></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-from-label">Email <span
-                                                class="text-danger">*</span> <i class="las la-language text-danger"
+                                        <label class="col-md-3 col-from-label">Email <span class="text-danger">*</span> <i class="las la-language text-danger"
                                                 title="Translatable"></i></label>
                                         <div class="col-md-9">
                                              <input type="email" id="emailInput" name="emailInput" class="form-control" placeholder="Your Email">
@@ -43,8 +38,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-from-label">Phone no.     <span
-                                                class="text-danger">*</span> <i class="las la-language text-danger"
+                                        <label class="col-md-3 col-from-label">Phone no.     <span class="text-danger">*</span> <i class="las la-language text-danger"
                                                 title="Translatable"></i></label>
                                         <div class="col-md-9">
                                              <input type="tel" id="phoneInput" name="phoneInput" class="form-control" placeholder="Your Phone Number">
@@ -52,8 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-from-label">Business Name <span
-                                                class="text-danger">*</span> <i class="las la-language text-danger"
+                                        <label class="col-md-3 col-from-label">Business Name <span class="text-danger">*</span> <i class="las la-language text-danger"
                                                 title="Translatable"></i></label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" name="Business_name"
@@ -62,8 +55,7 @@
                                         </div>
                                     </div> 
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-from-label">Address<span
-                                                class="text-danger">*</span> <i class="las la-language text-danger"
+                                        <label class="col-md-3 col-from-label">Address<span class="text-danger">*</span> <i class="las la-language text-danger"
                                                 title="Translatable"></i></label>
                                         <div class="col-md-9">
                                             <input type="text" id="addressInput" name="addressInput" class="form-control" placeholder="Your Address">
@@ -71,8 +63,7 @@
                                         </div>
                                     </div> 
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-from-label">Profile Image<span
-                                                class="text-danger">*</span> <i class="las la-language text-danger"
+                                        <label class="col-md-3 col-from-label">Profile Image<span class="text-danger">*</span> <i class="las la-language text-danger"
                                                 title="Translatable"></i></label>
                                         <div class="col-md-9">
                                             <input type="file" id="vendor_image" class="form-control" name="vendor_image[]" multiple>
