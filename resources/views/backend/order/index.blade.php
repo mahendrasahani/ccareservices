@@ -110,12 +110,10 @@
                                                                         <a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage" href="{{route('backend.order.edit', [$order->id])}}" title="View">
                                                                             <i class="fa-regular fa-eye"></i>
                                                                         </a>
-                                                                        <a class="btn btn-success btn-sm text-white" style="border-radius: 100px; background-color: #0abb75;" title="Print Invoice" href="javascript:void(0)" id="printIcon" >
+                                                                        <a class="btn btn-success btn-sm text-white" style="border-radius: 100px; background-color: #0abb75;" title="Print Invoice" href="{{route('backend.invoice.index', [$order->id])}}" id="printIcon" >
                                                                             <i class="fa-solid fa-print" style="cursor: pointer;"></i>
                                                                         </a> 
-                                                                        <a class="btn btn-success btn-icon btn-sm text-white" style="border-radius: 100px; background-color: #25bcf1;"  title="Print Invoice" href="javascript:void(0)">
-                                                                            <i class="fa-solid fa-download"></i>
-                                                                        </a>
+                                                                      
                                                                         
                                                                             <a href=""
                                                                                     class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete delete_ico"

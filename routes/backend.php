@@ -3,6 +3,7 @@ use App\Http\Controllers\Backend\AdminDashboardController;
 use App\Http\Controllers\Backend\AttributeController;
 use App\Http\Controllers\Backend\AttributeValueController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\InvoiceController;
 use App\Http\Controllers\Backend\MainCategoryController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
@@ -107,6 +108,7 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/order/edit/{id}', [OrderController::class, 'edit'])->name('backend.order.edit');
     Route::post('/admin/order/update/{id}', [OrderController::class, 'update'])->name('backend.order.update');
 
+    Route::get('/admin/invoice/{id}', [InvoiceController::class, 'index'])->name('backend.invoice.index');
 
 });
 // -------------------------After Admin login (end) ------------------------------------------------------------
