@@ -65,35 +65,30 @@
                                     </tr>
                                 </thead>
                                 <tbody id="main_table_body"> 
+                                    @php
+                                        $sn = 1;
+                                    @endphp
+                                    @foreach($stock_list as $stock)
                                     <tr >
-                                        <td style="display: table-cell;">
-                                             1
-                                        </td>
-                                        <td style="display: table-cell;"> 
-                                                    gvs   
-                                        </td>
-                                        <td style="display: table-cell;">
-                                             dfsghtr    
-                                        </td>
-                                        <td style="display: table-cell;"> 
-                                            2587413698 
-                                        </td>
-                                        <td>
-                                          35
-                                        </td> 
+                                        <td style="display: table-cell;">{{$sn++}}</td>
+                                        <td style="display: table-cell;">{{$stock->getProduct->product_name}}</td>
+                                        <td style="display: table-cell;">{{$stock->getAttr->name}}</td>
+                                        <td style="display: table-cell;">{{$stock->getAttrValue->name}}</td>
+                                        <td>35</td> 
                                         <td class="text-left footable-last-visible ">
                                             <div class="d-flex justify-content-center "> 
-                                            <a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2" href="{{route('backend.stock.edit')}}" title="Edit">
+                                            <a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2" href="{{route('backend.stock.edit', [$stock->id])}}" title="Edit">
                                                 <i class="fa-regular fa-pen-to-square text-white"></i>
                                             </a> 
                                             <button value="" class="btn btn-icon btn-sm delete_ico" id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
                                             </div>
                                         </td>
                                     </tr> 
+                                    @endforeach
                                 </tbody>
                             </table>
                             <div id="my_pagination">
-                                
+                                {{$stock_list->links('pagination::bootstrap-5')}}
                             </div>
                         </div>
                     </div>
@@ -102,7 +97,28 @@
         </div>
     </div>
 </div> 
+@section('javascript-section')
+@if(Session::has('stock_added'))
+        <script> 
+            Swal.fire({
+            title: "Success!",
+            text: "{{Session::get('stock_added')}}",
+            icon: "success",
+            timer: 5000,
+            });
+        </script>
+        @elseif(Session::has('stock_updated'))
+        <script> 
+            Swal.fire({
+            title: "Success!",
+            text: "{{Session::get('stock_updated')}}",
+            icon: "success",
+            timer: 5000,
+            });
+        </script>   
+        
+        @endif
 
  
- 
+@endsection
 @endsection

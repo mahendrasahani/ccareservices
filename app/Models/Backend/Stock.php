@@ -31,7 +31,12 @@ class Stock extends Model
         'price_10',
         'price_11',
         'price_12', 
-        'status',
+        'vendor_id',
+        'date_of_purchase',
+        'purchase_amount',
+        'invoice_no',
+        'stock_staus',
+        'status', 
     ];
 
     protected $casts =[
@@ -52,5 +57,14 @@ public function getProduct(){
 public function getCart(){
     return $this->hasMany(Cart::class, 'stock_id');
 }
+
+public function getAttr(){
+    return $this->hasOne(Attribute::class, 'id', 'attribute_id');
+}
+
+public function getAttrValue(){
+    return $this->hasOne(AttributeValue::class, 'id', 'attribute_value_id');
+}
+
 
 }

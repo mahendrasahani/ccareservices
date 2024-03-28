@@ -298,13 +298,13 @@
                                 <div class="final-order-details">
                                     <div class="single-order-final">
                                         <p><b>Coupon discount :</b></p>
-                                        <p><b>₹{{number_format(0, 2)}}</b></p>
+                                        <p><b>₹{{number_format($order->promo_discount, 2)}}</b></p>
                                     </div>
                                 </div>
                                 <div class="final-order-details total-final">
                                     <div class="single-order-final">
                                         <p><b>Total :</b></p>
-                                        <p><b>₹{{number_format($order->total, 2)}}</b></p>
+                                        <p><b>₹{{number_format($order->total - $order->promo_discount, 2)}}</b></p>
                                     </div>
                                 </div>
                                  

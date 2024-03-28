@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Attribute;
 use App\Models\Backend\AttributeValue;
 use App\Models\Backend\BillingAddress;
 use App\Models\Backend\Order;
@@ -17,6 +18,31 @@ use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
+    public function index(){
+        $orders = Order::orderBy('id', 'desc')->get();
+        return view('backend.order.index', compact('orders'));
+    }
+
+    public function edit($id){
+        $order = Order::with(['getOrderProduct:order_id,product_name,quantity,price,month,total_price,product_id,option_id,option_value_id', 'getOrderProduct.getProduct:id,product_images'])->where('id', $id)->first(); 
+        // return $order;
+        return view('backend.order.edit', compact('order')); 
+    }
+
+    public function update(Request $request, $id){
+        $payment_status = $request->payment_status;
+        $order_status = $request->order_status;
+        $discount = $request->discount; 
+        Order::where('id', $id)->update([
+            "payment_status" => $payment_status,
+            "order_status" => $order_status,
+            "promo_discount" => $discount
+        ]); 
+        return redirect()->route('backend.order.index')->with('order_updated', "Order has been updated!");
+
+    }
+
+
     public function placeOrder(Request $request){
         $payment_mode = $request->paymentMethod;
         if($payment_mode == 'cash_on_delivery'){ 
@@ -52,7 +78,9 @@ class OrderController extends Controller
                     ])->id; 
 
                 foreach ($cart_items as $item) { 
-                    $option_value_name = AttributeValue::find($item->option_value_id)->first()->name;
+                    $option_value = AttributeValue::where('id', $item->option_value_id)->first();
+                    $option = Attribute::where('id', $item->option_id)->first();
+
                     OrderProduct::create([
                         "user_id" => Auth::user()->id,
                         "order_id" => $new_order_id,
@@ -61,7 +89,8 @@ class OrderController extends Controller
                         "quantity" => $item->quantity,
                         "price" => $item->price,
                         "month" => $item->month,
-                        "option_value_id" => $option_value_name,
+                        "option_id" => $option->name,
+                        "option_value_id" => $option_value->name,
                         "total_price" => $item->price * $item->quantity,
                         "stock_id" => $item->stock_id
                     ]); 
@@ -82,8 +111,7 @@ class OrderController extends Controller
 
             }
             // code for order with payment gateways -----------------------------------------------------------------------------------------
-    }
-
+    } 
     public function purchaseHistory(){
         $data['purchase_history'] = Order::with('getOrderProduct:order_id,product_name')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get(); 
         // return $data;

@@ -14,6 +14,11 @@ class Attribute extends Model
     ];
     
     public function attributeValues(){
-        return $this->hasmany(AttributeValue::class, 'attribute_id', 'id');
+        return $this->hasMany(AttributeValue::class, 'attribute_id', 'id');
     }
+
+    public function getStock(){
+        return $this->belongsTo(Stock::class, 'attribute_id', 'id');
+    }
+
 }

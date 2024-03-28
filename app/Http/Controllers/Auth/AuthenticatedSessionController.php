@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Backend\AttributeValue;
 use App\Models\Frontend\Cart;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
@@ -35,12 +36,14 @@ class AuthenticatedSessionController extends Controller
         if($cart != '') {
             foreach($cart as $index => $item) {
                 $product = Cart::where('product_id', $cart[$index]['product_id'])->where('user_id', Auth::user()->id)->first();
+                $attribute = AttributeValue::where('id', $cart[$index]['option_value_id'])->first()->attribute_id;
                 if($product){
                     Cart::where('user_id', Auth::user()->id)->where('product_id', $cart[$index]['product_id'])->update([
                         'user_id' => Auth::user()->id,
                         'product_id' => $cart[$index]['product_id'],
                         'quantity' => $cart[$index]['quantity'],  
                         'delivery_date' => $cart[$index]['delivery_date'],
+                        'option_id' => $attribute,
                         'option_value_id' => $cart[$index]['option_value_id'],
                         'month' => $cart[$index]['month'],
                         'price' => $cart[$index]['price'],
@@ -53,6 +56,7 @@ class AuthenticatedSessionController extends Controller
                     'product_id' => $cart[$index]['product_id'],
                     'quantity' => $cart[$index]['quantity'],  
                     'delivery_date' => $cart[$index]['delivery_date'],
+                    'option_id' => $attribute,
                     'option_value_id' => $cart[$index]['option_value_id'],
                     'month' => $cart[$index]['month'],
                     'price' => $cart[$index]['price'],

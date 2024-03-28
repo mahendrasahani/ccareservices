@@ -384,46 +384,7 @@
 
             <!------------------------------------ Modal End ---------------------------------->
 
-            <!--------------------------------- inventory code (start) ------------------------->
-                        <!-- <div class="card" style="border: 1px solid #e8e8e8;">
-                            <div class="card-header d-flex justify-content-between"
-                                style="border-bottom : 1px solid #e8e8e8;">
-                                <h5 class="mb-0 pt-2">Inventory</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="alert alert-info">Inventory Option</div>  
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="vendor_name">Vendor Name:</label>
-                                    <div class="col-md-9">
-                                        <select class="form-control" name="vendor_name" required>
-                                            <option value="">--Select--</option> 
-                                            <option value="">Options</option> 
-                                            <option value="">Options</option> 
-                                            <option value="">Options</option> 
-                                        </select>
-                                    </div> 
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="date_of_purchase">Date of Purchase:</label>
-                                    <div class="col-md-9">
-                                        <input type="date" id="date_of_purchase" name="date_of_purchase" class="form-control" required>
-                                    </div> 
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="purchase_amount">Purchase Amount:</label>
-                                    <div class="col-md-9">
-                                         <input type="number" id="purchase_amount" name="purchase_amount" class="form-control" required>
-                                    </div> 
-                                </div> 
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label" for="invoice_number">Invoice Number</label>
-                                    <div class="col-md-9">
-                                         <input type="text" id="invoice_number" name="invoice_number" class="form-control" required>
-                                    </div> 
-                                </div> 
-                            </div>
-                        </div> -->
-            <!-------------------------------- inventory code (end) ------------------------------>
+          
 
 
                         <div class="container">

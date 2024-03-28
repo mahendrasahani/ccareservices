@@ -235,7 +235,7 @@
 
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="orders.html">Orders</a></li> 
+                            <li><a href="{{route('backend.order.index')}}">Orders</a></li> 
                         </ul>
                     </li>
                     <li><a href="{{route('backend.vendor.index')}}">

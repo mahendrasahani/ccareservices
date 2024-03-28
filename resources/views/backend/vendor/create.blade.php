@@ -55,7 +55,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Profile Picture<span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <input type="file" id="vendor_image" class="form-control" name="vendor_image" required>
+                                            <input type="file" id="vendor_image" class="form-control" name="vendor_image">
                                             <div id="vendor_img_preview"></div>  
                                         </div> 
                                     </div> 

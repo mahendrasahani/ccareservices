@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\AttributeValue;
 use App\Models\Backend\Stock;
 use App\Models\Frontend\Cart;
 use Auth;
@@ -31,6 +32,7 @@ class CartController extends Controller
         $price = $request->price;
         $stock_id = $request->stock_id;
         $authentication = $request->authentication; 
+        $option = AttributeValue::where('id', $request->option_value_id)->first()->attribute_id;
         // $cart = session()->get('cart'); 
         if($authentication == "false"){
             $cart = session()->get('cart');  
@@ -79,6 +81,7 @@ class CartController extends Controller
                             'product_id' => $cart[$index]['product_id'],
                             'quantity' => $cart[$index]['quantity'],  
                             'delivery_date' => $cart[$index]['delivery_date'],
+                            'option_id' => $option,
                             'option_value_id' => $cart[$index]['option_value_id'],
                             'month' => $cart[$index]['month'],
                             'price' => $cart[$index]['price'],
@@ -94,6 +97,7 @@ class CartController extends Controller
                             'product_id' => $product_id,
                             'quantity' => $quantity,
                             'delivery_date' => $delivery_date,
+                            'option_id' => $option,
                             'option_value_id' => $option_value_id,
                             'month' => $month,
                             'price' => $price,
@@ -106,6 +110,7 @@ class CartController extends Controller
                         'product_id' => $product_id,
                         'quantity' => $quantity,
                         'delivery_date' => $delivery_date,
+                        'option_id' => $option,
                         'option_value_id' => $option_value_id,
                         'month' => $month,
                         'price' => $price,

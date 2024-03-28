@@ -56,6 +56,7 @@
                                 </div>
                             </div>
                         </div>
+                        @php if(isset($_GET['page'])){$page_number = $_GET['page'];}else{ $page_number = 1;} $count = $page_number * 10 - 9;  @endphp 
                         <div class="card-body">
                             <table class="table table-bordered mb-0">
                                 <thead>
@@ -71,14 +72,14 @@
                                 </thead>
                                 <tbody id="main_table_body">
                                    @foreach($vendor_list as $vendor)
-                                    <tr >
+                                    <tr id="vendor_list_{{$vendor->id}}">
                                         <td style="display: table-cell;">
-                                             1
+                                             {{$count++}}
                                         </td>
                                         <td style="display: table-cell;"> 
-                                                    <div class="vendor_img">
-                                                        <img src="https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg">
-                                                    </div>   
+                                            <div class="vendor_img">
+                                                <img src="{{url($vendor->profile_image != "" ? $vendor->profile_image:"public\assets\backend\images\profile\default-user.png")}}">
+                                            </div>   
                                         </td>
                                         <td style="display: table-cell;">
                                              {{$vendor->name}}    
@@ -96,10 +97,10 @@
                                         <td class="text-left footable-last-visible ">
                                             <div class="d-flex justify-content-center "> 
                                             <a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2"
-                                                href="{{route('backend.vendor.edit')}}" title="Edit">
+                                                href="{{route('backend.vendor.edit', [$vendor->id])}}" title="Edit">
                                                 <i class="fa-regular fa-pen-to-square text-white"></i>
                                             </a> 
-                                            <button value="" class="btn btn-icon btn-sm delete_ico"
+                                            <button value="{{$vendor->id}}" class="btn btn-icon btn-sm delete_ico"
                                             id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
                                             </div>
                                         </td>
@@ -108,8 +109,8 @@
                                 </tbody>
                             </table>
                             <div id="my_pagination">
-                                
-                            </div>
+                                        {{$vendor_list->links('pagination::bootstrap-5')}}
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -118,6 +119,72 @@
     </div>
 </div> 
 
- 
+@section('javascript-section')
+@if(Session::has('vendor_created'))
+        <script> 
+            Swal.fire({
+            title: "Success!",
+            text: "{{Session::get('vendor_created')}}",
+            icon: "success",
+            timer: 5000,
+            });
+        </script>
+        @elseif(Session::has('vendor_updated'))
+        <script> 
+            Swal.fire({
+            title: "Success!",
+            text: "{{Session::get('vendor_updated')}}",
+            icon: "success",
+            timer: 5000,
+            });
+        </script>   
+        @endif
+
+        <script> 
+            $(document).on('click', '#delete_btn', function(){
+                const id = $(this).val(); 
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{route('backend.vendor.destroy')}}",
+                            data:{'id':id},
+                            type:"GET",
+                            success:function(response){ 
+                                if(response.message == 'success'){
+                                Swal.fire({
+                                title: "Deleted!",
+                                text: "Vendor has been deleted.",
+                                icon: "success"
+                                });
+                                $("#vendor_list_"+id).hide(); 
+                            }else if(response.message == 'already_in_use'){ 
+                                Swal.fire({
+                                title: "Warning!",
+                                text: "Vendor already in use.",
+                                icon: "warning"
+                                });
+                            }else{
+                                Swal.fire({
+                                title: "Failed!",
+                                text: "Something went wrong.",
+                                icon: "error"
+                                });
+                            }
+
+                    }
+                })       
+                    }
+                    });  
+            });
+        </script>
+@endsection
  
 @endsection

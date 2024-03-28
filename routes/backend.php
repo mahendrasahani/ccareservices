@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\AttributeController;
 use App\Http\Controllers\Backend\AttributeValueController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\MainCategoryController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ShippingChargeController;
 use App\Http\Controllers\Backend\ShippingMethodCntroller;
@@ -90,12 +91,22 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/vendor', [VendorController::class, 'index'])->name('backend.vendor.index');
     Route::get('/admin/vendor/create', [VendorController::class, 'create'])->name('backend.vendor.create');
     Route::post('/admin/vendor/store', [VendorController::class, 'store'])->name('backend.vendor.store');
-    Route::get('/admin/vendor/edit', [VendorController::class, 'edit'])->name('backend.vendor.edit');
+    Route::get('/admin/vendor/edit/{id}', [VendorController::class, 'edit'])->name('backend.vendor.edit');
+    Route::post('/admin/vendor/update/{id}', [VendorController::class, 'update'])->name('backend.vendor.update');
+    Route::get('/admin/vendor/destroy', [VendorController::class, 'destroy'])->name('backend.vendor.destroy');
 
     Route::get('/admin/stock', [StockController::class, 'index'])->name('backend.stock.index');
     Route::get('/admin/stock/create', [StockController::class, 'create'])->name('backend.stock.create');
-    Route::get('/admin/stock/edit', [StockController::class, 'edit'])->name('backend.stock.edit');
+    Route::post('/admin/stock/store', [StockController::class, 'store'])->name('backend.stock.store');
+    Route::get('/admin/stock/edit/{id}', [StockController::class, 'edit'])->name('backend.stock.edit');
+    Route::post('/admin/stock/update/{id}', [StockController::class, 'update'])->name('backend.stock.update');
+    Route::get('/admin/stock/variant-value-list', [StockController::class, 'getVariantValueList'])->name('backend.stock.get_variant_value_list');
     
+
+    Route::get('/admin/order', [OrderController::class, 'index'])->name('backend.order.index');
+    Route::get('/admin/order/edit/{id}', [OrderController::class, 'edit'])->name('backend.order.edit');
+    Route::post('/admin/order/update/{id}', [OrderController::class, 'update'])->name('backend.order.update');
+
 
 });
 // -------------------------After Admin login (end) ------------------------------------------------------------

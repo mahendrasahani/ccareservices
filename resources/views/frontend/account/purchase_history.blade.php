@@ -25,7 +25,7 @@
                         <tr>
                             <td><b>Order No. {{$p_history->order_id}}</b></td>
                             <td><b>{{count($p_history->getOrderProduct)}} products</b></td>
-                            <td><b>₹{{number_format($p_history->total, 2)}}/-</b> </td>
+                            <td><b>₹{{number_format($p_history->total - $p_history->promo_discount, 2)}}/-</b> </td>
                             <td><a href="{{route('frontend.user.view_order_detail', [Crypt::encryptString($p_history->id)])}}" class="discount-details-btn ">View Details</a> </td>
                         </tr>
                         @endforeach 
