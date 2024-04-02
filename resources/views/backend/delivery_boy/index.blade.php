@@ -25,13 +25,10 @@
                                             <thead>
                                                 <tr class="footable-header" style="font-size: 12px;">
                                                     <th class="">#</th>
-                                                    <th class="">Name</th>
-                                                    <th>Email address	</th>
-                                                    <th>Phone </th>
-                                                    <th class="">Earning</th>
-                                                    <th class="">Collection</th>
-                                                    <th class="">Status</th>
-                                                    <th class="">Options</th>
+                                                    <th class="">Address</th>
+                                                    <th>Father's Name</th>
+                                                    <th>Aadhar No. </th>
+                                                    
                                                     
                                                 </tr>
                                             </thead>

@@ -240,22 +240,19 @@ slider.addEventListener('input', async function ()
 // ------------------------------- product image ---------------------------------------
 
 // ------------------------------- rating ---------------------------------------
-    const ratingInputs = document.querySelectorAll('input[name="rating"]');
-    ratingInputs.forEach(input =>{
-        input.addEventListener('click', function (){
-            const clickedValue = parseInt(this.value);
-            
-            ratingInputs.forEach(input =>{
-                const inputValue = parseInt(input.value);
-            
-                if (inputValue <= clickedValue){ 
-                    input.checked = true;
-                } else{
-                    input.checked = false;
-                }
-            });
+const ratingInputs = document.querySelectorAll('input[name="rating"]');
+ratingInputs.forEach((input, index) =>
+{
+    input.addEventListener('click', function ()
+    {
+        const clickedIndex = Array.from(ratingInputs).indexOf(this);
+        ratingInputs.forEach((input, i) =>
+        {
+            input.checked = i <= clickedIndex;
         });
     });
+});
+
 // ------------------------------- rating ---------------------------------------
 
 // ------------------------------- cart button ---------------------------------------
