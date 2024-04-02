@@ -2,12 +2,15 @@
 
 namespace App\Models\Backend;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
+    use SoftDeletes;
     use HasFactory;
 
     protected $fillable = [
@@ -28,6 +31,7 @@ class Order extends Model
         "billing_email", 
         "shipping_email", 
         "delivery_type", 
+        "delivery_boy_id",
         "payment_method", 
         "tax", 
         "payment_status", 
@@ -39,7 +43,9 @@ class Order extends Model
     return $this->hasMany(OrderProduct::class, 'order_id');
    }
 
-   
+   public function getAllOrders(){
+    return $this->belongsTo(User::class, 'user_id');
+   }
 
   
 }

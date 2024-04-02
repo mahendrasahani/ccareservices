@@ -23,7 +23,7 @@ class OrderProduct extends Model
     ];
 
     public function getProduct(){
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->belongsTo(Product::class, 'product_id')->withTrashed();
     }
 
     public function getOrder(){

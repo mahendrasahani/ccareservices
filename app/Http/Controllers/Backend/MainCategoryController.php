@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Attribute;
 use App\Models\Backend\MainCategory;
+use App\Models\Backend\Product;
+use App\Models\Backend\SubCategory;
 use Illuminate\Http\Request;
 use Str;    
 
@@ -66,7 +68,7 @@ class MainCategoryController extends Controller
         MainCategory::where('id', $newMainCategoryId)->update([ 
             'meta_image' => 'public/'.$metaImgPath.'/'.$metaImgNewName
         ]);
-    }
+        }
         
         return redirect()->route('backend.main_category.index')->with('success', "Main Category has been added successfully");   
     }
@@ -130,21 +132,31 @@ class MainCategoryController extends Controller
     }
 
     public function destroy(Request $request){
-        $id = $request->id;
-        
-        $main_cat = MainCategory::find($id);
-        $delete_result = $main_cat->delete();
-        if($delete_result){
-            return response()->json([
-                'status' => 200,
-                'message' => 'success'
-            ]);
-        }else{
+        $id = intval($request->id);
+        $main_cat = MainCategory::find($id); 
+        $exist_in_product = Product::whereJsonContains('main_category', $id)->get();
+        $exist_in_sub_cat = SubCategory::where('main_category_id', $id)->get();
+ 
+        if(count($exist_in_product) > 0){
             return response()->json([
                 'status' => 400,
-                'message' => 'failed'
+                'message' => 'exist_in_product'
+            ]);
+        }elseif(count($exist_in_sub_cat) > 0){
+            return response()->json([
+                'status' => 400,
+                'message' => 'exist_in_s_cat'
             ]);
         }
+        else{
+            $main_cat->delete();  
+            return response()->json([
+                'status' => 200,
+                'message' => 'deleted'
+            ]);
+        }  
+       
+      
     }
 
     public function search(Request $request){

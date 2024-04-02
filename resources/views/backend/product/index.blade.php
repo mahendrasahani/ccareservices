@@ -176,7 +176,7 @@
                                                 <i class="fa-regular fa-copy"></i>
                                             </a> -->
                                             <button value="{{$product->id}}" class="btn btn-icon btn-sm delete_ico"
-                                            id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
+                                            id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button> 
                                             </div>
                                         </td>
                                     </tr>
@@ -377,15 +377,14 @@
                     data: { 'id': id },
                     type: "GET",
                     success: function (response){
-                        console.log(id);
                         Swal.fire({
                             title: "Deleted!",
-                            text: "Main category has been deleted.",
+                            text: "Product has been deleted.",
                             icon: "success"
                         });
                         $("#row_id_" + id).hide();
                     }
-                }) 
+                })
             }
         }); 
     });

@@ -15,6 +15,7 @@ class CheckoutController extends Controller
 {
     public function checkoutPageView(){
          $cart_item = Cart::where('user_id', Auth::user()->id)->get();
+
          if(count($cart_item) != 0){
         $shipping_address = ShippingAddress::where('user_id', Auth::user()->id)->first();
         $billing_address = BillingAddress::where('user_id', Auth::user()->id)->first(); 

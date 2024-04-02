@@ -28,10 +28,12 @@ class Cart extends Model
     }
 
     public function getStock(){
-        return $this->belongsTo(Stock::class, 'stock_id');
+        return $this->belongsTo(Stock::class, 'stock_id')->withTrashed();
     }
 
-    
+    public function getUser(){
+        return $this->belongsTo(Cart::class, 'user_id');
+    }
 
 }
 

@@ -37,12 +37,12 @@
                                     <select class="form-control form-control-sm" name="type" id="sort_by"
                                         name="sort_by">
                                         <option>Sort by</option>
-                                        <option value=" ">Options</option>
-                                        <option value=" ">Options</option>
-                                        <option value=" ">Options</option>
-                                        <option value=" ">Options</option>
-                                        <option value=" ">Options</option>
-                                        <option value=" ">Options</option>
+                                        <option value="">Options</option>
+                                        <option value="">Options</option>
+                                        <option value="">Options</option>
+                                        <option value="">Options</option>
+                                        <option value="">Options</option>
+                                        <option value="">Options</option>
                                     </select>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                         <div class="card-body">
                             <table class="table table-bordered mb-0">
                                 <thead>
-                                    <tr>
+                                    <tr >
                                         <th style="display: table-cell;">S No.</th>
                                         <th style="display: table-cell;">Product Name</th>
                                         <th style="display: table-cell;">Product Option</th>
@@ -68,19 +68,20 @@
                                     @php
                                         $sn = 1;
                                     @endphp
-                                    @foreach($stock_list as $stock)
-                                    <tr >
+                                    @foreach($stock_list as $stock) 
+                                    <tr id="row_id_{{$stock->id}}">
                                         <td style="display: table-cell;">{{$sn++}}</td>
                                         <td style="display: table-cell;">{{$stock->getProduct->product_name}}</td>
                                         <td style="display: table-cell;">{{$stock->getAttr->name}}</td>
                                         <td style="display: table-cell;">{{$stock->getAttrValue->name}}</td>
-                                        <td>35</td> 
+                                        <td>{{$stock->quantity}}</td> 
                                         <td class="text-left footable-last-visible ">
                                             <div class="d-flex justify-content-center "> 
                                             <a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2" href="{{route('backend.stock.edit', [$stock->id])}}" title="Edit">
                                                 <i class="fa-regular fa-pen-to-square text-white"></i>
                                             </a> 
-                                            <button value="" class="btn btn-icon btn-sm delete_ico" id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
+                                            <button value="{{$stock->id}}" class="btn btn-icon btn-sm delete_ico"
+                                            id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
                                             </div>
                                         </td>
                                     </tr> 
@@ -115,10 +116,42 @@
             icon: "success",
             timer: 5000,
             });
-        </script>   
-        
+        </script>    
         @endif
 
+
+        <script>
+    $(document).on('click', '#delete_btn', function (){
+        const id = $(this).val(); 
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) =>
+        {
+            if (result.isConfirmed){
+                $.ajax({
+                    url: "{{route('backend.stock.destroy')}}",
+                    data: { 'id': id },
+                    type: "GET",
+                    success: function (response){
+                        console.log(id);
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Stock has been deleted.",
+                            icon: "success"
+                        });
+                        $("#row_id_" + id).hide();
+                    }
+                }) 
+            }
+        }); 
+    });
+</script>
  
 @endsection
 @endsection

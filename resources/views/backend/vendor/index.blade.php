@@ -158,17 +158,17 @@
                             data:{'id':id},
                             type:"GET",
                             success:function(response){ 
-                                if(response.message == 'success'){
+                                if(response.message == 'deleted' && response.status == 200){
                                 Swal.fire({
                                 title: "Deleted!",
                                 text: "Vendor has been deleted.",
                                 icon: "success"
                                 });
                                 $("#vendor_list_"+id).hide(); 
-                            }else if(response.message == 'already_in_use'){ 
+                            }else if(response.message == 'already_in_use' && response.status == 400){ 
                                 Swal.fire({
                                 title: "Warning!",
-                                text: "Vendor already in use.",
+                                text: "Vendor already used in stock!",
                                 icon: "warning"
                                 });
                             }else{

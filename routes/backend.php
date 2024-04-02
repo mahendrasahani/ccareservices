@@ -3,16 +3,21 @@ use App\Http\Controllers\Backend\AdminDashboardController;
 use App\Http\Controllers\Backend\AttributeController;
 use App\Http\Controllers\Backend\AttributeValueController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CustomerController;
+use App\Http\Controllers\Backend\DeliveryBoyController;
 use App\Http\Controllers\Backend\InvoiceController;
 use App\Http\Controllers\Backend\MainCategoryController;
 use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\PaymentController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\ShippingChargeController;
 use App\Http\Controllers\Backend\ShippingMethodCntroller;
 use App\Http\Controllers\Backend\StockController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\VendorController;
 use App\Models\Backend\MainCategory;
+use App\Models\Backend\Review;
 
 // -------------------------After Admin login (start) ------------------------------------------------------------
 Route::middleware(['auth', 'web', 'admin_check'])->group(function () { 
@@ -102,13 +107,35 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/stock/edit/{id}', [StockController::class, 'edit'])->name('backend.stock.edit');
     Route::post('/admin/stock/update/{id}', [StockController::class, 'update'])->name('backend.stock.update');
     Route::get('/admin/stock/variant-value-list', [StockController::class, 'getVariantValueList'])->name('backend.stock.get_variant_value_list');
+    Route::get('/admin/stock/destroy', [StockController::class, 'destroy'])->name('backend.stock.destroy');
     
+
 
     Route::get('/admin/order', [OrderController::class, 'index'])->name('backend.order.index');
     Route::get('/admin/order/edit/{id}', [OrderController::class, 'edit'])->name('backend.order.edit');
     Route::post('/admin/order/update/{id}', [OrderController::class, 'update'])->name('backend.order.update');
+    Route::get('/admin/order/destroy', [OrderController::class, 'destroy'])->name('backend.order.destroy');
+
 
     Route::get('/admin/invoice/{id}', [InvoiceController::class, 'index'])->name('backend.invoice.index');
+
+
+    Route::get('/admin/delivery-boy', [DeliveryBoyController::class, 'index'])->name('backend.delivery_boy.index');
+    Route::get('/admin/delivery-boy/create', [DeliveryBoyController::class, 'create'])->name('backend.delivery_boy.create');
+    Route::post('/admin/delivery-boy/store', [DeliveryBoyController::class, 'store'])->name('backend.delivery_boy.store');
+
+    Route::get('/admin/customers', [CustomerController::class, 'index'])->name('backend.customer.index'); 
+    Route::get('/admin/customers/view/{id}', [CustomerController::class, 'view'])->name('backend.customer.view'); 
+
+
+    Route::get('/admin/payment-method/', [PaymentController::class, 'index'])->name('backend.payment_method.index'); 
+    Route::post('/admin/payment-method/update-razorpay-credentials/{id}', [PaymentController::class, 'updateRazorpayCredentials'])->name('backend.update_razorpya_credentials'); 
+    
+    
+    
+    Route::get('/admin/review', [ReviewController::class, 'index'])->name('backend.review.index'); 
+    
+
 
 });
 // -------------------------After Admin login (end) ------------------------------------------------------------

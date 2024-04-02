@@ -61,7 +61,7 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <form>
+                                               
                                                         <table class="table aiz-table mb-0 footable footable-1 breakpoint-lg">
                                                             <thead>
                                                                 <tr class="footable-header">
@@ -86,7 +86,7 @@
                         
                                                             <tbody>
                                                                 @foreach($orders as $order)
-                                                                <tr>
+                                                                <tr id="row_id_{{$order->id}}">
                                                                     <td class="footable-first-visible">
                                                                         <div class="form-group d-inline-block">
                                                                             <label class="aiz-checkbox">
@@ -100,12 +100,10 @@
                                                                     <td style="display: table-cell;">₹{{number_format($order->total - $order->promo_discount, 2)}}</td>
                                                                     <td style="display: table-cell;">
                                                                         <span class="text-capitalize">{{strtoupper($order->order_status)}}</span>
-                                                                    </td>
-                        
+                                                                    </td> 
                                                                     <td style="display: table-cell;">
                                                                         <span class="badge badge-inline badge-danger">{{strtoupper($order->payment_status)}}</span>
-                                                                    </td>
-                        
+                                                                    </td> 
                                                                     <td class="text-right footable-last-visible">
                                                                         <a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage" href="{{route('backend.order.edit', [$order->id])}}" title="View">
                                                                             <i class="fa-regular fa-eye"></i>
@@ -113,13 +111,8 @@
                                                                         <a class="btn btn-success btn-sm text-white" style="border-radius: 100px; background-color: #0abb75;" title="Print Invoice" href="{{route('backend.invoice.index', [$order->id])}}" id="printIcon" >
                                                                             <i class="fa-solid fa-print" style="cursor: pointer;"></i>
                                                                         </a> 
-                                                                      
-                                                                        
-                                                                            <a href=""
-                                                                                    class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete delete_ico"
-                                                                                    title="Delete" data-toggle="modal" data-target="#exampleModal">
-                                                                                    <i class="fa-solid fa-trash-can"></i>
-                                                                                </a>           
+                                                                        <button value="{{$order->id}}" class="btn btn-icon btn-sm delete_ico"
+                                                                         id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>            
                                                                     </td>
                                                                 </tr>
                                                                 @endforeach
@@ -127,7 +120,7 @@
                                                             </tbody>
                                                         </table>
                                                          
-                                                    </form>
+                                                     
                                                 </div>
                                             </div>
                                         </div>
@@ -141,27 +134,58 @@
         </div> 
 
 @section('javascript-section')
-@if(Session::has('stock_added'))
-        <script> 
-            Swal.fire({
-            title: "Success!",
-            text: "{{Session::get('stock_added')}}",
-            icon: "success",
-            timer: 5000,
-            });
-        </script>
-        @elseif(Session::has('stock_updated'))
-        <script> 
-            Swal.fire({
-            title: "Success!",
-            text: "{{Session::get('stock_updated')}}",
-            icon: "success",
-            timer: 5000,
-            });
-        </script>   
-        
-        @endif
+    @if(Session::has('stock_added'))
+            <script> 
+                Swal.fire({
+                title: "Success!",
+                text: "{{Session::get('stock_added')}}",
+                icon: "success",
+                timer: 5000,
+                });
+            </script>
+            @elseif(Session::has('stock_updated'))
+            <script> 
+                Swal.fire({
+                title: "Success!",
+                text: "{{Session::get('stock_updated')}}",
+                icon: "success",
+                timer: 5000,
+                });
+            </script>   
+    @endif
 
+    <script>
+    $(document).on('click', '#delete_btn', function (){
+        const id = $(this).val(); 
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) =>
+        {
+            if (result.isConfirmed){
+                $.ajax({
+                    url: "{{route('backend.order.destroy')}}",
+                    data: { 'id': id },
+                    type: "GET",
+                    success: function (response){
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Product has been deleted.",
+                            icon: "success"
+                        });
+                        $("#row_id_" + id).hide();
+                    }
+                })
+            }
+        }); 
+    });
+</script>
+    
  
 @endsection
 @endsection

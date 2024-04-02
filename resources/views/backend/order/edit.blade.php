@@ -1,10 +1,6 @@
 @extends('layouts/backend/main')
 @section('main-section') 
 
-
-
-
-
 <div class="content-body">
             <div class="top-set">
                 <div class="container">
@@ -15,7 +11,7 @@
                         <div class="row">
                             <form method="POST" action="{{route('backend.order.update', [$order->id])}}">
                             @csrf
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card" style="border: 1px solid #e5e5e5;">
                                     <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
                                         <h2 class="h6 font-size-16 font-weight-bold mb-0">Order Details</h2>
@@ -27,7 +23,6 @@
                                                     <div class="font-size-10 font-weight-bold mb-2" style="font-size: 12px;">Customer info</div>
                                                     <div style="font-size: 12px;"><span class="opacity-80 mr-2 ml-0">Name:</span> {{$order->shipping_name}}</div>
                                                     <div style="font-size: 12px;"><span class="opacity-80 mr-2 ml-0">Email:</span> {{$order->shipping_email}}</div>
-                                                  
                                                 </div>
                                             </div>
                                             
@@ -71,13 +66,15 @@
                                                         <option value="delivered" {{$order->order_status == "delivered" ? "selected":""}}>Delivered</option> 
                                                     </select>
                                                 </div>
-                                                <!-- <div class="mb-3">
+                                                 <div class="mb-3">
                                                     <label for="assign_deliver_boy">Assign Deliver Boy</label>
-                                                    <select class="form-control" id="assign_deliver_boy" style="font-size: 12px;">
+                                                    <select class="form-control" id="delivery_boy" name="delivery_boy" style="font-size: 12px;">
                                                         <option value="" selected>Select Delivery Boy</option>
-                                                        <option value="86">John Doe</option>
+                                                        @foreach($delivery_boy_list as $delivery_boy)
+                                                        <option value="{{$delivery_boy->id}}" {{$order->delivery_boy_id == $delivery_boy->id ? "selected":""}}>{{$delivery_boy->name}}</option>
+                                                        @endforeach
                                                     </select>
-                                                </div> -->
+                                                </div>
                                             </div>
                                             <div class="col-md-auto w-md-250px" style="font-size: 12px;">
                                                 <h5 class="font-size-14 mb-3">Shipping Address</h5>

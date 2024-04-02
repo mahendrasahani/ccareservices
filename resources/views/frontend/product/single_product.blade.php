@@ -170,26 +170,27 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h6>Leave a review</h6>
-                            <form id="reviewForm"> 
-                                <div class="reviews d-flex">
+                            <form id="reviewForm" method="POST" action="{{route('frontend.submit_review')}}"> 
+                            @csrf    
+                            <div class="reviews d-flex">
                                     <label for="review"
                                         style="display: flex;justify-content: center;align-items: center;">Your Review:</label>
                                     <fieldset class="rating"> 
-                                        <input type="checkbox" id="star5" name="rating" value="5">
+                                        <input type="radio" id="star5" name="rating" value="5">
                                         <label class="full" for="star5"><i class="fas fa-star"></i></label>
-                                        <input type="checkbox" id="star4" name="rating" value="4">
+                                        <input type="radio" id="star4" name="rating" value="4">
                                         <label class="full" for="star4"><i class="fas fa-star"></i></label>
-                                        <input type="checkbox" id="star3" name="rating" value="3">
+                                        <input type="radio" id="star3" name="rating" value="3">
                                         <label class="full" for="star3"><i class="fas fa-star"></i></label>
-                                        <input type="checkbox" id="star2" name="rating" value="2">
+                                        <input type="radio" id="star2" name="rating" value="2">
                                         <label class="full" for="star2"><i class="fas fa-star"></i></label>
-                                        <input type="checkbox" id="star1" name="rating" value="1">
+                                        <input type="radio" id="star1" name="rating" value="1">
                                         <label class="full" for="star1"><i class="fas fa-star"></i></label>
                                     </fieldset>
                                 </div>
                                 <textarea id="review" name="review" placeholder="Write your review here..." cols="50"
                                     class="mt-2 p-2"></textarea><br>
-                                <button type="button" class="btn btn-warning animation  mx-2">Submit Review</button>
+                                <button type="submit" class="btn btn-warning animation  mx-2">Submit Review</button>
                             </form>
                     </div>
                     <div class="col-md-6">

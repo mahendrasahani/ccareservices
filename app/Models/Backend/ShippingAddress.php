@@ -2,6 +2,7 @@
 
 namespace App\Models\Backend;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,4 +20,8 @@ class ShippingAddress extends Model
         "zip_code",
         "country"
     ];
+
+    public function getUser(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

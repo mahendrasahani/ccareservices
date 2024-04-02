@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Product;
 use Illuminate\Http\Request;
 use App\Models\Backend\Brand;
 
@@ -56,9 +57,20 @@ class BrandController extends Controller{
     }
 
     public function destroy(Request $request){
-        $id  = $request->id; 
-        Brand::where('id', $id)->delete();
-        return redirect()->back()->with('destroy', "Brand has been deleted successfully"); 
+        $id  = $request->id;  
+        $brand_exist = Product::where('brand', $id)->get(); 
+        if(count($brand_exist) > 0){
+            return response()->json([
+                'status' => 400,
+                'message' => 'exist_in_product'
+            ]);
+        } 
+        Brand::where('id', $id)->delete(); 
+        return response()->json([
+            'status' => 200,
+            'message' => 'deleted'
+        ]);
+        
     }
 
     public function search(Request $request){

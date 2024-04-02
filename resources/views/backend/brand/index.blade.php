@@ -115,6 +115,15 @@
             timer: 5000,
             });
         </script>   
+        @elseif(Session::has('exist_in_product'))
+        <script> 
+            Swal.fire({
+            title: "Warning!",
+            text: "{{Session::get('exist_in_product')}}",
+            icon: "warning",
+            timer: 5000,
+            });
+        </script>   
         @endif
 
         <script>
@@ -136,14 +145,25 @@
             method: "GET",
             data: {id:brand_id},
             success: function (response){ 
-                Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-                }).then(function ()
-                {
-                  window.location.reload();
-                }); 
+                console.log(response);
+                if(response.status == 200 && response.message == "deleted"){
+                    Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                    }).then(function ()
+                    {
+                    window.location.reload();
+                    }); 
+                }else if(response.status == 400 && response.message == "exist_in_product"){
+                    Swal.fire({
+                    title: "Warning!",
+                    text: "This brand is already used in product !",
+                    icon: "warning", 
+            });
+        }
+                
+               
             }
         });
 

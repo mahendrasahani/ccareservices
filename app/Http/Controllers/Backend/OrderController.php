@@ -11,6 +11,7 @@ use App\Models\Backend\OrderProduct;
 use App\Models\Backend\ShippingAddress;
 use App\Models\Backend\Stock;
 use App\Models\Frontend\Cart;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -23,31 +24,38 @@ class OrderController extends Controller
         return view('backend.order.index', compact('orders'));
     }
 
-    public function edit($id){
+    public function edit($id){ 
+        $delivery_boy_list = User::where('user_type', 3)->where('status', 1)->get();
         $order = Order::with(['getOrderProduct:order_id,product_name,quantity,price,month,total_price,product_id,option_id,option_value_id', 'getOrderProduct.getProduct:id,product_images'])->where('id', $id)->first(); 
         // return $order;
-        return view('backend.order.edit', compact('order')); 
+        return view('backend.order.edit', compact('order', 'delivery_boy_list')); 
     }
 
     public function update(Request $request, $id){
         $payment_status = $request->payment_status;
         $order_status = $request->order_status;
         $discount = $request->discount; 
+        $delivery_boy = $request->delivery_boy;
         Order::where('id', $id)->update([
             "payment_status" => $payment_status,
             "order_status" => $order_status,
-            "promo_discount" => $discount
+            "promo_discount" => $discount,
+            "delivery_boy_id" => $delivery_boy
         ]); 
         return redirect()->route('backend.order.index')->with('order_updated', "Order has been updated!");
-
     }
 
 
-    public function placeOrder(Request $request){
-        $payment_mode = $request->paymentMethod;
-        if($payment_mode == 'cash_on_delivery'){ 
+    public function placeOrder(Request $request){ 
+        $payment_mode = $request->paymentMethod; 
+        if($payment_mode == '1'){
             $shipping_charge = Session::get('shipping_charge');
-            $cart_items = Cart::with('getProduct:id,product_name')->where('user_id', Auth::user()->id)->get();
+            $cart_items = Cart::with('getProduct:id,product_name', 'getStock')
+            ->whereHas('getStock', function ($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->where('user_id', Auth::user()->id)->get();
+                
             $sub_total = 0;
             foreach ($cart_items as $item) {
                 $sub_total += $item->price*$item->quantity;
@@ -57,7 +65,8 @@ class OrderController extends Controller
             $billing_address = BillingAddress::where('user_id', Auth::user()->id)->first();
             $latest_order = Order::latest()->first();
             $new_order_id = $latest_order ? substr($latest_order->order_id, 3) + 1 : 1000001;
-           $new_order_id = Order::create([
+           
+            $new_order_id = Order::create([
                     "user_id" => Auth::user()->id,
                     "order_id" => 'CCS'.$new_order_id,
                     "payment_mode" => $request->paymentMethod,
@@ -76,7 +85,7 @@ class OrderController extends Controller
                     "billing_address" =>  $billing_address->address.' '.$billing_address->city.' '.$billing_address->zip_code.' '.$billing_address->country,
                     "status" => 1
                     ])->id; 
-
+ 
                 foreach ($cart_items as $item) { 
                     $option_value = AttributeValue::where('id', $item->option_value_id)->first();
                     $option = Attribute::where('id', $item->option_id)->first();
@@ -100,6 +109,7 @@ class OrderController extends Controller
                         $stock_item->save(); 
                     } 
                 } 
+                 
                 Session::forget('delivery_charge');
                 $cart_items = Cart::with('getProduct:id,product_name')->where('user_id', Auth::user()->id)->delete(); 
                 $enc_order_id = Crypt::encryptString($new_order_id);
@@ -113,7 +123,10 @@ class OrderController extends Controller
             // code for order with payment gateways -----------------------------------------------------------------------------------------
     } 
     public function purchaseHistory(){
-        $data['purchase_history'] = Order::with('getOrderProduct:order_id,product_name')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get(); 
+        $data['purchase_history'] = Order::with('getOrderProduct:order_id,product_name')
+        ->where('user_id', Auth::user()->id)
+        ->withTrashed()
+        ->orderBy('id', 'desc')->get(); 
         // return $data;
         return view('frontend.account.purchase_history', $data);
     }
@@ -121,11 +134,30 @@ class OrderController extends Controller
     public function orderDetail($id){
         try{
         $order_id = Crypt::decryptString($id);
-        $order = Order::with('getOrderProduct:order_id,product_id,product_name,price,total_price,quantity', 'getOrderProduct.getProduct:id,product_name,product_images')->findOrFail($order_id);
+        $order = Order::with('getOrderProduct:order_id,product_id,product_name,price,total_price,quantity', 'getOrderProduct.getProduct:id,product_name,product_images')
+        ->withTrashed()
+        ->findOrFail($order_id);
         }catch(\Exception $e){
             abort(404);
         }
         // return $order;
         return view('frontend.account.order_detail', compact('order'));
+    }
+
+    public function destroy(Request $request){
+        $id = $request->id;
+        $product = Order::find($id);
+        $delete_result = $product->delete();
+        if($delete_result){
+            return response()->json([
+                'status' => 200,
+                'message' => 'success'
+            ]);
+        }else{
+            return response()->json([
+                'status' => 400,
+                'message' => 'failed'
+            ]);
+        }
     }
 }

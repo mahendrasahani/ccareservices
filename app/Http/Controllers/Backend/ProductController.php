@@ -560,13 +560,17 @@ class ProductController extends Controller
 
     public function productToCheckout(Request $request){
         // $shipping_charge = intval(Session::get('shipping_charge'));
-    $user_id = Auth::user()->id;
-    // $shipping_charge = ShippingCharge::where('id', $request->shipping_charge_id);
-    $cart_item = Cart::with(['getProduct:id,product_name','getStock'])->where('user_id', $user_id)->get(); 
-            return response()->json([
-                "data"=>$cart_item, 
-            ]); 
-    }
+        $user_id = Auth::user()->id;
+        // $shipping_charge = ShippingCharge::where('id', $request->shipping_charge_id);
+        $cart_item = Cart::with(['getProduct:id,product_name','getStock'])
+        ->whereHas('getStock', function ($query) {
+            $query->whereNull('deleted_at');
+        })
+        ->where('user_id', $user_id)->get(); 
+                return response()->json([
+                    "data"=>$cart_item, 
+                ]); 
+        }
 
 
 

@@ -5,9 +5,11 @@ namespace App\Models\Backend;
 use App\Models\Frontend\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Stock extends Model
 {
+    use SoftDeletes;
     use HasFactory;
 
     protected $fillable = [
@@ -47,7 +49,7 @@ class Stock extends Model
     ];
 
 public function getProduct(){
-    return $this->belongsTo(Product::class, 'product_id');
+    return $this->belongsTo(Product::class, 'product_id')->withTrashed();
 }
 
 // public function getCart(){
@@ -55,7 +57,7 @@ public function getProduct(){
 // }
 
 public function getCart(){
-    return $this->hasMany(Cart::class, 'stock_id');
+    return $this->belongsTo(Cart::class, 'stock_id');
 }
 
 public function getAttr(){

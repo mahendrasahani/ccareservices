@@ -9,7 +9,17 @@ async function paymentPage(){
     let final_amount_total = 0; 
     let paymentData = await fetch(baseUrl+"/get-address-payment-detail");
     let response = await paymentData.json()
-    console.log(response);
+
+    let paymentMethods = await fetch(baseUrl+"/api/payment-methods");
+    let paymentMethodResponse = await paymentMethods.json();
+    let appendToPaymentMethod = '';
+    paymentMethodResponse.data.forEach(function (item){
+        appendToPaymentMethod += `<div class="form-check">
+        <input type="radio" class="form-check-input paymentMethod" id="" name="paymentMethod" value="${item.id}"  required>
+        <label class="form-check-label" for="" style="margin-left: 14px;">${item.name}</label>
+        </div>`;
+    }); 
+
     let address_table = `
     <tbody>  
         <tr>
@@ -23,16 +33,10 @@ async function paymentPage(){
             <tr>
             <th>Payment Method</th>
             <td>  
-            <div class="mb-3"> 
-                <div class="form-check">
-                   <input type="radio" class="form-check-input paymentMethod" id="cash_on_delivery" name="paymentMethod" value="cash_on_delivery" checked>
-                   <label class="form-check-label" for="cashOnDelivery" style="margin-left: 14px;">Cash on Delivery (COD)</label>
-                </div> 
+            <div class="mb-3" id="payment_methods> 
+                ${appendToPaymentMethod}
             </div> 
-            <div class="form-check">
-                <input type="radio" class="form-check-input paymentMethod" id="razorpay" name="paymentMethod" value="razorpay">
-                <label class="form-check-label" for="creditCard" style="margin-left: 14px;">Razorpay</label>
-            </div> 
+            
             </td>
         </tr>          
     </tbody>`; 

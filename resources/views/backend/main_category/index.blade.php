@@ -142,6 +142,7 @@
         <script> 
             $(document).on('click', '#delete_btn', function(){
                 const id = $(this).val();
+                
 
                 Swal.fire({
                     title: "Are you sure?",
@@ -154,16 +155,30 @@
                     }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                    url: "{{route('backend.main_category.destroy')}}",
-                    data:{'id':id},
-                    type:"GET",
+                        url: "{{route('backend.main_category.destroy')}}",
+                        data:{'id':id},
+                        type:"GET",
                     success:function(response){
+                       if(response.status == 200 && response.message == "deleted"){
+                            Swal.fire({
+                            title: "Deleted!",
+                            text: "Main category has been deleted !",
+                            icon: "success"
+                            });
+                            $("#cat_list_"+id).hide(); 
+                    }else if(response.status == 400 && response.message == "exist_in_product"){
                         Swal.fire({
-                        title: "Deleted!",
-                        text: "Main category has been deleted.",
-                        icon: "success"
-                        });
-                        $("#cat_list_"+id).hide(); 
+                            title: "Warning!",
+                            text: "This main category is used in product !",
+                            icon: "warning"
+                            });
+                    }else if(response.status == 400 && response.message == "exist_in_s_cat"){
+                        Swal.fire({
+                            title: "Warning!",
+                            text: "This main category is used in sub category !",
+                            icon: "warning"
+                            });
+                    }
                     }
                 })       
                     }

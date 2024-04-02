@@ -87,27 +87,21 @@ class VendorController extends Controller
 
    public function destroy(Request $request){
       $id = $request->id; 
-      // $exist_in_stock = Stock::where('vendor_id', $id)->get();
+     
+      $exist_in_stock = Stock::where('vendor_id', $id)->get();
 
-         // if($exist_in_stock){
-         try{
-            Vendor::findOrFail($id)->delete();
-         }catch(\Exception $e){
+         if(count($exist_in_stock) > 0){ 
             return response()->json([
                'status' => 400,
-               'message' => 'something_wrong'
-         ]);
-         } 
+               'message' => 'already_in_use'
+           ]);  
+      }else{
+         Vendor::findOrFail($id)->delete();
          return response()->json([
-             'status' => 200,
-             'message' => 'success'
-         ]); 
-      // }else{
-      //    return response()->json([
-      //       'status' => 400,
-      //       'message' => 'already_in_use'
-      //   ]); 
-      // }
+            'status' => 200,
+            'message' => 'deleted'
+        ]); 
+      }
   }
     
 }

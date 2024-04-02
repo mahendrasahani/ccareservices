@@ -137,12 +137,22 @@
                     data:{'id':id},
                     type:"GET",
                     success:function(response){
-                        Swal.fire({
+                        if(response.status == 200 && response.message == "deleted"){
+                            Swal.fire({
                         title: "Deleted!",
                         text: "Sub category has been deleted.",
                         icon: "success"
                         });
                         $("#cat_list_"+id).hide(); 
+                    }else if(response.status == 400 && response.message == "exist_in_product"){
+                        Swal.fire({
+                            title: "Warning!",
+                            text: "This sub category is used in product !",
+                            icon: "warning"
+                            });
+                    } 
+
+                        
                     }
                 })
     

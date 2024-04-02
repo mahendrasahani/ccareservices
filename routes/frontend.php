@@ -2,6 +2,7 @@
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -78,6 +79,7 @@ Route::middleware(['auth'])->group(function () {
     // ------------------------ Checkout page route (end) ----------------------------------------------------------------------
 
 
+    Route::post('/submit-review', [ReviewController::class, 'submitReview'])->name('frontend.submit_review'); 
 
 // -------------------------After Both User and Admin login (end) --------------------------------------------------------------
 });

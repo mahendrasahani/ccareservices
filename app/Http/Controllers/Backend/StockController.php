@@ -13,7 +13,11 @@ use Illuminate\Http\Request;
 class StockController extends Controller
 {
     public function index(){
-        $stock_list = Stock::with(['getProduct:id,product_name', 'getAttr:id,name', 'getAttrValue:id,name'])->where('status', 1)->orderBy('id', 'desc')->paginate(10); 
+        $stock_list = Stock::with(['getProduct:id,product_name', 'getAttr:id,name', 'getAttrValue:id,name'])
+        ->whereHas('getProduct', function ($query) {
+            $query->whereNull('deleted_at');
+        })
+        ->where('status', 1)->orderBy('id', 'desc')->paginate(10);  
         return view('backend.stock.index', compact('stock_list'));
     }
 
@@ -154,4 +158,24 @@ class StockController extends Controller
         return redirect()->route('backend.stock.index')->with('stock_updated', 'Stock has been update successfully !');
 
     }
+
+
+    public function destroy(Request $request){
+        $id = $request->id;
+        $stock = Stock::find($id);
+        $delete_result = $stock->delete();
+        if($delete_result){
+            return response()->json([
+                'status' => 200,
+                'message' => 'success'
+            ]);
+        }else{
+            return response()->json([
+                'status' => 400,
+                'message' => 'failed'
+            ]);
+        }
+    }
+
+
 }

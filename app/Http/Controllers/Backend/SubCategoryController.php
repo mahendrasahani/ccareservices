@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Attribute;
 use App\Models\Backend\MainCategory;
+use App\Models\Backend\Product;
 use App\Models\Backend\SubCategory;
 use Illuminate\Http\Request;
 use Str;
@@ -141,20 +142,26 @@ class SubCategoryController extends Controller
     }
 
     public function destroy(Request $request){
-        $id = $request->id;
-        $sub_cat = SubCategory::find($id);
-        $delete_result = $sub_cat->delete();
-        if($delete_result){
-            return response()->json([
-                'status' => 200,
-                'message' => 'success'
-            ]);
-        }else{
+        $id = intval($request->id);
+        $sub_cat = SubCategory::find($id); 
+        $exist_in_product = Product::whereJsonContains('sub_category', $id)->get();
+
+        if(count($exist_in_product) > 0){
             return response()->json([
                 'status' => 400,
-                'message' => 'failed'
+                'message' => 'exist_in_product'
             ]);
-        }
+        } 
+        else{
+            $sub_cat->delete();     
+            return response()->json([   
+                'status' => 200,
+                'message' => 'deleted'
+            ]);
+        }   
+
+
+        
     }
 
     public function search(Request $request){

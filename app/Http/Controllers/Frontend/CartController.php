@@ -15,7 +15,11 @@ class CartController extends Controller
     public function showCart(){ 
 
         if(Auth::check()){
-            $cart_product = Cart::where('user_id', Auth::user()->id)->with(['getProduct:id,product_name,product_images,slug'])->get();
+            $cart_product = Cart::where('user_id', Auth::user()->id)->with(['getProduct:id,product_name,product_images,slug', 'getStock'])
+            ->whereHas('getStock', function ($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->get();
         }else{
             $cart_product = Session::get('cart');
         } 
@@ -131,7 +135,12 @@ class CartController extends Controller
 
     public function updateCartOnLoad(Request $request){ 
         if(Auth::check()){ 
-            $cart = Cart::where('user_id', Auth::user()->id)->get(); 
+            $cart = Cart::with('getStock')
+            ->whereHas('getStock', function ($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->where('user_id', Auth::user()->id)->get();
+
             return response()->json([
                 'status' => 200,
                 'message' => "Added into cart",  

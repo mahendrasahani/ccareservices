@@ -206,9 +206,8 @@
                             <li><a href="{{route('backend.admin.product.index')}}">Products</a></li> 
                             <li><a href="{{route('backend.brand.index')}}">Brand</a></li>
                             <li><a href="{{route('backend.attribute.index')}}">Attributes</a></li>
-                            <li><a href="reviews.html">Reviews</a></li>
-                            <li><a href="bulk-import.html">Bulk Import</a></li>
-                            <li><a href="product_sheet/products.xlsx" download>Bulk Export</a></li>
+                            <li><a href="{{route('backend.review.index')}}">Reviews</a></li>
+                      
                         </ul>
                     </li>
 
@@ -252,15 +251,22 @@
                         </span>
                         </a>
                     </li>
-                    <li><a href="customers.html">
+                    <li><a href="{{route('backend.customer.index')}}">
                         <span>
                             <i class="fa fa-users"></i>
                             <p class="sidebar-option">Customers</p>
                         </span>
                         </a>
                     </li>
+                    <li><a href="{{route('backend.shipping_charge.index')}}">
+                        <span>
+                            <i class="fa fa-users"></i>
+                            <p class="sidebar-option">Shipping Charge</p>
+                        </span>
+                        </a>
+                    </li>
 
-                    <li><a href="payment-method.html">
+                    <li><a href="{{route('backend.payment_method.index')}}">
                         <span>
                             <img src="{{url('public/assets/backend/images/png.icon/payment-method.png')}}" alt="">
                             <p class="sidebar-option">Payment Methods</p>
@@ -274,8 +280,7 @@
                                 <img src="{{url('public/assets/backend/images/png.icon/money-back.png')}}">
                                 <p class="sidebar-option">Refund</p>
                                 <p class="badge-1 badge-inline badge-danger pull-right text-white mx-3">Addon</p>
-                            </span>
-
+                            </span> 
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="refund-requests.html">Refund requests</a></li>
@@ -283,39 +288,7 @@
 
                         </ul>
                     </li>
-
-                    
-
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="nav-text">
-                                <img src="{{url('public/assets/backend/images/png.icon/file.png')}}">
-                                <p class="sidebar-option">Blog</p>
-                            </span>
-
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="all-blog.html" aria-expanded="false">All Blogs</a></li>
-                            <li><a href="blog-category.html" aria-expanded="false">Blog Categories</a></li>
-                        </ul>
-                    </li>
-
-                        <li class="mega-menu mega-menu-sm">
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <span class="nav-text">
-                                    <img src="{{url('public/assets/backend/images/png.icon/monitor.png')}}">
-                                    <p class="sidebar-option">Website Setup</p>
-                                </span>
-        
-                            </a>
-                            <ul aria-expanded="false">
-                                    <li><a href="header.html">Header</a></li>
-                                    <li><a href="footer.html">Footer</a></li>                                                                                                                                                                                                                                                                                                                                                                                                          
-                                    <li><a href="banners.html">Banners</a></li>
-                                    <li><a href="website-pages.html">Pages</a></li>
-                                    <li><a href="appearance.html">Appearance</a></li>
-                             </ul>
-                        </li>
+    
                     
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -326,50 +299,15 @@
 
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="delivery-boy.html">All Delivery Boy</a></li>
-                            <li><a href="create.html">Add Delivery Boy</a></li>
+                            <li><a href="{{route('backend.delivery_boy.index')}}">All Delivery Boy</a></li>
+                            <li><a href="{{route('backend.delivery_boy.create')}}">Add Delivery Boy</a></li>
                             <li><a href="configuration.html">Delivery Boy Configurations</a></li>
                             <li><a href="cancel-request-list.html">Cancel Request</a></li>
                             <li><a href="payment-histories.html">Payment Histories</a></li>
                             <li><a href="collection-histories.html">Collections Histories</a></li>
                         </ul>
                     </li>
-                    
-                    
-                    
-                    <li class="mega-menu mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="nav-text">
-                                <img src="{{url('public/assets/backend/images/png.icon/setting.png')}}">
-                                <p class="sidebar-option">Settings</p>
-                            </span>
-
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('backend.shipping_charge.index')}}">Shipping Charge</a></li>
-                            <li><a href="shop-setting.html">Shop Settings</a></li>
-                            <li><a href="general-setting.html">General Settings</a></li>
-                            <li><a href="otp-settings.html">OTP Settings</a></li>
-                            <li><a href="languages.html">Languages</a></li>
-                            <li><a href="currency.html">Currency</a></li>
-                            <li><a href="smtp-settings.html">SMTP Settings</a></li>
-                            <li><a href="#">File System Configuration</a></li>
-                            <li><a href="#">Social media Logins</a></li>
-                            <li><a href="#">Third Party Settings</a></li>
-                            <li class="mega-menu mega-menu-sm">
-                                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                    <span class="nav-text">Shipping</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    <li><a href="physical.html">Shipping Countries</a></li>
-                                    <li><a href="digital.html">Shipping States</a></li>
-                                    <li><a href="digital.html">Shipping Cities</a></li>
-                                    <li><a href="digital.html">Shipping Zones</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Tax</a></li>
-                        </ul>
-                    </li> 
+                      
                 </ul>
             </div>
         </div>

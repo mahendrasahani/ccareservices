@@ -244,9 +244,11 @@ slider.addEventListener('input', async function ()
     ratingInputs.forEach(input =>{
         input.addEventListener('click', function (){
             const clickedValue = parseInt(this.value);
+            
             ratingInputs.forEach(input =>{
                 const inputValue = parseInt(input.value);
-                if (inputValue <= clickedValue){
+            
+                if (inputValue <= clickedValue){ 
                     input.checked = true;
                 } else{
                     input.checked = false;
