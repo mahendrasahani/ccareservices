@@ -50,10 +50,11 @@
                         <div class="col-md-12">
                             <div class="reviews d-flex">
                                 <div class="star mx-2">
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                    <i class="fa-regular fa-star"></i>
-                                    <i class="fa-regular fa-star"></i>
+                                     <i class="fas fa-star c_yellow"></i>
+                                        <i class="fa-solid fa-star c_yellow"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
                                 </div>
                                 <div class="review-counting d-flex mx-2">
                                     <p class="">0 Reviews |</p>
@@ -201,11 +202,11 @@
                             </div>
                             <div class="full-rev">  
                                     <div class="star ">
-                                        <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                        <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
+                                        <i class="fas fa-star c_yellow"></i>
+                                        <i class="fa-solid fa-star c_yellow"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
                                     </div>  
                                     <div class="rev-name"><b>Kartik Sharma</b></div>
                                     <div class="rev-content">

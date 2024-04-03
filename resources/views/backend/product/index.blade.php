@@ -111,11 +111,11 @@
                                             <div>
                                                 <div>
                                                     <span>Rating</span>: <span class="rating rating-sm my-2">
+                                                        <i class="fa fa-star c_yellow"></i>
+                                                        <i class="fa-solid fa-star c_yellow"></i>
+                                                        <i class="fa-solid fa-star "></i>
                                                         <i class="fa-solid fa-star"></i>
                                                         <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i>
-                                                        <i class="fa-regular fa-star"></i> 
                                                     </span>
                                                 </div>
                                                 <!-- <div><span>Total Sold</span>: <span class="fw-600">2</span></div> -->

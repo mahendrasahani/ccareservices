@@ -1738,6 +1738,19 @@ input[type=range]:focus::-ms-fill-upper {
   margin-left: 10px;
 }
 
+    .full-rev .star i{
+    color: #aaa; 
+    }
+    .full-rev .star .c_yellow{ 
+        color: #FFD43B;
+    }
+    .reviews .star i{
+ color: #aaa; 
+    }
+    .reviews .star .c_yellow{ 
+        color: #FFD43B;
+    }
+
 .rating {
   display: inline-block;
   position: relative;

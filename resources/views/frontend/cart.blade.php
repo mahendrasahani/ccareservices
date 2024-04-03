@@ -20,7 +20,7 @@
   </div>
   <!-- breadcrumb end -->
 </section>
-<!----------------------------------------------------- -Cart checkout-------------------------- -->
+<!------------------------------------------------------Cart checkout-------------------------- -->
 @if($cart_product != '')
 <section class="">  
   <div class="container"> 
@@ -125,11 +125,9 @@
                     <div class="col-md-6 d-flex justify-content-end">
                       <button type="button" class="btn btn-submit btn-primary btn-md"
                         style="background-color: #213854; border: none;">Update cart</button>
-                    </div> -->
-                  
+                    </div> --> 
                 </div>
-              </div>  
-
+              </div>   
           </div>
         </div>
        
