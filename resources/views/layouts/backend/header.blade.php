@@ -156,7 +156,12 @@
                                         <hr class="my-2">
                                         <li><a href="http://localhost/ccareservices/"><i class="icon-user" target="_blank"></i><span>Go To Website</span></a></li>
                                         <hr class="my-2">
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a>
+                                        <li>  
+                                        <form action="{{route('logout')}}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="p-2  dropdown-item fw-bold"
+                                            style=" font-size: 13px;color: #01316b;"><i class="icon-key"></i> Logout</button>
+                                        </form> 
                                         </li>
                                     </ul>
                                 </div>
@@ -185,10 +190,9 @@
             </div>
             <hr>
             <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu">
-
+                <ul class="metismenu" id="menu"> 
                     <li>
-                        <a href="index.html">
+                        <a href="{{route('backend.admin.dashboard.view')}}">
                             <span>
                                 <img src="{{url('public/assets/backend/images/png.icon/dashboard.png')}}" class="">
                                 <p class="sidebar-option">Dashboard</p>

@@ -45,9 +45,9 @@
                                     <td>{{$sn++}}</td>
                                        <td>{{$customers->name}}</td>
                                        <td>{{$customers->email}}</td>
-                                       <td>{{$customers->getShippingAddress->phone}}</td>
+                                       <td>{{$customers->getShippingAddress->phone ?? ''}}</td>
                                        <td>{{$customers->get_user_order_count}}</td>
-                                       <td>{{$customers->getShippingAddress->address}}</td>
+                                       <td>{{$customers->getShippingAddress->address ?? ''}}</td>
                                        <td>
                                        <a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage" href="{{route('backend.customer.view', [$customers->id])}}" title="View">
                                            <i class="fa-regular fa-eye"></i>

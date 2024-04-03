@@ -10,7 +10,7 @@
                                 <div class="card-body">
                                     <h3 class="card-title text-white">Total Customers</h3>
                                     <div class="d-inline-block">
-                                        <h2 class="text-white">40</h2>
+                                        <h2 class="text-white">{{number_format($total_customers)}}</h2>
                                     </div>
     
                                     <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
@@ -23,7 +23,7 @@
                                 <div class="card-body">
                                     <h3 class="card-title text-white">Total Products</h3>
                                     <div class="d-inline-block">
-                                        <h2 class="text-white">307</h2>
+                                        <h2 class="text-white">{{number_format($total_product)}}</h2>
                                     </div>
                                     <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
     
@@ -36,7 +36,7 @@
                                 <div class="card-body">
                                     <h3 class="card-title text-white">Total Orders</h3>
                                     <div class="d-inline-block">
-                                        <h2 class="text-white">203</h2>
+                                        <h2 class="text-white">{{number_format($total_order)}}</h2>
                                     </div>
                                     <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
                                 </div>
@@ -48,7 +48,7 @@
                                 <div class="card-body">
                                     <h3 class="card-title text-white">Total Sales</h3>
                                     <div class="d-inline-block">
-                                        <h2 class="text-white">₹67,283.63</h2>
+                                        <h2 class="text-white">₹{{number_format($total_sales, 2)}}</h2>
                                     </div>
                                     <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
                                 </div>
@@ -128,30 +128,31 @@
                                                     <th class="text-center">Action</th>
                                                 </tr>
                                             </thead>
-                
+                                            @if(count($latest_order) > 0)
                                             <tbody>
+                                                @foreach($latest_order as $order)
                                                 <tr>
                                                     <td style="display: table-cell;">
-                                                        322
+                                                    {{$order->order_id}}
                                                     </td>
-                                                    <td>
-                                                        Shubham MEHRA
-                                                    </td>
+                                                    <td>{{$order->shipping_name}}</td>
                                                     <td style="display: table-cell;">
-                                                        Pending
+                                                    {{strtoupper($order->order_status)}}
                                                     </td>
                                                     <td>
-                                                        16/01/2024
+                                                        {{Carbon\Carbon::parse($order->created_at)->format('d M, Y')}}
                                                     </td>
                                                     <td>
-                                                        ₹1,650.00
+                                                    ₹{{number_format($order->total - $order->promo_discount, 2)}}
                                                     </td>
                                                     <td class="text-right footable-last-visible">
-                                                        <a href="#" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="View"><i class="fa fa-eye"></i>
+                                                        <a href="{{route('backend.order.edit', [$order->id])}}" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="View"><i class="fa fa-eye"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
+                                            @endif
                                         </table>
                                     </form>
                                 </div>
