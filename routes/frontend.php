@@ -32,6 +32,7 @@ Route::get('/single-product', [PageController::class, 'viewSingleProductView'])-
 Route::middleware(['auth', 'user_check'])->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'userDashboardPageView'])->name('frontend.user.dashboar.view');
     Route::get('/manage-profile', [UserDashboardController::class, 'manageProfilePageView'])->name('frontend.user.manage_profile.view');
+    Route::post('/update-profile', [UserDashboardController::class, 'updateUserProfile'])->name('frontend.user.update_profile');
     Route::get('/discount', [UserDashboardController::class, 'discountPageView'])->name('frontend.user.discount.view');
 });
 // -------------------------After user login (end) ------------------------------------------------------------
