@@ -24,32 +24,19 @@
                                 <div class="crad-body">
                                     <form action="{{route('backend.delivery_boy.store')}}" method="POST" class="mt-5" style="padding: 0 16px 16px 16px;">
                                     @csrf      
+                                    <div class="form-group ">
+                                            <label for="address">Address</label>
+                                            <input type="text" class="form-control" id="address" name="address" placeholder="Your Address">
+                                          </div> 
+
                                     <div class="form-group">
-                                            <label for="inputName">Name</label>
-                                            <input type="text" class="form-control" id="inputName" name="name" placeholder="Your Name">
-                                          </div>
-
-                                        <div class="form-group ">
-                                            <label for="inputEmail">Email</label>
-                                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Your Email">
-                                          </div>
-                                      
-                                          <div class="form-group ">
-                                            <label for="inputPhone">Phone</label>
-                                            <input type="tel" class="form-control" id="inputPhone" name="phone" placeholder="Your Phone">
-                                          </div>
-                                         
-                                        
-                                        <div class="form-group ">
-                                            <label for="inputPassword">Password</label>
-                                            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Your Password">
-                                          </div>
-
-                                          <div class="form-group ">
-                                            <label for="inputPassword">Password</label>
-                                            <input type="password" class="form-control" id="inputPassword" name="password_confirmation" placeholder="Your Password">
-                                          </div>
-                                       
+                                            <label for="fathername">Father's Name</label>
+                                            <input type="text" class="form-control" id="fathername" name="name" placeholder="Father's Name">
+                                          </div>  
+                                            <div class="form-group ">
+                                            <label for="aadharno">Aadhar No.</label>
+                                            <input type="number" class="form-control" id="aadharno" name="phone" placeholder="Aadhar No.">
+                                          </div> 
                                         <button type="submit" class="btn btn-primary">Save</button>
                                       </form>
                                 </div>
