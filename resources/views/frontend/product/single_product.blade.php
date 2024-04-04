@@ -27,8 +27,7 @@
                     </section>
                     <section class="thumbnail">
                         <div>
-                        @if($product_detail->product_images != '')
-
+                        @if($product_detail->product_images != '') 
                             @foreach($product_detail->product_images as $key => $images)
                             <div class="thumbnailBox {{$key == 0 ? " active":""}}">
                                 <img src="{{url('public/'.$images)}}" alt="">
@@ -50,14 +49,14 @@
                         <div class="col-md-12">
                             <div class="reviews d-flex">
                                 <div class="star mx-2">
-                                     <i class="fas fa-star c_yellow"></i>
-                                        <i class="fa-solid fa-star c_yellow"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
+                                     <i class="fas fa-star {{$roundedRating >= 1?'c_yellow':''}}"></i>
+                                        <i class="fa-solid fa-star {{$roundedRating >= 2?'c_yellow':''}}"></i>
+                                        <i class="fa-solid fa-star {{$roundedRating >= 3?'c_yellow':''}}"></i>
+                                        <i class="fa-solid fa-star {{$roundedRating >= 4?'c_yellow':''}}"></i>
+                                        <i class="fa-solid fa-star {{$roundedRating >= 5?'c_yellow':''}}"></i>
                                 </div>
                                 <div class="review-counting d-flex mx-2">
-                                    <p class="">0 Reviews |</p>
+                                    <p class="">{{$review_count}} Reviews |</p>
                                     <a href="#description" style="text-decoration:none;"><p class="" style="color:#01316b"> &nbsp Write a Review</p></a>
                                 </div>
                             </div>
@@ -170,8 +169,33 @@
             <div class="tab-pane fade" id="myreview">
                 <div class="row">
                     <div class="col-md-6">
-                        <h6>Leave a review</h6>
-                            <form id="reviewForm" method="POST" action="{{route('frontend.submit_review')}}"> 
+                        <h6>Leave a review</h6> <p>{{$review_data->status == 0?'(Your review is not approved)':''}}</p>
+                                    @if(auth()->check() && $review_data != '')
+                                    <form id="reviewForm" method="POST" action="{{route('frontend.submit_review')}}"> 
+                            @csrf    
+                            <div class="reviews d-flex">
+                                    <label for="review"
+                                        style="display: flex;justify-content: center;align-items: center;">Your Review:</label>
+                                    <fieldset class="rating"> 
+                                        <input type="radio" id="star5" name="rating" value="5" {{$review_data->rating == 5 ? 'checked':''}}>
+                                        <label class="full" for="star5"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="star4" name="rating" value="4" {{$review_data->rating == 4 ? 'checked':''}}>
+                                        <label class="full" for="star4"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="star3" name="rating" value="3" {{$review_data->rating == 3 ? 'checked':''}}>
+                                        <label class="full" for="star3"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="star2" name="rating" value="2" {{$review_data->rating == 2 ? 'checked':''}}>
+                                        <label class="full" for="star2"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="star1" name="rating" value="1" {{$review_data->rating == 1 ? 'checked':''}}>
+                                        <label class="full" for="star1"><i class="fas fa-star"></i></label>
+                                    </fieldset>
+                                </div>
+                                <input type="hidden" value="{{$product_detail->id}}" name="product_id">
+                                <textarea id="comment" name="comment" placeholder="Write your review here..." cols="50"
+                                    class="mt-2 p-2">{{$review_data->comment}}</textarea><br>
+                                <button type="submit" class="btn btn-warning animation  mx-2" {{$review_data->status == 0?'disabled':''}}>Submit Review</button>
+                            </form>
+                                    @else
+                                    <form id="reviewForm" method="POST" action="{{route('frontend.submit_review')}}"> 
                             @csrf    
                             <div class="reviews d-flex">
                                     <label for="review"
@@ -183,37 +207,53 @@
                                         <label class="full" for="star4"><i class="fas fa-star"></i></label>
                                         <input type="radio" id="star3" name="rating" value="3">
                                         <label class="full" for="star3"><i class="fas fa-star"></i></label>
-                                        <input type="radio" id="star2" name="rating" value="2">
+                                        <input type="radio" id="star2" name="rating" value="2" >
                                         <label class="full" for="star2"><i class="fas fa-star"></i></label>
-                                        <input type="radio" id="star1" name="rating" value="1">
+                                        <input type="radio" id="star1" name="rating" value="1" checked>
                                         <label class="full" for="star1"><i class="fas fa-star"></i></label>
                                     </fieldset>
                                 </div>
-                                <textarea id="review" name="review" placeholder="Write your review here..." cols="50"
+                                <input type="hidden" value="{{$product_detail->id}}" name="product_id">
+                                <textarea id="comment" name="comment" placeholder="Write your review here..." cols="50"
                                     class="mt-2 p-2"></textarea><br>
                                 <button type="submit" class="btn btn-warning animation  mx-2">Submit Review</button>
                             </form>
+                                    @endif
+                            
                     </div>
                     <div class="col-md-6">
                         <h6>Reviews by customers</h6>
+                        @if(count($all_review) > 0) 
+                        @foreach($all_review as $review)
                         <div class="single-review">
                             <div class="rev-img">
-                                <img src="https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg" alt="">
+                                <img src="
+                                @if($review->getUser->profile != '')
+                                {{url($review->getUser->profile) }}
+                                @else 
+                                https://pbs.twimg.com/profile_images/1701878932176351232/AlNU3WTK_400x400.jpg
+                            @endif
+                            " alt="">
                             </div>
                             <div class="full-rev">  
                                     <div class="star ">
-                                        <i class="fas fa-star c_yellow"></i>
-                                        <i class="fa-solid fa-star c_yellow"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fas fa-star {{$review->rating >= 1?'c_yellow':''}}"></i>
+                                        <i class="fa-solid fa-star {{$review->rating >= 2?'c_yellow':''}}"></i>
+                                        <i class="fa-solid fa-star {{$review->rating >= 3?'c_yellow':''}}"></i>
+                                        <i class="fa-solid fa-star {{$review->rating >= 4?'c_yellow':''}}"></i>
+                                        <i class="fa-solid fa-star {{$review->rating >= 5?'c_yellow':''}}"></i>
                                     </div>  
-                                    <div class="rev-name"><b>Kartik Sharma</b></div>
+                                    <div class="rev-name"><b>{{$review->getUser->name}}</b></div>
                                     <div class="rev-content">
-                                        <p>One of the standout features of the LunarGlow is its customizable lighting options. With adjustable brightness and color setting</p>
+                                        <p>{{$review->comment}}</p>
                                      </div> 
                              </div> 
                             </div>
+                            @endforeach
+                            @else
+                                <p>No review</p>
+                            @endif
+
                         </div>
                     </div> 
                 </div> 
@@ -222,7 +262,16 @@
     </div>
 </section> 
 @section('javascript-section')
-  
+@if(Session::has('review_sent'))
+        <script> 
+            Swal.fire({
+            title: "Success!",
+            text: "{{Session::get('review_sent')}}",
+            icon: "success",
+            timer: 5000,
+            });
+        </script> 
+        @endif
 
 @endsection
 @endsection

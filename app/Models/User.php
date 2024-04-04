@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Backend\Order;
+use App\Models\Backend\Review;
 use App\Models\Backend\ShippingAddress;
 use App\Models\Frontend\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -71,5 +72,9 @@ class User extends Authenticatable
 
     public function getCartItem(){
         return $this->hasMany(Cart::class, 'user_id');
+    }
+
+    public function getReview(){
+        return $this->hasMany(Review::class, 'user_id');
     }
 }

@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
         $user_type = Auth::user()->user_type;
-
+        $token = Auth::user()->createToken('Personal Access Token')->plainTextToken;
         $cart = session()->get('cart'); 
         if($cart != '') {
             foreach($cart as $index => $item) {
@@ -69,7 +69,7 @@ class AuthenticatedSessionController extends Controller
         Session::forget('cart');
        
         if($user_type == 1 || $user_type == 0){
-            return redirect('/admin/dashboard');
+            return redirect('/admin/dashboard?'.$token);
         }else{
             return redirect('/');
         }

@@ -7,6 +7,7 @@ use App\Models\Backend\Attribute;
 use App\Models\Backend\AttributeValue;
 use App\Models\Backend\Brand;
 use App\Models\Backend\MainCategory;
+use App\Models\Backend\Review;
 use App\Models\Backend\ShippingCharge;
 use App\Models\Backend\Stock;
 use App\Models\Backend\SubCategory;
@@ -456,7 +457,22 @@ class ProductController extends Controller
             $product_detail = Product::where('slug', $slug)->with('getStock')->first();  
             $option_id = $product_detail->getStock[0]->attribute_id;
             $option_name = Attribute::where('id', $option_id)->first()->name; 
-            return view('frontend.product.single_product', compact('product_detail', 'option_name'));
+
+            $review_data = Review::select('*');
+            if(auth()->check()){
+                $review_data = $review_data->where('user_id', Auth::user()->id);
+                $review_data = $review_data->where('product_id', $product_detail->id)->first();
+            }else{
+                $review_data = $review_data->get();
+            }
+
+            $average_rating = Review::where('product_id', $product_detail->id)->avg('rating');
+            $roundedRating = ceil($average_rating);  
+
+            $all_review = Review::with('getUser')->where('product_id', $product_detail->id)->where('status', 1)->get();
+
+            $review_count = Review::where('product_id', $product_detail->id)->count();
+            return view('frontend.product.single_product', compact('product_detail', 'option_name', 'review_data', 'roundedRating', 'all_review', 'review_count'));
         }
 
 

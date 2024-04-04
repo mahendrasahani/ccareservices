@@ -2,6 +2,7 @@
 
 namespace App\Models\Backend;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,4 +17,12 @@ class Review extends Model
         "comment",
         "status"
     ];
+
+    public function getUser(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getProduct(){
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }

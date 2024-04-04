@@ -1,11 +1,5 @@
 @extends('layouts/backend/main')
-@section('main-section')
-
-
-
-
-
-
+@section('main-section')  
 <div class="content-body">
             <div class="top-set">
                 <div class="container">
@@ -30,7 +24,9 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                
+                                    @php
+                                    $sn = 1;
+                                    @endphp
                                     <table id="myTable" class="table table-bordered mb-0">
                                         <thead>
                                             <tr> 
@@ -43,37 +39,49 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @if(count($reviews) > 0)
+                                            @foreach($reviews as $review)
                                             <tr>
                                                  
-                                                <td>1</td>
+                                                <td>{{$sn++}}</td>
                                                 <td>
-                                                     <p>Apple iPhone 12 Pro, 128GB, 256GB, 512 GB Deep Purple</p>
+                                                     <p>{{$review->getProduct->product_name}}</p>
                                                 </td>
                                                 <td class="lh-1-8">
-                                                    <span class="d-block">Name: Christina Ashens</span>
-                                                    <span class="d-block">Email: customer@example.com</span>
-                                                    <span class="d-block">Phone: +1603-842-2079</span>
+                                                    <span class="d-block">Name: {{$review->getUser->name ?? ''}}</span>
+                                                    <span class="d-block">Email: {{$review->getUser->email ?? ''}}</span>
+                                                    <span class="d-block">Phone: {{$review->getUser->phone ?? ''}}</span>
                                                     
                                                 </td>
                                                 <td>
-                                                <span class="d-block">
-                                                        Rating: <span class="rating"><i class="las la-star active"></i><i class="las la-star active"></i><i class="las la-star active"></i><i class="las la-star active"></i><i class="las la-star active"></i></span>
+                                                <div>
+                                                   <span class="rating rating-sm my-2">
+                                                        <i class="fa fa-star {{$review->rating >= 1?'c_yellow':''}}"></i>
+                                                        <i class="fa-solid fa-star {{$review->rating >= 2?'c_yellow':''}}"></i>
+                                                        <i class="fa-solid fa-star {{$review->rating >= 3?'c_yellow':''}}"></i>
+                                                        <i class="fa-solid fa-star {{$review->rating >= 4?'c_yellow':''}}"></i>
+                                                        <i class="fa-solid fa-star {{$review->rating >= 5?'c_yellow':''}}"></i>
                                                     </span>
+                                                </div>
                                                 </td>
                                                 <td>
-                                                    <p>This is my first iPhone bought by myself i worked for it and ummm I’m not going to lie I mean to purchase the Pro Max BUT I accidentally bought the Pro only so yup there it is But I must say the phone is still amazing and looks so nice like if I would've bought it from the apple store it had 100% battery life is 512GB thats so good to have that much space to install how many games or videos Id like and still have a toon of space overall I totally recommend this phone to anybody and it’s a great start before you get to the 13 Pro or Pro max because you don’t value stuff if you didn’t have something worse or less valuable before that definitely worth every penny.</p>
+                                                    <p>{{$review->comment}}</p>
                                                 </td>
                                                  
                                                 <td>
                                                     <div class="custom-control custom-switch text-right">
-                                                        <label class="switch"> <input type="checkbox"> <span class="slider"></span> </label>
+                                                        <label class="switch"> <input type="checkbox" name="status" id="status" data-id="{{$review->id}}" value="{{$review->status}}" {{$review->status == 1 ? 'checked':''}}> <span class="slider"></span> </label>
                                                     </div>
                                                 </td>
                                             </tr>
+                                            @endforeach
+                                            @else
+                                            <p>No Review</p>
+                                            @endif
                                         </tbody>
                                     </table>
                                      
-                           
+                                {{$reviews->links('pagination::bootstrap-5')}}
                                 
                             </div>
                             </div>
@@ -88,15 +96,38 @@
             <!-- #/ container -->
         </div>
 
-
-
-
-
-
-
-
 @section('javascript-section')
- 
+ <script>
+    const updateStatusRoute = "{{ route('backend.review.update_status') }}";
+$(document).on("change", "#status", async function(){ 
+    var $toggleButton = $(this);
+        var status = $toggleButton.prop('checked') ? '1' : '0';
+        let review_id = $(this).data('id');
+        let data = { 'status': status, 'review_id':review_id};
+        try {
+            const response = await fetch(updateStatusRoute, {
+                method: 'POST',
+                headers:{
+                    'Content-Type':'application/json', 
+                    'Authorization': 'Bearer 1|Tm9ARAVXh35wTxyL6tIjrMMb8yQXs7FkH5laTCJef22e300d',
+                },
+                body: JSON.stringify(data)
+            }); 
+            if(!response.ok){
+                throw new Error('Network response was not ok');
+            }
+            const responseData = await response.json();
+            Swal.fire({
+                        title: "Success!",
+                        text: "Status successfully updated.",
+                        icon: "success"
+                    }); 
+        }catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+        throw error;
+    } 
+    }); 
+</script>
 
 @endsection
 @endsection
