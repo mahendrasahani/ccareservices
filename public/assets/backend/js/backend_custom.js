@@ -1,4 +1,46 @@
-function removeMainOption(divSection){
+// --------------------dashboard bar graph ------------------------ 
+        // Sample data for the chart
+    const months = ['January', 'February', 'March', 'April', 'May', 'June','July','August','September','October','November','December'];
+    const salesData = [3000, 4000, 3500, 5000, 6000, 4500,4567];
+
+    // Configuration options
+    const config = {
+        type: 'bar',  //REMOVE CHART FROM THIS
+    data: {
+        labels: months,
+    datasets: [{
+        label: 'Monthly Sales',
+    backgroundColor: 'rgb(54, 162, 235)',
+    borderColor: 'rgb(54, 162, 235)',
+    data: salesData,
+                }]
+            },
+    options: {
+        scales: {
+        yAxes: [{
+        ticks: {
+        beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        };
+
+        // Wait for the document to load before creating the chart
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create the chart
+            var salesChart = new Chart(
+    document.getElementById('salesChart'),
+    config
+    );
+        }); 
+// --------------------dashboard bar graph end------------------------ 
+
+
+
+
+function removeMainOption(divSection)
+{
     var section = document.getElementById(divSection);
     section.remove();
  }

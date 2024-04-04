@@ -168,51 +168,36 @@
 /*******************
 Chart Chartist
 *******************/
-(function($) {
-    "use strict"
+new Chartist.Line("#chart_widget_4", {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+    series: [
+        [10, 20, 15, 25, 18, 30, 22, 28]
+    ]
+}, {
+    low: 0,
+    showArea: false,
+    showPoint: true,
+    showLine: true,
+    fullWidth: true,
+    lineSmooth: false,
+    chartPadding: {
+        top: 4,
+        right: 4,
+        bottom: -20,
+        left: 4
+    },
+    axisX: {
+        showLabel: true, // Show labels on X axis
+        showGrid: false,
+        offset: 0
+    },
+    axisY: {
+        showLabel: true, // Show labels on Y axis
+        showGrid: true, // Show grid lines on Y axis
+        offset: 0
+    }
+});
 
-
-    new Chartist.Line("#chart_widget_3", {
-        labels: ["1", "2", "3", "4", "5", "6", "7", "8"],
-        series: [
-            [4, 5, 1.5, 6, 7, 5.5, 5.8, 4.6]
-        ]
-    }, {
-        low: 0,
-        showArea: !1,
-        showPoint: !0,
-        showLine: !0,
-        fullWidth: !0,
-        lineSmooth: !1,
-        chartPadding: {
-            top: 4,
-            right: 4,
-            bottom: -20,
-            left: 4
-        },
-        axisX: {
-            showLabel: !1,
-            showGrid: !1,
-            offset: 0
-        },
-        axisY: {
-            showLabel: !1,
-            showGrid: !1,
-            offset: 0
-        }
-    });
-
-
-    new Chartist.Pie("#chart_widget_3_1", {
-        series: [35, 65]
-    }, {
-        donut: !0,
-        donutWidth: 10,
-        startAngle: 0,
-        showLabel: !1
-    });
-
-})(jQuery);
 
 
 

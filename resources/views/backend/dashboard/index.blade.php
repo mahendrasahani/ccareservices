@@ -57,7 +57,7 @@
                     </div>
                     
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <div class="border rounded-lg p-4 mb-4">
                                 <div class="chartjs-size-monitor">
                                     <div class="chartjs-size-monitor-expand">
@@ -68,8 +68,7 @@
                                     </div>
                                 </div>
                                 <div class="fs-16 fw-700 mb-4">Sales stat</div>
-                                <canvas id="graph-2" class="w-100 chartjs-render-monitor" height="269"
-                                    style="display: block; height: 300px; width: 527px;" width="474"></canvas>
+                                   <canvas id="salesChart" width="500" height="300"></canvas>
                             </div>
                         </div>
                         
@@ -217,7 +216,7 @@
         <!--**********************************
             Content body end
         ***********************************-->
+     
 
-
-
+ 
 @endsection
