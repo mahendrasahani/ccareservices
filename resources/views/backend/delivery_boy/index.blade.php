@@ -25,6 +25,9 @@
                                             <thead>
                                                 <tr class="footable-header" style="font-size: 12px;">
                                                     <th class="">#</th>
+                                                    <th class="">Name</th>
+                                                    <th class="">Email</th>
+                                                    <th class="">Phone</th>
                                                     <th class="">Address</th>
                                                     <th>Father's Name</th>
                                                     <th>Aadhar No. </th>
@@ -43,19 +46,16 @@
                                                     <td style="display: table-cell;">{{$delivery_boy->name}}</td>
                                                     <td style="display: table-cell;" class="">{{$delivery_boy->email}}</td>
                                                     <td style="display: table-cell;">+91-{{$delivery_boy->phone}}</td>
-                                                    <td style="display: table-cell;" class=""> ₹20.00</td>
-                                                    <td class="" style="display: table-cell;">₹0.00</td>
-                                                    <td class="" style="display: table-cell;">Active</td>
+                                                    <td style="display: table-cell;" class=""> {{$delivery_boy->address ?? '-'}}</td>
+                                                    <td class="" style="display: table-cell;">{{$delivery_boy->father_name ?? '-'}}</td>
+                                                    <td class="" style="display: table-cell;">{{$delivery_boy->aadhar_number ?? '-'}}</td>
                                                     <td style="display: table-cell;">
                                                         <div class="dropdown vartical">
                                                             <a href="#" class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 <span class="new-icon">  <i class="fa-solid fa-ellipsis-vertical"></i></span>
                                                             </a>
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                              <a class="dropdown-item" href="#"> Edit</a>
-                                                              <a class="dropdown-item" href="#"> Ban this delivery boy</a>
-                                                              <a class="dropdown-item" href="#"> Go to Collection</a>
-                                                              <a class="dropdown-item" href="#"> Go to Payment</a>
+                                                              <a class="dropdown-item" href="{{route('backend.delivery_boy.edit', [$delivery_boy->id])}}"> Edit</a> 
                                                             </div>
                                                           </div>
                                                     </td>
@@ -77,20 +77,20 @@
             <!-- #/ container -->
         </div>
 @section('javascript-section')
-    @if(Session::has('success'))
+    @if(Session::has('created'))
         <script> 
             Swal.fire({
             title: "Success!",
-            text: "{{Session::get('success')}}",
+            text: "{{Session::get('created')}}",
             icon: "success",
             timer: 5000,
             });
         </script>
-        @elseif(Session::has('update'))
+        @elseif(Session::has('updated'))
         <script> 
             Swal.fire({
             title: "Success!",
-            text: "{{Session::get('update')}}",
+            text: "{{Session::get('updated')}}",
             icon: "success",
             timer: 5000,
             });

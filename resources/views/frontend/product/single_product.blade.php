@@ -101,7 +101,7 @@
                                         <input type="number" id="quantity" value="1" min="1"
                                             style="width: 20%;"> 
                                             <button type="button" class="single_product_btn" id="add_to_cart_btn"><i class="fa-solid fa-spinner"></i></button>
-                                            <button type="button" class="single_product_btn">Add to Wishlist</button>
+                                            <!-- <button type="button" class="single_product_btn">Add to Wishlist</button> -->
                                         </div>
                                     </div>
                                     <p  style="color:red; font-weight:bold;" id="quantity_error"></p>
@@ -169,7 +169,7 @@
             <div class="tab-pane fade" id="myreview">
                 <div class="row">
                     <div class="col-md-6">
-                        <h6>Leave a review</h6> <p>{{$review_data->status == 0?'(Your review is not approved)':''}}</p>
+                        <h6>Leave a review</h6> @if($review_data != '') <p>{{$review_data->status == 0?'(Your review is not approved)':''}}</p>@endif
                                     @if(auth()->check() && $review_data != '')
                                     <form id="reviewForm" method="POST" action="{{route('frontend.submit_review')}}"> 
                             @csrf    

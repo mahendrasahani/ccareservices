@@ -7,6 +7,8 @@ use App\Models\Backend\Attribute;
 use App\Models\Backend\AttributeValue;
 use App\Models\Backend\Brand;
 use App\Models\Backend\MainCategory;
+use App\Models\Backend\Order;
+use App\Models\Backend\OrderProduct;
 use App\Models\Backend\Review;
 use App\Models\Backend\ShippingCharge;
 use App\Models\Backend\Stock;
@@ -24,7 +26,8 @@ use Str;
 class ProductController extends Controller
 {
     public function index(){ 
-        $product_list = Product::select('*');
+        $product_list = Product::select('*')->withAvg('getReview', 'rating');
+
         if(isset($_GET['sortBy']) && $_GET['sortBy'] != ''){
             if($_GET['sortBy'] == 'price_high_to_low'){
                 $product_list = $product_list->orderBy('regular_price', 'desc');
@@ -41,6 +44,7 @@ class ProductController extends Controller
             'page' => isset($_GET['page']) ? $_GET['page'] : '',
         ]);
 
+        // return $product_list;
         return view('backend.product.index', compact('product_list'));
     }
 
@@ -285,8 +289,10 @@ class ProductController extends Controller
 
         public function view($id){
             $product_detail = Product::where('id', $id)->with('getBrand')->first();
-            // return $product_detail;
-            return view('backend.product.view', compact('product_detail'));
+            $review_count = Review::where('product_id', $id)->count();
+            $cart_count = Cart::where('product_id', $id)->count();
+            $time_sold = OrderProduct::where('product_id', $id)->count();
+            return view('backend.product.view', compact('product_detail', 'review_count', 'cart_count', 'time_sold'));
         }
 
         public function clone(Request $request){ 

@@ -22,36 +22,36 @@
                                     </div>
                                 @endif
                                 <div class="crad-body">
-                                    <form action="{{route('backend.delivery_boy.store')}}" method="POST" class="mt-5" style="padding: 0 16px 16px 16px;">
+                                    <form action="{{route('backend.delivery_boy.update', [$delivery_boy->id])}}" method="POST" class="mt-5" style="padding: 0 16px 16px 16px;">
                                     @csrf      
                                     <div class="form-group">
                                             <label for="inputName">Name</label>
-                                            <input type="text" class="form-control" id="inputName" name="name" placeholder="Your Name">
+                                            <input type="text" class="form-control" id="inputName" name="name" placeholder="Your Name" value="{{$delivery_boy->name ?? ''}}">
                                           </div>
 
                                         <div class="form-group ">
                                             <label for="inputEmail">Email</label>
-                                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Your Email">
+                                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Your Email" value="{{$delivery_boy->email ?? ''}}">
                                           </div>
 
                                           <div class="form-group ">
                                             <label for="inputPhone">Phone</label>
-                                            <input type="tel" class="form-control" id="inputPhone" name="phone" placeholder="Your Phone">
+                                            <input type="tel" class="form-control" id="inputPhone" name="phone" placeholder="Your Phone" value="{{$delivery_boy->phone ?? ''}}">
                                           </div>
  
 
                                     <div class="form-group ">
                                             <label for="address">Address</label>
-                                            <input type="text" class="form-control" id="address" name="address" placeholder="Your Address">
+                                            <input type="text" class="form-control" id="address" name="address" placeholder="Your Address" value="{{$delivery_boy->address ?? ''}}">
                                           </div> 
 
                                     <div class="form-group">
                                             <label for="father_name">Father's Name</label>
-                                            <input type="text" class="form-control" id="father_name" name="father_name" placeholder="Father's Name">
+                                            <input type="text" class="form-control" id="father_name" name="father_name" placeholder="Father's Name" value="{{$delivery_boy->father_name ?? ''}}">
                                           </div>  
                                             <div class="form-group ">
                                             <label for="aadhar_number">Aadhar No.</label>
-                                            <input type="number" class="form-control" id="aadhar_number" name="aadhar_number" placeholder="Aadhar No.">
+                                            <input type="number" class="form-control" id="aadhar_number" name="aadhar_number" placeholder="Aadhar No." value="{{$delivery_boy->aadhar_number ?? ''}}">
                                           </div> 
                                         <button type="submit" class="btn btn-primary">Save</button>
                                       </form>

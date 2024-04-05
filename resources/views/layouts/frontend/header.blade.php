@@ -164,9 +164,7 @@
                                     @endif
                                 </li>
                                 @endforeach
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="{{route('testing_flush_cart')}}">Flush Cart</a>
-                                </li>
+                             
  
                             </ul>
                         </div>

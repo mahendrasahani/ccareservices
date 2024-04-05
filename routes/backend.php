@@ -22,6 +22,8 @@ use App\Models\Backend\Review;
 // -------------------------After Admin login (start) ------------------------------------------------------------
 Route::middleware(['auth', 'web', 'admin_check'])->group(function () { 
     Route::get('admin/dashboard', [AdminDashboardController::class, 'adminDashboardPageView'])->name('backend.admin.dashboard.view');
+    Route::get('admin/profile/edit', [AdminDashboardController::class, 'editAdminProfile'])->name('backend.admin.edit_admin_profile');
+    Route::post('admin/profile-update', [AdminDashboardController::class, 'updateAdminProfile'])->name('backend.admin.update_admin_profile');
 
 // ------------------------------------Brand Routes(start)----------------------------------------------------------------
     Route::get('/admin/brand', [BrandController::class, 'index'])->name('backend.brand.index');
@@ -123,6 +125,8 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/delivery-boy', [DeliveryBoyController::class, 'index'])->name('backend.delivery_boy.index');
     Route::get('/admin/delivery-boy/create', [DeliveryBoyController::class, 'create'])->name('backend.delivery_boy.create');
     Route::post('/admin/delivery-boy/store', [DeliveryBoyController::class, 'store'])->name('backend.delivery_boy.store');
+    Route::get('/admin/delivery-boy/edit/{id}', [DeliveryBoyController::class, 'edit'])->name('backend.delivery_boy.edit');
+    Route::post('/admin/delivery-boy/update/{id}', [DeliveryBoyController::class, 'update'])->name('backend.delivery_boy.update');
 
     Route::get('/admin/customers', [CustomerController::class, 'index'])->name('backend.customer.index'); 
     Route::get('/admin/customers/view/{id}', [CustomerController::class, 'view'])->name('backend.customer.view'); 
@@ -139,3 +143,4 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
 
 });
 // -------------------------After Admin login (end) ------------------------------------------------------------
+

@@ -60,13 +60,16 @@
                 <div class="form-field">
                     <label for="text">Email <span>*</span></label>
                     <input type="email" name="email" placeholder="Enter your email....." required>
+                    
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
                 
                
                 <div class="form-field"> 
                     <label for="password">Password <span>*</span></label>
                      <input type="password" name="password" placeholder="Enter your password....." required>
-                </div>
+                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    </div>
 
                 <a href="#" style="text-align:center"><span>Forget Password?</span></a>
 

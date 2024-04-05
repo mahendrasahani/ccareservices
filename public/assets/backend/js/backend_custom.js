@@ -1,39 +1,65 @@
 // --------------------dashboard bar graph ------------------------ 
-        // Sample data for the chart
+ 
     const months = ['January', 'February', 'March', 'April', 'May', 'June','July','August','September','October','November','December'];
-    const salesData = [3000, 4000, 3500, 5000, 6000, 4500,4567];
-
-    // Configuration options
+    const salesData = [];
+ 
     const config = {
-        type: 'bar',  //REMOVE CHART FROM THIS
-    data: {
-        labels: months,
-    datasets: [{
-        label: 'Monthly Sales',
-    backgroundColor: 'rgb(54, 162, 235)',
-    borderColor: 'rgb(54, 162, 235)',
-    data: salesData,
-                }]
-            },
-    options: {
-        scales: {
-        yAxes: [{
-        ticks: {
-        beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        };
-
-        // Wait for the document to load before creating the chart
-        document.addEventListener('DOMContentLoaded', () => {
-            // Create the chart
-            var salesChart = new Chart(
-    document.getElementById('salesChart'),
-    config
-    );
+        type: 'line',   
+        data: {
+            labels: months,
+            datasets: [{
+            label: 'Monthly Sales',
+            backgroundColor: 'rgb(54, 162, 235)',
+            borderColor: 'rgb(0, 107, 179)',
+            data: salesData,
+            }]
+        },
+        options: {
+            scales: {
+            yAxes: [{
+            ticks: {
+            beginAtZero: true
+                            }
+                        }]
+                    }
+        }
+    };
+        let salesChart;
+       
+        document.addEventListener('DOMContentLoaded', async () => { 
+            const year = new Date().getFullYear(); 
+            let response = await fetch(graphUrl, {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': 'Bearer 1|Tm9ARAVXh35wTxyL6tIjrMMb8yQXs7FkH5laTCJef22e300d',
+                },
+                body:JSON.stringify({'year':year})
+            });
+            let responseData = await response.json(); 
+            config.data.datasets[0].data = responseData;
+            salesChart = new Chart(
+                document.getElementById('salesChart'),
+                config
+            );
         }); 
+
+        $(document).on("change", "#sales_year", async function(){
+            let year = $(this).val();
+        
+            let response = await fetch(graphUrl, {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': 'Bearer 1|Tm9ARAVXh35wTxyL6tIjrMMb8yQXs7FkH5laTCJef22e300d',
+                },
+                body:JSON.stringify({'year':year})
+            });
+            let responseData = await response.json();
+            config.data.datasets[0].data = responseData; 
+            salesChart.update();
+         
+        });
 // --------------------dashboard bar graph end------------------------ 
 
 

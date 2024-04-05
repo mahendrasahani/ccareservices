@@ -67,6 +67,15 @@
                                         <div class=""></div>
                                     </div>
                                 </div>
+                                @php
+                                    $currentYear = date("Y"); 
+                                    $years = range($currentYear - 4, $currentYear);
+                                @endphp
+                                <select id="sales_year">
+                                @foreach ($years as $year)   
+                            <option value="{{$year}}" {{$year == $currentYear ? 'selected' : ''}}>{{$year}}</option>';
+                                @endforeach 
+                                </select>
                                 <div class="fs-16 fw-700 mb-4">Sales stat</div>
                                    <canvas id="salesChart" width="500" height="300"></canvas>
                             </div>
@@ -74,35 +83,7 @@
                         
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="card" style="border: 1px solid #e5e5e5;">
-                                <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
-                                    <h4 class="h5"> Recent Activity</h4>
-                                </div>
-                                <div class="card-body">
-                                    <ul class="list-group">
-                                        <li class="list-group-item" style="border-bottom: 1px solid #e5e5e5;">
-                                            <a href="#">Shubham MEHRA</a>  added a 
-                                            <a href="#">new order</a>
-                                            <br>
-                                            <small class="text-muted"><i class="fa fa-clock-o"></i> 16/01/2024 21:54:47</small>
-                                        </li>
-                                        <li class="list-group-item" style="border-bottom: 1px solid #e5e5e5;"><a href="#">Shubham MEHRA</a> added a new address.<br>
-                                            <small class="text-muted"><i class="fa fa-clock-o"></i> 16/01/2024 21:54:17</small>
-                                        </li>
-                                        <li class="list-group-item" style="border-bottom: 1px solid #e5e5e5;"><a href="#">Shubham MEHRA</a> registered a new account.<br>
-                                            <small class="text-muted"><i class="fa fa-clock-o"></i> 16/01/2024 21:50:30</small>
-                                        </li>
-                                        <li class="list-group-item" style="border-bottom: 1px solid #e5e5e5;"><a href="#">Mildred Chiramba</a> registered a new account.<br>
-                                            <small class="text-muted"><i class="fa fa-clock-o"></i> 16/01/2024 15:43:16</small>
-                                        </li>
-                                        <li class="list-group-item" style="border-bottom: 1px solid #e5e5e5;"><a href="#">kaoutar bendefa</a> registered a new account.<br>
-                                            <small class="text-muted"><i class="fa fa-clock-o"></i> 14/01/2024 15:42:05</small>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                         
     
                         <div class="col-md-8">
                             <div class="card" style="border: 1px solid #e5e5e5;">
@@ -217,6 +198,10 @@
             Content body end
         ***********************************-->
      
-
+@section('javascript-section')
+<script>
+let graphUrl = "{{route('backend.chart.monthly_sales')}}";
+</script>
  
+@endsection
 @endsection

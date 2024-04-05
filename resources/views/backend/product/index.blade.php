@@ -111,11 +111,11 @@
                                             <div>
                                                 <div>
                                                     <span>Rating</span>: <span class="rating rating-sm my-2">
-                                                        <i class="fa fa-star c_yellow"></i>
-                                                        <i class="fa-solid fa-star c_yellow"></i>
-                                                        <i class="fa-solid fa-star "></i>
-                                                        <i class="fa-solid fa-star"></i>
-                                                        <i class="fa-solid fa-star"></i>
+                                                        <i class="fa fa-star {{round($product->get_review_avg_rating) >= 1 ? 'c_yellow':''}}"></i>
+                                                        <i class="fa-solid fa-star {{round($product->get_review_avg_rating) >= 2 ? 'c_yellow':''}}"></i>
+                                                        <i class="fa-solid fa-star {{round($product->get_review_avg_rating) >= 3 ? 'c_yellow':''}}"></i>
+                                                        <i class="fa-solid fa-star {{round($product->get_review_avg_rating) >= 4 ? 'c_yellow':''}}"></i>
+                                                        <i class="fa-solid fa-star {{round($product->get_review_avg_rating) >= 5 ? 'c_yellow':''}}"></i>
                                                     </span>
                                                 </div>
                                                 <!-- <div><span>Total Sold</span>: <span class="fw-600">2</span></div> -->

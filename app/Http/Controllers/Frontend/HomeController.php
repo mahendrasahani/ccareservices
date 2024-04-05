@@ -9,5 +9,9 @@ class HomeController extends Controller
 {
     public function homePageView(){
         return view('frontend.home');
+    } 
+
+    public function otpMail(){
+        return view('emails.otp_mail');
     }
 }

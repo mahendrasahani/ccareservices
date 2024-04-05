@@ -37,7 +37,7 @@
                                     @php 
                                         $i = 1;
                                     @endphp
-                                    @foreach($shipping_charges as $charges)
+                                    @foreach($shipping_charges_list as $charges)
                                         <tr>
                                             <td>{{$i++}}</td>
                                             <td>{{$charges->name}}</td>
@@ -105,15 +105,7 @@
             timer: 5000,
             });
         </script>
-        @elseif(Session::has('shipping_charge'))
-        <script> 
-            Swal.fire({
-            title: "Sorry!",
-            text: "{{Session::get('shipping_charge')}}",
-            icon: "warning",
-            timer: 5000,
-            });
-        </script>   
+       
         @elseif(Session::has('updated'))
         <script> 
             Swal.fire({

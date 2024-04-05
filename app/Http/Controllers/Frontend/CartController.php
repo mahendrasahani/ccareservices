@@ -203,9 +203,5 @@ class CartController extends Controller
                 ]); 
         } 
     }
-    
-    function testingFlushCart(Request $request){
-        $request->session()->flush(); 
-        return redirect()->back();
-    } 
+     
 }

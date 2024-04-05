@@ -160,7 +160,7 @@
                                 <span id="editorError" class="formFiedllerror"></span>
                             </div>
                         </div>
-                        <div class="card" style="border: 1px solid #e8e8e8;">
+                        <!-- <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header d-flex justify-content-between"
                                 style="border-bottom : 1px solid #e8e8e8;">
                                 <h5 class="mb-0 pt-2">Product attributes</h5>
@@ -176,7 +176,7 @@
                                 <div id="add_on"></div>
                                 <p class="input_error" id="attribute_error"></p>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
                                 <h5 class="mb-0 h6">SEO Meta Tags</h5>

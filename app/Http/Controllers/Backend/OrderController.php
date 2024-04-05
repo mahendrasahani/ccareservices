@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\Attribute;
 use App\Models\Backend\AttributeValue;
 use App\Models\Backend\BillingAddress;
+use App\Models\Backend\DeliveryBoy;
 use App\Models\Backend\Order;
 use App\Models\Backend\OrderProduct;
 use App\Models\Backend\ShippingAddress;
 use App\Models\Backend\Stock;
 use App\Models\Frontend\Cart;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -25,7 +27,7 @@ class OrderController extends Controller
     }
 
     public function edit($id){ 
-        $delivery_boy_list = User::where('user_type', 3)->where('status', 1)->get();
+        $delivery_boy_list = DeliveryBoy::where('status', 1)->get();
         $order = Order::with(['getOrderProduct:order_id,product_name,quantity,price,month,total_price,product_id,option_id,option_value_id', 'getOrderProduct.getProduct:id,product_images'])->where('id', $id)->first(); 
         // return $order;
         return view('backend.order.edit', compact('order', 'delivery_boy_list')); 
@@ -159,5 +161,31 @@ class OrderController extends Controller
                 'message' => 'failed'
             ]);
         }
+    }
+
+    public function monthlySales(Request $request){
+        try{
+            $year = $request->year;
+        $months = collect(range(1, 12))->map(function ($month) use ($year) {
+            return Carbon::createFromDate($year, $month, 1)->format('Y-m');
+        }); 
+        // Get monthly sales data
+         $monthlySales = Order::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, IFNULL(SUM(total), 0) as total')
+         ->whereYear('created_at', $year)
+         ->groupBy('month')
+         ->orderBy('month')
+         ->pluck('total', 'month');
+ 
+        $salesData = $months->map(function ($month) use ($monthlySales) {
+            return $monthlySales->get($month, 0);
+        })->toArray(); 
+        return response()->json($salesData);
+        }catch(\Exception $e){
+            return response()->json([
+                "message" => "something_went_wrong",
+                "error" => $e->getMessage()
+            ]);
+        }
+        
     }
 }

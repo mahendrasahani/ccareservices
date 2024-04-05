@@ -54,8 +54,7 @@ Route::get('/check-product-in-cart', [CartController::class, 'checkProductInCart
 Route::get('/get-product-id', [ProductController::class, 'decryptProductId'])->name('decrypt_product_id');
 Route::get('/check-stock', [ProductController::class, 'checkStock'])->name('check_stock');
 Route::get('/remove-from-cart', [ProductController::class, 'removeFromCart'])->name('remove_from_cart');
-Route::get('/testing-flush-cart', [CartController::class, 'testingFlushCart'])->name('testing_flush_cart');
-// -------------------------add to cart page (end) --------------------------------------------------------------
+ // -------------------------add to cart page (end) --------------------------------------------------------------
 
 
 Route::middleware(['auth'])->group(function () {
@@ -84,3 +83,6 @@ Route::middleware(['auth'])->group(function () {
 
 // -------------------------After Both User and Admin login (end) --------------------------------------------------------------
 });
+
+ 
+Route::get('/otp-mail', [HomeController::class, 'otpMail'])->name('frontend.otp_mail'); 

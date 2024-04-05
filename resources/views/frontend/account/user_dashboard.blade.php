@@ -88,66 +88,7 @@
                                 </div>
                             </div>
 
-                   <div class="col-md-6">
-                           <div class="card recent">
-                                <div class="recent-heading">
-                                    <h5>My Wishlist</h5>
-                                </div>
-                                <hr>
-                                <div class="recent-products-wrapper">
-                                        <div class="recent-products">
-                                            <div class="recent-products-img">
-                                                <img src="https://shop.activeitzone.com/public/uploads/all/eAyjUaOrohoDCUY4tR9SxpkcaqEBCxWw0uNjCSqi.png"
-                                                    alt="">
-                                            </div>
-                                            <div class="recent-products-content">
-                                                <a href=""><p>ASUS ROG Phone 2 </p></a>
-                                                <span>$301.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="recent-products">
-                                            <div class="recent-products-img">
-                                                <img src="https://shop.activeitzone.com/public/uploads/all/eAyjUaOrohoDCUY4tR9SxpkcaqEBCxWw0uNjCSqi.png"
-                                                    alt="">
-                                            </div>
-                                            <div class="recent-products-content">
-                                                <a href=""><p>ASUS ROG Phone 2 </p></a>
-                                                <span>$301.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="recent-products">
-                                            <div class="recent-products-img">
-                                                <img src="https://shop.activeitzone.com/public/uploads/all/eAyjUaOrohoDCUY4tR9SxpkcaqEBCxWw0uNjCSqi.png"
-                                                    alt="">
-                                            </div>
-                                            <div class="recent-products-content">
-                                                <a href=""><p>ASUS ROG Phone 2 </p></a>
-                                                <span>$301.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="recent-products">
-                                            <div class="recent-products-img">
-                                                <img src="https://shop.activeitzone.com/public/uploads/all/eAyjUaOrohoDCUY4tR9SxpkcaqEBCxWw0uNjCSqi.png"
-                                                    alt="">
-                                            </div>
-                                            <div class="recent-products-content">
-                                                <a href=""><p>ASUS ROG Phone 2 </p></a>
-                                                <span>$301.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="recent-products">
-                                            <div class="recent-products-img">
-                                                <img src="https://shop.activeitzone.com/public/uploads/all/eAyjUaOrohoDCUY4tR9SxpkcaqEBCxWw0uNjCSqi.png"
-                                                    alt="">
-                                            </div>
-                                            <div class="recent-products-content">
-                                                <a href=""><p>ASUS ROG Phone 2 </p></a>
-                                                <span>$301.00</span>
-                                            </div>
-                                        </div> 
-                                </div>
-                            </div>
-                       </div>
+                    
                         </div>
  
                     <div class="row">

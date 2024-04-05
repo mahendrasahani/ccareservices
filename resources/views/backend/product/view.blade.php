@@ -39,7 +39,7 @@
                                             </div>
                                             <div class="d-flex flex-wrap">
                                                 <div class="border border-dotted rounded py-2 px-3 mr-3 ml-0">
-                                                    <div class="h3 mb-0 fw-700">1</div>
+                                                    <div class="h3 mb-0 fw-700">{{$review_count ?? '0'}}</div>
                                                     <div class="opacity-60 fs-12">Reviews</div>
                                                 </div>
                                                 <div class="border border-dotted rounded py-2 px-3 mr-3 ml-0">
@@ -47,14 +47,14 @@
                                                     <div class="opacity-60 fs-12">In wishlist</div>
                                                 </div>
                                                 <div class="border border-dotted rounded py-2 px-3 mr-3 ml-0">
-                                                    <div class="h3 mb-0 fw-700">0</div>
+                                                    <div class="h3 mb-0 fw-700">{{$cart_count ?? '0'}}</div>
                                                     <div class="opacity-60 fs-12">In cart</div>
                                                 </div>
                                                 <div class="border border-dotted rounded py-2 px-3 mr-3 ml-0">
-                                                    <div class="h3 mb-0 fw-700">2</div>
+                                                    <div class="h3 mb-0 fw-700">{{$time_sold ?? '0'}}</div>
                                                     <div class="opacity-60 fs-12">Times sold</div>
                                                 </div>
-                                                <div class="border border-dotted rounded py-2 px-3 mr-3 ml-0">
+                                                <!-- <div class="border border-dotted rounded py-2 px-3 mr-3 ml-0">
                                                     <div class="h3 mb-0 fw-700">₹
                                                     @if($product_detail->discount_type == 'flat')
                                                     {{number_format($product_detail->regular_price - $product_detail->discount, 2)}}
@@ -65,7 +65,7 @@
                                               
                                                 </div>
                                                     <div class="opacity-60 fs-12">Amount sold</div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>

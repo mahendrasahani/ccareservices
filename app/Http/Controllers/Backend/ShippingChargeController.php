@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class ShippingChargeController extends Controller
 {
     public function index(){
-        $shipping_charges = ShippingCharge::all();
-        return view('backend.shipping_charge.index', compact('shipping_charges'));
+        $shipping_charges_list = ShippingCharge::all();
+        return view('backend.shipping_charge.index', compact('shipping_charges_list'));
     }
 
     public function store(Request $request){
