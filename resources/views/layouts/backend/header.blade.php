@@ -250,8 +250,15 @@
                     </li>
                     <li><a href="{{route('backend.stock.index')}}">
                         <span>
-                            <img src="{{url('public/assets/backend/images/png.icon/payment-method.png')}}" alt="">
+                            <i class="fa fa-archive"></i>
                             <p class="sidebar-option">Stock</p>
+                        </span>
+                        </a>
+                    </li>
+                    <li><a href="{{route('backend.return.index')}}">
+                        <span>
+                             <i class="fa fa-undo"></i> 
+                            <p class="sidebar-option">Return</p>
                         </span>
                         </a>
                     </li>
@@ -264,7 +271,8 @@
                     </li>
                     <li><a href="{{route('backend.shipping_charge.index')}}">
                         <span>
-                            <i class="fa fa-users"></i>
+                            <i class="fa fa-truck"></i>
+
                             <p class="sidebar-option">Shipping Charge</p>
                         </span>
                         </a>
@@ -272,7 +280,7 @@
 
                     <li><a href="{{route('backend.payment_method.index')}}">
                         <span>
-                            <img src="{{url('public/assets/backend/images/png.icon/payment-method.png')}}" alt="">
+                            <i class="fa fa-credit-card"></i>
                             <p class="sidebar-option">Payment Methods</p>
                         </span>
                         </a>
@@ -288,8 +296,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="refund-requests.html">Refund requests</a></li>
-                            <li><a href="refund-settings.html">Refund Settings</a></li>
-
+                            <li><a href="refund-settings.html">Refund Settings</a></li> 
                         </ul>
                     </li>
     
