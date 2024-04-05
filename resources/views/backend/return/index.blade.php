@@ -8,6 +8,11 @@
                 <div class="col-md-4">
                     <h1 class="h4">Return Product List</h1>
                 </div> 
+                <div class="col-md-8 text-md-right">
+                    <a href="{{route('backend.return.create')}}" class="btn btn-primary" style="background-color: #f5a100; border: none; border-radius: 50em;">
+                        <span>Add New Product</span>
+                    </a>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12">

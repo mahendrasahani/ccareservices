@@ -143,6 +143,7 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/return', [ReturnController::class, 'index'])->name('backend.return.index');
     Route::get('/admin/return/edit', [ReturnController::class, 'edit'])->name('backend.return.edit');
     Route::get('/admin/return/view', [ReturnController::class, 'view'])->name('backend.return.view');
+    Route::get('/admin/return/create', [ReturnController::class, 'create'])->name('backend.return.create');
 
 
 });

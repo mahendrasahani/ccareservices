@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 mt-3 mb-3"> 
-                    <h3>Edit Product Return</h3>
+                    <h3>Create Product Return</h3>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
                     <div class="col-md-12">
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
-                                <h4 class="mb-0 h6">Edit Product Return</h4>
+                                <h4 class="mb-0 h6">Create Product Return</h4>
                             </div> 
                             <form enctype="multipart/form-data" action=" ">
                                 @csrf
