@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\MainCategoryController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ReturnController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\ShippingChargeController;
 use App\Http\Controllers\Backend\ShippingMethodCntroller;
@@ -137,8 +138,11 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     
     
     
-    Route::get('/admin/review', [ReviewController::class, 'index'])->name('backend.review.index'); 
-    
+    Route::get('/admin/review', [ReviewController::class, 'index'])->name('backend.review.index');
+
+    Route::get('/admin/return', [ReturnController::class, 'index'])->name('backend.return.index');
+    Route::get('/admin/return/edit', [ReturnController::class, 'edit'])->name('backend.return.edit');
+    Route::get('/admin/return/view', [ReturnController::class, 'view'])->name('backend.return.view');
 
 
 });
