@@ -226,21 +226,7 @@
                         </span>
                         </a>
                     </li>
-
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span>
-                                <img src="{{url('public/assets/backend/images/png.icon/money-back.png')}}">
-                                <p class="sidebar-option">Refund</p>
-                                <p class="badge-1 badge-inline badge-danger pull-right text-white mx-3">Addon</p>
-                            </span> 
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="refund-requests.html">Refund requests</a></li>
-                            <li><a href="refund-settings.html">Refund Settings</a></li> 
-                        </ul>
-                    </li>
-    
+ 
                     
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
