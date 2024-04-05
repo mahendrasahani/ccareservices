@@ -16,4 +16,7 @@ class ReturnController extends Controller
     public function view(){
         return view('backend.return.view');
     }
+    public function create(){
+        return view('backend.return.create');
+    }
 }
