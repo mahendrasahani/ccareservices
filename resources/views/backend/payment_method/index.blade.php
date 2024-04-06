@@ -9,30 +9,6 @@
                             <div class="row ">
                                 <div class="col-md-6">
                                     <div class="card" style="border: 1px solid #e5e5e5;">
-                                        <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
-                                            <h4 class="h5">Cash Payment Activation</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <form class="form-horizontal" method="POST">
-                                                <input type="hidden" name="_token" value="">
-                                                <div class="form-group row">
-                                                    <div class="col-md-4">
-                                                        <label class="col-form-control">Activation</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <label class="switch">
-                                                            <input data-id="{{$cod->id}}" type="checkbox" {{$cod->status == 1 ? 'checked':''}} id="cod_switch">
-                                                            <span class="slider"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6">
-                                    <div class="card">
                                         <div class="card-header">
                                             <h4 class="h5">RazorPay Credential</h4>
                                         </div>
@@ -45,7 +21,7 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <label class="switch">
-                                                            <input type="checkbox" data-id="{{$razorpay->id}}" {{$razorpay->status == 1 ? 'checked':''}} id="razorpay">
+                                                            <input type="checkbox" data-id="{{$razorpay->id}}" {{$razorpay->status == 1 ? 'checked' : ''}} id="razorpay">
                                                             <span class="slider"></span>
                                                         </label>
                                                     </div>
@@ -73,7 +49,31 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="col-md-6">
+                                    <div class="card" style="border: 1px solid #e5e5e5;">
+                                        <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
+                                            <h4 class="h5">Cash Payment Activation</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <form class="form-horizontal" method="POST">
+                                                <input type="hidden" name="_token" value="">
+                                                <div class="form-group row">
+                                                    <div class="col-md-4">
+                                                        <label class="col-form-control">Activation</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <label class="switch">
+                                                            <input data-id="{{$cod->id}}" type="checkbox" {{$cod->status == 1 ? 'checked' : ''}} id="cod_switch">
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                 
                         </div>
                     </div>
                 </div>

@@ -77,10 +77,10 @@
                                                                     </th>
                                                                     <th class="col-xl-2">Order Code</th> 
                                                                     <th>Customer </th>
-                                                                    <th class="text-center">Amount</th>
+                                                                    <th >Amount</th>
                                                                     <th>Order Status</th>
-                                                                    <th class="text-center">Payment Status</th>
-                                                                    <th class="text-center">Options</th>
+                                                                    <th >Payment Status</th>
+                                                                    <th >Options</th>
                                                                 </tr>
                                                             </thead>
                         
@@ -95,18 +95,22 @@
                                                                             </label>
                                                                         </div>
                                                                     </td>
-                                                                    <td style="display: table-cell;">{{$order->order_id}}</td> 
-                                                                    <td style="display: table-caption;">{{$order->shipping_name}}</td>
-                                                                    <td style="display: table-cell;">₹{{number_format($order->total - $order->promo_discount, 2)}}</td>
-                                                                    <td style="display: table-cell;">
+                                                                    <td>{{$order->order_id}}</td> 
+                                                                    <td>{{$order->shipping_name}}</td>
+                                                                    <td>₹{{number_format($order->total - $order->promo_discount, 2)}}</td>
+                                                                    <td>
                                                                         <span class="text-capitalize">{{strtoupper($order->order_status)}}</span>
                                                                     </td> 
                                                                     <td style="display: table-cell;">
-                                                                        <span class="badge badge-inline badge-danger">{{strtoupper($order->payment_status)}}</span>
-                                                                    </td> 
-                                                                    <td class="text-right footable-last-visible">
+                                                                        @if($order->payment_status == 'paid')
+                                                                            <span class="badge badge-inline badge-success text-white p-2">{{ strtoupper($order->payment_status) }}</span>  
+                                                                        @else
+                                                                            <span class="badge badge-inline badge-danger p-2">{{ strtoupper($order->payment_status) }}</span>  
+                                                                        @endif
+                                                                    </td>  
+                                                                    <td class="footable-last-visible">
                                                                         <a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage" href="{{route('backend.order.edit', [$order->id])}}" title="View">
-                                                                            <i class="fa-regular fa-eye"></i>
+                                                                            <i class="fa-regular fa-edit"></i>
                                                                         </a>
                                                                         <a class="btn btn-success btn-sm text-white" style="border-radius: 100px; background-color: #0abb75;" title="Print Invoice" href="{{route('backend.invoice.index', [$order->id])}}" id="printIcon" >
                                                                             <i class="fa-solid fa-print" style="cursor: pointer;"></i>

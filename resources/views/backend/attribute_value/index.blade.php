@@ -7,7 +7,7 @@
                         <div class="col-md-12">
                             <h1 class="h3 mb-5">All Values</h1>
                         </div>
-                            <div class="col-md-7">
+                            <div class="col-md-8">
                                 <form action="">
                                     <div class="card" style="border: 1px solid #dfdfdf;">
                                         <div class="card-header" style=" border-bottom: 1px solid #dfdfdf;">
@@ -24,7 +24,7 @@
                                                         <th>#</th>
                                                         <th>Attribute Value</th>
                                                         <th>Attribute</th>
-                                                        <th class="text-right">Actions</th>
+                                                        <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody> 
@@ -33,7 +33,7 @@
                                                         <td>{{$count++}}</td>
                                                         <td>{{$value->attribute->name}}</td>
                                                         <td>{{$value->name}}</td>
-                                                        <td class="text-center " style="border: 0;">
+                                                        <td >
                                                             <a href="{{route('backend.attribute_value.edit', [$value->id])}}"><i class="fa-regular fa-pen-to-square edit_icon text-white"></i></a>
                                                         </td>
                                                     </tr>
@@ -47,7 +47,7 @@
                                 </form>
                                 
                             </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="row">
                                
                                     <div class="card" style="border: 1px solid #e5e5e5;">

@@ -49,7 +49,11 @@
                                                 <td>{{$sub_cat->name}}</td>
                                                 <td>{{$sub_cat->mainCategory->name}}</td> 
                                                 <td>{{$sub_cat->ordering_number}}</td>
-                                                <td style="width:15%"><img src="{{$sub_cat->thumbnail_image != '' ? url($sub_cat->thumbnail_image):url('public/assets/both/placeholder/sub_category.jpg')}}" width="100%"></td>
+                                                <td >
+                                                <div class="main_cat_img">
+                                                    <img src="{{$sub_cat->thumbnail_image != '' ? url($sub_cat->thumbnail_image):url('public/assets/both/placeholder/sub_category.jpg')}}" >
+                                                </div>
+                                                </td>
                                                 <td><label class="switch">
                                                 <input type="checkbox" {{$sub_cat->status == 1 ? 'checked':''}} id="status" name="status" value="{{$sub_cat->status}}" data-id="{{$sub_cat->id}}">
                                                 <span class="slider"></span></label>

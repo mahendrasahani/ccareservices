@@ -22,7 +22,8 @@
                 <div class="form-field"> 
                     <label for="verify_otp">Enter OTP <span>*</span></label>
                     <input type="number" name="verify_otp" placeholder="Enter OTP" required>
-                </div> 
+                </div>
+                    
                 <button class="form-btn" style="margin-top: 10px;">SignUp</button>
                 <p>Already have an account? <a href="{{route('login')}}">Login here</a></p>
             </form>

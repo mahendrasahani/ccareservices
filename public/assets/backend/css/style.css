@@ -232,7 +232,7 @@ select#floatingSelectGrid{
   height: 36px;
 }
 .card.art_card{
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+ box-shadow: 1px 2px 19px -6px rgba(0,0,0,0.20);
 }
 
 .alert_one {
@@ -281,6 +281,7 @@ button.btn.btn-primary.modal_check{
 .rating {
   color: #ffa707; /* Default color for inactive stars */
   font-size: 11px;
+  display: flex;
 }
 #myTable a{
   font-size: 12px !important;
@@ -11072,8 +11073,7 @@ input[type="checkbox"]:checked:after {
   border-color: #f3f3f3; }
 
 .table thead th {
-  border-bottom: none;
-  border-top: none;
+  border-bottom: none; 
   vertical-align: middle; }
 
 .verticle-middle tr td {
@@ -12150,7 +12150,7 @@ table.dataTable thead .sorting::after {
     .card-header:first-child {
       border-radius: 0; }
   .card .card-body {
-    padding: 1.88rem 1.81rem; }
+    padding: 1rem; }
   .card-action a {
     display: inline-block;
     color: #fff;
@@ -15837,8 +15837,8 @@ font-size: 10px;
 }
 
 .pro-img {
-        width: 200px; 
-        height:200px;
+        width: 100px; 
+        height:100px;
         
     }
 
@@ -15849,8 +15849,8 @@ font-size: 10px;
     }
 
 .brand {
-        width: 150px;
-        height: 100px;
+        width: 60px;
+        height: 60px;
     }
 
 .brand img {
@@ -15871,7 +15871,8 @@ font-size: 10px;
 .vendor_img img{
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: fill;
+      border-radius: 50%;
     }
 .rating i{
       color: #aaa;
@@ -15879,3 +15880,26 @@ font-size: 10px;
 .rating .c_yellow {
     color: #FFD43B;
     } 
+
+    .switch input:checked + .slider{
+      box-shadow: none !important;
+    }
+    .main_cat_img{
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+    }
+    .main_cat_img img{
+      width: 100%;
+      height: 100%;
+    } 
+    #my_pagination{
+      margin-top: 20px;
+    }
+    #my_pagination .page-item.active .page-link{
+border-radius: 0px !important;
+    }
+    .avatar {
+    width: 100px;
+    margin: auto;
+}

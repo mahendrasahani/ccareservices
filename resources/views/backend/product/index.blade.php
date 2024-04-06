@@ -12,19 +12,15 @@
                     <h1 class="h4">All products</h1>
                 </div>
                 <div class="col-md-8 text-md-right">
-                    <a href="{{route('backend.product.create')}}" class="btn btn-primary"
-                        style="background-color: #f5a100; border: none; border-radius: 50em;">
+                    <a href="{{route('backend.product.create')}}" class="btn btn-primary" style="background-color: #f5a100; border: none; border-radius: 50em;">
                         <span>Add New Product</span>
                     </a>
                 </div>
-            </div>
+            </div> 
             <div class="row">
                 <div class="col-md-12">
                     <div class="card" style="border: 1px solid #dadada;">
-                        <div class="d-flex align-items-center" style="border-bottom: 1px solid #ececec;">
-                            <div class="col text-center text-md-left">
-                                <h5 class="mb-md-0 h6">All products</h5>
-                            </div>
+                        <div class="d-flex align-items-center" style="border-bottom: 1px solid #ececec;"> 
                             <div class="dropdown mb-2 mb-md-0" id="multiSelectActionBtn" style="display:none;">
                                 <button class="btn border dropdown-toggle" type="button" data-toggle="dropdown"
                                     aria-expanded="false">
@@ -45,10 +41,10 @@
                                         <option value="sale_high_to_low">Num of Sale (High > Low)</option>
                                         <option value="sale_low_to_high">Num of Sale (Low > High)</option>
                                         <option value="price_high_to_low" {{isset($_GET['sortBy']) &&
-                                            $_GET['sortBy']=='price_high_to_low' ? 'selected' :''}}>Base Price (High >
+    $_GET['sortBy'] == 'price_high_to_low' ? 'selected' : ''}}>Base Price (High >
                                             Low)</option>
                                         <option value="price_low_to_high" {{isset($_GET['sortBy']) &&
-                                            $_GET['sortBy']=='price_low_to_high' ? 'selected' :''}}>Base Price (Low >
+    $_GET['sortBy'] == 'price_low_to_high' ? 'selected' : ''}}>Base Price (Low >
                                             High)</option>
                                     </select>
                                 </div>
@@ -76,9 +72,9 @@
                                         <th style="display: table-cell;">Name</th>
                                         <th style="display: table-cell;">Info</th>
                                         <th style="display: table-cell;">Categories</th>
-                                        <th style="display: table-cell; text-align: center;">Brand</th>
-                                        <th style="display: table-cell; text-align: center;">Published</th>
-                                        <th style="display: table-cell;" class="text-center">Options</th>
+                                        <th style="display: table-cell;">Brand</th>
+                                        <th style="display: table-cell;">Published</th>
+                                        <th style="display: table-cell;">Options</th>
                                     </tr>
                                 </thead>
                                 <tbody id="main_table_body">
@@ -102,15 +98,14 @@
                                                     </div>
                                                     <div class=" text-truncate-2">
                                                         <p class="font-s mt-3"> <b>{{$product->product_name}}</b></p>
-                                                    </div>
-
+                                                    </div> 
                                                 </a>
                                             </div>
                                         </td>
                                         <td style="display: table-cell;">
                                             <div>
-                                                <div>
-                                                    <span>Rating</span>: <span class="rating rating-sm my-2">
+                                                <div class="d-flex align-items-center">
+                                                    <span>Rating</span>: <span class="rating rating-sm my-2 mx-2">
                                                         <i class="fa fa-star {{round($product->get_review_avg_rating) >= 1 ? 'c_yellow':''}}"></i>
                                                         <i class="fa-solid fa-star {{round($product->get_review_avg_rating) >= 2 ? 'c_yellow':''}}"></i>
                                                         <i class="fa-solid fa-star {{round($product->get_review_avg_rating) >= 3 ? 'c_yellow':''}}"></i>
@@ -162,7 +157,7 @@
 
                                         <td class="text-left footable-last-visible ">
                                             <div class="d-flex justify-content-center ">
-                                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage"
+                                            <a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage mr-1"
                                                 href="{{route('backend.product.view', [$product->id])}}" title="View">
                                                 <i class="fa-regular fa-eye"></i>
                                             </a>

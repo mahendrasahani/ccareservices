@@ -65,9 +65,9 @@
                                         <th style="display: table-cell;">Vendor Image</th>
                                         <th style="display: table-cell;">Vendor Name</th>
                                         <th style="display: table-cell;">Phone</th>
-                                        <th style="display: table-cell; text-align: center;">Email</th>
-                                        <th style="display: table-cell; text-align: center;">Business Name</th>
-                                        <th style="display: table-cell;" class="text-center">Options</th>
+                                        <th style="display: table-cell;">Email</th>
+                                        <th style="display: table-cell;">Business Name</th>
+                                        <th style="display: table-cell;">Options</th>
                                     </tr>
                                 </thead>
                                 <tbody id="main_table_body">
@@ -94,8 +94,8 @@
                                             {{$vendor->business_name}}
                                         </td>
 
-                                        <td class="text-left footable-last-visible ">
-                                            <div class="d-flex justify-content-center "> 
+                                        <td class="footable-last-visible ">
+                                            <div class="d-flex "> 
                                             <a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2"
                                                 href="{{route('backend.vendor.edit', [$vendor->id])}}" title="Edit">
                                                 <i class="fa-regular fa-pen-to-square text-white"></i>

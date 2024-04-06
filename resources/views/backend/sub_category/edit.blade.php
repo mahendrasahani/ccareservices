@@ -55,7 +55,7 @@
                                         </label>
                                         <div class="col-md-9">
                                             <div class="input-group" data-toggle="aizuploader" data-type="image">  
-                                                <input type="file" class="selected-files" name="thumbnail_image"> 
+                                                <input type="file" class="selected-files form-control" name="thumbnail_image"> 
                                             </div> 
                                         </div>
                                     </div>
@@ -87,7 +87,7 @@
                                         </label>
                                         <div class="col-md-9">
                                             <div class="input-group" data-toggle="aizuploader" data-type="image">  
-                                                <input type="file" class="selected-files" name="meta_image"> 
+                                                <input type="file" class="selected-files form-control" name="meta_image"> 
                                             </div> 
                                         </div>
                                     </div>

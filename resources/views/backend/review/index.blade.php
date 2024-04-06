@@ -32,10 +32,10 @@
                                             <tr> 
                                                 <th class="col-xl-2">#</th>
                                                 <th>Product</th>
-                                                <th class="text-center">Customer</th>
+                                                <th>Customer</th>
                                                 <th>Rating</th>
                                                 <th>Comment</th> 
-                                                <th class="text-right">Status</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -69,7 +69,7 @@
                                                 </td>
                                                  
                                                 <td>
-                                                    <div class="custom-control custom-switch text-right">
+                                                    <div class=" custom-switch ">
                                                         <label class="switch"> <input type="checkbox" name="status" id="status" data-id="{{$review->id}}" value="{{$review->status}}" {{$review->status == 1 ? 'checked':''}}> <span class="slider"></span> </label>
                                                     </div>
                                                 </td>

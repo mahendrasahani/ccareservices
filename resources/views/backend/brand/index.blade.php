@@ -9,12 +9,10 @@
                         </div>
                     </div>
                     <div class="row" style=" padding: 0px 15px 0px 16px;">
-                        <div class="col-md-7">
+                        <div class="col-md-8">
                             <div class="card" style="border: 1px solid #e5e5e5;">
-                                <div class="card-header d-flex" style="border-bottom: 1px solid #e5e5e5;">
-                                <div class="col text-center text-md-left">
-                                    <h5 class="mb-md-0 h6">Brands</h5>
-                                </div>
+                                <div class="card-header d-flex justify-content-end" style="border-bottom: 1px solid #e5e5e5;">
+                                 
     
                                 <div class="">
                                     <div class="input-group enter">
@@ -29,7 +27,7 @@
                                         <tr class="footable-header">
                                             <th class="col-xl-2">#</th>
                                             <th>Name</th>
-                                            <th class="text-center">Logo
+                                            <th>Logo
                                             </th>
                                             <th class="text-right">Options</th>
                                         </tr>
@@ -60,8 +58,7 @@
                             </div>
                             
                         </div>
-                        <div class="col-md-5">
-                            <div class="row">
+                        <div class="col-md-4"> 
                                 <div class="card" style="border: 1px solid #e5e5e5;">
                                     <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
                                         <h5 class="mb-0">Add New Brand</h5>
@@ -89,8 +86,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                </div>
-                            </div>
+                                </div> 
                         </div>
                     </div> 
                  </div>

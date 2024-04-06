@@ -73,7 +73,7 @@
                                 
                                 <div class="fs-16 fw-700 mb-4 d-flex justify-content-between">
                                     <p>Sales stat</p>
-                                <select class="btn border dropdown-toggle" id="sales_year">
+                                <select class="border dropdown-toggle" id="sales_year">
                                 @foreach ($years as $year)   
                             <option value="{{$year}}" {{$year == $currentYear ? 'selected' : ''}}>{{$year}}</option>';
                                 @endforeach 
@@ -82,12 +82,61 @@
                                    <canvas id="salesChart" width="500" height="300"></canvas>
                             </div>
                         </div>
+                        <div class="col-md-5">
+                            <div class="card" style="border: 1px solid #e5e5e5;">
+                                <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
+                                    <h4 class="h5">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Cancel Orders
+                                    </h4>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <table id="myTable" class="table aiz-table mb-0 footable footable-1 breakpoint-lg">
+                                            <thead>
+                                                <tr class="footable-header">
+                                                    
+                                                    <th class="col-xl-2">Order ID</th>
+                                                    <th>Customer</th>
+                                                    <th>Status
+                                                    </th>
+                                                    <th class="text-center">Date Added</th>
+                                                    <th>Total</th>
+                                                    <th class="text-center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="display: table-cell;">
+                                                        322
+                                                    </td>
+                                                    <td>
+                                                        Shubham MEHRA
+                                                    </td>
+                                                    <td style="display: table-cell;">
+                                                        Pending
+                                                    </td>
+                                                    <td>
+                                                        16/01/2024
+                                                    </td>
+                                                    <td>
+                                                        ₹1,650.00
+                                                    </td>
+                                                    <td class="text-right footable-last-visible">
+                                                        <a href="#" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="View"><i class="fa fa-eye"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         
                     </div>
-                    <div class="row">
-                         
-    
-                        <div class="col-md-8">
+                    <div class="row"> 
+                        <div class="col-md-12">
                             <div class="card" style="border: 1px solid #e5e5e5;">
                                 <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
                                     <h4 class="h5">
@@ -138,57 +187,7 @@
                                         </table>
                                     </form>
                                 </div>
-                            </div>
-                            <div class="card" style="border: 1px solid #e5e5e5;">
-                                <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
-                                    <h4 class="h5">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        Cancel Orders
-                                    </h4>
-                                </div>
-                                <div class="card-body">
-                                    <form>
-                                        <table id="myTable" class="table aiz-table mb-0 footable footable-1 breakpoint-lg">
-                                            <thead>
-                                                <tr class="footable-header">
-                                                    
-                                                    <th class="col-xl-2">Order ID</th>
-                                                    <th>Customer</th>
-                                                    <th>Status
-                                                    </th>
-                                                    <th class="text-center">Date Added</th>
-                                                    <th>Total</th>
-                                                    <th class="text-center">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td style="display: table-cell;">
-                                                        322
-                                                    </td>
-                                                    <td>
-                                                        Shubham MEHRA
-                                                    </td>
-                                                    <td style="display: table-cell;">
-                                                        Pending
-                                                    </td>
-                                                    <td>
-                                                        16/01/2024
-                                                    </td>
-                                                    <td>
-                                                        ₹1,650.00
-                                                    </td>
-                                                    <td class="text-right footable-last-visible">
-                                                        <a href="#" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="View"><i class="fa fa-eye"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </form>
-                                </div>
-                            </div>
-                            
+                            </div> 
                         </div>  
                     </div>
                 </div>
