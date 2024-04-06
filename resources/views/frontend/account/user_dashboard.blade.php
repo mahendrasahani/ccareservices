@@ -6,8 +6,7 @@
                 
             @include('layouts/frontend/sidebar')
 
-                <section class="middle col-md-9">
-                    <div class="">
+                <section class="middle col-md-9"> 
                         <div class="dashboard-heading">
                             <h3>Dashboard</h3>
                         </div>
@@ -35,28 +34,30 @@
                         </div> -->
 
                         <div class="row"> 
-                            <div class="col-md-4">
-                                <div class="card my-order-detail">
-                                    <p class="my-order-detail-quantity">{{$total_products_in_cart ?? 0}}</p>
+                            <div class="col-md-6">
+                                <div class="card my-order-detail ">
+                                    <div class="my_order_content">
+                                        <p class="my-order-detail-quantity">{{$total_products_in_cart ?? 0}}</p>
                                     <p class="my-order-detail-name">Total Products in Your Cart</p>
+                                    </div> 
                                 </div>
                             </div>
                                 
                            
                                 
-                            <div class="col-md-4">
-                                <div class="card my-order-detail">
-                                    <p class="my-order-detail-quantity">{{$total_products_in_order_list ?? 0}}</p>
+                            <div class="col-md-6">
+                                <div class="card my-order-detail ">
+                                    <div class="my_order_content">
+                                        <p class="my-order-detail-quantity">{{$total_products_in_order_list ?? 0}}</p>
                                     <p class="my-order-detail-name">Total Products in Your Order List</p>
+                                    </div> 
                                 </div>
-                            </div>
-                                 
-
+                            </div> 
                             
-                        </div>
+                     
                          
                         
-                            <div class=" col-md-6">
+                            <div class=" col-md-12">
                                 <div class="card recent">
                                                         <div class="recent-heading">
                                                             <h5>Recent Purchase History</h5>
@@ -91,7 +92,7 @@
                                 @endif
                             </div>
                             </div>  
-                    </div>
+                               </div> 
                 </section> 
 
                 

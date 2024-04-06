@@ -85,4 +85,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
  
-Route::get('/otp-mail', [HomeController::class, 'otpMail'])->name('frontend.otp_mail'); 
+Route::get('/otp-mail', [HomeController::class, 'otpMail'])->name('frontend.otp_mail');
+Route::get('otp-verify', [HomeController::class, 'otpverify'])->name('otp.verify');
