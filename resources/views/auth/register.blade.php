@@ -70,6 +70,10 @@
                     <label for="">Email <span>*</span></label>
                     <input type="email" name="email" placeholder="Enter your email....." required>
                 </div>
+                <div class="form-field">
+                    <label for="phone">Phone <span>*</span></label>
+                    <input type="tel" name="Phone"   placeholder="Enter your phone....." required>
+                </div>
                 <div class="form-field"> 
                     <label for="">Password <span>*</span></label>
                     <input type="password" name="password" placeholder="Create your password....." required>
