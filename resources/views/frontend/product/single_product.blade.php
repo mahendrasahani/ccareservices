@@ -87,27 +87,15 @@
 
                     <form action="#">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="select-box">
                                     <input type="hidden" value="{{Crypt::encryptString($product_detail->id)}}" name="product_id" id="product_id">
                                     <label for="select-option" class="month-select mt-2">Delivery Date:</label> <br>
                                     <input type="date" id="delivery_date" name="delivery_date">
                                     <p  style="color:red; font-weight:bold;" id="date_error"></p> 
                                 </div>
-                                
-                                <div class="product-quantity d-flex mt-3">
-                                    <div class="mx-2 d-flex">
-                                        <p class="mx-2 m-auto"> Qty</p>
-                                        <input type="number" id="quantity" value="1" min="1"
-                                            style="width: 20%;"> 
-                                            <button type="button" class="single_product_btn" id="add_to_cart_btn"><i class="fa-solid fa-spinner"></i></button>
-                                            <!-- <button type="button" class="single_product_btn">Add to Wishlist</button> -->
-                                        </div>
-                                    </div>
-                                    <p  style="color:red; font-weight:bold;" id="quantity_error"></p>
-                            </div>
-                            <div class="col-md-6">
-                                <h6>{{$option_name}}</h6>
+
+                                 <h6>{{$option_name}}</h6>
                                 <div class="cap-btns" id="option_value_radio">
                                 @foreach($product_detail->getStock as $index => $attribute_value)
                                         @php
@@ -139,7 +127,21 @@
                                      <input type="hidden" name="month" id="month" value="1">
                                      <input type="hidden" id="price" value="{{$product_detail->getStock[0]['price_1']}}">
                                 </div>
+                                
+                                <div class="product-quantity d-flex mt-3">
+                                    <div class="mx-2 d-flex">
+                                        <p class="mx-2 m-auto"> Qty</p>
+                                        <input type="number" id="quantity" value="1" min="1"
+                                            style="width: 20%;"> 
+                                            <button type="button" class="single_product_btn" id="add_to_cart_btn"><i class="fa-solid fa-spinner"></i></button>
+                                            <!-- <button type="button" class="single_product_btn">Add to Wishlist</button> -->
+                                        </div>
+                                    </div>
+                                    <p  style="color:red; font-weight:bold;" id="quantity_error"></p>
+ 
+                                
                             </div>
+                            
                         </div>
                     </form>
                 </div>
@@ -167,8 +169,7 @@
                 <p>SECURITY...(CASH NIL) PDC (Post Dated Cheque) 31December 2024 Rs.7000. It will be returned back at the time of Pickup. Stabilizer charge extra 700 Rs if required. Transport charge extra 300 Rs. Submeter charge...500 if Required. Power Requirements:AC 230 V, 50 Hz. Pre installed plug point of 15 Amp should be available near ac.</p>
             </div>
             <div class="tab-pane fade" id="myreview">
-                <div class="row">
-                    <div class="col-md-6">
+                <div class="row"> 
                         <h6>Leave a review</h6> @if($review_data != '') <p>{{$review_data->status == 0?'(Your review is not approved)':''}}</p>@endif
                                     @if(auth()->check() && $review_data != '')
                                     <form id="reviewForm" method="POST" action="{{route('frontend.submit_review')}}"> 
@@ -220,9 +221,7 @@
                             </form>
                                     @endif
                             
-                    </div>
-                    <div class="col-md-6">
-                        <h6>Reviews by customers</h6>
+                                     <h6 class="mt-3">Reviews by customers</h6>
                         @if(count($all_review) > 0) 
                         @foreach($all_review as $review)
                         <div class="single-review">
@@ -252,9 +251,7 @@
                             @endforeach
                             @else
                                 <p>No review</p>
-                            @endif
-
-                        </div>
+                            @endif   
                     </div> 
                 </div> 
             </div>

@@ -42,12 +42,7 @@
                                 </div>
                             </div>
                                 
-                            <div class="col-md-4">
-                                <div class="card my-order-detail">
-                                    <p class="my-order-detail-quantity">33</p>
-                                    <p class="my-order-detail-name">Total Products in Your Wishlist</p>
-                                </div>
-                            </div>
+                           
                                 
                             <div class="col-md-4">
                                 <div class="card my-order-detail">
@@ -59,8 +54,8 @@
 
                             
                         </div>
+                         
                         
-                        <div class="row">
                             <div class=" col-md-6">
                                 <div class="card recent">
                                                         <div class="recent-heading">
@@ -86,23 +81,16 @@
 
                                                         </div>
                                 </div>
-                            </div>
 
-                    
-                        </div>
- 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card address-default mt-4">
+                                <div class="card address-default mt-4">
                                 <h6>Default Shipping Address</h6>
                                 <hr>
                                 @if($default_shipping_address != '')
                                 <p>{{$default_shipping_address->address}}, {{$default_shipping_address->city}}</p>
                                 <p>{{$default_shipping_address->zip_code}} - {{$default_shipping_address->country}}</p>
                                 @endif
-                            </div> 
-                         </div>
-                    </div>
+                            </div>
+                            </div>  
                     </div>
                 </section> 
 

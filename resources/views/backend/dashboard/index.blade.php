@@ -11,8 +11,7 @@
                                     <h3 class="card-title text-white">Total Customers</h3>
                                     <div class="d-inline-block">
                                         <h2 class="text-white">{{number_format($total_customers)}}</h2>
-                                    </div>
-    
+                                    </div> 
                                     <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
                                 </div>
                             </div>
@@ -71,12 +70,15 @@
                                     $currentYear = date("Y"); 
                                     $years = range($currentYear - 4, $currentYear);
                                 @endphp
-                                <select id="sales_year">
+                                
+                                <div class="fs-16 fw-700 mb-4 d-flex justify-content-between">
+                                    <p>Sales stat</p>
+                                <select class="btn border dropdown-toggle" id="sales_year">
                                 @foreach ($years as $year)   
                             <option value="{{$year}}" {{$year == $currentYear ? 'selected' : ''}}>{{$year}}</option>';
                                 @endforeach 
                                 </select>
-                                <div class="fs-16 fw-700 mb-4">Sales stat</div>
+                            </div>
                                    <canvas id="salesChart" width="500" height="300"></canvas>
                             </div>
                         </div>

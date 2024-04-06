@@ -32,24 +32,7 @@
         <div class="row">
             <form action="#" class="d-flex flex-column flex-md-row justify-content-between mb-3 align-items-center">
                 <h4 class="mb-3 mb-md-0">Categories</h4>
-                <div class="d-flex align-items-center">
-                    <label for="sortSelect" class="label-width me-2">Sort by:</label>
-                    <select class="form-select" id="sortSelect" aria-label="">
-                        <option selected="">Default</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    <div class="ms-md-3">
-                        <input type="text" class="form-control form-control-sm" id="search" name="search"
-                            placeholder="Type & Enter">
-                    </div>
-                    <div class="ms-md-3"> 
-                        <input class="form-control" type="text" style="border-radius: 0;" placeholder="Search">
-                    </div>
-                    <a href="" class="" style="font-size: 10px;"><button type="button"
-                            class="btn btn-warning animation search-cate">Search</button></a>
-                </div>
+                 
             </form>
         </div>
     </div>
@@ -132,7 +115,7 @@
                                 @endif 
                                 <p class="" style="font-size: 11px; color: gray;">{!! Str::limit($product->product_description, 40) !!}</p>
                                 <hr> 
-                                <a href="{{route('frontend.product.single_product', [$product->slug])}}" class="animate-btx btn btn-warning animation">View More</a>
+                                <a href="{{route('frontend.product.single_product', [$product->slug])}}" class="btn btn-warning animation search-cate">View More</a>
                             </div>
                         </div>
                     </div>

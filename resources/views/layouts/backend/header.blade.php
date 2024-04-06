@@ -125,7 +125,9 @@
                     <b class="logo-abbr"><img src="{{url('public/assets/backend/images/logo.png')}}" alt=""> </b>
                      
                     <span class="brand-title">
-                        <img src="{{url('public/assets/backend/images/coolcarelogo-1.jpg')}}" alt="">
+                        <a href="{{route('backend.admin.dashboard.view')}}">
+                    <img src="{{url('public/assets/backend/images/coolcarelogo-1.jpg')}}" alt=""></a>
+                        
                     </span>
                 </a>
             </div>
@@ -225,9 +227,7 @@
                             <p class="sidebar-option">Payment Methods</p>
                         </span>
                         </a>
-                    </li>
- 
-                    
+                    </li>  
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <span class="nav-text">

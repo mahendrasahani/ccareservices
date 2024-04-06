@@ -77,62 +77,14 @@
     <!-- secound-Header -->
     <header class="header" id="section1">
         <div class="container">
-            <div class="row">
-                <div class="d-flex">
-                    <div class="col-md-6" id="media-logo">
-                        <a href=""><img src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}"
-                                class="w-25"></a>
+            <div class="row"> 
+                    <div class="col-md-2" style="align-self: center;">
+                        <div class="logo">
+                            <a href=""><img src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}" ></a>
+                        </div>  
                     </div>
-                    <div class="col-md-6 text-end pt-4">
-                        <div class="top-icon d-flex justify-content-end" style="cursor: pointer; padding: 0 44px;"> 
-                            <a href="#"> 
-                                    <form role="search" method="get" class="search-form" action="">
-                                        <label>
-
-                                            <input type="search" class="search-field" placeholder="Search …" value=""
-                                                name="s" title="Search for:" />
-                                        </label>
-                                        <input type="submit" class="search-submit" value="Search" />
-                                    </form> 
-                            </a>
-                            <a href="{{route('frontend.show.cart')}}" class="d-flex align-items-center">
-                                <i class="fa-solid fa-cart-shopping px-2" style="color: #676767;"></i><span
-                                    class="cart-count" id="cartItemCount">0</span></a>
-                            <li class="dropdown d-inline" id="dropdownUser1" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                @guest
-                                <i class="fa-regular fa-user px-2" style="color: #676767;"></i>
-                                @else
-                                <i class="fa-regular fa-user px-2" style="color: #676767;"></i>{{Auth::user()->name}}
-                                @endguest
-                            </li>
-                            <ul class="dropdown-menu dropdown-menu-end login-drop" id=""
-                                aria-labelledby="dropdownUser1">
-                                @guest
-                                <li><a class="dropdown-item fw-bold" href="{{route('login')}}"
-                                        style=" color: #01316b;">Login</a></li>
-                                @else
-                                @if(Auth::user()->user_type == 1)
-                                <li><a class="dropdown-item fw-bold" href="{{route('backend.admin.dashboard.view')}}" style=" color: #01316b;" target="_blank">Admin Dashboard</a></li>
-                                <li>
-                                @endif
-                                <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}"
-                                        style=" color: #01316b;">Dashboard</a></li>
-                                <li> 
-                                    <form action="{{route('logout')}}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="p-2  dropdown-item fw-bold"
-                                            style=" font-size: 13px;color: #01316b;"> Logout</button>
-                                    </form>
-                                </li>
-                                @endguest
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <nav class="navbar navbar-expand-lg">
+                    <div class="col-md-10 text-end" id="media-logo">
+                        <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <div class="row">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -171,6 +123,54 @@
                     </div>
                 </div>
         </nav>
+                        <div class="top-icon d-flex justify-content-end align-items-center" > 
+                            <a href="#"> 
+                                    <form role="search" method="get" class="search-form" action="">
+                                        <label>
+
+                                            <input type="search" class="search-field" placeholder="Search …" value=""
+                                                name="s" title="Search for:"/>
+                                        </label>
+                                        <input type="submit" class="search-submit" value="Search" style="cursor: pointer;"/>
+                                    </form>     
+                            </a>
+                            <a href="{{route('frontend.show.cart')}}" class="d-flex align-items-center" style="text-decoration:none">
+                                <i class="fa-solid fa-cart-shopping px-2" style="color: #676767;" style="cursor: pointer;"></i><span
+                                    class="cart-count" id="cartItemCount">0</span></a>
+                            <li class="dropdown header_user" id="dropdownUser1" data-bs-toggle="dropdown"
+                                aria-expanded="false" style="cursor: pointer;">
+                                @guest
+                                <i class="fa-regular fa-user px-2 " style="color: #676767;align-self: center;"></i>
+                                @else
+                                <i class="fa-regular fa-user px-2" style="color: #676767;align-self: center;"></i> <p>{{Auth::user()->name}}</p>
+                                @endguest
+                            </li>
+                            <ul class="dropdown-menu dropdown-menu-end login-drop" id=""
+                                aria-labelledby="dropdownUser1">
+                                @guest
+                                <li><a class="dropdown-item fw-bold" href="{{route('login')}}"
+                                        style=" color: #01316b;">Login</a></li>
+                                @else
+                                @if(Auth::user()->user_type == 1)
+                                <li><a class="dropdown-item fw-bold" href="{{route('backend.admin.dashboard.view')}}" style=" color: #01316b;" target="_blank">Admin Dashboard</a></li>
+                                <li>
+                                @endif
+                                <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}"
+                                        style=" color: #01316b;">Dashboard</a></li>
+                                <li> 
+                                    <form action="{{route('logout')}}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="p-2  dropdown-item fw-bold"
+                                            style=" font-size: 13px;color: #01316b;"> Logout</button>
+                                    </form>
+                                </li>
+                                @endguest
+                            </ul>
+                        </div>
+                    </div> 
+            </div>
+        </div>
+        
 
         <!-- secound-Header end -->
     </header>

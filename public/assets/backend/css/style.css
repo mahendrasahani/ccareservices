@@ -15831,8 +15831,9 @@ font-size: 10px;
 } 
     /* ------------------------ create product css end by pro ---------------------------- */
 
-.brand-logo{
-  padding: 10px 0;
+.brand-logo {
+    padding: 10px 0;
+    margin-top: 7px;
 }
 
 .pro-img {
