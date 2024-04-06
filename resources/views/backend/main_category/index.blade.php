@@ -16,10 +16,7 @@
                             </div>
                         <div class="col-md-12">
                             <div class="card" style="border: 1px solid #e9e9e9;">
-                                <div class="card-header d-flex" style="border-bottom: 1px solid #e9e9e9;">
-                                    <div class="col text-center text-md-left">
-                                        <h4 class="mb-md-0 h5 pt-3">Main Categories</h4></div>
-        
+                                <div class="card-header d-flex justify-content-end" style="border-bottom: 1px solid #e9e9e9;"> 
                                     <div class="col-md-4">
                                         <div class="form-group mb-0">
                                             <input type="text" class="form-control form-control-sm" id="search" name="search"
@@ -66,8 +63,10 @@
                                                 <td>{{$main_cat->name}}</td>
                                                  
                                                 <td>{{$main_cat->ordering_number}}</td>
-                                                <td style="width:15%">
-                                                    <img src="{{$main_cat->thumbnail != '' ? url($main_cat->thumbnail):url('public/assets/both/placeholder/main_category.jpg')}}" width="100%">
+                                                <td>
+                                                    <div class="main_cat_img">
+                                                        <img src="{{$main_cat->thumbnail != '' ? url($main_cat->thumbnail):url('public/assets/both/placeholder/main_category.jpg')}}">
+                                                    </div> 
                                                 </td>
                                                 <td>
                                                     <label class="switch">

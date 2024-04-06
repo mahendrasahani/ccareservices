@@ -21,8 +21,9 @@
                 <p style="text-align: center;font-size:17px;font-weight: 600;">Verify OTP</p> 
                 <div class="form-field"> 
                     <label for="verify_otp">Enter OTP <span>*</span></label>
-                    <input type="number" name="otp" placeholder="Enter OTP" required>
-                </div> 
+                    <input type="number" name="verify_otp" placeholder="Enter OTP" required>
+                </div>
+                    
                 <button class="form-btn" style="margin-top: 10px;">SignUp</button>
                 <p class="cstm_resend"><a href="">Resend OTP</a></p>
                 <p class="cstm_resend">Already have an account? <a href="{{route('login')}}">Login here</a></p>

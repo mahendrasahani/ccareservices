@@ -23,7 +23,7 @@
                                    
                                         <table id="myTable" class="table aiz-table mb-0 footable footable-1 breakpoint-lg">
                                             <thead>
-                                                <tr class="footable-header" style="font-size: 12px;">
+                                                <tr class="footable-header">
                                                     <th class="">#</th>
                                                     <th class="">Name</th>
                                                     <th class="">Email</th>
@@ -41,7 +41,7 @@
                                                     $sn = 1;
                                                 @endphp
                                                 @foreach($delivery_boy_list as $delivery_boy)
-                                                <tr style="font-size: 12px;">
+                                                <tr>
                                                     <td class="footable-first-visible" style="display: table-cell;">{{$sn++}}</td>
                                                     <td style="display: table-cell;">{{$delivery_boy->name}}</td>
                                                     <td style="display: table-cell;" class="">{{$delivery_boy->email}}</td>

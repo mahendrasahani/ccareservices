@@ -13,7 +13,7 @@
                                     <h1 class="h5 mb-1">{{$customer->name ?? ''}}</h1>
                                     
                                     <div class="text-left mt-5">
-                                        <h6 class="separator mb-4 text-left"><span class="bg-white pr-3">Account Information</span></h6>
+                                        <h6 class="separator text-left"><span class="bg-white pr-3"><b>Account Information</b></span></h6>
                                         <p class="text-muted">
                                             <strong>Full Name :</strong>
                                             <span class="ml-2">{{$customer->name ?? ''}}</span>
@@ -33,8 +33,8 @@
                                     </div>
                             
                                     <div class="text-left mt-5">
-                                        <h6 class="separator mb-4 text-left">
-                                            <span class="bg-white pr-3">Others Information</span>
+                                        <h6 class="separator text-left">
+                                            <span class="bg-white pr-3"><b>Other Information</b></span>
                                         </h6>
                                         <p class="text-muted">
                                             <strong>Number of Orders :</strong>
@@ -87,7 +87,14 @@
                                                     <td>{{$order->order_id}}</td>
                                                     <td>₹{{number_format($order->total - $order->promo_discount, 2)}}</td>
                                                     <td><span class="text-capitalize">{{$order->order_status}}</span></td>
-                                                    <td><span class="badge badge-inline badge-danger">{{$order->payment_status}}</span></td>
+                                                                                                        <td>
+                                                        @if($order->payment_status == 'paid')
+                                                            <span class="badge badge-inline badge-success text-white p-2">{{ strtoupper($order->payment_status) }}</span>  
+                                                        @else
+                                                            <span class="badge badge-inline badge-danger p-2">{{ strtoupper($order->payment_status) }}</span> 
+                                                        @endif
+                                                    </td>
+
                                                      
                                                     <td class="text-right footable-last-visible">
                                                                         <a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage" href="{{route('backend.order.edit', [$order->id])}}" title="View">

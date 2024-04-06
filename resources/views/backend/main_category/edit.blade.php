@@ -42,22 +42,19 @@
                                                 </div>
                                             </div>
                                             <div class="file-preview box sm mt-2">
-                                                <div class="d-flex justify-content-between align-items-center file-preview-item" data-id="83" title="Sports-&amp;-outdoor.png">
-                                                    <div class="align-items-center align-self-stretch d-flex justify-content-center thumb">
+                                                <div class=" " data-id="83" title="Sports-&amp;-outdoor.png">
+                                                    <div class=" thumb">
                                                         <img src="{{$main_cat_detail->thumbnail != '' ? url($main_cat_detail->thumbnail):url('public/assets/both/placeholder/main_category.jpg')}}" class="img-fit" width="20%">
-                                                    </div>
-                                                    <div class="col body">
-                                                        <h6 class="d-flex">
+                                                        <h6 class="mt-2">
                                                             @php
                                                             $thumbnail_name = basename($main_cat_detail->thumbnail);
                                                             $thumbnail_size = filesize($main_cat_detail->thumbnail);
                                                             $thumbnail_size_in_kb = number_format($thumbnail_size/1024, 2);
                                                             @endphp
-                                                            <span class="text-truncate title">{{$thumbnail_name}}</span>
+                                                            <span>{{$thumbnail_name}}</span>
                                                         </h6>
                                                         <p>{{$thumbnail_size_in_kb}} KB</p>
-                                                    </div>
-                                                     
+                                                    </div>  
                                                 </div>
                                             </div>
                                         </div>
@@ -87,19 +84,17 @@
                                         <div class="col-md-9"> 
                                                 <input type="file" class="form-control" name="meta_image" class="selected-files">
                                             <div class="file-preview box sm">
-                                                <div class="d-flex justify-content-between align-items-center mt-2 file-preview-item" data-id="83" title="Sports-&amp;-outdoor.png">
-                                                    <div class="align-items-center align-self-stretch d-flex justify-content-center thumb">
+                                                <div data-id="83" title="Sports-&amp;-outdoor.png">
+                                                    <div>
                                                         <img src="{{$main_cat_detail->meta_image != '' ? url($main_cat_detail->meta_image):url('public/assets/both/placeholder/main_category.jpg')}}" class="img-fit" width="20%">
-                                                    </div>
-                                                    <div class="col body">
+                                                    </div> 
                                                     @php
                                                         $meta_image_name = basename($main_cat_detail->meta_image);
                                                         $meta_image_size = filesize($main_cat_detail->meta_image);
                                                         $meta_image_size_in_kb = number_format($meta_image_size/1024, 2);
                                                     @endphp
-                                                        <h6 class="d-flex"><span class="text-truncate title">{{$meta_image_name}}</span></h6>
-                                                        <p>{{$meta_image_size_in_kb}} KB</p>
-                                                    </div>
+                                                        <h6 class="mt-2"><span >{{$meta_image_name}}</span></h6>
+                                                        <p>{{$meta_image_size_in_kb}} KB</p> 
                                                 </div>
                                             </div>
                                         </div>

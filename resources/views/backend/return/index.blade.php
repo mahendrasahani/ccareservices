@@ -58,9 +58,9 @@
                                     <tr> 
                                         <th style="display: table-cell;">Order Id </th>
                                         <th style="display: table-cell;">Customer Name</th>
-                                        <th style="display: table-cell; text-align: center;">Product</th>   
-                                        <th style="display: table-cell;" class="text-center">Return Date</th>
-                                        <th style="display: table-cell;" class="text-center">Action</th>
+                                        <th style="display: table-cell;">Product</th>   
+                                        <th style="display: table-cell;">Return Date</th>
+                                        <th style="display: table-cell;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="main_table_body"> 

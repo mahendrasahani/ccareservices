@@ -76,7 +76,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="card box_shadow_type">
+                            <div class="card art_card">
                                 <div class="card-body">
                                     <div class="mb-3 d-flex justify-content-between">
                                         <span class="mr-2 ml-0">Status:</span>
@@ -125,7 +125,7 @@
                         <div class="col-md-8">
                              
                             
-                            <div class="card box_shadow_type">
+                            <div class="card art_card">
                                 <div class="card-header">
                                     <h5 class="mb-0 h6">Gallery</h5>
                                 </div>
@@ -140,7 +140,7 @@
                                 </div>
                             </div>
                              
-                            <div class="card type_tow">
+                            <div class="card art_card">
                                 <div class="card-header">
                                     <h5 class="mb-0 h6">Product Description</h5>
                                 </div>

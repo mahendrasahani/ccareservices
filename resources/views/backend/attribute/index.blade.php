@@ -12,7 +12,7 @@
                         <div class="col-md-12">
                             <h1 class="h3 mb-5">All Attributes</h1>
                         </div>
-                            <div class="col-md-7">
+                            <div class="col-md-8">
                                 <form action="">
                                     <div class="card" style="border: 1px solid #e7e6e6;">
                                         <div class="card-header" style="border-bottom: 1px solid #e7e6e6;">
@@ -26,7 +26,7 @@
                                                         <th>#</th>
                                                         <th>Name</th>
                                                         <th>Values</th>
-                                                        <th class="text-center">Actions</th>
+                                                        <th>Actions</th>
                                                     </tr> 
                                                     @foreach($attribute_list as $attribute)
                                                 </thead>
@@ -53,9 +53,7 @@
                                 </form>
                                 
                             </div>
-                        <div class="col-md-5">
-                            <div class="row">
-                          
+                        <div class="col-md-4"> 
                                     <div class="card" style="border: 1px solid #e5e5e5;">
                                         <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
                                             <h5 class="mb-0 h6">Add new attribute</h5>
@@ -76,8 +74,7 @@
                                                 </div>
                                             </form>
                                         </div>
-                                    </div> 
-                            </div>
+                                    </div>  
                         </div>
                     </div> 
                 </div>

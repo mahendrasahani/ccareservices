@@ -6,15 +6,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2 class="h4">Order Code: {{$order->order_id}}</h2>
-                        </div>
-                        <div class="row">
+                            <h2 class="h4">Order Details</h2>
+                            <div class="">
                             <form method="POST" action="{{route('backend.order.update', [$order->id])}}">
                             @csrf
                             <div class="col-md-12">
                                 <div class="card" style="border: 1px solid #e5e5e5;">
                                     <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
-                                        <h2 class="h6 font-size-16 font-weight-bold mb-0">Order Details</h2>
+                                        <h2 class="h6 font-size-16 font-weight-bold mb-0"> Order Code: {{$order->order_id}}</h2>
                                     </div>
                                     <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
                                         <div class="row">
@@ -41,7 +40,7 @@
                                                         
                                                         <tr>
                                                             <td class="">Payment Method:</td>
-                                                            <td class="text-right font-weight-bold">{{$order->payment_method == "cash_on_delivery" ? "Cash On Delivery":"Online"}}</td>
+                                                            <td class="text-right font-weight-bold">{{$order->payment_method == "cash_on_delivery" ? "Cash On Delivery" : "Online"}}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -50,20 +49,20 @@
                                     </div>
                                     <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
                                         <div class="row align-items-start">
-                                            <div class="col-md-3 mr-auto ml-0" style="font-size: 12px;">
+                                            <div class="col-md-4" style="font-size: 12px;">
                                                 <div class="mb-3">
                                                     <label class="mb-0">Payment Status</label>
                                                     <select class="form-control" id="payment_status" name="payment_status" style="font-size: 12px;">
-                                                        <option value="paid" {{$order->payment_status == "paid" ? "selected":""}}>Paid</option>
-                                                        <option value="unpaid" {{$order->payment_status == "unpaid" ? "selected":""}}>Unpaid</option>
+                                                        <option value="paid" {{$order->payment_status == "paid" ? "selected" : ""}}>Paid</option>
+                                                        <option value="unpaid" {{$order->payment_status == "unpaid" ? "selected" : ""}}>Unpaid</option>
                                                     </select>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="mb-0">Order Status</label>
                                                     <select class="form-control" id="order_status" name="order_status" style="font-size: 12px;">
-                                                        <option value="ordered" {{$order->order_status == "ordered" ? "selected":""}}>Ordered</option> 
-                                                        <option value="shipped" {{$order->order_status == "shipped" ? "selected":""}}>Shipped</option> 
-                                                        <option value="delivered" {{$order->order_status == "delivered" ? "selected":""}}>Delivered</option> 
+                                                        <option value="ordered" {{$order->order_status == "ordered" ? "selected" : ""}}>Ordered</option> 
+                                                        <option value="shipped" {{$order->order_status == "shipped" ? "selected" : ""}}>Shipped</option> 
+                                                        <option value="delivered" {{$order->order_status == "delivered" ? "selected" : ""}}>Delivered</option> 
                                                     </select>
                                                 </div>
                                                  <div class="mb-3">
@@ -71,7 +70,7 @@
                                                     <select class="form-control" id="delivery_boy" name="delivery_boy" style="font-size: 12px;">
                                                         <option value="" selected>Select Delivery Boy</option>
                                                         @foreach($delivery_boy_list as $delivery_boy)
-                                                        <option value="{{$delivery_boy->id}}" {{$order->delivery_boy_id == $delivery_boy->id ? "selected":""}}>{{$delivery_boy->name}}</option>
+                                                        <option value="{{$delivery_boy->id}}" {{$order->delivery_boy_id == $delivery_boy->id ? "selected" : ""}}>{{$delivery_boy->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -84,13 +83,13 @@
                                                     <textarea name="delivery_remark" id="delivery_remark" class="form-control">{{$order->delivery_remark ?? ''}}</textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-md-auto w-md-250px" style="font-size: 12px;">
+                                            <div class="col-md-4 " style="font-size: 12px;">
                                                 <h5 class="font-size-14 mb-3">Shipping Address</h5>
                                                 <address> 
                                                     {{$order->shipping_address}} 
                                                 </address>
                                             </div>
-                                            <div class="col-md-auto w-md-250px" >
+                                            <div class="col-md-4" >
                                                 <h5 class="h6 font-size-14 mb-3">Billing Address</h5>
                                                 <address>
                                                 {{$order->billing_address}} 
@@ -102,19 +101,19 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr style="font-size: 12px;">
-                                                    <th class="text-center" width="5%">#</th>
+                                                    <th>#</th>
                                                     <th width="40%">Product</th>
-                                                    <th class="text-center">QTY</th>
-                                                    <th class="text-center">Month</th>
-                                                    <th class="text-center">Unit price</th>
-                                                    <th class="text-center">Total</th>
+                                                    <th>QTY</th>
+                                                    <th>Month</th>
+                                                    <th>Unit price</th>
+                                                    <th>Total</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 
                                             @foreach($order->getOrderProduct as $product)
                                                 <tr style="font-size: 12px;">
-                                                    <td class="text-center">1</td>
+                                                    <td>1</td>
                                                     <td>
                                                         <div class="media"> 
                                                             <img src="{{$product->getProduct->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->getProduct->product_images[0])}}" class="" width="20%"> 
@@ -128,16 +127,16 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td class="text-center">{{$product->quantity}}</td>
-                                                    <td class="text-center">{{$product->month}} Months</td>
-                                                    <td class="text-center">₹{{number_format($product->price, 2)}}</td>
-                                                    <td class="text-center">₹{{number_format($product->total_price, 2)}}</td>
+                                                    <td>{{$product->quantity}}</tdlass=>
+                                                    <td>{{$product->month}} Months</td>
+                                                    <td>₹{{number_format($product->price, 2)}}</td>
+                                                    <td>₹{{number_format($product->total_price, 2)}}</td>
                                                 </tr>
                                                 @endforeach 
                                             </tbody>
                                         </table>
                                         <div class="row">
-                                            <div class="col-xl-4 col-md-6 ml-auto mr-0">
+                                            <div class="col-xl-4 col-md-6">
                                                 <table class="table">
                                                     <tbody>
                                                         <tr style="font-size: 12px;">
@@ -159,7 +158,8 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <input type="submit" value="Update Order">
+                                                 
+                                                <input type="submit" value="Update Order" class="btn btn-primary" style="background-color: #f5a100;border:0;" >
                                             </div>
                                         </div>
                                     </div>
@@ -216,6 +216,8 @@
                             </div> -->
                             
                         </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
