@@ -26,6 +26,7 @@ class Order extends Model
         "promo_code",
         "promo_discount",
         "cancel_reason", 
+        "delivery_remark", 
         "billing_name", 
         "shipping_name", 
         "billing_email", 

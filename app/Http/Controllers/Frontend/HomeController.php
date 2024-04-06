@@ -14,7 +14,5 @@ class HomeController extends Controller
     public function otpMail(){
         return view('emails.otp_mail');
     }
-    public function otpverify(){
-        return view('auth.enter-otp');
-    }
+ 
 }

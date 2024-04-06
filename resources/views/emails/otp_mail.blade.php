@@ -20,9 +20,9 @@
         </div>
         <hr>
         <div class="main-section" style="text-align:justify;">
-                    <p>Dear [Recipient],</p>
+                    <p>Dear {{$otp_mail_data['user_name']}},</p>
                     <p>We have received your request for an OTP (One-Time Password). Please find your OTP below:</p>
-                    <h2 style="font-size: 24px; font-weight: bold;">[OTP]</h2>
+                    <h2 style="font-size: 24px; font-weight: bold;">{{$otp_mail_data['otp']}}</h2>
                     <p>If you did not request this OTP, please ignore this message.</p>
                     <p>Thank you for using our service.</p>
                     <b> <p>Sincerely,<br>CoolCare Services</p></b>

@@ -141,16 +141,16 @@
                 <div class="card address-default">
                   <h6>Default Shipping Address</h6>
                   <hr>
-                  <p>{{$shipping_addres->address}}</p>
-                  <p>{{$shipping_addres->city}} {{$shipping_addres->zip_code}} {{$shipping_addres->country}}</p>
+                  <p>{{$shipping_addres->address ?? ''}}</p>
+                  <p>{{$shipping_addres->city ?? ''}} {{$shipping_addres->zip_code ?? ''}} {{$shipping_addres->country ?? ''}}</p>
                 </div>
               </div>
               <div class=" col-md-6">
                 <div class="card address-default">
                   <h6>Default Billing Address</h6>
                   <hr>
-                  <p>{{$billing_address->address}}</p>
-                  <p>{{$billing_address->city}} {{$billing_address->zip_code}} {{$billing_address->country}}</p>
+                  <p>{{$billing_address->address ?? ''}}</p>
+                  <p>{{$billing_address->city ?? ''}} {{$billing_address->zip_code ?? ''}} {{$billing_address->country ?? ''}}</p>
                 </div>
               </div>
             </div>

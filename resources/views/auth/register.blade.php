@@ -72,7 +72,7 @@
                 </div>
                 <div class="form-field">
                     <label for="phone">Phone <span>*</span></label>
-                    <input type="tel" name="Phone"   placeholder="Enter your phone....." required>
+                    <input type="tel" name="phone"   placeholder="Enter your phone....." required>
                 </div>
                 <div class="form-field"> 
                     <label for="">Password <span>*</span></label>

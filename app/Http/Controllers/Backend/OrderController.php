@@ -38,11 +38,15 @@ class OrderController extends Controller
         $order_status = $request->order_status;
         $discount = $request->discount; 
         $delivery_boy = $request->delivery_boy;
+        $delivery_date = $request->delivery_date;
+        $delivery_remark = $request->delivery_remark;
         Order::where('id', $id)->update([
             "payment_status" => $payment_status,
             "order_status" => $order_status,
             "promo_discount" => $discount,
-            "delivery_boy_id" => $delivery_boy
+            "delivery_boy_id" => $delivery_boy,
+            "delivery_date" => $delivery_date,
+            "delivery_remark" => $delivery_remark,
         ]); 
         return redirect()->route('backend.order.index')->with('order_updated', "Order has been updated!");
     }

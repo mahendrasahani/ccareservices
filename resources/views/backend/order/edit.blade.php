@@ -75,6 +75,14 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
+                                                <div class="mb-3">
+                                                    <label for="delivery_date">Delivery Date</label>
+                                                     <input type="date" name="delivery_date" id="delivery_date" class="form-control" value="{{ \Carbon\Carbon::parse($order->delivery_date)->format('Y-m-d') ?? ''}}">
+                                                </div>
+                                                 <div class="mb-3">
+                                                    <label for="remarks">Remarks</label>
+                                                    <textarea name="delivery_remark" id="delivery_remark" class="form-control">{{$order->delivery_remark ?? ''}}</textarea>
+                                                </div>
                                             </div>
                                             <div class="col-md-auto w-md-250px" style="font-size: 12px;">
                                                 <h5 class="font-size-14 mb-3">Shipping Address</h5>
@@ -108,11 +116,9 @@
                                                 <tr style="font-size: 12px;">
                                                     <td class="text-center">1</td>
                                                     <td>
-                                                        <div class="media">
-
-                                                            <img src="{{$product->getProduct->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->getProduct->product_images[0])}}" class="" width="20%">
-                                                           
-                                                            <div class="media-body">
+                                                        <div class="media"> 
+                                                            <img src="{{$product->getProduct->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->getProduct->product_images[0])}}" class="" width="20%"> 
+                                                            <div class="media-body mx-2">
                                                                 <h4 class="h6 font-size-8 font-weight-">{{$product->product_name}}</h4>
                                                                 <div>
                                                                     <span class="mr-2">
@@ -127,8 +133,7 @@
                                                     <td class="text-center">₹{{number_format($product->price, 2)}}</td>
                                                     <td class="text-center">₹{{number_format($product->total_price, 2)}}</td>
                                                 </tr>
-                                                @endforeach
-
+                                                @endforeach 
                                             </tbody>
                                         </table>
                                         <div class="row">

@@ -461,6 +461,7 @@ class ProductController extends Controller
 
         public function singleProductFrontView($slug){
             $product_detail = Product::where('slug', $slug)->with('getStock')->first();  
+            // return $product_detail;
             $option_id = $product_detail->getStock[0]->attribute_id;
             $option_name = Attribute::where('id', $option_id)->first()->name; 
 

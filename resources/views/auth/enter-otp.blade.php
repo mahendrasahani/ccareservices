@@ -16,15 +16,16 @@
         <div class="form-part" >
              
 
-            <form method="POST" action="{{ route('register') }}" class="form" id="signup-form">
+            <form method="POST" action="{{ route('otp.verify.submit', [$user->id]) }}" class="form" id="signup-form">
                 @csrf
                 <p style="text-align: center;font-size:17px;font-weight: 600;">Verify OTP</p> 
                 <div class="form-field"> 
                     <label for="verify_otp">Enter OTP <span>*</span></label>
-                    <input type="number" name="verify_otp" placeholder="Enter OTP" required>
+                    <input type="number" name="otp" placeholder="Enter OTP" required>
                 </div> 
                 <button class="form-btn" style="margin-top: 10px;">SignUp</button>
-                <p>Already have an account? <a href="{{route('login')}}">Login here</a></p>
+                <p class="cstm_resend"><a href="">Resend OTP</a></p>
+                <p class="cstm_resend">Already have an account? <a href="{{route('login')}}">Login here</a></p>
             </form>
         </div>
     </div>
@@ -32,7 +33,17 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="{{url('public/assets/frontend/js/bootstrap.bundle.min.js')}}"></script>
-     
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if(Session::has('incorrect_otp'))
+        <script> 
+            Swal.fire({
+            title: "Sorry!",
+            text: "{{Session::get('incorrect_otp')}}",
+            icon: "warning",
+            timer: 5000,
+            });
+        </script>
+        @endif
 </body>
 </html>
 

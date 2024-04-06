@@ -147,6 +147,14 @@ input{
     color: #000;
     font-weight: bold;
 }
+.cstm_resend{
+        width: 80%;
+    text-align: center;
+    margin: auto;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+}
 
 @media only screen and (max-width:992px) {
     .image-part{

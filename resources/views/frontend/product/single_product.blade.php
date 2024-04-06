@@ -170,7 +170,10 @@
             </div>
             <div class="tab-pane fade" id="myreview">
                 <div class="row"> 
-                        <h6>Leave a review</h6> @if($review_data != '') <p>{{$review_data->status == 0?'(Your review is not approved)':''}}</p>@endif
+                        <h6>Leave a review</h6>
+                           @if(auth()->check()) 
+                           @if($review_data != '') <p>{{$review_data->status == 0?'(Your review is not approved)':''}}</p>@endif 
+                        @endif
                                     @if(auth()->check() && $review_data != '')
                                     <form id="reviewForm" method="POST" action="{{route('frontend.submit_review')}}"> 
                             @csrf    
