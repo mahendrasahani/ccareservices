@@ -34,13 +34,18 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        ]); 
+        $otp = '090909';
+
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'user_type' => 2,
+            'otp_verify_status' => 0,
+            'otp' => $otp,
+
         ]);
 
         event(new Registered($user));

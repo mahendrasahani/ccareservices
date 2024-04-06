@@ -5,7 +5,13 @@
                 <div class="card-body ">
                     <div class="circle">
                         <img class="my-profile"
-                            src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg">
+                            src="
+                            @if(Auth::user()->profile == '' || Auth::user()->profile == null)
+                            https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg
+                            @else
+                            {{Auth::user()->profile}}
+                           @endif
+                            ">
                     </div>
                     <div class="identity">
                         <h3>{{Auth::user()->name}}</h3>

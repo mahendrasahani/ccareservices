@@ -29,7 +29,7 @@ Route::get('/single-product', [PageController::class, 'viewSingleProductView'])-
 // ------------------------ All Pages route (end) --------------------------------------------------------
 
 // -------------------------After user login (start) ------------------------------------------------------------
-Route::middleware(['auth', 'user_check'])->group(function () {
+Route::middleware(['auth', 'user_check', 'customer_otp_verification'])->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'userDashboardPageView'])->name('frontend.user.dashboar.view');
     Route::get('/manage-profile', [UserDashboardController::class, 'manageProfilePageView'])->name('frontend.user.manage_profile.view');
     Route::post('/update-profile', [UserDashboardController::class, 'updateUserProfile'])->name('frontend.user.update_profile');
@@ -57,9 +57,8 @@ Route::get('/remove-from-cart', [ProductController::class, 'removeFromCart'])->n
  // -------------------------add to cart page (end) --------------------------------------------------------------
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'customer_otp_verification'])->group(function () {
 // -------------------------After Both User and Admin login (start) --------------------------------------------------------------
-
     // ------------------------ Checkout page route (end) ---------------------------------------------------------------------
        Route::get('/checkout', [CheckoutController::class, 'checkoutPageView'])->name('frontend.checkout.view');
        Route::get('/checkout-product-list', [ProductController::class, 'productToCheckout'])->name('frontend.checkout.product_list');
@@ -69,9 +68,7 @@ Route::middleware(['auth'])->group(function () {
      
     // Route::get('/payment-method', [PaymentController::class, 'paymentMethodShow'])->name('payment_method'); 
        Route::get('/get-address-payment-detail', [PaymentController::class, 'getAddressDetail'])->name('get_address_payment_detail');
-       
-       
-       
+      
        Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('place_order');
        Route::get('/purchase-history', [OrderController::class, 'purchaseHistory'])->name('frontend.user.purchase_history.view');
        Route::get('/order-detail/{id}', [OrderController::class, 'orderDetail'])->name('frontend.user.view_order_detail');

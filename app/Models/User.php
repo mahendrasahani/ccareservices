@@ -39,6 +39,8 @@ class User extends Authenticatable
         'aadhar_back',
         'company_id',
         'profile',
+        'otp_verify_status',
+        'otp',
     ];
 
     /**
