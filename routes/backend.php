@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\MainCategoryController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ProductReturnController;
 use App\Http\Controllers\Backend\ReturnController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\ShippingChargeController;
@@ -135,15 +136,15 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
 
     Route::get('/admin/payment-method/', [PaymentController::class, 'index'])->name('backend.payment_method.index'); 
     Route::post('/admin/payment-method/update-razorpay-credentials/{id}', [PaymentController::class, 'updateRazorpayCredentials'])->name('backend.update_razorpya_credentials'); 
-    
-    
-    
+     
     Route::get('/admin/review', [ReviewController::class, 'index'])->name('backend.review.index');
 
-    Route::get('/admin/return', [ReturnController::class, 'index'])->name('backend.return.index');
-    Route::get('/admin/return/edit', [ReturnController::class, 'edit'])->name('backend.return.edit');
-    Route::get('/admin/return/view', [ReturnController::class, 'view'])->name('backend.return.view');
-    Route::get('/admin/return/create', [ReturnController::class, 'create'])->name('backend.return.create');
+     Route::get('/admin/return', [ProductReturnController::class, 'index'])->name('backend.return.index');
+    Route::get('/admin/return/edit/{id}', [ProductReturnController::class, 'edit'])->name('backend.return.edit');
+    Route::get('/admin/return/view', [ProductReturnController::class, 'view'])->name('backend.return.view');
+    Route::get('/admin/return/create', [ProductReturnController::class, 'create'])->name('backend.return.create');
+    Route::post('/admin/return/store', [ProductReturnController::class, 'store'])->name('backend.return.store');
+    Route::post('/admin/return/update/{id}', [ProductReturnController::class, 'update'])->name('backend.return.update');
 
 
 });

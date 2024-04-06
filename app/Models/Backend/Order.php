@@ -30,6 +30,8 @@ class Order extends Model
         "shipping_name", 
         "billing_email", 
         "shipping_email", 
+        "billing_phone", 
+        "shipping_phone", 
         "delivery_type", 
         "delivery_boy_id",
         "payment_method", 

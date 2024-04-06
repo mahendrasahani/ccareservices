@@ -55,58 +55,39 @@
                         <div class="card-body">
                             <table class="table table-bordered mb-0">
                                 <thead>
-                                    <tr>
-                                        <th style="display: table-cell;">
-                                            <div class="form-group">
-                                                <div class="form-check-inline">
-                                                    <input type="checkbox" class="form-check-input check-all"
-                                                        name="main_checkbox">
-                                                    <label class="form-check-label"></label>
-                                                </div>
-                                            </div>
-                                        </th> 
+                                    <tr> 
                                         <th style="display: table-cell;">Order Id </th>
                                         <th style="display: table-cell;">Customer Name</th>
-                                        <th style="display: table-cell; text-align: center;">Product</th>
-                                        <th style="display: table-cell; text-align: center;">Model</th>
-                                        <th style="display: table-cell;" class="text-center">Status</th>
-                                        <th style="display: table-cell;" class="text-center">Date Added</th>
-                                        <th style="display: table-cell;" class="text-center">Date Modified</th>
+                                        <th style="display: table-cell; text-align: center;">Product</th>   
+                                        <th style="display: table-cell;" class="text-center">Return Date</th>
                                         <th style="display: table-cell;" class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="main_table_body"> 
+                                    @if(count($return_products) > 0)
+                                    @foreach($return_products as $return_product)
                                     <tr id="row_id_1">
-                                        <td style="display: table-cell;">
-                                            <div class="form-group">
-                                                <div class="form-check-inline">
-                                                    <input type="checkbox" class="form-check-input check-one"
-                                                        name="product_ids[]" value="1">
-                                                    <label class="form-check-label"></label>
-                                                </div>
-                                            </div>
-                                        </td>
+                                         
                                          
                                         <td style="display: table-cell;">
                                             <div class=" text-truncate-2">
-                                                        <p class="font-s mt-3"> 369</p>
+                                                        <p class="font-s mt-3">{{$return_product->order_number}}</p>
                                                     </div>
                                         </td>
-                                        <td style="display: table-cell;">vbdfks</td>
-                                        <td style="display: table-cell;">Samsung</td>
-                                        <td style="display: table-cell;">Samsung 56496459</td>
-                                        <td style="display: table-cell;">Awaiting Products</td>
-                                        <td style="display: table-cell;">32/55/2005</td>
-                                        <td style="display: table-cell;">32/55/2005</td> 
+                                        <td style="display: table-cell;">{{$return_product->customer_name}}</td>
+                                        <td style="display: table-cell;">{{$return_product->product_name}}</td>  
+                                        <td style="display: table-cell;">{{ \Carbon\Carbon::parse($return_product->created_at)->format('d M, Y') }}</td> 
                                         <td style="display: table-cell;">
                                             <div class="d-flex justify-content-center "> 
                                                 <a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2"
-                                                    href="{{route('backend.return.edit')}}" title="Edit">
+                                                    href="{{route('backend.return.edit', [$return_product->id])}}" title="Edit">
                                                     <i class="fa-regular fa-pen-to-square text-white"></i>
                                                 </a>  
                                             </div>
                                         </td> 
                                     </tr> 
+                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                             <div id="my_pagination">
