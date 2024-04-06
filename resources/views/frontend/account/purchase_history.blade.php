@@ -13,25 +13,31 @@
                     <h3>Purchase History</h3>
                 </div>
                 <div class="discount-details">
-                    <table class="table-container">
-                        <tr>
-                            <th>Details</th>
-                            <th>Info</th>
-                            <th>Amount</th>
-                            <th>Action</th>
-                        </tr>
-                        @if(count($purchase_history) != 0)
-                        @foreach($purchase_history as $p_history)
-                        <tr>
-                            <td><b>Order No. {{$p_history->order_id}}</b></td>
-                            <td><b>{{count($p_history->getOrderProduct)}} products</b></td>
-                            <td><b>₹{{number_format($p_history->total - $p_history->promo_discount, 2)}}/-</b> </td>
-                            <td><a href="{{route('frontend.user.view_order_detail', [Crypt::encryptString($p_history->id)])}}" class="discount-details-btn ">View Details</a> </td>
-                        </tr>
-                        @endforeach 
-                        @endif
-                    </table>
-                </div> 
+    <table class="table-container">
+        <tr>
+            <th>Serial No.</th>
+            <th>Details</th>
+            <th>Info</th>
+            <th>Amount</th>
+            <th>Action</th>
+        </tr>
+        @if(count($purchase_history) != 0)
+        @php $serialNo = 1; @endphp        
+        @foreach($purchase_history as $p_history)
+        <tr>
+            <td> {{ $serialNo++ }} </td> 
+            <td> Order No. {{$p_history->order_id}} </td>
+            <td> {{count($p_history->getOrderProduct)}} products </td>
+            <td> ₹{{number_format($p_history->total - $p_history->promo_discount, 2)}}/-  </td>
+            <td><a href="{{route('frontend.user.view_order_detail', [Crypt::encryptString($p_history->id)])}}" class="discount-details-btn ">View Details</a> </td>
+        </tr>
+        @endforeach 
+        @endif
+    </table> 
+</div>
+        <div class="my_pagination">
+        {{$purchase_history->links('pagination::bootstrap-5')}}
+        </div> 
             </section> 
         </div>
     </div>

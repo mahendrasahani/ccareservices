@@ -128,7 +128,7 @@ class OrderController extends Controller
         $data['purchase_history'] = Order::with('getOrderProduct:order_id,product_name')
         ->where('user_id', Auth::user()->id)
         ->withTrashed()
-        ->orderBy('id', 'desc')->get(); 
+        ->orderBy('id', 'desc')->paginate(10); 
         // return $data;
         return view('frontend.account.purchase_history', $data);
     }

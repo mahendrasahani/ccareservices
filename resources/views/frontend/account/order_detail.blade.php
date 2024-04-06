@@ -1,4 +1,4 @@
-@extends('layouts/frontend/main')
+   @extends('layouts/frontend/main')
 @section('main-section')
  <style>
             .hh-grayBox {
@@ -117,7 +117,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p><b>Order Code :</b></p>
+                                        <p>   Order Code :   </p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -127,7 +127,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p><b>Name :</b></p>
+                                        <p>   Name :   </p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -137,7 +137,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p><b>Email :</b></p>
+                                        <p>   Email :   </p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p><b>Shipping Address :</b></p>
+                                        <p>   Shipping Address :   </p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -161,7 +161,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p><b>Total Order Amount :</b></p>
+                                        <p>   Total Order Amount :   </p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -171,7 +171,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p><b>Payment Method :</b></p>
+                                        <p>   Payment Method :   </p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -191,7 +191,7 @@
                                 </div> -->
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p><b>Billing Address :</b></p>
+                                        <p>   Billing Address :   </p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -256,9 +256,9 @@
                                      </td>
  
                                 <td class="track-order-name"> {{$order_product->product_name}}<br> <b>{{$order_product->option_value_id}}</b> </td>
-                                <td><b>{{$order_product->quantity}}</b></td>
-                                <td><b>₹{{number_format($order_product->price, 2)}}</b></td>
-                                <td><b>₹{{number_format($order_product->total_price, 2)}}</b></td>
+                                <td>  {{$order_product->quantity}}  </td>
+                                <td>  ₹{{number_format($order_product->price, 2)}}  </td>
+                                <td>  ₹{{number_format($order_product->total_price, 2)}}  </td>
                             </tr>
                               @endforeach
                         </table>
@@ -279,8 +279,8 @@
                             <div class="col-md-6 card p-4">
                                 <div class="final-order-details">
                                     <div class="single-order-final">
-                                        <p><b>Sub Total:</b></p>
-                                        <p><b>₹{{number_format($order->sub_total, 2)}}</b></p>
+                                        <p> Sub Total: </p>
+                                        <p> ₹{{number_format($order->sub_total, 2)}} </p>
                                     </div>
                                 </div>
                                 <!-- <div class="final-order-details">
@@ -291,20 +291,20 @@
                                 </div> -->
                                 <div class="final-order-details">
                                     <div class="single-order-final">
-                                        <p><b>Shipping Charge :</b></p>
-                                        <p><b>₹{{number_format($order->delivery_charge, 2)}}</b></p>
+                                        <p> Shipping Charge : </p>
+                                        <p> ₹{{number_format($order->delivery_charge, 2)}} </p>
                                     </div>
                                 </div>
                                 <div class="final-order-details">
                                     <div class="single-order-final">
-                                        <p><b>Coupon discount :</b></p>
-                                        <p><b>₹{{number_format($order->promo_discount, 2)}}</b></p>
+                                        <p> Coupon discount : </p>
+                                        <p> ₹{{number_format($order->promo_discount, 2)}} </p>
                                     </div>
                                 </div>
                                 <div class="final-order-details total-final">
                                     <div class="single-order-final">
-                                        <p><b>Total :</b></p>
-                                        <p><b>₹{{number_format($order->total - $order->promo_discount, 2)}}</b></p>
+                                        <p> Total : </p>
+                                        <p> ₹{{number_format($order->total - $order->promo_discount, 2)}} </p>
                                     </div>
                                 </div>
                                  
