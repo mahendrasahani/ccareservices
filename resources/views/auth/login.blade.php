@@ -60,8 +60,10 @@
                 <div class="form-field">
                     <label for="text">Email <span>*</span></label>
                     <input type="email" name="email" placeholder="Enter your email....." required>
+                    @error('email')
+                      <p style="color:red;">{{$message}}</p>
+                    @enderror
                     
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
                 
                
@@ -71,7 +73,7 @@
                      <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
-                <a href="#" style="text-align:center"><span>Forget Password?</span></a>
+                <a href="{{route('password.request')}}" style="text-align:center"><span>Forget Password?</span></a>
 
                 <button class="form-btn">Login</button>
                 <p>Don't have an account? <a href="{{route('register')}}">Signup here</a></p>

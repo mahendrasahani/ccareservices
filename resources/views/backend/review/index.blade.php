@@ -16,12 +16,12 @@
                                     <h4 class="mb-md-0 h5">Product Reviews</h4>
                                 </div>
     
-                                <div class="col-md-2">
+                                <!-- <div class="col-md-2">
                                     <div class="input-group enter">
                                         <input type="text" class="form-control form-control-sm" id="search" name="search"
                                             placeholder="Type Email or name &; Enter">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="card-body">
                                     @php

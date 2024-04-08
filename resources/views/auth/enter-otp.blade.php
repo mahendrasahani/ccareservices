@@ -21,7 +21,7 @@
                 <p style="text-align: center;font-size:17px;font-weight: 600;">Verify OTP</p> 
                 <div class="form-field"> 
                     <label for="verify_otp">Enter OTP <span>*</span></label>
-                    <input type="number" name="verify_otp" placeholder="Enter OTP" required>
+                    <input type="number" name="otp" placeholder="Enter OTP" required>
                 </div>
                     
                 <button class="form-btn" style="margin-top: 10px;">SignUp</button>

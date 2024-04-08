@@ -31,26 +31,23 @@
                                         onclick="deleteSelection()"> Delete selection</a>
                                 </div>
                             </div>
+                            <form id="filter_form" method="GET" action="">
                             <div class="col-md-2 ml-auto">
                                 <div class="form-group mt-2 mb-2">
-                                    <select class="form-control form-control-sm" name="type" id="sort_by"
-                                        name="sort_by">
+                                    <select class="form-control form-control-sm" id="sort_by" name="sort_by">
                                         <option>Sort by</option>
-                                        <option value="rating_high_to_low">Rating (High > Low)</option>
-                                        <option value="rating_low_to_high">Rating (Low > High)</option>
-                                        <option value="sale_high_to_low">Num of Sale (High > Low)</option>
-                                        <option value="sale_low_to_high">Num of Sale (Low > High)</option>
-                                        <option value="price_high_to_low" >Base Price (High > Low)</option>
-                                        <option value="price_low_to_high">Base Price (Low > High)</option>
+                                        <option value="asc">Old > New</option>
+                                        <option value="desc">New > Old</option> 
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            </form>
+                            <!-- <div class="col-md-2">
                                 <div class="input-group">
                                     <input type="text" class="form-control form-control-sm" id="search" name="search"
                                         placeholder="Type &amp; Enter">
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered mb-0">
@@ -101,5 +98,16 @@
     </div>
 </div>
 
+@section('javascript-section')
+<script> 
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectElement = document.getElementById('sort_by');
+        var formElement = document.getElementById('filter_form');
+        selectElement.addEventListener('change', function() {
+            formElement.submit();
+        });
+    }); 
+</script>
  
+@endsection
 @endsection

@@ -396,7 +396,7 @@
             data: { 'product_status': status, 'product_id': product_id },
             type: "GET",
             success: function (response){
-                if (response.status == 200){
+                if (response.status == 200){    
                     Swal.fire({
                         title: "Success!",
                         text: "Status successfully updated.",

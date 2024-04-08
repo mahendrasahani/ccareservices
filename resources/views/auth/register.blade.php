@@ -65,6 +65,7 @@
                 <div class="form-field">
                     <label for="">Full Name <span>*</span></label>
                     <input type="text" name="name" placeholder="Enter your name....." required>
+
                 </div>
                 <div class="form-field">
                     <label for="">Email <span>*</span></label>
@@ -78,10 +79,16 @@
                     <label for="">Password <span>*</span></label>
                     <input type="password" name="password" placeholder="Create your password....." required>
                 </div>
+                @error('password')
+                <p style="color:red;">{{$message}}</p>
+                @enderror
                 <div class="form-field"> 
                     <label for="">Confirm Password <span>*</span></label>
                     <input type="password" name="password_confirmation" placeholder="Confirm your password....." required>
                 </div>
+                @error('password_confirmation')
+                <p>{{$message}}</p>
+                @enderror
                 <button class="form-btn" style="margin-top: 10px;">SignUp</button>
                 <p>Already have an account? <a href="{{route('login')}}">Login here</a></p>
             </form>

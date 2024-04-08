@@ -87,7 +87,7 @@
                                 <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
                                     <h4 class="h5">
                                         <i class="fa fa-shopping-cart"></i>
-                                        Cancel Orders
+                                        Return Orders
                                     </h4>
                                 </div>
                                 <div class="card-body">
@@ -98,35 +98,33 @@
                                                     
                                                     <th class="col-xl-2">Order ID</th>
                                                     <th>Customer</th>
-                                                    <th>Status
-                                                    </th>
-                                                    <th class="text-center">Date Added</th>
-                                                    <th>Total</th>
+                                                 
+                                                    <th class="text-center">Date Added</th> 
                                                     <th class="text-center">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @if(count($return_order) > 0)
+                                                @foreach($return_order as $return)
                                                 <tr>
                                                     <td style="display: table-cell;">
-                                                        322
+                                                        {{$return->order_number}}
                                                     </td>
                                                     <td>
-                                                        Shubham MEHRA
+                                                        {{$return->customer_name}}
                                                     </td>
-                                                    <td style="display: table-cell;">
-                                                        Pending
-                                                    </td>
+                                                     
                                                     <td>
-                                                        16/01/2024
+                                                        {{\Carbon\Carbon::parse($return->created_at)->format('d M, Y')}}
                                                     </td>
-                                                    <td>
-                                                        ₹1,650.00
-                                                    </td>
+                                                   
                                                     <td class="text-right footable-last-visible">
-                                                        <a href="#" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="View"><i class="fa fa-eye"></i>
+                                                        <a href="{{route('backend.return.edit', [$return->id])}}" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="View"><i class="fa fa-eye"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
+                                                @endforeach
+                                                @endif
                                             </tbody>
                                         </table>
                                     </form>

@@ -10,7 +10,7 @@
                                             <div class="col text-center text-md-left">
                                                 <h4 class="mb-md-0 h5">Orders</h4>
                                             </div>
-                                            <div class="dropdown mb-2 mb-md-0">
+                                            <!-- <div class="dropdown mb-2 mb-md-0">
                                                 <button class="btn border dropdown-toggle" type="button" data-toggle="dropdown"
                                                     aria-expanded="false">
                                                     Bulk Action
@@ -20,15 +20,16 @@
                                                         data-target="#bulk-delete-modal">
                                                         Delete selection</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="col-xl-2 col-md-3 ml-auto">
+                                                <form id="filter_form" method="GET" action="">
                                                 <div class="row g-2">
                                                     <div class="col-md">
                                                         <div class="form-floating">
-                                                            <select class="form-select" id="floatingSelectGrid">
-                                                                <option selected="">Filter by Payment Status</option>
-                                                                <option value="1">Paid</option>
-                                                                <option value="2">Unpaid</option>
+                                                            <select class="form-select payment_status" id="payment_status" name="payment_status">
+                                                                <option selected value="">Filter by Payment Status</option>
+                                                                <option value="paid" {{isset($_GET['payment_status']) && $_GET['payment_status'] == 'paid'?'selected':''}}>Paid</option>
+                                                                <option value="unpaid" {{isset($_GET['payment_status']) && $_GET['payment_status'] == 'unpaid'?'selected':''}}>Unpaid</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -40,23 +41,21 @@
                                                 <div class="row g-2">
                                                     <div class="col-md">
                                                         <div class="form-floating">
-                                                            <select class="form-select" id="floatingSelectGrid">
-                                                                <option selected="">Filter by Deliver Status</option>
-                                                                <option value="1"> Order Placed</option>
-                                                                <option value="2">Confirmed</option>
-                                                                <option value="3">Processed</option>
-                                                                <option value="4">Shipped</option>
-                                                                <option value="5">Delivered</option>
-                                                                <option value="6">Cancelled</option>
+                                                            <select class="form-select" id="delivery_status" name="delivery_status">
+                                                                <option selected value="">Filter by Deliver Status</option>
+                                                                <option value="ordered" {{isset($_GET['delivery_status']) == 'ordered'?'selected':''}}>Ordered</option>
+                                                                <option value="shipped" {{isset($_GET['delivery_status']) == 'shipped'?'selected':''}}>Shipped</option>
+                                                                <option value="delivered" {{isset($_GET['delivery_status']) == 'delivered'?'selected':''}}>Delivered</option> 
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-2 col-md-3">
+                                            </form>
+                                            <!-- <div class="col-xl-2 col-md-3">
                                                 <input type="text" class="form-control form-control-sm" id="search"
                                                     name="search" placeholder="Type Order code & hit Enter">
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
@@ -65,7 +64,7 @@
                                                         <table class="table aiz-table mb-0 footable footable-1 breakpoint-lg">
                                                             <thead>
                                                                 <tr class="footable-header">
-                                                                    <th class="footable-first-visible">
+                                                                    <!-- <th class="footable-first-visible">
                                                                         <div class="form-group">
                                                                             <div class="aiz-checkbox-inline">
                                                                                 <label class="aiz-checkbox">
@@ -74,7 +73,7 @@
                                                                                 </label>
                                                                             </div>
                                                                         </div>
-                                                                    </th>
+                                                                    </th> -->
                                                                     <th class="col-xl-2">Order Code</th> 
                                                                     <th>Customer </th>
                                                                     <th >Amount</th>
@@ -87,14 +86,14 @@
                                                             <tbody>
                                                                 @foreach($orders as $order)
                                                                 <tr id="row_id_{{$order->id}}">
-                                                                    <td class="footable-first-visible">
+                                                                    <!-- <td class="footable-first-visible">
                                                                         <div class="form-group d-inline-block">
                                                                             <label class="aiz-checkbox">
                                                                                 <input type="checkbox" class="selectCheckbox">
                                                                                 <span class="aiz-square-check"></span>
                                                                             </label>
                                                                         </div>
-                                                                    </td>
+                                                                    </td> -->
                                                                     <td>{{$order->order_id}}</td> 
                                                                     <td>{{$order->shipping_name}}</td>
                                                                     <td>₹{{number_format($order->total - $order->promo_discount, 2)}}</td>
@@ -124,7 +123,7 @@
                                                             </tbody>
                                                         </table>
                                                          
-                                                     
+                                                     {{$orders->links('pagination::bootstrap-5')}}
                                                 </div>
                                             </div>
                                         </div>
@@ -190,6 +189,24 @@
     });
 </script>
     
+<script> 
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectElement = document.getElementById('payment_status');
+        var formElement = document.getElementById('filter_form');
+        selectElement.addEventListener('change', function() {
+            formElement.submit();
+        });
+    }); 
+</script>
+<script> 
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectElement = document.getElementById('delivery_status');
+        var formElement = document.getElementById('filter_form');
+        selectElement.addEventListener('change', function() {
+            formElement.submit();
+        });
+    }); 
+</script>
  
 @endsection
 @endsection

@@ -22,7 +22,17 @@ use Illuminate\Support\Facades\Session;
 class OrderController extends Controller
 {
     public function index(){
-        $orders = Order::orderBy('id', 'desc')->get();
+
+
+        $orders = Order::select('*');
+        if(isset($_GET['payment_status']) && $_GET['payment_status'] != ''){
+            $orders = $orders->where('payment_status', $_GET['payment_status']);
+        }
+        if(isset($_GET['delivery_status']) && $_GET['delivery_status'] != ''){
+            $orders = $orders->where('order_status', $_GET['delivery_status']);
+        }
+
+        $orders = $orders->orderBy('id', 'desc')->paginate(10);
         return view('backend.order.index', compact('orders'));
     }
 
@@ -129,7 +139,8 @@ class OrderController extends Controller
 
             }
             // code for order with payment gateways -----------------------------------------------------------------------------------------
-    } 
+    
+        } 
     public function purchaseHistory(){
         $data['purchase_history'] = Order::with('getOrderProduct:order_id,product_name')
         ->where('user_id', Auth::user()->id)

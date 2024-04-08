@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Order;
 use App\Models\Backend\Product;
+use App\Models\Backend\ProductReturn;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +18,10 @@ class AdminDashboardController extends Controller
         $total_sales = Order::where('status', 1)->where('order_status', 'delivered')->sum('total');
         $total_product = Product::count(); 
         $latest_order = Order::orderBy('id', 'desc')->paginate(5);
+        $return_order = ProductReturn::orderBy('id', 'desc')->get();
+
         return view('backend.dashboard.index', compact('total_customers', 'total_order', 'total_sales', 'total_product',
-    'latest_order'));
+    'latest_order', 'return_order'));
     }
 
 

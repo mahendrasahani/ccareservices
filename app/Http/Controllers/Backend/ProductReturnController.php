@@ -12,7 +12,14 @@ use Illuminate\Http\Request;
 class ProductReturnController extends Controller
 {
     public function index(){ 
-        $return_products = ProductReturn::orderBy('id', 'desc')->get();
+
+        $return_products = ProductReturn::select('*');
+        if(isset($_GET['sort_by']) && $_GET['sort_by'] != ''){ 
+            $return_products = $return_products->orderBy('created_at', $_GET['sort_by']);
+        }else{
+            $return_products = $return_products->orderBy('id', 'desc');
+        }
+        $return_products = $return_products->get();
         return view('backend.return.index', compact('return_products'));
     }
     public function edit($id){

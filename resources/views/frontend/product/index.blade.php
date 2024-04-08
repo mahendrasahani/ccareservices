@@ -46,32 +46,25 @@
                     <div class="card-header">
                         <h6>More Option</h6>
                     </div>
-                    <div class="card-body"> 
+                    <div class="card-body">  
                         <ul id="toggleList">
-                            <li ><a href="#" class="text-decoration-none text-dark" >Laptop</a>
-                            <i class="fa-solid fa-caret-down mx-2"></i>
+                        @foreach($main_categories as $main) 
+                            <li ><a href="#" class="text-decoration-none text-dark" >{{$main->name}}</a>
+                            @if(count($main->subCategory) > 0)
+                            <i class="fa-solid fa-caret-down mx-2"></i> 
                                 <ul>
-                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark">Window AC on Rent</a> </li> 
+                                @foreach($main->subCategory as $sub)
+                                    <li class="mt-2 mb-2"><a href="{{route('frontend.product.product_list', [Str::slug($main->name), Str::slug($sub->name)])}}" class="text-decoration-none text-dark">{{$sub->name}}</a> </li> 
+                                    @endforeach
                                 </ul>
-                            </li>
-                            <li><a href="#" class="text-decoration-none text-dark"  >Heater</a>
-                            <i class="fa-solid fa-caret-down mx-2"></i>
-                                <ul>
-                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark">Heater On Rent</a> 
-                                </ul>
-                            </li>
-                            <li><a href="#" class="text-decoration-none text-dark" >Laptop On rent</a>
-                            <i class="fa-solid fa-caret-down mx-2"></i>
-                                <ul>
-                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark" >Window AC on Rent</a></li>
-                                    <li class="mt-2 mb-2"><a href="#" class="text-decoration-none text-dark" >Split AC on Rent</a> </li>
-                                </ul>
-                            </li>
+                                @endif
+                            </li> 
+                            @endforeach
                         </ul> 
                     </div>
                 </div>
                 <!--product filter-->
-                <div class="card mt-5">
+                <!-- <div class="card mt-5">
                     <div class="card-header">
                         <h6>Filter</h6>
                     </div>
@@ -81,30 +74,30 @@
                                 data-filter="all">
                             <label class="form-check-label" for="allCheckbox">All</label>
                         </div>
+                        @foreach($sub_cat_list as $sub_cat)
                         <div class="form-check">
-                            <input class="form-check-input filter" type="checkbox" value="" id="laptopCheckbox"
-                                data-filter="laptop">
-                            <label class="form-check-label" for="laptopCheckbox">Laptop</label>
+                            <input class="form-check-input filter" type="checkbox" value="{{$sub_cat->id}}" id="laptopCheckbox"
+                                data-filter="{{$sub_cat->name}}">
+                            <label class="form-check-label" for="laptopCheckbox">{{$sub_cat->name}}</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input filter" type="checkbox" value="" id="oldLaptopCheckbox"
-                                data-filter="oldLaptop">
-                            <label class="form-check-label" for="oldLaptopCheckbox">Old Laptop</label>
-                        </div>
+                        @endforeach
+                         
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="col-md-10">
                 <div class="row">
+                    
+                    <input type="hidden" value="{{$page_url}}" id="page_url">
                     @foreach($product_list as $product)
-                    <div class="col-md-3 all laptop" class="content" id="all">
+                    <div class="col-md-3 all laptop" class="content" id="{{$product->slug}}">
                         <div class="card ">
                             <div class="cart_img_wrap mt-2">
                                 <a href="single-product.html"><img
                                         src="{{$product->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->product_images[0])}}"></a>
                             </div>
                             <div class="card-body">
-                                <h6 class="fw-bold"><a href="single-product.html" class="text-decoration-none"
+                                <h6 class="fw-bold"><a href="{{route('frontend.product.single_product', [$product->slug])}}" class="text-decoration-none"
                                         style="color: black;">{{$product->product_name}}</a></h6>
 
                                 @if($product->discount_type == 'flat')
@@ -163,30 +156,18 @@
 </section>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
  
-
 <script>
-    document.addEventListener('DOMContentLoaded', function ()
-    {
-        const checkboxes = document.querySelectorAll('.filter');
-        const items = document.querySelectorAll('.item');
-
-        checkboxes.forEach(function (checkbox)
-        {
-            checkbox.addEventListener('change', function ()
-            {
-                const filterValue = this.getAttribute('data-filter');
-
-                items.forEach(function (item)
-                {
-                    if (filterValue === 'all' || item.classList.contains(filterValue))
-                    {
-                        item.style.display = this.checked ? 'block' : 'none';
-                    } else
-                    {
-                        item.style.display = 'none';
-                    }
-                }.bind(this));
+    $(document).ready(function () {
+        let page_url = $("#page_url").val();
+        console.log(page_url);
+        $('.filter').change(function () {
+            var checkedValues = [];
+            $('.filter:checked').each(function () {
+                checkedValues.push($(this).val());
             });
+
+            var filter = checkedValues.join(',');
+            window.location.href = page_url+'/?filter=' + filter;
         });
     });
 </script>

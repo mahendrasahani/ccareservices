@@ -35,26 +35,23 @@
                                         onclick="deleteSelection()"> Delete selection</a>
                                 </div>
                             </div>
+                            <form action="" method="GET" id="filter_form">
                             <div class="col-md-2 ml-auto">
-                                <div class="form-group mt-2 mb-2">
-                                    <select class="form-control form-control-sm" name="type" id="sort_by"
-                                        name="sort_by">
-                                        <option>Sort by</option>
-                                        <option value=" ">Options</option>
-                                        <option value=" ">Options</option>
-                                        <option value=" ">Options</option>
-                                        <option value=" ">Options</option>
-                                        <option value=" ">Options</option>
-                                        <option value=" ">Options</option>
+                                <div class="form-group mt-2 mb-2">  
+                                    <select class="form-control form-control-sm" name="sort_by" id="sort_by">
+                                        <option value="">Sort by Name</option>
+                                        <option value="asc">A to Z</option>
+                                        <option value="desc">Z to A</option> 
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            </form>
+                            <!-- <div class="col-md-2">
                                 <div class="input-group">
                                     <input type="text" class="form-control form-control-sm" id="search" name="search"
                                         placeholder="Type &amp; Enter">
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         @php if(isset($_GET['page'])){$page_number = $_GET['page'];}else{ $page_number = 1;} $count = $page_number * 10 - 9;  @endphp 
                         <div class="card-body">
@@ -185,6 +182,17 @@
                     });  
             });
         </script>
+
+
+<script> 
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectElement = document.getElementById('sort_by');
+        var formElement = document.getElementById('filter_form');
+        selectElement.addEventListener('change', function() {
+            formElement.submit();
+        });
+    }); 
+</script>
 @endsection
  
 @endsection

@@ -10,7 +10,17 @@ use Illuminate\Http\Request;
 class VendorController extends Controller
 {
     public function index(){
-      $vendor_list = Vendor::orderBy('id', 'desc')->paginate(10);
+
+      $vendor_list = Vendor::select('*');
+      if(isset($_GET['sort_by']) && $_GET['sort_by'] != ''){
+
+         $vendor_list = $vendor_list->orderBy('name', $_GET['sort_by']);
+     }else{
+      $vendor_list = $vendor_list->orderBy('id', 'desc');
+     }
+     $vendor_list = $vendor_list->paginate(10);
+
+
        return view('backend.vendor.index', compact('vendor_list')) ;
     }
 

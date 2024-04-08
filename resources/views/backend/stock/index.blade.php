@@ -32,17 +32,13 @@
                                     <a class="dropdown-item confirm-alert" href="javascript:void(0)" onclick="deleteSelection()"> Delete selection</a>
                                 </div>
                             </div>
-                            <div class="col-md-2 ml-auto">
+                            <!-- <div class="col-md-2 ml-auto">
                                 <div class="form-group mt-2 mb-2">
                                     <select class="form-control form-control-sm" name="type" id="sort_by"
                                         name="sort_by">
                                         <option>Sort by</option>
                                         <option value="">Options</option>
-                                        <option value="">Options</option>
-                                        <option value="">Options</option>
-                                        <option value="">Options</option>
-                                        <option value="">Options</option>
-                                        <option value="">Options</option>
+                                        <option value="">Options</option> 
                                     </select>
                                 </div>
                             </div>
@@ -50,7 +46,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control form-control-sm" id="search" name="search" placeholder="Type &amp; Enter">
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered mb-0">
