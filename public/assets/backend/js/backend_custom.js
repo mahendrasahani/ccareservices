@@ -9,7 +9,7 @@
             labels: months,
             datasets: [{
             label: 'Monthly Sales',
-            backgroundColor: 'rgb(54, 162, 235)',
+            backgroundColor: 'rgb(159, 216, 255)',
             borderColor: 'rgb(0, 107, 179)',
             data: salesData,
             }]
@@ -61,9 +61,6 @@
          
         });
 // --------------------dashboard bar graph end------------------------ 
-
-
-
 
 function removeMainOption(divSection)
 {

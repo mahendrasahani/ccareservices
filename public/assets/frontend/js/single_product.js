@@ -1,6 +1,7 @@
   
 // ------------------------------- select option ---------------------------------------
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
+        await checkStock();
         let radioButtons = document.querySelectorAll('.cap-btns input[name="option_value"]');
         let month = 1; 
         radioButtons.forEach(function(radioButton) {
@@ -349,6 +350,7 @@ try {
     const response = await fetch(baseUrl+"/check-stock?product_id="+product_id+"&quantity="+quantity+"&option_value_id="+option_value_id)
     if (response.ok) {
         const data = await response.json();
+            $("#number_of_stock").html('('+data.quantity+')');
         if (data.quantity < quantity || data.quantity == 0) {
             $('#add_to_cart_btn').prop('disabled', true);
             $('#add_to_cart_btn').html('Out of Stock');

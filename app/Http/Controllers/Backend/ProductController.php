@@ -452,19 +452,23 @@ class ProductController extends Controller
         }
 
 
-        public function productListFrontView($main_category, $sub_category = '', Request $request){
+        public function productListFrontView(Request $request, $main_category, $sub_category = ''){
             $filter = (int)$request->filter;
             $main_cat_id = MainCategory::where('slug', $main_category)->first()->id;
-            $sub_cat_id = SubCategory::where('slug', $sub_category)->first()->id;
-            
             $product_list = Product::select('*');
+            if($sub_category != ''){
+            $sub_cat_id = SubCategory::where('slug', $sub_category)->first()->id;
+          
             if($filter != 0){
                 $product_list = $product_list->whereJsonContains('sub_category', $filter);
             }else{
                 $product_list = $product_list->whereJsonContains('sub_category', $sub_cat_id);
             }
+            }
+            if($sub_category == ''){
+                $product_list = $product_list->whereJsonContains('main_category', $main_cat_id);
+            }
              $product_list = $product_list->orderBy('id', 'desc')->paginate(12);
-              
              
             $sub_cat_list = SubCategory::where('main_category_id', $main_cat_id)->get();
             $page_url = url('category/'.$main_category.'/'.$sub_category.'/');

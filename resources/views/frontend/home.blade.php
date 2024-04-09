@@ -101,169 +101,28 @@
           <h4 class="bg-white" style="color: #656565; font-size: 17px;">&nbsp&nbspProducts on sale&nbsp</h4>
         </div>
         <div class="row">
-          <div class="col" id="media-product">
+
+        @foreach($main_categories as $main)
+        @if(count($main->subCategory) > 0)
+        @foreach($main->subCategory as $sub)
+          <div class="col-md-4" id="media-product">
             <div class="card hover-item">
-              <a href="" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/banner21.jpg')}}" class="card-img-top" alt="...">
+              <a href="{{route('frontend.product.product_list', [Str::slug($main->name), Str::slug($sub->name)])}}" class="text-decoration-none">
+                <img src="{{url($sub->thumbnail_image)}}" class="card-img-top" alt="...">
                 <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center  categry">AC ON RENT</h6>
+                  <h6 class="card-title text-center  categry">{{$sub->name}} ON RENT</h6>
                 </div>
               </a>
             </div>
           </div>
-          <div class="col">
-            <div class="card hover-item" id="media-product">
-              <a href="#" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/coolcare-heater (1).jpg')}}" class="card-img-top"
-                  alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center  categry">HEATER ON RENT</h6>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col" id="media-product">
-            <div class="card hover-item">
-              <a href="#" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/banner23.jpg')}}" class="card-img-top" alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center  categry">LED TV ON RENT </h6>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col" id="media-product">
-            <div class="card hover-item">
-              <a href="#" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/banner22.jpg')}}" class="card-img-top" alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center  categry">REFRIGERATOR RENT</h6>
-                </div>
-              </a>
-            </div>
-          </div>
+          @endforeach
+          @endif
+          @endforeach
         </div>
       </div>
-      <div class="col-md-12 mt-5">
-        <div class="row">
-          <div class="col" id="media-product">
-            <div class="card hover-item">
-              <a href="" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/banner24.jpg')}}" class="card-img-top" alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center  categry">MICROWAVE ON RENT</h6>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col" id="media-product">
-            <div class="card hover-item">
-              <a href="#" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/banner25.jpg')}}" class="card-img-top" alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center  categry">R.O ON RENT</h6>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col" id="media-product">
-            <div class="card hover-item">
-              <a href="#" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/banner26.jpg')}}" class="card-img-top" alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center  categry">WASHING MACHINE ON RENT</h6>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col" id="media-product">
-            <div class="card hover-item">
-              <a href="#" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/banner27.jpg')}}" class="card-img-top" alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center  categry">INVERTER BATTERY ON RENT </h6>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+       
       <!--button toggle-->
-      <div class="col-md-12 mt-5" id="hiddenContent" style="display: none;">
-        <div class="row">
-          <div class="col" id="media-product">
-            <div class="card hover-item">
-              <a href="" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/chair-on-rent.jpg')}}" class="card-img-top"
-                  alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center  categry">CHAIR ON RENT</h6>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col" id="media-product">
-            <div class="card hover-item">
-              <a href="#" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/table-on-rent.jpg')}}" class="card-img-top"
-                  alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center  categry">TABLE ON RENT</h6>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col" id="media-product">
-            <div class="card hover-item">
-              <a href="#" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/sofa-on-rent.jpg')}}" class="card-img-top"
-                  alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center  categry">SOFA ON RENT</h6>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col" id="media-product">
-            <div class="card hover-item">
-              <a href="#" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/wardrobe-on-rent.jpg')}}" class="card-img-top"
-                  alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center  categry">WARDROBE ON RENT</h6>
-                </div>
-              </a>
-            </div>
-          </div>
-
-        </div>
-        <div class="row mt-3">
-          <div class="col-3" id="media-product">
-            <div class="card hover-item">
-              <a href="#" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/coolcare-laptop.jpg')}}" class="card-img-top"
-                  alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center categry">LAPTOP ON RENT</h6>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <div class="col-3" id="media-product">
-            <div class="card hover-item">
-              <a href="#" class="text-decoration-none">
-                <img src="{{url('public/assets/frontend/images/categry/bed-on-rent-1.jpg')}}" class="card-img-top"
-                  alt="...">
-                <div class="card-body" style="padding: 7px;">
-                  <h6 class="card-title text-center categry">BED ON RENT</h6>
-                </div>
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </div>
+       
       <div class="col-md-12 mt-5 mb-2">
         <a href="#" class="text-decoration-none" >
           <button class="animate-btx animate-btx-home" style="margin: 0px auto;" id="show-hidden-menu">
@@ -288,108 +147,45 @@
         </div>
       </div>
       <div id="my-unique-carousel" class="owl-carousel">
-        <div class="card">
-          <img
-            src="{{url('public/assets/frontend/images/WINDOW AC ON RENT IN GURGAON/LG-Window-AC-12000-BTU-Cooling-Heating-LW1216HR-600x600.jpg')}}"
-            class="card-img-top" alt="...">
 
+        @foreach($product_list as $product)
+        <div class="card">
+          <img
+            src="
+            @if($product->product_images != '' || $product->product_images != null)
+            {{url('public/'.$product->product_images[0])}}
+            @else
+            {{url('public/assets/both/placeholder/product.jpg')}}
+            @endif 
+            "
+            class="card-img-top" alt="..."> 
           <div class="card-body">
             <div class="d-flex justify-content-between align-content-center" style="height: 41px;">
               <a href="#" class="text-decoration-none">
-                <p class="text-dark title">1.3 Ton Window Ac On Rent</p>
+                <p class="text-dark title">{{$product->product_name}}</p>
               </a>
               <div class="block flex-shrink-0 ml-2">
                 <i class="fa-solid fa-truck time"></i>
               </div>
             </div>
-            <div class="d-flex justify-content-lg-between">
+            <!-- <div class="d-flex justify-content-lg-between">
               <p class="mb-0">
                 <span class="old-price">₹ 1,677 </span>
                 <span class="new-price">₹ 1,427/mo</span>
               </p>
               <p class="offer">-15% OFF</p>
-            </div>
+            </div> -->
             <div class="d-flex justify-content-between">
-              <a href=""><button type="button" class="btn btn-warning animation">View More</button></a>
+              <a href="{{route('frontend.product.single_product', [$product->slug])}}"><button type="button" class="btn btn-warning animation">View More</button></a>
             </div>
           </div>
         </div>
-        <div class="card">
-          <img
-            src="{{url('public/assets/frontend/images/WINDOW AC ON RENT IN GURGAON/LG-Window-AC-12000-BTU-Cooling-Heating-LW1216HR-600x600.jpg')}}"
-            class="card-img-top" alt="...">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-content-center" style="height: 41px;">
-              <a href="#" class="text-decoration-none">
-                <p class="text-dark title">2 Ton Window Ac On Rent</p>
-              </a>
-              <div class="block flex-shrink-0 ml-2">
-                <i class="fa-solid fa-truck time"></i>
-              </div>
-            </div>
-            <div class="d-flex justify-content-lg-between">
-              <p class="mb-0">
-                <span class="old-price">₹ 1,677 </span>
-                <span class="new-price">₹ 1,427/mo</span>
-              </p>
-              <p class="offer">-15% OFF</p>
-            </div>
-            <div class="d-flex justify-content-between">
-              <a href=""><button type="button" class="btn btn-warning animation">View More</button></a>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img
-            src="{{url('public/assets/frontend/images/WINDOW AC ON RENT IN GURGAON/LG-Window-AC-12000-BTU-Cooling-Heating-LW1216HR-600x600 (1).jpg')}}"
-            class="card-img-top" alt="...">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-content-center" style="height: 41px;">
-              <a href="#" class="text-decoration-none">
-                <p class="text-dark title">1 Ton Window Ac On Rent</p>
-              </a>
-              <div class="block flex-shrink-0 ml-2">
-                <i class="fa-solid fa-truck time"></i>
-              </div>
-            </div>
-            <div class="d-flex justify-content-lg-between">
-              <p class="mb-0">
-                <span class="old-price">₹ 1,677 </span>
-                <span class="new-price">₹ 1,427/mo</span>
-              </p>
-              <p class="offer">-15% OFF</p>
-            </div>
-            <div class="d-flex justify-content-between">
-              <a href=""><button type="button" class="btn btn-warning animation">View More</button></a>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <img
-            src="{{url('public/assets/frontend/images/WINDOW AC ON RENT IN GURGAON/LG-Window-AC-12000-BTU-Cooling-Heating-LW1216HR-600x600.jpg')}}"
-            class="card-img-top" alt="...">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-content-center" style="height: 41px;">
-              <a href="#" class="text-decoration-none">
-                <p class="text-dark title">0.75 Ton Window Ac On Rent</p>
-              </a>
-              <div class="block flex-shrink-0 ml-2">
-                <i class="fa-solid fa-truck time"></i>
-              </div>
-            </div>
-            <div class="d-flex justify-content-lg-between">
-              <p class="mb-0">
-                <span class="old-price">₹ 1,677 </span>
-                <span class="new-price">₹ 1,427/mo</span>
-              </p>
-              <p class="offer">-15% OFF</p>
-            </div>
-            <div class="d-flex justify-content-between">
-              <a href=""><button type="button" class="btn btn-warning animation">View More</button></a>
+        @endforeach
 
-            </div>
-          </div>
-        </div>
+
+         
+         
+         
       </div>
     </div>
   </div>

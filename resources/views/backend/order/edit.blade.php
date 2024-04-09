@@ -76,7 +76,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="delivery_date">Delivery Date</label>
-                                                     <input type="date" name="delivery_date" id="delivery_date" class="form-control" value="{{ \Carbon\Carbon::parse($order->delivery_date)->format('Y-m-d') ?? ''}}">
+                                                     <input type="date" name="delivery_date" id="delivery_date" class="form-control" value="{{ isset($order->delivery_date) ? \Carbon\Carbon::parse($order->delivery_date)->format('Y-m-d') : '' }}" required>
                                                 </div>
                                                  <div class="mb-3">
                                                     <label for="remarks">Remarks</label>

@@ -4,24 +4,14 @@
             <div class="col-md-3">
                 <h6 class="fw-bold  text-white">Categories</h6>
                 <ul class="list-inline hover-animate">
-                    <a href="index.html" class="text-decoration-none text-white ">
+                    <a href="/" class="text-decoration-none text-white ">
                         <li class="pt-2">Home</li>
                     </a>
-                    <a href="" class="text-decoration-none text-white">
-                        <li class="pt-2">Laptop</li>
+                    @foreach($main_categories as $main)
+                    <a href="{{route('frontend.product.product_list', [Str::slug($main->name)])}}" class="text-decoration-none text-white">
+                        <li class="pt-2">{{$main->name}}</li>
                     </a>
-                    <a href="" class="text-decoration-none text-white">
-                        <li class="pt-2">Heater</li>
-                    </a>
-                    <a href="" class="text-decoration-none text-white">
-                        <li class="pt-2">Ac On Rent</li>
-                    </a>
-                    <a href="" class="text-decoration-none text-white">
-                        <li class="pt-2"> washing Machine</li>
-                    </a>
-                    <a href="" class="text-decoration-none text-white">
-                        <li class="pt-2">Refrigerator</li>
-                    </a>
+                    @endforeach
                 </ul>
             </div>
             <div class="col-md-3">

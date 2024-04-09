@@ -96,13 +96,11 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav" id="header-ul">
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                                    <a class="nav-link" aria-current="page" href="/">Home</a>
                                 </li>
 
                                 @foreach($main_categories as $main)
-
-
-
+ 
                                 <li class="nav-item dropdown">
                                     <a class="nav-link {{count($main->subCategory) > 0 ? 'dropdown-toggle' : ''}}" href="{{route('frontend.product.product_list', [Str::slug($main->name)])}}" role="button" aria-expanded="false">
                                         {{$main->name}}

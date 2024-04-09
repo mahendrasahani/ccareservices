@@ -7,13 +7,9 @@
         <div class="row">
             
         @include('layouts/frontend/sidebar')
-
-             
-
-
+ 
         </div>
     </div>
 </section>
-
-
+ 
 @endsection

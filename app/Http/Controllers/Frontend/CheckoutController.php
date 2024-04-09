@@ -68,6 +68,7 @@ class CheckoutController extends Controller
        $shipping_address = ShippingAddress::where('user_id', Auth::user()->id)->first();
        $billing_address = BillingAddress::where('user_id', Auth::user()->id)->first(); 
        if($shipping_address && $billing_address){
+     
             if(!$both_address){
                 try{
                 ShippingAddress::where('user_id', Auth::user()->id)->update($shipping_detail);
