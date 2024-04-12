@@ -16,6 +16,7 @@
         <h1 class="text-center heading">
           Home Appliances On Rent In Gurgaon- Appliance Rental Services
         </h1>
+        <a href="https://mail.google.com/mail/u/0/#search/task/FMfcgzGxSRNZXgtdMVPTqzPHkgbxkZTp" download>Download</a>
       </div>
 
     </div>
