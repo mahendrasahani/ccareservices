@@ -222,7 +222,7 @@
                         <div class="col-md-12 hh-grayBox pt45 pb20">
                             <div class="row justify-content-between">
                                 <div class="order-tracking 
-                                @if($order->order_status == 'ordered' || $order->order_status == 'shipped' || $order->order_status == 'delivered')
+                                @if($order->order_status == 'ordered'||$order->order_status=='accepted' || $order->order_status == 'shipped' || $order->order_status == 'delivered')
                                 completed
                                 @endif ">
                                     <span class="is-complete"></span>
