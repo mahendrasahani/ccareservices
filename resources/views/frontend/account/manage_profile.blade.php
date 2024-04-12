@@ -52,20 +52,20 @@
               <div class="col-md-6">
                 <div class="form-field">
                   <label for="address1" class="form-about">Address 1</label>
-                  <input required placeholder="Address 1" type="text" name="address_1" id="address_1" value="{{$user_data->address_1 ?? ''}}"/>
+                  <input placeholder="Address 1" type="text" name="address_1" id="address_1" value="{{$user_data->address_1 ?? ''}}" required/>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-field">
                   <label for="address2" class="form-about">Address 2</label>
-                  <input required placeholder="Address 2" type="text" name="address_2" id="address_2" value="{{$user_data->address_2 ?? ''}}"/>
+                  <input placeholder="Address 2" type="text" name="address_2" id="address_2" value="{{$user_data->address_2 ?? ''}}" required/>
                 </div>
               </div>
             
               <div class="col-md-6">
                 <div class="form-field">
                   <label for="country" class="form-about">Country:</label>
-                  <select id="country" name="country">
+                  <select id="country" name="country" required>
                     <option value="India" selected>India</option>
                   </select>
                 </div>
@@ -73,7 +73,7 @@
               <div class="col-md-6">
                 <div class="form-field">
                   <label for="state" class="form-about">State:</label>
-                  <select id="state" name="state">
+                  <select id="state" name="state" required>
                     <option value="New Delhi" selected>New Delhi</option>
                   </select>
                 </div>
@@ -90,7 +90,7 @@
                     <input type="text" id="postal_code" name="postal_code" placeholder="Enter your postal code" required value="{{$user_data->postal_code ?? ''}}"/>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-field">
                     <label for="aadhar_front" class="form-about">Upload Aadhar Card Front:</label>
                     <input type="file" id="aadhar_front" name="aadhar_front" accept=".pdf"  />
@@ -100,7 +100,7 @@
                     @endif
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-field">
                     <label for="aadhar_back" class="form-about">Upload Aadhar Card Back:</label>
                     <input type="file" id="aadhar_back" name="aadhar_back" accept=".pdf"  />
@@ -110,7 +110,8 @@
                     @endif
                   </div>
                 </div>
-                <div class="col-md-4">
+                <!-- 
+                  <div class="col-md-4">
                   <div class="form-field">
                     <label for="company_id" class="form-about">Company Id:</label>
                     <input type="file" id="company_id" name="company_id" accept=".pdf"  />
@@ -120,6 +121,7 @@
                     @endif
                   </div>
                 </div>  
+               -->
                 <div class="upload-container ">
                   <div class="circle" id="selected-image-container">
                     <img class="profile-pic selected-image-container"
@@ -137,14 +139,18 @@
           </form>
           <section class="address mt-5">
             <div class="row">
+              @if(Auth::user()->address_1 != '' || $shipping_addres != null)
               <div class=" col-md-6">
                 <div class="card address-default">
                   <h6>Default Shipping Address</h6>
                   <hr>
-                  <p>{{$shipping_addres->address ?? ''}}</p>
-                  <p>{{$shipping_addres->city ?? ''}} {{$shipping_addres->zip_code ?? ''}} {{$shipping_addres->country ?? ''}}</p>
+                  <p>{{$shipping_addres->address ?? Auth::user()->address_1.', '.Auth::user()->address_2}}</p>
+                  <p>{{$shipping_addres->city ?? Auth::user()->city}} {{$shipping_addres->zip_code ?? Auth::user()->zip_code}} {{$shipping_addres->country ?? Auth::user()->country}}</p>
                 </div>
               </div>
+              @endif 
+
+                @if($billing_address != null)
               <div class=" col-md-6">
                 <div class="card address-default">
                   <h6>Default Billing Address</h6>
@@ -153,6 +159,7 @@
                   <p>{{$billing_address->city ?? ''}} {{$billing_address->zip_code ?? ''}} {{$billing_address->country ?? ''}}</p>
                 </div>
               </div>
+              @endif
             </div>
           </section>
         </div>

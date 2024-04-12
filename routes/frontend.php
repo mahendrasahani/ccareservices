@@ -29,7 +29,7 @@ Route::get('/single-product', [PageController::class, 'viewSingleProductView'])-
 // ------------------------ All Pages route (end) --------------------------------------------------------
 
 // -------------------------After user login (start) ------------------------------------------------------------
-Route::middleware(['auth', 'user_check', 'customer_otp_verification'])->group(function () {
+Route::middleware(['auth', 'verified', 'user_check', 'customer_otp_verification'])->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'userDashboardPageView'])->name('frontend.user.dashboar.view');
     Route::get('/manage-profile', [UserDashboardController::class, 'manageProfilePageView'])->name('frontend.user.manage_profile.view');
     Route::post('/update-profile', [UserDashboardController::class, 'updateUserProfile'])->name('frontend.user.update_profile');
@@ -57,7 +57,7 @@ Route::get('/remove-from-cart', [ProductController::class, 'removeFromCart'])->n
  // -------------------------add to cart page (end) --------------------------------------------------------------
 
 
-Route::middleware(['auth', 'customer_otp_verification'])->group(function () {
+Route::middleware(['auth', 'verified', 'customer_otp_verification'])->group(function () {
 // -------------------------After Both User and Admin login (start) --------------------------------------------------------------
     // ------------------------ Checkout page route (end) ---------------------------------------------------------------------
        Route::get('/checkout', [CheckoutController::class, 'checkoutPageView'])->name('frontend.checkout.view');
@@ -82,5 +82,6 @@ Route::middleware(['auth', 'customer_otp_verification'])->group(function () {
 });
 
  
-Route::get('/otp-mail', [HomeController::class, 'otpMail'])->name('frontend.otp_mail');
+ 
+Route::get('/test-command', [HomeController::class, 'testCommand']);
 

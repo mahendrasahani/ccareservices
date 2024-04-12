@@ -11,8 +11,8 @@
 
     <div class="mt-4 flex items-center justify-between">
         <form method="POST" action="{{ route('verification.send') }}">
-            @csrf
-
+            @csrf 
+                <input type="email" value="{{Auth::user()->email}}" name="email">
             <div>
                 <x-primary-button>
                     {{ __('Resend Verification Email') }}

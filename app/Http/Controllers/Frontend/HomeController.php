@@ -7,6 +7,7 @@ use App\Models\Backend\Order;
 use App\Models\Backend\OrderProduct;
 use App\Models\Backend\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -22,8 +23,11 @@ class HomeController extends Controller
         return view('frontend.home', compact('product_list'));
     } 
 
-    public function otpMail(){
-        return view('emails.otp_mail');
+    
+
+    public function testCommand(){
+        $orders = Order::with('getOrderProduct')->get();
+       return view('frontend.pages.alert_test', compact('orders'));
     }
  
 }

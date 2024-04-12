@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderStatusUpdateMail;
+use App\Mail\PlaceOrderMail;
 use App\Models\Backend\Attribute;
 use App\Models\Backend\AttributeValue;
 use App\Models\Backend\BillingAddress;
@@ -17,6 +19,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
@@ -58,12 +61,48 @@ class OrderController extends Controller
             "delivery_date" => $delivery_date,
             "delivery_remark" => $delivery_remark,
         ]); 
+
+        $user_detail = Order::where('id', $id)->first();
+
+        if($order_status == 'accepted'){
+            $order_status_data = [
+                "user_name" => $user_detail->shipping_name,
+                "order_status" => "accepted", 
+            ];
+            Mail::to($user_detail->shipping_email)->send(new OrderStatusUpdateMail($order_status_data, "Your order has been accepted."));
+
+        }elseif($order_status == 'canceled'){
+            Order::where('id', $id)->update([
+                "cancel_note" =>$request->cancel_note
+            ]);
+            $order_status_data = [
+                "user_name" => $user_detail->shipping_name,
+                "order_status" => "canceled",
+                "cancel_note" => $request->cancel_note
+            ];
+            Mail::to($user_detail->shipping_email)->send(new OrderStatusUpdateMail($order_status_data, "Your order has been canceled."));
+            
+            }elseif($order_status == 'shipped'){
+                $order_status_data = [
+                    "user_name" => $user_detail->shipping_name,
+                    "order_status" => "shipped", 
+                ];
+                Mail::to($user_detail->shipping_email)->send(new OrderStatusUpdateMail($order_status_data, "Your order has been shipped."));
+            }elseif($order_status == 'delivered'){
+                $order_status_data = [
+                    "user_name" => $user_detail->shipping_name,
+                    "order_status" => "delivered", 
+                ];
+                Mail::to($user_detail->shipping_email)->send(new OrderStatusUpdateMail($order_status_data, "Your order has been delivered."));
+            }
+ 
         return redirect()->route('backend.order.index')->with('order_updated', "Order has been updated!");
     }
 
 
     public function placeOrder(Request $request){ 
         $payment_mode = $request->paymentMethod; 
+        $admin_email = User::where('id', 1)->first()->email;
         if($payment_mode == '1'){
             $shipping_charge = Session::get('shipping_charge');
             $cart_items = Cart::with('getProduct:id,product_name', 'getStock')
@@ -103,6 +142,8 @@ class OrderController extends Controller
                     "billing_address" =>  $billing_address->address.' '.$billing_address->city.' '.$billing_address->zip_code.' '.$billing_address->country,
                     "status" => 1
                     ])->id; 
+
+                        $new_order_detail = Order::where('id', $new_order_id)->first();
  
                 foreach ($cart_items as $item) { 
                     $option_value = AttributeValue::where('id', $item->option_value_id)->first();
@@ -127,12 +168,24 @@ class OrderController extends Controller
                         $stock_item->save(); 
                     } 
                 } 
-                 
+             
+                $place_order_data = [
+                   "user_name" => Auth::user()->name,
+                   "order_number" => $new_order_detail->order_id,
+                   "order_date" => $new_order_detail->created_at,
+                   "total" => $new_order_detail->total,
+                   "product_list" => OrderProduct::where('order_id', $new_order_id)->get(),
+                   "shipping_address" => ShippingAddress::where('user_id', Auth::user()->id)->first(),
+                   "billing_address" => BillingAddress::where('user_id', Auth::user()->id)->first(),
+                   "payment_method" => $new_order_detail->payment_method
+                ];
+
+                Mail::to(Auth::user()->email)->send(new PlaceOrderMail($place_order_data, "Your order has been placed successfully"));
+                Mail::to($admin_email)->send(new PlaceOrderMail($place_order_data, "Received new order."));
                 Session::forget('delivery_charge');
                 $cart_items = Cart::with('getProduct:id,product_name')->where('user_id', Auth::user()->id)->delete(); 
                 $enc_order_id = Crypt::encryptString($new_order_id);
-                return redirect('/order-detail/'.$enc_order_id);
-              
+                return redirect('/order-detail/'.$enc_order_id); 
             }
             // code for order with payment gateways -------------------------------------------------------------------------------------------------
             else{
@@ -146,7 +199,6 @@ class OrderController extends Controller
         ->where('user_id', Auth::user()->id)
         ->withTrashed()
         ->orderBy('id', 'desc')->paginate(10); 
-        // return $data;
         return view('frontend.account.purchase_history', $data);
     }
 

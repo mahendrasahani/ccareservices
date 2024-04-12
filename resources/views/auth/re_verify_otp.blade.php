@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,10 +16,10 @@
        
         <div class="form-part"> 
         
-            <form method="POST" action="{{ route('otp.verify.submit', [$user->id]) }}" class="form" id="signup-form">
+            <form method="POST" action="{{ route('otp.re_verify.submit', [$user->id]) }}" class="form" id="signup-form">
                 @csrf
                 <p>{{$user->phone}}</p>
-                <p style="text-align: center;font-size:17px;font-weight: 600;">Verify OTP</p> 
+                <p style="text-align: center;font-size:17px;font-weight: 600;">Re Verify OTP</p> 
                 <div class="form-field"> 
                     <label for="verify_otp">Enter OTP <span>*</span></label>
                     <input type="number" name="otp" placeholder="Enter OTP" required>

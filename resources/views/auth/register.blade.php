@@ -70,10 +70,16 @@
                 <div class="form-field">
                     <label for="">Email <span>*</span></label>
                     <input type="email" name="email" placeholder="Enter your email....." required>
+                    @error('email')
+                    <p style="color:red;">{{$message}}</p>
+                    @enderror
                 </div>
                 <div class="form-field">
                     <label for="phone">Phone <span>*</span></label>
                     <input type="tel" name="phone"   placeholder="Enter your phone....." required>
+                    @error('phone')
+                    <p style="color:red;">{{$message}}</p>
+                    @enderror
                 </div>
                 <div class="form-field"> 
                     <label for="">Password <span>*</span></label>

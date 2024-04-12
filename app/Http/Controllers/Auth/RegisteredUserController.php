@@ -37,16 +37,16 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'phone' => ['required', 'max:10', 'unique:'.User::class],
         ]); 
         $otp = random_int(1000, 9999); 
         $otp_mail_data = [
             "user_name" => $request->name,
             "otp" => $otp
-        ]; 
+        ];
 
-     try {
-    Mail::to($request->email)->send(new OtpMail($otp_mail_data));
-    
+    try {
+    Mail::to($request->email)->send(new OtpMail($otp_mail_data)); 
     $response = Http::get('https://api.msg91.com/api/sendhttp.php?authkey=372411AIYHh0nX61f29867P1&sender=COOLCS&mobiles=91'.$request->phone.'&route=transactional &message=Your OTP Verification Code from COOLCARE SERVICES is '.$otp.'. Do not share it with anyone.&DLT_TE_ID=1307164337662843810&response=json&pluginsource=70');
     $user = User::create([
         'name' => $request->name,
@@ -54,12 +54,11 @@ class RegisteredUserController extends Controller
         'password' => Hash::make($request->password),
         'user_type' => 2,
         'otp_verify_status' => 0,
+        'phone' => $request->phone,
         'otp' => $otp, 
-    ]); 
+    ]);
     return redirect()->route('otp.verify', ['user' => $user->id]);
-
-
-    } catch (\Exception $e) {
+    }catch (\Exception $e){
         return $e->getMessage();
     }
 
@@ -91,5 +90,29 @@ class RegisteredUserController extends Controller
  
     }
 
+
+    public function reVerifyOtp($user){
+        $user = User::findOrFail($user);
+        return view('auth.re_verify_otp', compact('user'));
+    }
+    public function reVerifyOtpSubmit(Request $request, $user_id){ 
+        try{
+        $otp = $request->otp;
+        $user = User::where('id', $user_id)->first();
+
+        if($otp == $user->otp){
+            User::where('id', $user_id)->update([
+                "otp_verify_status" => 1,
+                "otp" => null
+            ]); 
+        return redirect(RouteServiceProvider::HOME);
+        }else{
+            return redirect()->route('otp.re_verify', [$user->id])->with('incorrect_otp', "Otp not match");
+        }
+    }catch(\Exception $e){
+        return $e->getMessage();
+    }
+ 
+    }
    
 }

@@ -18,7 +18,7 @@ class verifyCustomer
         if(Auth::user()->otp_verify_status == 1){
             return $next($request);
         }else{
-            return redirect('/');
+            return redirect('/otp-re-verify/'.Auth::user()->id);
         }
         // return $next($request);
     }

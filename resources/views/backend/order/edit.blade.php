@@ -57,14 +57,26 @@
                                                         <option value="unpaid" {{$order->payment_status == "unpaid" ? "selected" : ""}}>Unpaid</option>
                                                     </select>
                                                 </div>
-                                                <div class="mb-3">
+
+
+                                                <div class="mb-3" id="order_status_area">
                                                     <label class="mb-0">Order Status</label>
                                                     <select class="form-control" id="order_status" name="order_status" style="font-size: 12px;">
                                                         <option value="ordered" {{$order->order_status == "ordered" ? "selected" : ""}}>Ordered</option> 
+                                                        <option value="accepted" {{$order->order_status == "accepted" ? "selected" : ""}}>Accept</option> 
+                                                        <option value="canceled" {{$order->order_status == "canceled" ? "selected" : ""}}>Cancel</option> 
                                                         <option value="shipped" {{$order->order_status == "shipped" ? "selected" : ""}}>Shipped</option> 
                                                         <option value="delivered" {{$order->order_status == "delivered" ? "selected" : ""}}>Delivered</option> 
                                                     </select>
+                                                </div>  
+                                                @if($order->order_status == 'canceled')
+                                                <div class="mb-3" id="cancel_note_area">
+                                                    <label class="mb-0">Cancel Note</label>
+                                                    <input type="text" id="cancel_note" name="cancel_note" class="form-control" placeholder="Cancel Note" value="{{$order->cancel_note ?? ''}}">
                                                 </div>
+                                                @endif
+
+
                                                  <div class="mb-3">
                                                     <label for="assign_deliver_boy">Assign Deliver Boy</label>
                                                     <select class="form-control" id="delivery_boy" name="delivery_boy" style="font-size: 12px;">
@@ -148,7 +160,7 @@
                                                             <td>₹{{number_format($order->delivery_charge, 2)}}</td>
                                                         </tr>
                                                         <tr style="font-size: 12px;">
-                                                            <td><strong class="font-weight-bold">discount :</strong></td>
+                                                            <td><strong class="font-weight-bold">Discount :</strong></td>
                                                             <td><input type="number" name="discount" id="discount" min="0" value="{{$order->promo_discount ?? '0'}}"></td>
                                                         </tr>
                                                         <tr style="font-size: 12px;">
@@ -243,6 +255,21 @@
 
     }
 </script> 
+
+    <script> 
+        $(document).on("change", "#order_status", function(){
+            let order_status = $(this).val();
+            let cancel_note_val = $("#cancel_note").val();
+            if(order_status == 'canceled'){
+                $(`<div class="mb-3" id="cancel_note_area">
+                   <label class="mb-0">Cancel Note</label>
+                   <input type="text" id="cancel_note" name="cancel_note" class="form-control" value="${cancel_note_val == undefined ? '':cancel_note_val}" placeholder="Cancel Note">
+               </div>`).insertAfter('#order_status_area');
+            }else{
+                $('#cancel_note_area').remove();
+            }
+        });
+    </script>
 @endsection
 
 

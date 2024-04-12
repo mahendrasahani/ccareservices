@@ -206,6 +206,7 @@
                 <div class="track-order">
                     <div class="order-details">
                         <h4>The Shop</h4>
+                        <p>{{$order->cancel_note ?? ''}}</p>
                     </div>
                     <div class="row p-2">
                         <div class="col-md-12 hh-grayBox pt45 pb20">
@@ -269,10 +270,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="payment-seal" style="text-align: center;">
+                                @if($order->order_status == 'canceled')
+                                <img src="https://www.onlygfx.com/wp-content/uploads/2017/12/cancelled-stamp-4.png" alt="">
+                                @else
+
                                 @if($order->payment_status == 'unpaid')
                                         <img src="https://t3.ftcdn.net/jpg/03/53/98/42/360_F_353984215_cAK0GhSRc5MVzvj2iFljGjJmhs3w5YlY.jpg" alt="">
                                 @elseif($order->payment_status == 'paid')
                                     <img src="https://shop.activeitzone.com/public/assets/img/paid_sticker.svg" alt="">
+                             
+                                    @endif
                                     @endif
                                 </div> 
                             </div>

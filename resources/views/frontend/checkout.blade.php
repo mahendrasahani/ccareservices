@@ -32,32 +32,32 @@
               @csrf
               <div class="mb-3">
                 <label for="forName">Full Name<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" placeholder="Enter your full name" id="shipping_full_name" name="s_name" value="{{$shipping_address->name ?? ''}}" required>
+                <input type="text" class="form-control" placeholder="Enter your full name" id="shipping_full_name" name="s_name" value="{{$shipping_address->name ?? Auth::user()->name}}" required>
                 <p class="input_error" id="error_shipping_full_name"></p>
               </div>
               <div class="mb-3">
                 <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
-                <input type="email" class="form-control" id="shipping_email" name="s_email" placeholder="Enter your email" value="{{$shipping_address->email ?? ''}}" required>
+                <input type="email" class="form-control" id="shipping_email" name="s_email" placeholder="Enter your email" value="{{$shipping_address->email ?? Auth::user()->email}}" required>
                 <p class="input_error" id="error_shipping_email"></p>
               </div>
               <div class="mb-3">
                 <label for="email" class="form-label">Phone<span class="text-danger">*</span></label>
-                <input type="number" class="form-control" id="shipping_phone" name="s_phone" placeholder="Enter your phone" value="{{$shipping_address->phone ?? ''}}" required>
+                <input type="number" class="form-control" id="shipping_phone" name="s_phone" placeholder="Enter your phone" value="{{$shipping_address->phone ?? Auth::user()->phone}}" required>
                 <p class="input_error" id="error_shipping_phone"></p>
               </div>
               <div class="mb-3">
                 <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="shipping_address" name="s_address" placeholder="Enter full address" value="{{$shipping_address->address ?? ''}}" required>
+                <input type="text" class="form-control" id="shipping_address" name="s_address" placeholder="Enter full address" value="{{$shipping_address->address ?? Auth::user()->address_1}}" required>
                 <p class="input_error" id="error_shipping_address"></p>
               </div>
               <div class="mb-3">
                 <label for="city" class="form-label">City<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="shipping_city" name="s_city" placeholder="Enter City" value="{{$shipping_address->city ?? ''}}" required>
+                <input type="text" class="form-control" id="shipping_city" name="s_city" placeholder="Enter City" value="{{$shipping_address->city ?? Auth::user()->city}}" required>
                 <p class="input_error" id="error_shipping_city"></p>
               </div>
               <div class="mb-3">
                 <label for="zipCode" class="form-label">Zip Code<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="shipping_zip_code" name="s_zip_code" placeholder="Enter Zip Code" value="{{$shipping_address->zip_code ?? ''}}" required>
+                <input type="text" class="form-control" id="shipping_zip_code" name="s_zip_code" placeholder="Enter Zip Code" value="{{$shipping_address->zip_code ?? Auth::user()->postal_code}}" required>
                 <p class="input_error" id="error_shipping_zip_code"></p>
               </div> 
               <div class="mb-3">

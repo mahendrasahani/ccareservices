@@ -39,7 +39,8 @@ class Order extends Model
         "tax", 
         "payment_status", 
         "order_status", 
-        "status"
+        "status",
+        "cancel_note"
     ];
 
    public function getOrderProduct(){
