@@ -4,7 +4,7 @@
             .hh-grayBox {
         background-color: #F8F8F8;
         margin-bottom: 20px;
-        padding: 35px;
+        padding: 35px 0;
         margin-top: 20px;
     }
 
@@ -14,7 +14,7 @@
 
     .order-tracking {
         text-align: center;
-        width: 33.33%;
+        width:25%;
         position: relative;
         display: block;
     }
@@ -97,6 +97,16 @@
 
     .order-tracking.completed:before {
         background-color: #27aa80;
+    }
+
+    @media only screen and (max-width:400px) {
+        .order-tracking p {
+        font-size: 12px;
+    }
+
+    .order-tracking p span {
+        font-size: 12px;
+    }
     }
  </style>
 
@@ -217,6 +227,13 @@
                                 @endif ">
                                     <span class="is-complete"></span>
                                     <p>Ordered<br><span>Mon, June 24</span></p>
+                                </div>
+                                <div class="order-tracking 
+                                @if($order->order_status=='accepted' || $order->order_status == 'shipped' || $order->order_status == 'delivered')
+                                completed
+                                @endif ">
+                                    <span class="is-complete"></span>
+                                    <p>Accepted<br><span>Mon, June 24</span></p>
                                 </div>
                                 <div class="order-tracking 
                                 @if($order->order_status == 'shipped' || $order->order_status == 'delivered')
