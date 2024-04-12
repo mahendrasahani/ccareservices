@@ -27,9 +27,11 @@
                     
                 <button class="form-btn" style="margin-top: 10px;">Submit</button>
                 <p class="cstm_resend"><a href="">Resend OTP</a></p>
-                <p class="cstm_resend"><a href="">Edit Phone Number</a></p>
+                < class="cstm_resend"><a>Edit phone number</a></p>
                 <p class="cstm_resend">Already have an account? <a href="{{route('login')}}">Login here</a></p>
             </form>
+
+
         </div>
     </div>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -46,7 +48,13 @@
             timer: 5000,
             });
         </script>
+
+
         @endif
+
+        <script>
+
+        </script>
 </body>
 </html>
 

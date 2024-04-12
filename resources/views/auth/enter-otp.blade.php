@@ -27,8 +27,20 @@
                     
                 <button class="form-btn" style="margin-top: 10px;">Submit</button>
                 <p class="cstm_resend"><a href="">Resend OTP</a></p>
-                <p class="cstm_resend"><a href="">Edit Phone Number</a></p>
+                <p class="cstm_resend"><a href="" onclick="openVerifyNumber(event)">Edit Phone Number</a></p>
                 <p class="cstm_resend">Already have an account? <a href="{{route('login')}}">Login here</a></p>
+            </form>
+
+             
+            <form method="POST" action="{{ route('otp.edit_phone_number', [$user->id]) }}" class="form" id="verify_number">
+                @csrf
+               
+                <p style="text-align: center;font-size:17px;font-weight: 600;">Verify NUMBER</p> 
+                <div class="form-field"> 
+                    <label for="phone_number">Enter Phone <span>*</span></label>
+                    <input type="number" value="{{$user->phone}}" name="phone" id="phone_number" placeholder="Enter Phone" required>
+                </div>  
+                <button class="form-btn">Submit</button>
             </form>
         </div>
     </div>
@@ -47,6 +59,39 @@
             });
         </script>
         @endif
+
+        <script>
+             document.addEventListener("DOMContentLoaded", function (){
+            const number=document.getElementById("verify_number");
+                  number.style.display="none";
+              });
+
+
+             function openVerifyNumber(e){
+                e.preventDefault();
+            const number=document.getElementById("verify_number");
+            number.style.display="flex";
+
+            const signUp=document.getElementById("signup-form");
+            signUp.style.display="none";
+                  
+             }
+
+
+             function openVerifyOtp(e){
+                e.preventDefault();
+
+                const signUp=document.getElementById("signup-form");
+            signUp.style.display="flex";
+
+            const number=document.getElementById("verify_number");
+            number.style.display="none";
+
+            const numberval=document.getElementById("number_val");
+            const val=document.getElementById("phone_number").value;
+                numberval.innerHTML=val;
+             }
+        </script>
 </body>
 </html>
 

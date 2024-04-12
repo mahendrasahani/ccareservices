@@ -21,6 +21,7 @@ Route::middleware('guest')->group(function () {
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
     Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
     Route::get('otp-verify/{user}', [RegisteredUserController::class, 'verifyOtp'])->name('otp.verify');
+    Route::post('edit-phone-number/{user}', [RegisteredUserController::class, 'editPhoneNumber'])->name('otp.edit_phone_number');
     Route::post('otp-verify-submit/{user_id}', [RegisteredUserController::class, 'verifyOtpSubmit'])->name('otp.verify.submit');
    
 });
