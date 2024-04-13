@@ -67,7 +67,7 @@
                     <td>
                        {{$product->quantity}}
                     </td> 
-                    <td>₹ {{number_format($product->price * $product->quantity, 2)}}/- <br><button class="remover_cart" id="remove_cart_item" data-product_id="{{$product->product_id}}">Delete</button></td>
+                    <td>₹ {{number_format($product->price * $product->quantity, 2)}}/- <br><button class="remover_cart" id="remove_cart_item" data-product_id="{{$product->product_id}}" onclick="deleteProduct()">Delete</button></td>
                   </tr>
                   @endforeach
 
@@ -99,7 +99,7 @@
                         <input type="number" min="0" step="1" class="form-control" name="commisson_amounts_2" value="{{$product['quantity']}}">
                       </div>
                     </td>
-                    <td>₹ {{number_format($product['price'] * $product['quantity'], 2)}}/- <br><button class="remover_cart" id="remove_cart_item" data-product_id="{{$product['product_id']}}">Delete</button></td>
+                    <td>₹ {{number_format($product['price'] * $product['quantity'], 2)}}/- <br><button class="remover_cart" id="remove_cart_item" data-product_id="{{$product['product_id']}}" onclick="deleteProduct()">Delete</button></td>
                   </tr>
                   @endforeach
                   @endif
@@ -207,4 +207,15 @@
 
 
 @endif
+@section('javascript-section')
+<script>
+  function deleteProduct(){
+    setTimeout(function(){
+      window.location.reload();
+    },50);
+  }
+</script>
+@endsection
+
+
 @endsection
