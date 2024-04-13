@@ -30,8 +30,7 @@
                 <p class="cstm_resend"><a href="" onclick="openVerifyNumber(event)">Edit Phone Number</a></p>
                 <p style="text-align:center;" class="cstm_resend">A 4 digit XXXX OTP is send to this number {{$user->phone}}. Please Enter the OTP to proceed </p>
                 <p class="cstm_resend">Already have an account? <a href="{{route('login')}}">Login here</a></p>
-            </form>
-
+            </form> 
 
             <form method="POST" action="{{ route('otp.edit_phone_number', [$user->id]) }}" class="form" id="verify_number">
                 @csrf

@@ -27,6 +27,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::post('edit-phone-number/{user}', [RegisteredUserController::class, 'editPhoneNumber'])->name('otp.edit_phone_number');
     Route::get('otp-re-verify/{user}', [RegisteredUserController::class, 'reVerifyOtp'])->name('otp.re_verify');
     Route::post('otp-re-verify-submit/{user_id}', [RegisteredUserController::class, 'reVerifyOtpSubmit'])->name('otp.re_verify.submit');
     Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
