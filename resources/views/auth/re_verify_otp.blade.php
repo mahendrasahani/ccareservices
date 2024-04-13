@@ -26,7 +26,7 @@
                 </div>
                     
                 <button class="form-btn" style="margin-top: 10px;">Submit</button>
-                <p class="cstm_resend"><a href="">Resend OTP</a></p>
+                <p class="cstm_resend"><a href="" onclick="resendOtp(event)">Resend OTP</a></p>
                 <p class="cstm_resend"><a href="" onclick="openVerifyNumber(event)">Edit Phone Number</a></p>
                 <p style="text-align:center;" class="cstm_resend">A 4 digit XXXX OTP is send to this number {{$user->phone}}. Please Enter the OTP to proceed </p>
                 <p class="cstm_resend">Already have an account? <a href="{{route('login')}}">Login here</a></p>
@@ -94,6 +94,23 @@
             const val=document.getElementById("phone_number").value;
                 numberval.innerHTML=val;
              }
+        </script> 
+
+<script>
+         async function resendOtp(e){
+    const formData = new FormData();
+    formData.append("user_id", {{$user->id}});
+    formData.append("phone", {{$user->phone}});
+
+    e.preventDefault();
+    const apiResponse = await fetch("http://localhost/ccareservices/api/resend-otp", {
+        method: "POST",
+        body: formData
+    });
+    const data = await apiResponse.json();
+    console.log("data", data);
+}
+
         </script>
 </body>
 </html>
