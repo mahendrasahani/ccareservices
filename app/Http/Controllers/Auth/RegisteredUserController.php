@@ -124,5 +124,21 @@ class RegisteredUserController extends Controller
             $response = Http::get('https://api.msg91.com/api/sendhttp.php?authkey=372411AIYHh0nX61f29867P1&sender=COOLCS&mobiles=91'.$request->phone.'&route=transactional &message=Your OTP Verification Code from COOLCARE SERVICES is '.$otp.'. Do not share it with anyone.&DLT_TE_ID=1307164337662843810&response=json&pluginsource=70');
             return redirect()->back();
     }
+
+    public function resendOtp(Request $request){
+        $user_id = $request->user_id;
+        $phone = $request->phone; 
+        $otp = random_int(1000, 9999); 
+
+        User::where('id', $user_id)->update([
+            "phone" => $request->phone,
+            "otp" => $otp,
+            $response = Http::get('https://api.msg91.com/api/sendhttp.php?authkey=372411AIYHh0nX61f29867P1&sender=COOLCS&mobiles=91'.$request->phone.'&route=transactional &message=Your OTP Verification Code from COOLCARE SERVICES is '.$otp.'. Do not share it with anyone.&DLT_TE_ID=1307164337662843810&response=json&pluginsource=70');
+        ]);
+       return response()->json([
+        "status" => 200,
+        "message" => "otp_resend"
+       ]);
+    }
    
 }
