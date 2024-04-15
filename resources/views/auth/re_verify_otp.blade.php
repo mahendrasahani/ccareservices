@@ -35,7 +35,7 @@
             <form method="POST" action="{{ route('otp.edit_phone_number', [$user->id]) }}" class="form" id="verify_number">
                 @csrf
                
-                <p style="text-align: center;font-size:17px;font-weight: 600;">Verify NUMBER</p> 
+                <p style="text-align: center;font-size:17px;font-weight: 600;">Verify Number</p> 
                 <div class="form-field"> 
                     <label for="phone_number">Enter Phone <span>*</span></label>
                     <input type="number" value="{{$user->phone}}" name="phone" id="phone_number" placeholder="Enter Phone" required>
@@ -111,7 +111,8 @@
     title: 'Success!',
     text: 'Otp Send Successfully',
     icon: 'success',
-    confirmButtonText: 'OK'
+    showConfirmButton: false,
+    timer: 1000
 });
 }
 

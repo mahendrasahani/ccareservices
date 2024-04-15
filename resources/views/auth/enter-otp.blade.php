@@ -114,8 +114,10 @@
     title: 'Success!',
     text: 'Otp Send Successfully',
     icon: 'success',
-    confirmButtonText: 'OK'
+    showConfirmButton: false,
+    timer: 1000
 });
+
 }
 
         </script>
