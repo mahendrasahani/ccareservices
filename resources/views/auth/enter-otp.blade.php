@@ -18,7 +18,7 @@
         
             <form method="POST" action="{{ route('otp.verify.submit', [$user->id]) }}" class="form" id="signup-form">
                 @csrf
-                <p>{{$user->phone}}</p>
+               
                 <p style="text-align: center;font-size:17px;font-weight: 600;">Verify OTP</p> 
                 <div class="form-field"> 
                     <label for="verify_otp">Enter OTP <span>*</span></label>
@@ -37,7 +37,7 @@
             <form method="POST" action="{{ route('otp.edit_phone_number', [$user->id]) }}" class="form" id="verify_number">
                 @csrf
                
-                <p style="text-align: center;font-size:17px;font-weight: 600;">Verify NUMBER</p> 
+                <p style="text-align: center;font-size:17px;font-weight: 600;">Verify Number</p> 
                 <div class="form-field"> 
                     <label for="phone_number">Enter Phone <span>*</span></label>
                     <input type="number" value="{{$user->phone}}" name="phone" id="phone_number" placeholder="Enter Phone" required>

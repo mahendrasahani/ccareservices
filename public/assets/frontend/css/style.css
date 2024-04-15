@@ -1974,8 +1974,12 @@ a.btn.btn-warning.animation {
   color: white;
   border: none;
   font-weight:600;
-
 }
+
+.main_verify button:hover{
+  background: linear-gradient(to right, #6b74f4, rgb(138, 171, 201));
+}
+
 
 .logout_btn{
   background: red !important;
