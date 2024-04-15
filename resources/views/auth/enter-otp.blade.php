@@ -24,12 +24,14 @@
                     <label for="verify_otp">Enter OTP <span>*</span></label>
                     <input type="number" name="otp" placeholder="Enter OTP" required>
                 </div>
-                    
                 <button class="form-btn" style="margin-top: 10px;">Submit</button>
                 <p class="cstm_resend"><a onclick="resendOtp(event)">Resend OTP</a></p>
                 <p class="cstm_resend"><a href="" onclick="openVerifyNumber(event)">Edit Phone Number</a></p>
                 <p class="cstm_resend">Already have an account? <a href="{{route('login')}}">Login here</a></p>
+                <p>We have sent a verification link on your email please confirm your verification</p>
+
             </form>
+            
 
              
             <form method="POST" action="{{ route('otp.edit_phone_number', [$user->id]) }}" class="form" id="verify_number">
