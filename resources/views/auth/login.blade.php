@@ -59,7 +59,8 @@
                 <p style="text-align: center;font-size:17px;font-weight: 600;">LOGIN TO COOLCARE</p>
                 <div class="form-field">
                     <label for="text">Email <span>*</span></label>
-                    <input type="email" name="email" placeholder="Enter your email....." required>
+                    <input type="email" name="email" id="email" placeholder="Enter your email....." required value="{{old('email')}}">
+                    <p id="check_account_error" style="color:red;"></p>
                     @error('email')
                       <p style="color:red;">{{$message}}</p>
                     @enderror
@@ -87,6 +88,22 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="{{url('public/assets/frontend/js/bootstrap.bundle.min.js')}}"></script>
      
+    <script>
+      
+    $("#login-form").submit(async function(event){
+        event.preventDefault(); 
+        let email = $("#email").val(); 
+        let response = await fetch("{{route('user.check_account_exist')}}/?email=" + email);
+        let data = await response.json(); // extract JSON from the response
+        if(data.message == "user_not_found"){
+            $("#check_account_error").html('This email id is not registered.')
+        }else{
+            $("#check_account_error").html('')
+            this.submit();
+        } 
+    });
+    
+    </script>
 </body>
 </html>
 

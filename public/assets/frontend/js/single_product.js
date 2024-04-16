@@ -334,8 +334,7 @@ async function updateCart() {
             if (productData.product_status === "already_exist") {
                 document.getElementById('add_to_cart_btn').innerHTML = 'Update Cart';
                 document.getElementById('add_to_cart_btn').classList.remove("add_to_cart_btn_success");
-            }
-            console.log("loggedout")
+            } 
         }
     } catch (error) {
         console.error('Error:', error);
@@ -361,6 +360,7 @@ try {
         } else {
             $('#add_to_cart_btn').prop('disabled', false);
             $("#stock_status").html("In Stock");
+            $('#add_to_cart_btn').html('In Stock');
             $("#stock_status").removeClass("text-danger");
             $("#stock_status").addClass("text-success");
             $("#add_to_cart_btn").removeClass("bg-danger"); 

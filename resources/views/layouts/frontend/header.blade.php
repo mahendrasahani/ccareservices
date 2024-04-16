@@ -122,7 +122,7 @@
                 </div>
         </nav>
                         <div class="top-icon d-flex justify-content-end align-items-center" > 
-                            <a href="#"> 
+                            <!-- <a href="#"> 
                                     <form role="search" method="get" class="search-form" action="">
                                         <label>
 
@@ -131,7 +131,7 @@
                                         </label>
                                         <input type="submit" class="search-submit" value="Search" style="cursor: pointer;"/>
                                     </form>     
-                            </a>
+                            </a> -->
                             <a href="{{route('frontend.show.cart')}}" class="d-flex align-items-center" style="text-decoration:none">
                                 <i class="fa-solid fa-cart-shopping px-2" style="color: #676767;" style="cursor: pointer;"></i><span
                                     class="cart-count" id="cartItemCount">0</span></a>

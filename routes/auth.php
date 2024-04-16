@@ -23,11 +23,12 @@ Route::middleware('guest')->group(function () {
     Route::get('otp-verify/{user}', [RegisteredUserController::class, 'verifyOtp'])->name('otp.verify');
     Route::post('edit-phone-number/{user}', [RegisteredUserController::class, 'editPhoneNumber'])->name('otp.edit_phone_number');
     Route::post('otp-verify-submit/{user_id}', [RegisteredUserController::class, 'verifyOtpSubmit'])->name('otp.verify.submit');
+    Route::get('check-account_exist', [AuthenticatedSessionController::class, 'checkAccount'])->name('user.check_account_exist');
    
 });
 
 Route::middleware('auth')->group(function () {
-    Route::post('edit-phone-number/{user}', [RegisteredUserController::class, 'editPhoneNumber'])->name('otp.edit_phone_number');
+    Route::post('re-edit-phone-number/{user}', [RegisteredUserController::class, 'EditPhoneNumber'])->name('otp.re_edit_phone_number');
     Route::get('otp-re-verify/{user}', [RegisteredUserController::class, 'reVerifyOtp'])->name('otp.re_verify');
     Route::post('otp-re-verify-submit/{user_id}', [RegisteredUserController::class, 'reVerifyOtpSubmit'])->name('otp.re_verify.submit');
     Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');

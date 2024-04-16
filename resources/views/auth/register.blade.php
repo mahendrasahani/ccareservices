@@ -64,19 +64,19 @@
                 <p style="text-align: center;font-size:17px;font-weight: 600;">SIGNUP TO COOLCARE</p>
                 <div class="form-field">
                     <label for="">Full Name <span>*</span></label>
-                    <input type="text" name="name" placeholder="Enter your name....." required>
+                    <input type="text" name="name" placeholder="Enter your name....." required value="{{old('name')}}">
 
                 </div>
                 <div class="form-field">
                     <label for="">Email <span>*</span></label>
-                    <input type="email" name="email" placeholder="Enter your email....." required>
+                    <input type="email" name="email" placeholder="Enter your email....." required value="{{old('email')}}">
                     @error('email')
                     <p style="color:red;">{{$message}}</p>
                     @enderror
                 </div>
                 <div class="form-field">
                     <label for="phone">Phone <span>*</span></label>
-                    <input type="tel" name="phone"   placeholder="Enter your phone....." required>
+                    <input type="tel" name="phone"   placeholder="Enter your phone....." required value="{{old('phone')}}">
                     @error('phone')
                     <p style="color:red;">{{$message}}</p>
                     @enderror

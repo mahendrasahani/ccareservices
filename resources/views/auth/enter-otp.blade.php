@@ -17,8 +17,7 @@
         <div class="form-part"> 
         
             <form method="POST" action="{{ route('otp.verify.submit', [$user->id]) }}" class="form" id="signup-form">
-                @csrf
-                <p>{{$user->phone}}</p>
+                @csrf 
                 <p style="text-align: center;font-size:17px;font-weight: 600;">Verify OTP</p> 
                 <div class="form-field"> 
                     <label for="verify_otp">Enter OTP <span>*</span></label>
@@ -27,8 +26,10 @@
                 <button class="form-btn" style="margin-top: 10px;">Submit</button>
                 <p class="cstm_resend"><a onclick="resendOtp(event)">Resend OTP</a></p>
                 <p class="cstm_resend"><a href="" onclick="openVerifyNumber(event)">Edit Phone Number</a></p>
+                <!-- <p style="text-align:center;" class="cstm_resend">A 4 digit XXXX OTP is send to this number {{$user->phone}}. Please Enter the OTP to proceed </p> -->
+
                 <p class="cstm_resend">Already have an account? <a href="{{route('login')}}">Login here</a></p>
-                <p>We have sent a verification link on your email please confirm your verification</p>
+                <p style="color:red">We have sent a verification link on your email please verify your email account</p>
 
             </form>
             
@@ -37,7 +38,7 @@
             <form method="POST" action="{{ route('otp.edit_phone_number', [$user->id]) }}" class="form" id="verify_number">
                 @csrf
                
-                <p style="text-align: center;font-size:17px;font-weight: 600;">Verify NUMBER</p> 
+                <p style="text-align: center;font-size:17px;font-weight: 600;">Verify Number</p> 
                 <div class="form-field"> 
                     <label for="phone_number">Enter Phone <span>*</span></label>
                     <input type="number" value="{{$user->phone}}" name="phone" id="phone_number" placeholder="Enter Phone" required>
@@ -98,8 +99,8 @@
 
         </script>
 
-        <script>
-         async function resendOtp(e){
+<script>
+    async function resendOtp(e){
     const formData = new FormData();
     formData.append("user_id", {{$user->id}});
     formData.append("phone", {{$user->phone}});
@@ -109,11 +110,9 @@
         method: "POST",
         body: formData
     });
-    const data = await apiResponse.json();
-    console.log("data", data);
-}
-
-        </script>
+    const data = await apiResponse.json(); 
+    }
+</script>
 </body>
 </html>
 

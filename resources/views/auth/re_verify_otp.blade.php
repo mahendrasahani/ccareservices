@@ -32,7 +32,7 @@
                 <p class="cstm_resend">Already have an account? <a href="{{route('login')}}">Login here</a></p>
             </form> 
 
-            <form method="POST" action="{{ route('otp.edit_phone_number', [$user->id]) }}" class="form" id="verify_number">
+            <form method="POST" action="{{ route('otp.re_edit_phone_number', [$user->id]) }}" class="form" id="verify_number">
                 @csrf
                
                 <p style="text-align: center;font-size:17px;font-weight: 600;">Verify NUMBER</p> 

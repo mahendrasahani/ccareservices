@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Backend\AttributeValue;
 use App\Models\Frontend\Cart;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        
         $request->authenticate();
         $request->session()->regenerate();
         $user_type = Auth::user()->user_type;
@@ -85,5 +87,21 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate(); 
         $request->session()->regenerateToken(); 
         return redirect('/');
+    }
+
+    public function checkAccount(Request $request){
+        $email = $request->email;
+        $user = User::where('email', $email)->first();
+        if($user == '' || $user == null){
+            return response()->json([
+                "status" => 200,
+                "message" => "user_not_found"
+            ], 200);
+        }else{
+            return response()->json([
+                "status" => 200,
+                "message" => "user_found"
+            ], 200);
+        }
     }
 }
