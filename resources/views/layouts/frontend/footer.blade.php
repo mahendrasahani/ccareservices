@@ -34,9 +34,7 @@
             <div class="col-md-3">
                 <h6 class="fw-bold  text-white">Extras</h6>
                 <ul class="list-inline hover-animate">
-                    <a href="" class="text-decoration-none text-white ">
-                        <li class="pt-2">Blogs</li>
-                    </a>
+                  
                     <a href="" class="text-decoration-none text-white">
                         <li class="pt-2">My Account</li>
                     </a>
@@ -54,7 +52,7 @@
                         <li class="pt-2"><i class="fa-solid fa-phone"></i>&nbsp +91 7291917070</li>
                     </a>
                     <a href="mailto:testing12@gmail.com" class="text-decoration-none text-white">
-                        <li class="pt-2"><i class="fa-regular fa-envelope"></i>&nbsp testing12@gmail.com</li>
+                        <li class="pt-2"><i class="fa-regular fa-envelope"></i>&nbsp info@coolcareservice.in</li>
                     </a>
                     <a href="mailto:testing12@gmail.com" class="text-decoration-none text-white">
                         <li class="pt-2"><i class="fa-solid fa-location-dot"></i>&nbsp View on map</li>
