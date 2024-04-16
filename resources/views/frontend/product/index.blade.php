@@ -159,7 +159,6 @@
 <script>
     $(document).ready(function () {
         let page_url = $("#page_url").val();
-        console.log(page_url);
         $('.filter').change(function () {
             var checkedValues = [];
             $('.filter:checked').each(function () {

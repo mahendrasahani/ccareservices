@@ -35,7 +35,7 @@
             <form method="POST" action="{{ route('otp.re_edit_phone_number', [$user->id]) }}" class="form" id="verify_number">
                 @csrf
                
-                <p style="text-align: center;font-size:17px;font-weight: 600;">Verify NUMBER</p> 
+                <p style="text-align: center;font-size:17px;font-weight: 600;">Verify Number</p> 
                 <div class="form-field"> 
                     <label for="phone_number">Enter Phone <span>*</span></label>
                     <input type="number" value="{{$user->phone}}" name="phone" id="phone_number" placeholder="Enter Phone" required>
@@ -107,7 +107,13 @@
         body: formData
     });
     const data = await apiResponse.json();
-    console.log("data", data);
+    Swal.fire({
+    title: 'Success!',
+    text: 'Otp Send Successfully',
+    icon: 'success',
+    showConfirmButton: false,
+    timer: 1000
+});
 }
 
         </script>

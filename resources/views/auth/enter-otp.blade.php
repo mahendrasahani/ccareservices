@@ -110,9 +110,18 @@
         method: "POST",
         body: formData
     });
-    const data = await apiResponse.json(); 
-    }
-</script>
+    const data = await apiResponse.json();
+    Swal.fire({
+    title: 'Success!',
+    text: 'Otp Send Successfully',
+    icon: 'success',
+    showConfirmButton: false,
+    timer: 1000
+});
+
+}
+
+        </script>
 </body>
 </html>
 
