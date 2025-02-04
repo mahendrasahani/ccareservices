@@ -31,34 +31,40 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Email <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                             <input type="email" id="vendor_email" name="vendor_email" class="form-control" placeholder="Vendor Email" required>
+                                             <input type="email" id="vendor_email" name="vendor_email" class="form-control" placeholder="Vendor Email">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Phone no.<span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                             <input type="tel" id="vendor_phone" name="vendor_phone" class="form-control" placeholder="Your Phone Number" required>
+                                             <input type="tel" id="vendor_phone" name="vendor_phone" class="form-control" placeholder="Your Phone Number">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Business Name <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" name="business_name" placeholder="Business Name" id="business_name" required> 
+                                            <input type="text" class="form-control" name="business_name" placeholder="Business Name" id="business_name"> 
                                         </div>
                                     </div> 
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Address<span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <input type="text" id="vendor_address" name="vendor_address" class="form-control" placeholder="Your Address" required> 
+                                            <input type="text" id="vendor_address" name="vendor_address" class="form-control" placeholder="Your Address"> 
                                         </div>
                                     </div> 
                                     <div class="form-group row">
+                                        <label class="col-md-3 col-from-label">GST<span class="text-danger">*</span></label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="vendor_gst" name="vendor_gst" class="form-control" placeholder="GST"> 
+                                        </div>
+                                    </div> 
+                                    <!-- <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Profile Picture<span class="text-danger">*</span></label>
                                         <div class="col-md-9">
                                             <input type="file" id="vendor_image" class="form-control" name="vendor_image">
                                             <div id="vendor_img_preview"></div>  
                                         </div> 
-                                    </div> 
+                                    </div>  -->
                                 </div> 
                                 <div class="container">
                                 <div class="row">

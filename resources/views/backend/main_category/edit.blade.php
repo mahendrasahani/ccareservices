@@ -59,12 +59,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="form-group row">
+
+
+                                    <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Slug</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" name="slug" value="{{$main_cat_detail->slug}}" placeholder="Slug" required>
                                         </div>
-                                    </div> --}}
+                                    </div> 
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Meta Title</label>
                                         <div class="col-md-9">

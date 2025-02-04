@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card" style="border: 1px solid #dadada;">
-                        <div class="d-flex align-items-center" style="border-bottom: 1px solid #ececec;">
+                        <div class="d-flex align-items-center" style="border-bottom: 1px solid #ececec;height:53px">
                             <div class="col text-center text-md-left">
                                 <h5 class="mb-md-0 h6">All Vendors</h5>
                             </div>
@@ -35,7 +35,7 @@
                                         onclick="deleteSelection()"> Delete selection</a>
                                 </div>
                             </div>
-                            <form action="" method="GET" id="filter_form">
+                            <!-- <form action="" method="GET" id="filter_form">
                             <div class="col-md-2 ml-auto">
                                 <div class="form-group mt-2 mb-2">  
                                     <select class="form-control form-control-sm" name="sort_by" id="sort_by">
@@ -45,13 +45,13 @@
                                     </select>
                                 </div>
                             </div>
-                            </form>
-                            <!-- <div class="col-md-2">
+                            </form> -->
+                            <div class="col-md-2">
                                 <div class="input-group">
                                     <input type="text" class="form-control form-control-sm" id="search" name="search"
-                                        placeholder="Type &amp; Enter">
+                                        placeholder="Search Name or Email">
                                 </div>
-                            </div> -->
+                            </div>  
                         </div>
                         @php if(isset($_GET['page'])){$page_number = $_GET['page'];}else{ $page_number = 1;} $count = $page_number * 10 - 9;  @endphp 
                         <div class="card-body">
@@ -193,6 +193,30 @@
         });
     }); 
 </script>
+
+
+<script>
+    $(document).ready(function (){
+        $(document).on('keydown', '#search', function (){
+            const search_val = $(this).val();
+            if (search_val === ''){
+                $('#my_pagination').show();
+            } else{ 
+                $.ajax({
+                    url: "{{route('backend.vendor.search')}}",
+                    method: "GET",
+                    data: { 'search_val': search_val },
+                    success: function (result){ 
+                        $("#main_table_body").html(result);
+                        $('#my_pagination').hide();
+                    }
+                });
+            }
+        });
+    }); 
+</script>
+
+
 @endsection
  
 @endsection

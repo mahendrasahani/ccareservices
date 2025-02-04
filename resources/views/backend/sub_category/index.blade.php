@@ -20,7 +20,7 @@
                                     <div class="col text-center text-md-left">
                                         <h4 class="mb-md-0 h5 pt-3">Sub Categories</h4></div>
         
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group mb-0">
                                             <input type="text" class="form-control form-control-sm" id="search" name="search"
                                                 placeholder="Search by category name">

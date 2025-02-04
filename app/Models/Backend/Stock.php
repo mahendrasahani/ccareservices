@@ -38,6 +38,8 @@ class Stock extends Model
         'purchase_amount',
         'invoice_no',
         'stock_staus',
+        'tax_name',
+        'tax_rate',
         'status', 
     ];
 
@@ -46,6 +48,8 @@ class Stock extends Model
         // 'quantity' => 'array',
         'month' => 'array',
         'price' => 'array',
+        'tax_name' => 'array',
+        'tax_rate' => 'array',
     ];
 
 public function getProduct(){

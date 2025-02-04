@@ -56,10 +56,8 @@
         <div class="image-part">
              <img src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}" alt="">
         </div>
-        <div class="form-part" >
-             
-
-            <form method="POST" action="{{ route('register') }}" class="form" id="signup-form">
+        <div class="form-part" > 
+            <form method="POST" action="{{ route('register') }}" class="form" id="signup-form" enctype="multipart/form-data">
                 @csrf
                 <p style="text-align: center;font-size:17px;font-weight: 600;">SIGNUP TO COOLCARE</p>
                 <div class="form-field">
@@ -81,6 +79,8 @@
                     <p style="color:red;">{{$message}}</p>
                     @enderror
                 </div>
+
+                {{--
                 <div class="form-field"> 
                     <label for="">Password <span>*</span></label>
                     <input type="password" name="password" placeholder="Create your password....." required>
@@ -92,6 +92,26 @@
                     <label for="">Confirm Password <span>*</span></label>
                     <input type="password" name="password_confirmation" placeholder="Confirm your password....." required>
                 </div>
+
+                --}}
+                  <div class="form-field">
+                    <label for="aadhar_front" class="form-about">Upload Aadhar Card Front:</label>
+                    <input type="file" id="aadhar_front" name="aadhar_front"  required/> 
+                  </div>
+            
+       
+                  <div class="form-field">
+                    <label for="aadhar_back" class="form-about">Upload Aadhar Card Back:</label>
+                    <input type="file" id="aadhar_back" name="aadhar_back" required/> 
+                  </div>
+
+                  <div class="form-field">
+                    <label for="security_cheque" class="form-about">Upload Security Cheque:</label>
+                    <input type="file" id="security_cheque" name="security_cheque" required/> 
+                  </div>
+                 
+
+
                 @error('password_confirmation')
                 <p>{{$message}}</p>
                 @enderror

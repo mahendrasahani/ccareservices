@@ -52,7 +52,7 @@
                                                 </div>
                                                 <div class="border border-dotted rounded py-2 px-3 mr-3 ml-0">
                                                     <div class="h3 mb-0 fw-700">{{$time_sold ?? '0'}}</div>
-                                                    <div class="opacity-60 fs-12">Times sold</div>
+                                                    <div class="opacity-60 fs-12">Times Rent</div>
                                                 </div>
                                                 <!-- <div class="border border-dotted rounded py-2 px-3 mr-3 ml-0">
                                                     <div class="h3 mb-0 fw-700">₹

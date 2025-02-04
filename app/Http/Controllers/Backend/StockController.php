@@ -7,6 +7,7 @@ use App\Models\Backend\Attribute;
 use App\Models\Backend\AttributeValue;
 use App\Models\Backend\Product;
 use App\Models\Backend\Stock;
+use App\Models\Backend\Tax;
 use App\Models\Backend\Vendor;
 use Illuminate\Http\Request;
 
@@ -26,10 +27,12 @@ class StockController extends Controller
         $variant_type = Attribute::where('status', 1)->get();
         $variant_value = AttributeValue::where('status', 1)->get();
         $vendor_list = Vendor::get();
-        return view('backend.stock.create', compact('product_list', 'variant_type', 'variant_value', 'vendor_list'));
+        $taxes = Tax::where('status', 1)->get();
+        return view('backend.stock.create', compact('product_list', 'variant_type', 'variant_value', 'vendor_list', 'taxes'));
     }
 
     public function store(Request $request){
+        // return $request->all(); 
         $validated = $request->validate([
             "product" => 'required',
             "select_variant_type" => 'required',
@@ -84,6 +87,8 @@ class StockController extends Controller
                 "stock_staus" => $stock_status,
                 "status" => 1,
             ]);
+               
+
         }catch(\Exception $e){
             return "Something went wrong";
         } 
@@ -94,12 +99,9 @@ class StockController extends Controller
     {
         $stock = Stock::where('id', $id)->first();
         $product_list = Product::get();
-        $variant_type = Attribute::where('status', 1)->get();
-
-        $variant_value = AttributeValue::where('attribute_id', $stock->attribute_id)->where('status', 1)->get();
-
+        $variant_type = Attribute::where('status', 1)->get(); 
+        $variant_value = AttributeValue::where('attribute_id', $stock->attribute_id)->where('status', 1)->get(); 
         $vendor_list = Vendor::get();
-
         return view('backend.stock.edit', compact('stock', 'product_list', 'variant_type', 'variant_value', 'vendor_list'));
     }
 
@@ -176,6 +178,51 @@ class StockController extends Controller
             ]);
         }
     }
+
+
+// ------------------------------------------------------------------------------------------
+    public function search(Request $request){
+        $search_val = $request->search_val;
+        if($search_val != ''){
+            $search_result = Stock::whereHas('getProduct', function ($query) use ($search_val) {
+                $query->where('product_name', 'like', '%'.$search_val.'%');
+            })->get();
+        }else{
+            $search_result = Stock::orderBy('id', 'desc')->paginate(10);
+        }
+ 
+        $html = '';
+        $count = 1;
+        if($search_result->count() == 0){
+            $html .= '<tr>';
+            $html .= '<td class="text-center" style="display: table-cell;" colspan="4">No Result Found</td>';
+            $html .= '</td>';
+            $html .= '</tr>';
+        }else{
+            foreach($search_result as $index => $search_data){
+                 $html .= '';
+                $html .= '<tr id="row_id_'.$search_data->id.'">';
+                $html .= '<td style="display: table-cell;">'.($index+1).'</td>';
+                $html .= '<td style="display: table-cell;">'.$search_data->getProduct->product_name.'</td>';
+                $html .= '<td style="display: table-cell;">'.$search_data->getAttr->name.'</td>';
+                $html .= '<td style="display: table-cell;">'.$search_data->getAttrValue->name.'</td>';
+                $html .= '<td>'.$search_data->quantity.'</td> ';
+                $html .= '<td class="text-left footable-last-visible ">';
+                $html .= '<div class="d-flex justify-content-center ">';
+                $html .= '<a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2" href="'.route('backend.stock.edit', [$search_data->id]).'" title="Edit">';
+                $html .= '<i class="fa-regular fa-pen-to-square text-white"></i>';
+                $html .= '</a>';
+                $html .= '<button value="'.$search_data->id.'" class="btn btn-icon btn-sm delete_ico" id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>';
+                $html .= '</div>';
+                $html .= '</td>';
+                $html .= '</tr>';
+            }
+        }
+        return $html;
+     } 
+// ------------------------------------------------------------------------------------------
+
+
 
 
 }

@@ -33,7 +33,8 @@ class SubCategoryController extends Controller
         $ordering_number = $request->ordering_number;
         $meta_title = $request->meta_title;
         $slug = $request->slug;
-        $meta_description = $request->meta_description;  
+        $meta_description = $request->meta_description; 
+        $page_description = $request->page_description;   
         $filtering_attributes = collect($request->filtering_attributes)->map(function ($value) {
             return intval(trim($value, '"'));
         })->all(); 
@@ -46,6 +47,7 @@ class SubCategoryController extends Controller
             'meta_title' => $meta_title,
             'meta_description' => $meta_description,
             'filtering_attribute' => $filtering_attributes, 
+            'page_description' => $page_description,
             'status' => 1
         ]); 
         $newSubCategoryId = $newSubCategory->id;    
@@ -90,6 +92,8 @@ class SubCategoryController extends Controller
         $ordering_number = $request->ordering_number; 
         $meta_title = $request->meta_title;
         $meta_description = $request->meta_description;  
+        $slug = $request->slug;  
+        $page_description = $request->page_description;  
         $filtering_attributes = collect($request->filtering_attributes)->map(function ($value) {
             return intval(trim($value, '"'));
         })->all(); 
@@ -101,6 +105,8 @@ class SubCategoryController extends Controller
             'meta_title' => $meta_title, 
             'meta_description' => $meta_description,
             'filtering_attribute' => $filtering_attributes, 
+            'page_description' => $page_description,
+            'slug' => $slug, 
             'status' => 1
         ]);
         

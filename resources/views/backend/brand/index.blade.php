@@ -12,8 +12,6 @@
                         <div class="col-md-8">
                             <div class="card" style="border: 1px solid #e5e5e5;">
                                 <div class="card-header d-flex justify-content-end" style="border-bottom: 1px solid #e5e5e5;">
-                                 
-    
                                 <div class="">
                                     <div class="input-group enter">
                                         <input type="text" class="form-control form-control-sm" id="search" name="search"
@@ -27,9 +25,8 @@
                                         <tr class="footable-header">
                                             <th class="col-xl-2">#</th>
                                             <th>Name</th>
-                                            <th>Logo
-                                            </th>
-                                            <th class="text-right">Options</th>
+                                            <!-- <th>Logo</th> -->
+                                            <th class="">Options</th>
                                         </tr>
                                     </thead>
                                     @php if(isset($_GET['page'])){$page_number = $_GET['page'];}else{ $page_number = 1;} $count = $page_number * 10 - 9;  @endphp 
@@ -38,8 +35,7 @@
                                         <tr>
                                             <td class="" style="display: table-cell;">{{$count++}}</td>
                                             <td style="display: table-cell;">{{$brand->name}}</td>
-                                            <td style="display: table-cell; text-align: center;"><div class="brand"><img src="{{url($brand->logo)}}" ></div></td>
-                                            <td class="">
+                                             <td class="">
                                                 <a href="{{route('backend.brand.edit', [$brand->id])}}"><i class="fa-regular fa-pen-to-square text-white edit_icon"></i></a>
                                                 <button value="{{$brand->id}}" class="btn btn-sm delete_ico delete_button"><i class="fa fa-trash-o"></i></button>
                                                 <!-- <a href="javascript:void(0)" class="btn btn-sm delete_ico delete_button"><i class="fa-solid fa-trash-can"></i></a> -->
@@ -71,7 +67,7 @@
                                                 <input type="text" placeholder="Enter brand name" id="name" name="name" class="form-control" required>
                                        
                                             </div>
-                                            <div class="form-group mb-3">
+                                            <!-- <div class="form-group mb-3">
                                                 <label for="name">
                                                 Logo
                                                 <small>(120x80)</small>
@@ -80,7 +76,7 @@
                                                     <input type="file" class="form-control" name="logo" class="selected-files" onchange="displaySelectedImages(event)" required >
                                                 </div>  
                                                 <div id="imagePreview"></div>
-                                            </div>
+                                            </div> -->
                                             <div class="form-group mb-3 text-right">
                                                 <button type="submit" class="btn btn-primary add-button" style="background-color: #f5a100; border: none;">Save</button>
                                             </div>

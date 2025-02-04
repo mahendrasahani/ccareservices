@@ -16,16 +16,16 @@ class BrandController extends Controller{
 
     public function store(Request $request){
         $name = $request->name; 
-        $fileStorePath = 'assets/backend/upload/brand_logo';  
-        $fileFromRequest = $request->file('logo');   // geting file form request
-        $originalFileName = $fileFromRequest->getClientOriginalName();  // gettign original file name 
-        $fileNameNew = $name.'_brand_logo_'.time().'.'.$fileFromRequest->getClientOriginalExtension();  // creating new file name 
-        $fileFromRequest->move(public_path($fileStorePath), $fileNameNew);   // uploadin file in project folder
+        // $fileStorePath = 'assets/backend/upload/brand_logo';  
+        // $fileFromRequest = $request->file('logo');   // geting file form request
+        // $originalFileName = $fileFromRequest->getClientOriginalName();  // gettign original file name 
+        // $fileNameNew = $name.'_brand_logo_'.time().'.'.$fileFromRequest->getClientOriginalExtension();  // creating new file name 
+        // $fileFromRequest->move(public_path($fileStorePath), $fileNameNew);   // uploadin file in project folder
        
         
         Brand::create([
             'name' => $name,
-            'logo' => 'public/'.$fileStorePath.'/'.$fileNameNew,
+            // 'logo' => 'public/'.$fileStorePath.'/'.$fileNameNew,
             'status' => 1,
         ]);
         return redirect()->back()->with('success', "Brand has been added successfully"); 

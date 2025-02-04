@@ -20,7 +20,8 @@
                 <nav aria-label="breadcrumb" style="margin: 0 auto;">
                     <ol class="breadcrumb d-flex justify-content-center">
                         <li class="breadcrumb-item"><a href="#" class="text-white">Home</a></li>
-                        <li class="breadcrumb-item active pt-1" aria-current="page" style="color: #01b7e0; font-size: 14px;">Categories</li>
+                        <li class="breadcrumb-item active pt-1" aria-current="page" style="color: #01b7e0; font-size: 14px;">{{$main_category_name}}</li>
+                        <li class="breadcrumb-item active pt-1" aria-current="page" style="color: #01b7e0; font-size: 14px;">{{$sub_cat_name}}</li>
                     </ol>
                 </nav>
             </div>
@@ -54,7 +55,7 @@
                             <i class="fa-solid fa-caret-down mx-2"></i> 
                                 <ul>
                                 @foreach($main->subCategory as $sub)
-                                    <li class="mt-2 mb-2"><a href="{{route('frontend.product.product_list', [Str::slug($main->name), Str::slug($sub->name)])}}" class="text-decoration-none text-dark">{{$sub->name}}</a> </li> 
+                                    <li class="mt-2 mb-2"><a href="{{route('frontend.product.product_list', [Str::slug($main->slug), Str::slug($sub->slug)])}}" class="text-decoration-none text-dark">{{$sub->name}}</a> </li> 
                                     @endforeach
                                 </ul>
                                 @endif
@@ -89,11 +90,12 @@
                 <div class="row">
                     
                     <input type="hidden" value="{{$page_url}}" id="page_url">
+
                     @foreach($product_list as $product)
                     <div class="col-md-3 all laptop" class="content" id="{{$product->slug}}">
                         <div class="card ">
                             <div class="cart_img_wrap mt-2">
-                                <a href="single-product.html"><img
+                                <a href="{{route('frontend.product.single_product', [$product->slug])}}"><img
                                         src="{{$product->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->product_images[0])}}"></a>
                             </div>
                             <div class="card-body">
@@ -108,11 +110,12 @@
                                 @endif 
                                 <p class="" style="font-size: 11px; color: gray;">{!! Str::limit($product->product_description, 40) !!}</p>
                                 <hr> 
-                                <a href="{{route('frontend.product.single_product', [$product->slug])}}" class="btn btn-warning animation search-cate">View More</a>
+                                <a href="{{route('frontend.product.single_product', [$product->slug])}}" class="btn btn-warning animation search-cate">Rent Now</a>
                             </div>
                         </div>
                     </div>
                     @endforeach 
+                    
                 </div>
                 <div class="col-md-12" class="my_pagination">
                     {{$product_list->links('pagination::bootstrap-5')}}
@@ -121,35 +124,7 @@
             </div>
             
             <div class="col-md-12 mt-5 p-tag">
-                <p>Although renting a laptop may be unfamiliar to us, successful businesses are no strangers to making
-                    this wise option in the first place. With the advent of work-from-home culture and online schooling
-                    during the epidemic, it is undeniable that firms are struggling from the surge in demand for laptops
-                    and other portable devices. Everyone, of course, wants to invest in cutting-edge technology to
-                    attain peak performance, but what should you do if your budget is a little restricted? It's possible
-                    that renting a laptop for your team or simply renting IT equipment, in general, will solve your
-                    problem. For your convenience, we've compiled a summary of some of the benefits of this popular
-                    option to assist you in making an informed decision.</p>
-
-                <p>Purchasing laptops or any other IT equipment is not a simple decision - you must first establish
-                    budgets, then examine the different brands available on the market, and lastly, determine what
-                    connects with your needs and what is currently trendy! After all, purchasing information technology
-                    gear is a significant financial commitment in most circumstances. A laptop rental is an easy answer
-                    in this situation, as it provides greater flexibility and room for error. If you plan on renting a
-                    laptop from Cool Care Services, you should be aware of the following:</p>
-
-                <ul class="list-inline">
-                    <li>- There are no up-front fees associated with your rent.</li>
-                    <li>- Get the same high-quality results at a low cost with our simple, cheap pricing!</li>
-                    <li>- Renting a laptop eliminates the need for ongoing maintenance.</li>
-                    <li>- Preventing technological obsolescence is essential.</li>
-                    <li>- You can customize it.</li>
-                </ul>
-                <p>We are well-versed in the subject of paradigm shifts. It is nearly hard to perform any work without
-                    using a laptop computer. It has evolved into a social and professional prerequisite that will assist
-                    you in remaining on par with the rest of the globe in your endeavors. Renting a laptop is a pleasant
-                    alternative to purchasing a computer and avoiding dealing with out-of-date equipment. Why not start
-                    with the finest to get you started on your laptop rental adventure? Cool Care Services may provide
-                    you with a rented laptop.</p>
+                {!! $sub_cat_row->page_description !!}
             </div>
         </div>
     </div>

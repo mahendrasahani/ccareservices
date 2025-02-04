@@ -52,21 +52,20 @@
                                             <td>  
                                                 @if($charges->id != 1)
                                                 <a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2" href="{{route('backend.shipping_charge.edit', [$charges->id])}}" title="Edit"> <i class="fa-regular fa-pen-to-square text-white"></i></a>
-                                                <button value="{{$charges->id}}" class="btn btn-icon btn-sm delete_ico " id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
+                                                <!-- <button value="{{$charges->id}}" class="btn btn-icon btn-sm delete_ico " id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button> -->
                                                 @endif
                                             </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div>
-                           {{--     {{$brand_list->links('pagination::bootstrap-5')}} --}}
+                                <div> 
                                 </div>
                             </div>
                             </div>
                             
                         </div>
-                        <div class="col-md-4"> 
+                        <!-- <div class="col-md-4"> 
                                 <div class="card" style="border: 1px solid #e5e5e5;">
                                     <div class="card-header" style="border-bottom: 1px solid #e5e5e5;">
                                         <h5 class="mb-0">Add New Shipping Method</h5>
@@ -88,7 +87,7 @@
                                         </form>
                                     </div>
                                 </div> 
-                        </div>
+                        </div> -->
                     </div> 
                  </div>
             </div> 
@@ -122,10 +121,38 @@
             timer: 5000,
             });
         </script> 
-        @endif
-
+        @endif 
         <script>
-              // delete category reques
+ 
+            $(document).on('change', '#shipping_charge_status', function (){
+                var $toggleButton = $(this);
+                var status = $toggleButton.prop('checked') ? '1' : '0';
+                var id = $(this).data('id');
+                $.ajax({
+                    url: "{{route('backend.shipping_charge.change_status')}}",
+                    data: { 'shipping_charge_status': status, 'shipping_charge_id': id },
+                    type: "GET",
+                    success: function (response){
+                        if (response.status == 200){
+                            window.location.reload();
+                            // Swal.fire({
+                            //     title: "Success!",
+                            //     text: "Status successfully updated.",
+                            //     icon: "success"
+                            // });
+                        }
+                    }
+                });
+            });
+ 
+
+
+  
+</script>
+ 
+<!-- <script>
+
+ // delete category reques
     $(document).on('click', '#delete_btn', function (){
       var id = $(this).val();
       Swal.fire({
@@ -157,9 +184,6 @@
             }
         });
     }); 
-</script>
- 
-<script>
     $(document).on('change', '#shipping_charge_status', function (){
         var $toggleButton = $(this);
         var status = $toggleButton.prop('checked') ? '1' : '0';
@@ -179,7 +203,7 @@
             }
         });
     });
-</script>
+</script> -->
 
         @endsection
 @endsection

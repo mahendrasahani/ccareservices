@@ -165,12 +165,31 @@
                                          <input type="number" id="purchase_amount" name="purchase_amount" class="form-control" required>
                                     </div> 
                                 </div> 
+
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="invoice_number">Invoice Number</label>
                                     <div class="col-md-9">
                                          <input type="text" id="invoice_number" name="invoice_number" class="form-control" required>
                                     </div> 
                                 </div> 
+
+                                <!-- <div class="form-group row">
+                                    <label class="col-md-3 col-form-label" for="invoice_number">Select Tax</label>
+                                    <div class="col-md-9">
+                                        <div class="row">
+
+                                        @if(count($taxes) > 0)
+                                        @foreach($taxes as $tax)
+                                        <div class="col-md-3">
+                                        <label  class="col-form-label" for="tax">{{$tax->tax_name}} {{$tax->tax_rate}}%</label>
+                                         <input type="checkbox" name="tax[]" class="mx-1" value="{{$tax->id}}">
+                                        </div> 
+                                        @endforeach
+                                        @endif
+
+                                        </div>
+                                    </div> 
+                                </div>  -->
                             </div>
                         </div>
             <!-------------------------------- inventory code (end) ------------------------------>

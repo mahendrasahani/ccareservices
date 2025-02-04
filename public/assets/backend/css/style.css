@@ -10718,7 +10718,9 @@ Input Style
   Input Size
 ******************************************/
 .form-control {
-  min-height: 40px; }
+  min-height: 40px;
+  border-radius: 0.25rem;
+}
 
 .form-control-sm {
   min-height: 36px; }
@@ -10824,7 +10826,7 @@ input[type="checkbox"]:after {
   height: 1.2rem;
   margin-top: -3px;
   margin-left: -3px;
-  border: 1px solid #EEEEEE;
+  border: 1px solid grey;
   border-radius: 0px;
   background: #fff;
   line-height: 1.3; }

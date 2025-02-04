@@ -59,7 +59,7 @@
                                             </div> 
                                         </div>
                                     </div>
-                                    {{-- <div class="form-group row">
+                                <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Slug</label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" name="slug" value="{{$sub_cat_detail->slug}}" placeholder="Slug" required>
@@ -67,7 +67,7 @@
                                             <span id="productNameError" class="formFiedllerror">{{$message}}</span>
                                             @enderror
                                         </div>
-                                    </div> --}}
+                                    </div>  
 
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label">Meta Title</label>
@@ -103,9 +103,17 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Page Description</label>
+                                        <div class="col-md-9">
+                                             <textarea id="editor" type="editor" rows="4" cols="100" placeholder="Message" style="padding: 10px; width:100%;" name="page_description"></textarea>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group mb-0 text-right">
                                         <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>                                                        
+                                    </div> 
+
                                 </form>
                             </div>
                         </div>
@@ -219,6 +227,16 @@
                  
                 });
             }); 
-        </script>
+    </script>
+
+       
+<script>
+    let myEditor; 
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            myEditor = editor; 
+        });
+</script>
 @endsection
 @endsection

@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -11,17 +10,19 @@
     <link rel="stylesheet" href="{{url('public/assets/frontend/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="{{url('public/assets/frontend/font/MarlinGeo-ExtraBold.ttf')}}">
     <meta name="base-url" content="http://localhost/ccareservices">
+
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+    <!-- <meta name="base-url" content="http://192.168.1.12/ccareservices"> -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Head title -->
     <title>Home Appliances On Rent In Gurgaon- Appliance Rental Services</title>
-    
-
     <style>
-         
-
         .search-field {
             background-color: transparent;
             background-image: url(https://wp-themes.com/wp-content/themes/twentythirteen/images/search-icon.png);
@@ -38,7 +39,6 @@
             width: 0px;
             cursor: pointer;
         }
-
         .search-field:focus { 
             cursor: text;
             outline: 0;
@@ -46,14 +46,12 @@
             color: #000;
             border: 1px solid #000;
         }
-
         .search-form .search-submit {
             display: none;
         }
     </style>
 
-    <meta name="description"
-        content="Cool Care Services offers Home appliances on Rent in Gurgaon with affordable Rental AMC Services. Quote Now for Electronics items for rental!" />
+    <meta name="description" content="Cool Care Services offers Home appliances on Rent in Gurgaon with affordable Rental AMC Services. Quote Now for Electronics items for rental!" />
 </head>
 
 <body>
@@ -75,99 +73,111 @@
     </section>
     <!-- Top-Header end -->
     <!-- secound-Header -->
-    <header class="header" id="section1">
-        <div class="container">
-            <div class="row"> 
-                    <div class="col-md-2" style="align-self: center;">
-                        <div class="logo">
-                            <a href=""><img src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}" ></a>
-                        </div>  
-                    </div>
-                    <div class="col-md-10 text-end" id="media-logo">
-                        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <div class="row">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="col-md-12">
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav" id="header-ul">
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="/">Home</a>
-                                </li>
+<header class="header" id="section1">
+    <div class="container">
+        <div class="row rowposition" >
 
-                                @foreach($main_categories as $main)
- 
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link {{count($main->subCategory) > 0 ? 'dropdown-toggle' : ''}}" href="{{route('frontend.product.product_list', [Str::slug($main->name)])}}" role="button" aria-expanded="false">
-                                        {{$main->name}}
-                                    </a>
-                                    @if(count($main->subCategory) > 0)
-                                        <ul class="dropdown-menu">
-                                            @foreach($main->subCategory as $sub)
-                                            <li><a class="dropdown-item" href="{{route('frontend.product.product_list', [Str::slug($main->name), Str::slug($sub->name)])}}">{{$sub->name}}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </li>
-                                @endforeach
-                             
- 
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-        </nav>
-                        <div class="top-icon d-flex justify-content-end align-items-center" > 
-                            <!-- <a href="#"> 
-                                    <form role="search" method="get" class="search-form" action="">
-                                        <label>
-
-                                            <input type="search" class="search-field" placeholder="Search …" value=""
-                                                name="s" title="Search for:"/>
-                                        </label>
-                                        <input type="submit" class="search-submit" value="Search" style="cursor: pointer;"/>
-                                    </form>     
-                            </a> -->
-                            <a href="{{route('frontend.show.cart')}}" class="d-flex align-items-center" style="text-decoration:none">
-                                <i class="fa-solid fa-cart-shopping px-2" style="color: #676767;" style="cursor: pointer;"></i><span
-                                    class="cart-count" id="cartItemCount">0</span></a>
-                            <li class="dropdown header_user" id="dropdownUser1" data-bs-toggle="dropdown"
-                                aria-expanded="false" style="cursor: pointer;">
-                                @guest
-                                <i class="fa-regular fa-user px-2 " style="color: #676767;align-self: center;"></i>
-                                @else
-                                <i class="fa-regular fa-user px-2" style="color: #676767;align-self: center;"></i> <p>{{Auth::user()->name}}</p>
-                                @endguest
-                            </li>
-                            <ul class="dropdown-menu dropdown-menu-end login-drop" id=""
-                                aria-labelledby="dropdownUser1">
-                                @guest
-                                <li><a class="dropdown-item fw-bold" href="{{route('login')}}"
-                                        style=" color: #01316b;">Login</a></li>
-                                @else
-                                @if(Auth::user()->user_type == 1)
-                                <li><a class="dropdown-item fw-bold" href="{{route('backend.admin.dashboard.view')}}" style=" color: #01316b;" target="_blank">Admin Dashboard</a></li>
-                                <li>
-                                @endif
-                                <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}"
-                                        style=" color: #01316b;">Dashboard</a></li>
-                                <li> 
-                                    <form action="{{route('logout')}}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="p-2  dropdown-item fw-bold"
-                                            style=" font-size: 13px;color: #01316b;"> Logout</button>
-                                    </form>
-                                </li>
-                                @endguest
-                            </ul>
-                        </div>
-                    </div> 
+            <div class="col-lg-2 col-6" style="align-self: center;">
+                <div class="logo">
+                    <a href=""><img src="{{url('public/assets/frontend/images/logo/coolcarelogo.jpg')}}" ></a>
+                </div>  
             </div>
+
+            <div class="col-lg-2 col-6 d-flex justify-content-end align-items-center positionCart">
+                 
+                <div class="top-icon d-flex justify-content-end align-items-center" > 
+                    <!-- <a href="#"> 
+                            <form role="search" method="get" class="search-form" action="">
+                                <label>
+
+                                    <input type="search" class="search-field" placeholder="Search …" value=""
+                                        name="s" title="Search for:"/>
+                                </label>
+                                <input type="submit" class="search-submit" value="Search" style="cursor: pointer;"/>
+                            </form>     
+                    </a> -->
+                   
+                    <a href="{{route('frontend.show.cart')}}" class="d-flex align-items-center" style="text-decoration:none">
+                        <i class="fa-solid fa-cart-shopping px-2" style="color: #676767;" style="cursor: pointer;"></i><span
+                            class="cart-count" id="cartItemCount">0</span></a>
+                    <li class="dropdown header_user" id="dropdownUser1" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="cursor: pointer;">
+                        @guest
+                        <i class="fa-regular fa-user px-2 " style="color: #676767;align-self: center;"></i>
+                        @else
+                        <i class="fa-regular fa-user px-2" style="color: #676767;align-self: center;"></i>
+                         <!-- <p>{{Auth::user()->name}}</p> -->
+                        @endguest
+                    </li>
+                    <ul class="dropdown-menu dropdown-menu-end login-drop" id=""
+                        aria-labelledby="dropdownUser1">
+                        @guest
+                        <li><a class="dropdown-item fw-bold" href="{{route('login')}}"
+                                style=" color: #01316b;">Login</a></li>
+                        @else
+                        @if(Auth::user()->user_type == 1)
+                        <li><a class="dropdown-item fw-bold" href="{{route('backend.admin.dashboard.view')}}" style=" color: #01316b;" target="_blank">Admin Dashboard</a></li>
+                        <li>
+                        @endif
+                        <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.dashboar.view')}}"
+                                style=" color: #01316b;">Dashboard</a></li>
+                        <li> 
+                        <li><a class="dropdown-item fw-bold" href="{{route('frontend.user.manage_profile.view')}}"
+                                style=" color: #01316b;">Profile</a></li>
+                        <li> 
+                            <form action="{{route('logout')}}" method="POST">
+                                @csrf
+                                <button type="submit" class="p-2  dropdown-item fw-bold"
+                                    style=" font-size: 13px;color: #01316b;"> Logout</button>
+                            </form>
+                        </li>
+                        @endguest
+                    </ul>
+                </div>
+                
+            </div>
+
+            <div class="col-lg-8 col-md-12 text-end menubarBtn" id="media-logo">
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container">
+                        <div class="row">
+                            <span class="navbar-toggler toggleBTN"  data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation" style="cursor:pointer">
+                                <i class="ri-menu-2-line"></i>
+                            </span>
+                            
+                            <div class="col-md-12">
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav dropMenu" id="header-ul">
+                                        <li class="nav-item">
+                                            <a class="nav-link" aria-current="page" href="/">Home</a>
+                                        </li> 
+                                        @foreach($main_categories as $main) 
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link {{count($main->subCategory) > 0 ? 'dropdown-toggle' : ''}}" href="{{route('frontend.product.product_list', [Str::slug($main->slug)])}}" role="button" aria-expanded="false">
+                                                {{$main->name}}
+                                            </a>
+                                            @if(count($main->subCategory) > 0)
+                                                <ul class="dropdown-menu">
+                                                    @foreach($main->subCategory as $sub)
+                                                    <li><a class="dropdown-item" href="{{route('frontend.product.product_list', [Str::slug($main->slug), Str::slug($sub->slug)])}}">{{$sub->name}}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
+                                        @endforeach
+                                    
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                </nav>
+            </div> 
+
         </div>
+    </div>
         
 
         <!-- secound-Header end -->

@@ -36,6 +36,9 @@ class Product extends Model
         'date_of_purchase',
         'purchase_amount',
         'invoice_number', 
+        'tax_name', 
+        'tax_rate',  
+        "tax_id"
     ];
 
     protected $casts = [
@@ -43,7 +46,7 @@ class Product extends Model
     'main_category' => 'array',
     'sub_category' => 'array',
     'attribute_name' => 'array',
-    'attribute_value' => 'array'
+    'attribute_value' => 'array', 
     ];
 
     public function getBrand(){

@@ -229,9 +229,7 @@ input.btn.px-4.btn-outline-dark:hover{
                 <div class="container">
                     <div class="row">
                         
-        <!--**********************************
-            form strat Edit Profile Page
-        ***********************************-->
+      
                         <div class="col-md-8">
                             <div class="card" style=" border: 1px solid #dbdbdb;">
                                 <div class="card-header" style=" border-bottom: 1px solid #dbdbdb;">

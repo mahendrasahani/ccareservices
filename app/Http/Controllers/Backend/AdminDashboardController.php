@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\Order;
 use App\Models\Backend\Product;
 use App\Models\Backend\ProductReturn;
+use App\Models\Backend\RecentActivity;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,11 +20,15 @@ class AdminDashboardController extends Controller
         $total_product = Product::count(); 
         $latest_order = Order::orderBy('id', 'desc')->paginate(5);
         $return_order = ProductReturn::orderBy('id', 'desc')->get();
+        $todays_recent_activity = RecentActivity::whereDate('created_at', now()->toDateString())->count();
 
         return view('backend.dashboard.index', compact('total_customers', 'total_order', 'total_sales', 'total_product',
-    'latest_order', 'return_order'));
+        'latest_order', 'return_order', 'todays_recent_activity'));
     }
 
+    public function adminLogin(){
+        return view('auth.admin_login');
+    }
 
     public function editAdminProfile(){
         $profile = User::where('id', Auth::user()->id)->first();

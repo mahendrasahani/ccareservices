@@ -10,8 +10,8 @@
         <h2 class=" text-white pb-2 pt-5 text-center">Cart</h2>
         <nav aria-label="breadcrumb" style="margin: 0 auto;">
           <ol class="breadcrumb d-flex justify-content-center">
-            <li class="breadcrumb-item"><a href="#" class="text-white">Home</a></li>
-            <li class="breadcrumb-item active pt-1" aria-current="page" style="color: #01b7e0; font-size: 14px;">Cart
+              <li class="breadcrumb-item"><a href="#" class="text-white">Home</a></li>
+              <li class="breadcrumb-item active pt-1" aria-current="page" style="color: #01b7e0; font-size: 14px;">Cart
             </li>
           </ol>
         </nav>

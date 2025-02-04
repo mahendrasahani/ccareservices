@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\BillingAddress;
 use App\Models\Backend\ShippingAddress;
 use App\Models\Backend\ShippingCharge;
+use App\Models\Backend\Tax;
 use App\Models\Frontend\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,14 +15,15 @@ use Illuminate\Support\Facades\Session;
 class CheckoutController extends Controller
 {
     public function checkoutPageView(){
-         $cart_item = Cart::where('user_id', Auth::user()->id)->get();
-
+         $cart_item = Cart::where('user_id', operator: Auth::user()->id)->get();
          if(count($cart_item) != 0){
         $shipping_address = ShippingAddress::where('user_id', Auth::user()->id)->first();
         $billing_address = BillingAddress::where('user_id', Auth::user()->id)->first(); 
         $paid_shipping_charges = ShippingCharge::where('status', 1)->where('id', '!=', 1)->get();  
-        $free_shipping_charges = ShippingCharge::where('status', 1)->where('id', 1)->first();   
-        return view('frontend.checkout', compact('shipping_address', 'billing_address', 'free_shipping_charges', 'paid_shipping_charges'));
+        $free_shipping_charges = ShippingCharge::where('status', 1)->where('id', 1)->first();  
+        $all_taxes = Tax::where('status', 1)->get();
+        return view('frontend.checkout', compact('shipping_address', 'billing_address', 'free_shipping_charges',
+        'paid_shipping_charges', 'all_taxes'));
          }else{
             return redirect('/cart');
          }
@@ -43,7 +45,7 @@ class CheckoutController extends Controller
        $b_address = $request->b_address;
        $b_city = $request->b_city;
        $b_zip_code = $request->b_zip_code;
-       $b_country = $request->b_country; 
+    //    $b_country = $request->b_country; 
        $shipping_detail = [
         'user_id' => Auth::user()->id,
             'name' => $s_name,
@@ -56,13 +58,13 @@ class CheckoutController extends Controller
        ]; 
        $billing_detail = [
         'user_id' => Auth::user()->id,
-        'name' => $b_name,
-        'email' => $b_email,
-        'phone' => $b_phone,
-        'address' => $b_address,
-        'city' => $b_city,
-        'zip_code' => $b_zip_code,
-        'country' => $b_country,
+        'name' => $b_name ?? $s_name,
+        'email' => $b_email ?? $s_email,
+        'phone' => $b_phone ?? $s_phone,
+        'address' => $b_address ?? $s_address,
+        'city' => $b_city ?? $s_city,
+        'zip_code' => $b_zip_code ?? $s_zip_code,
+        // 'country' => $b_country,
        ]; 
 
        $shipping_address = ShippingAddress::where('user_id', Auth::user()->id)->first();

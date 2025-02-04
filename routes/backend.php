@@ -11,15 +11,22 @@ use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductReturnController;
+use App\Http\Controllers\Backend\RecentActivityController;
 use App\Http\Controllers\Backend\ReturnController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\ShippingChargeController;
 use App\Http\Controllers\Backend\ShippingMethodCntroller;
 use App\Http\Controllers\Backend\StockController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\TaxController;
 use App\Http\Controllers\Backend\VendorController;
 use App\Models\Backend\MainCategory;
 use App\Models\Backend\Review;
+
+
+Route::middleware('guest')->group(function () {
+    Route::get('admin', [AdminDashboardController::class, 'adminLogin'])->name('backend.admin_login');
+});
 
 // -------------------------After Admin login (start) ------------------------------------------------------------
 Route::middleware(['auth', 'web', 'admin_check'])->group(function () { 
@@ -104,6 +111,8 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/vendor/edit/{id}', [VendorController::class, 'edit'])->name('backend.vendor.edit');
     Route::post('/admin/vendor/update/{id}', [VendorController::class, 'update'])->name('backend.vendor.update');
     Route::get('/admin/vendor/destroy', [VendorController::class, 'destroy'])->name('backend.vendor.destroy');
+    Route::get('/admin/vendor/search', [VendorController::class, 'search'])->name('backend.vendor.search');
+
 
     Route::get('/admin/stock', [StockController::class, 'index'])->name('backend.stock.index');
     Route::get('/admin/stock/create', [StockController::class, 'create'])->name('backend.stock.create');
@@ -112,6 +121,7 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::post('/admin/stock/update/{id}', [StockController::class, 'update'])->name('backend.stock.update');
     Route::get('/admin/stock/variant-value-list', [StockController::class, 'getVariantValueList'])->name('backend.stock.get_variant_value_list');
     Route::get('/admin/stock/destroy', [StockController::class, 'destroy'])->name('backend.stock.destroy');
+    Route::get('/admin/stock/search', [StockController::class, 'search'])->name('backend.stock.search');
     
 
 
@@ -119,6 +129,8 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/order/edit/{id}', [OrderController::class, 'edit'])->name('backend.order.edit');
     Route::post('/admin/order/update/{id}', [OrderController::class, 'update'])->name('backend.order.update');
     Route::get('/admin/order/destroy', [OrderController::class, 'destroy'])->name('backend.order.destroy');
+    Route::get('/admin/order/search', [OrderController::class, 'search'])->name('backend.product.search');
+    Route::get('/admin/order/send-invoice-to-customer/{order_id}', [OrderController::class, 'sendInvoiceToCustomer'])->name('backend.order.send_invoice_to_customer');
 
 
     Route::get('/admin/invoice/{id}', [InvoiceController::class, 'index'])->name('backend.invoice.index');
@@ -129,9 +141,14 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::post('/admin/delivery-boy/store', [DeliveryBoyController::class, 'store'])->name('backend.delivery_boy.store');
     Route::get('/admin/delivery-boy/edit/{id}', [DeliveryBoyController::class, 'edit'])->name('backend.delivery_boy.edit');
     Route::post('/admin/delivery-boy/update/{id}', [DeliveryBoyController::class, 'update'])->name('backend.delivery_boy.update');
+    Route::get('/admin/delivery-boy/search', [DeliveryBoyController::class, 'search'])->name('backend.delivery_boy.search');
+
 
     Route::get('/admin/customers', [CustomerController::class, 'index'])->name('backend.customer.index'); 
+    Route::get('/admin/customers/create', [CustomerController::class, 'create'])->name('backend.customer.create'); 
+    Route::post('/admin/customers/store', [CustomerController::class, 'store'])->name('backend.customer.store'); 
     Route::get('/admin/customers/view/{id}', [CustomerController::class, 'view'])->name('backend.customer.view'); 
+    Route::get('/admin/customers/search', [CustomerController::class, 'search'])->name('backend.customer.search');
 
 
     Route::get('/admin/payment-method/', [PaymentController::class, 'index'])->name('backend.payment_method.index'); 
@@ -140,11 +157,25 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/review', [ReviewController::class, 'index'])->name('backend.review.index');
 
      Route::get('/admin/return', [ProductReturnController::class, 'index'])->name('backend.return.index');
-    Route::get('/admin/return/edit/{id}', [ProductReturnController::class, 'edit'])->name('backend.return.edit');
-    Route::get('/admin/return/view', [ProductReturnController::class, 'view'])->name('backend.return.view');
-    Route::get('/admin/return/create', [ProductReturnController::class, 'create'])->name('backend.return.create');
-    Route::post('/admin/return/store', [ProductReturnController::class, 'store'])->name('backend.return.store');
-    Route::post('/admin/return/update/{id}', [ProductReturnController::class, 'update'])->name('backend.return.update');
+     Route::get('/admin/return/edit/{id}', [ProductReturnController::class, 'edit'])->name('backend.return.edit');
+     Route::get('/admin/return/view', [ProductReturnController::class, 'view'])->name('backend.return.view');
+     Route::get('/admin/return/create', [ProductReturnController::class, 'create'])->name('backend.return.create');
+     Route::post('/admin/return/store', [ProductReturnController::class, 'store'])->name('backend.return.store');
+     Route::post('/admin/return/update/{id}', [ProductReturnController::class, 'update'])->name('backend.return.update');
+    Route::get('/admin/return/search', [ProductReturnController::class, 'search'])->name('backend.return.search');
+
+     
+     
+     Route::get('/admin/tax', [TaxController::class, 'index'])->name('backend.tax'); 
+     Route::get('/admin/tax/create', [TaxController::class, 'create'])->name('backend.tax.create');
+     Route::post('/admin/tax/store', [TaxController::class, 'store'])->name('backend.tax.store');
+     Route::get('/admin/tax/edit/{id}', [TaxController::class, 'edit'])->name('backend.tax.edit');
+     Route::post('/admin/tax/update/{id}', [TaxController::class, 'update'])->name('backend.tax.update');
+     Route::get('/admin/tax/change-status', [TaxController::class, 'changeStatus'])->name('backend.tax.change_status');
+
+
+     Route::get('/admin/recent-activity', [RecentActivityController::class, 'index'])->name('backend.recent_activity');
+    Route::get('/admin/recent-activity/search', [RecentActivityController::class, 'search'])->name('backend.recent_activity.search');
 
 
 });

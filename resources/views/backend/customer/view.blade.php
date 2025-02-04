@@ -48,6 +48,15 @@
                                             <strong>Number of items in cart :</strong>
                                             <span class="ml-2">{{number_format($customer->get_cart_item_count)}}</span>
                                         </p>
+                                        @if($customer->aadhar_front != '')
+                                        <a class="text-muted" href="{{url($customer->aadhar_front)}}" target="_blank">View Adhar Front</a><br>
+                                        @endif
+                                        @if($customer->aadhar_front != '')
+                                        <a class="text-muted" href="{{url($customer->aadhar_back)}}" target="_blank">View Adhar Back</a><br>
+                                        @endif
+                                        @if($customer->security_check != '')
+                                        <a class="text-muted" href="{{url($customer->security_check)}}" target="_blank">View Security Check</a><br>
+                                        @endif
                                         <!-- <p class="text-muted">
                                             <strong>Number of items in wishlist :</strong>
                                             <span class="ml-2">10</span>

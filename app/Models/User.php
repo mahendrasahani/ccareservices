@@ -7,13 +7,14 @@ use App\Models\Backend\Order;
 use App\Models\Backend\Review;
 use App\Models\Backend\ShippingAddress;
 use App\Models\Frontend\Cart;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\CustomResetPasswordNotification;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -42,6 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile',
         'otp_verify_status',
         'otp',
+        'security_check',
     ];
 
     /**
@@ -64,6 +66,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomResetPasswordNotification($token));
+    }
 
     public function getShippingAddress(){
         return $this->hasOne(ShippingAddress::class, 'user_id');

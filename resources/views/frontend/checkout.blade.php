@@ -57,17 +57,16 @@
               </div>
               <div class="mb-3">
                 <label for="zipCode" class="form-label">Zip Code<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="shipping_zip_code" name="s_zip_code" placeholder="Enter Zip Code" value="{{$shipping_address->zip_code ?? Auth::user()->postal_code}}" required>
+                <input type="text" class="form-control" id="shipping_zip_code" name="s_zip_code" placeholder="Enter Zip Code" value="{{$shipping_address->zip_code ?? Auth::user()->postal_code}}">
                 <p class="input_error" id="error_shipping_zip_code"></p>
               </div> 
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <label for="region" class="form-label">Country / Region<span class="text-danger">*</span></label>
                 <select class="form-control aiz-selectpicker" name="s_country" id="s_country">
                   <option value="India" selected>India</option> 
                 </select> 
                 <p class="input_error" id="error_shipping_country"></p>
-              </div>  
-           
+              </div>   --> 
           </div>
         </div>
         <br>
@@ -80,8 +79,7 @@
             </div>
             <h3 class="h5" style="margin-left: 13px;">Billing address is different?</h3>
           </div>
-          <div class="card-body" id="content" style="display: none;">
-          
+          <div class="card-body" id="content" style="display: none;"> 
               <div class="mb-3">
                 <label for="forName">Full Name<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" placeholder="Enter your full name" name="b_name" value="{{$billing_address->name ?? ''}}"  id="billing_full_name">
@@ -112,14 +110,13 @@
                 <input type="text" class="form-control" id="billing_zip_code" name="billing_zip_code" placeholder="Enter Zip Code" value="{{$billing_address->zip_code ?? ''}}">
                 <p class="input_error" id="error_billing_zip_code"></p>
               </div> 
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <label for="region" class="form-label">Country / Region <span class="text-danger">*</span></label>
                 <select class="form-control aiz-selectpicker" name="b_country" id="billing_country">
                   <option value="India" selected>India</option> 
                 </select> 
                 <p class="input_error" id="error_billing_country"></p>
-              </div> 
-           
+              </div>  --> 
           </div>
         </div>
       </div>
@@ -134,6 +131,7 @@
                 <thead>
                   <tr>
                     <th>Product</th>
+                    <th>Tax</th>
                     <th style="text-align: end">Subtotal</th>
                   </tr>
                 </thead>
@@ -143,6 +141,12 @@
 
               <table class="table aiz-table mb-0 footable footable-1 breakpoint-lg">
                 <tbody>
+                  <!-- @foreach($all_taxes as $tax)
+                  <tr>
+                    <td>{{$tax->tax_name}} {{$tax->tax_rate}}%</td>
+                    <td style="text-align: end" id="{{$tax->tax_name}}">₹  </td>
+                  </tr>
+                  @endforeach -->
                   <tr>
                     <td>Subtotal</td>
                     <td style="text-align: end" id="sub_total">₹</td>
@@ -152,14 +156,14 @@
                     <td style="text-align: end">
                       @if($free_shipping_charges != '')
                       <div class="form_check_checkout">
-                        <input type="radio" class="form-check-input" id="shipping_charge_{{$free_shipping_charges->id}}" name="shipping_rate" data-shipping-id="{{$free_shipping_charges->id}}" value="{{$free_shipping_charges->amount}}" required>
+                        <input type="radio" class="form-check-input" id="shipping_charge_{{$free_shipping_charges->id}}" name="shipping_rate" data-shipping-id="{{$free_shipping_charges->id}}" value="{{$free_shipping_charges->amount}}" required checked>
                         <label class="form-check-label mx-2" for="radio2">{{$free_shipping_charges->name}}</label>
                       </div>
                       @endif
                       @if($paid_shipping_charges != '')
                       @foreach($paid_shipping_charges as $paid_charge)
                       <div class="form_check_checkout">
-                        <input type="radio" class="form-check-input" id="shipping_charge_{{$paid_charge->id}}" name="shipping_rate" value="{{$paid_charge->amount}}" data-shipping-id="{{$paid_charge->id}}" required> 
+                        <input type="radio" class="form-check-input" id="shipping_charge_{{$paid_charge->id}}" name="shipping_rate" value="{{$paid_charge->amount}}" data-shipping-id="{{$paid_charge->id}}" required checked> 
                         <label class="form-check-label mx-2" for="radio1">{{$paid_charge->name}} {{number_format($paid_charge->amount, 2)}}/-</label>
                       </div>
                       @endforeach

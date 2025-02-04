@@ -11,17 +11,25 @@
                 <div class="col-md-4">
                     <h1 class="h4">All Customers</h1>
                 </div>
+                <div class="col-md-8 text-md-right">
+                    <a href="{{route('backend.customer.create')}}" class="btn btn-primary" style="background-color: #f5a100; border: none; border-radius: 50em;">
+                        <span>Add New User</span>
+                    </a>
+                </div>
                  
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card" style="border: 1px solid #dadada;">
-                        <div class="d-flex align-items-center" style="border-bottom: 1px solid #ececec;">
+                        <div class="d-flex align-items-center" style="border-bottom: 1px solid #ececec;height:53px">
                             <div class="col text-center text-md-left">
                                 <h5 class="mb-md-0 h6">All Customers</h5>
                             </div>
-                              
-                             
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-sm" id="search" name="search" placeholder="Search name or email">
+                                </div>
+                                </div>  
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered mb-0">
@@ -45,7 +53,7 @@
                                     <td>{{$sn++}}</td>
                                        <td>{{$customers->name}}</td>
                                        <td>{{$customers->email}}</td>
-                                       <td>{{$customers->getShippingAddress->phone ?? ''}}</td>
+                                       <td>{{$customers->phone ?? ''}}</td>
                                        <td>{{$customers->get_user_order_count}}</td>
                                        <td>{{$customers->getShippingAddress->address ?? ''}}</td>
                                        <td>
@@ -69,11 +77,11 @@
     </div>
 </div> 
 @section('javascript-section')
-@if(Session::has('stock_added'))
+@if(Session::has('created'))
         <script> 
             Swal.fire({
             title: "Success!",
-            text: "{{Session::get('stock_added')}}",
+            text: "{{Session::get('created')}}",
             icon: "success",
             timer: 5000,
             });
@@ -121,6 +129,29 @@
             }
         }); 
     });
+</script>
+
+
+<script>
+    $(document).ready(function (){
+        $(document).on('keydown', '#search', function (){
+            const search_val = $(this).val();
+            if (search_val === ''){
+                $('#my_pagination').show();
+            } else{ 
+                $.ajax({
+                    url: "{{route('backend.customer.search')}}",
+                    method: "GET",
+                    data: { 'search_val': search_val },
+                    success: function (result){ 
+                        console.log(result);
+                        $("#main_table_body").html(result);
+                        $('#my_pagination').hide();
+                    }
+                });
+            }
+        });
+    }); 
 </script>
  
 @endsection

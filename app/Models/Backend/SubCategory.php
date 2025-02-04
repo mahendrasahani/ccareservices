@@ -18,6 +18,7 @@ class SubCategory extends Model
         'meta_title',
         'meta_description',
         'meta_image',
+        'page_description',
         'filtering_attribute',
         'status'
     ];

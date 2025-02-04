@@ -200,24 +200,41 @@ function removeMainOption(divSection)
 
  
 
+// function calculate() {
+//     var amount = parseFloat(document.getElementById('amount').value);
+//     var vatRate = parseFloat(document.getElementById('vatRate').value);
+//     var taxRate = parseFloat(document.getElementById('taxRate').value);
+//     if (isNaN(amount) || isNaN(vatRate) || isNaN(taxRate)) {
+//         alert('Please enter valid numeric values.');
+//         return;
+//     }
+//     var vatAmount = (amount * vatRate) / 100;
+//     var taxAmount = (amount * taxRate) / 100;
+//     var totalAmount = amount + vatAmount + taxAmount;
+//     var resultHTML = '<h4>Result:</h4>' +
+//         '<p>VAT Amount: ₹' + vatAmount.toFixed(2) + '</p>' +
+//         '<p>Tax Amount: ₹ ' + taxAmount.toFixed(2) + '</p>' +
+//         '<p>Total Amount (including VAT and Tax): ₹ ' + totalAmount.toFixed(2) + '</p>';
+//     document.getElementById('result').innerHTML = resultHTML;
+// }
+
+
 function calculate() {
+    // Get the amount entered by the user
     var amount = parseFloat(document.getElementById('amount').value);
-    var vatRate = parseFloat(document.getElementById('vatRate').value);
-    var taxRate = parseFloat(document.getElementById('taxRate').value);
-    if (isNaN(amount) || isNaN(vatRate) || isNaN(taxRate)) {
-        alert('Please enter valid numeric values.');
+
+    if (isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid amount");
         return;
     }
-    var vatAmount = (amount * vatRate) / 100;
-    var taxAmount = (amount * taxRate) / 100;
-    var totalAmount = amount + vatAmount + taxAmount;
-    var resultHTML = '<h4>Result:</h4>' +
-        '<p>VAT Amount: ₹' + vatAmount.toFixed(2) + '</p>' +
-        '<p>Tax Amount: ₹ ' + taxAmount.toFixed(2) + '</p>' +
-        '<p>Total Amount (including VAT and Tax): ₹ ' + totalAmount.toFixed(2) + '</p>';
-    document.getElementById('result').innerHTML = resultHTML;
-}
 
+    // Loop through all the tax rate fields and calculate the tax
+    document.querySelectorAll('.tax_rate').forEach(function (input) {
+        var taxRate = parseFloat(input.nextElementSibling.value); // Get tax rate from hidden input
+        var taxAmount = (amount * taxRate) / 100;  // Calculate the tax
+        input.value = taxAmount.toFixed(2);        // Set the calculated tax in the input
+    });
+}
 
 
 function checkAllBox(main, sub) {

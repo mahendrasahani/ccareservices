@@ -212,5 +212,52 @@ class ProductReturnController extends Controller
         } 
 
     }
+
+
+    // ------------------------------------------------------------------------------------------
+    public function search(Request $request){
+        $search_val = $request->search_val;
+        if($search_val != ''){
+            $search_result = ProductReturn::where('product_name', 'like', '%'.$search_val.'%')
+            ->orWhere('customer_name', 'like', '%'.$search_val.'%')
+            ->orWhere('order_number', 'like', '%'.$search_val.'%')
+            ->get();
+        }else{
+            $search_result = ProductReturn::orderBy('id', 'desc')->paginate(10);
+        }
+ 
+        $html = '';
+        $count = 1;
+        if($search_result->count() == 0){
+            $html .= '<tr>';
+            $html .= '<td class="text-center" style="display: table-cell;" colspan="4">No Result Found</td>';
+            $html .= '</td>';
+            $html .= '</tr>';
+        }else{
+            foreach($search_result as $index => $search_data){
+                $html .= '';
+                $html .= '<tr id="row_id_1">';
+                $html .= '<td style="display: table-cell;">';
+                $html .= '<div class=" text-truncate-2">';
+                $html .= '<p class="font-s mt-3">'.$search_data->order_number.'</p>';
+                $html .= '</div>';
+                $html .= '</td>';
+                $html .= '<td style="display: table-cell;">'.$search_data->customer_name.'</td>';
+                $html .= '<td style="display: table-cell;">'.$search_data->product_name.'</td>  ';
+                $html .= '<td style="display: table-cell;">'.\Carbon\Carbon::parse($search_data->created_at)->format('d M, Y').'</td>';
+                $html .= '<td style="display: table-cell;">';
+                $html .= '<div class="d-flex justify-content-center">';
+                $html .= '<a class="btn btn-soft-info btn-icon btn-circle btn-sm eye-2" href="'.route('backend.return.edit', [$search_data->id]).'" title="Edit">';
+                $html .= '<i class="fa-regular fa-pen-to-square text-white"></i>';
+                $html .= '</a>  ';
+                $html .= '</div>';
+                $html .= '</td> ';
+                $html .= '</tr>';
+            }
+        }
+        return $html;
+     } 
+// ------------------------------------------------------------------------------------------
+
  
 }

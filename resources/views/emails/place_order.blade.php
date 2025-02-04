@@ -71,7 +71,7 @@
 @endforeach
 <tr style="height: 21px;">
 <td style="width: 499.812px; height: 21px; text-align: left; border:1px solid #b3adad;" colspan="2" >Payment method:</td>
-<td style="width: 371.188px; height: 21px; text-align: right; border:1px solid #b3adad;">Cash on delivery</td>
+<td style="width: 371.188px; height: 21px; text-align: right; border:1px solid #b3adad;">{{$place_order_data['payment_method'] == 1 ? "Cash On Delivery":"Online"}} </td>
 </tr>
 <tr style="height: 21px;">
 <td style="width: 499.812px; height: 21px; text-align: left; border:1px solid #b3adad;" colspan="2">Total:</td>

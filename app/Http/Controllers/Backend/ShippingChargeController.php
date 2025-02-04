@@ -27,9 +27,40 @@ class ShippingChargeController extends Controller
     public function changeStatus(Request $request){
         $shipping_charge_id = $request->shipping_charge_id;
         $status = $request->shipping_charge_status; 
-        ShippingCharge::where('id', $shipping_charge_id)->update([
-            "status" => $status
-        ]); 
+
+        if($shipping_charge_id == 1 && $status == 0){
+            //make 2 enable and make 1 disable
+            ShippingCharge::where('id', 1)->update([
+                "status" => 0
+            ]); 
+            ShippingCharge::where('id', 2)->update([
+                "status" => 1
+            ]); 
+        }else if($shipping_charge_id == 1 && $status == 1){
+            // make 2 disable and make 1 enable
+            ShippingCharge::where('id', 1)->update([
+                "status" => 1
+            ]); 
+            ShippingCharge::where('id', 2)->update([
+                "status" => 0
+            ]); 
+        }else if($shipping_charge_id == 2 && $status == 0){
+            // make 1 enable and make 2 disable
+            ShippingCharge::where('id', 1)->update([
+                "status" => 1
+            ]); 
+            ShippingCharge::where('id', 2)->update([
+                "status" => 0
+            ]); 
+        }else if($shipping_charge_id == 2 && $status == 1){
+            // make 2 enable and make 1 disable
+            ShippingCharge::where('id', 1)->update([
+                "status" => 0
+            ]); 
+            ShippingCharge::where('id', 2)->update([
+                "status" => 1
+            ]); 
+        } 
         return response()->json([
             'status' => 200,
             'message' => "success"

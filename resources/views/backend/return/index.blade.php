@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card" style="border: 1px solid #dadada;">
-                        <div class="d-flex align-items-center" style="border-bottom: 1px solid #ececec;">
+                        <div class="d-flex align-items-center" style="border-bottom: 1px solid #ececec;height:53px">
                             <div class="col text-center text-md-left">
                                 <h5 class="mb-md-0 h6">Return Product List</h5>
                             </div>
@@ -31,7 +31,7 @@
                                         onclick="deleteSelection()"> Delete selection</a>
                                 </div>
                             </div>
-                            <form id="filter_form" method="GET" action="">
+                            <!-- <form id="filter_form" method="GET" action="">
                             <div class="col-md-2 ml-auto">
                                 <div class="form-group mt-2 mb-2">
                                     <select class="form-control form-control-sm" id="sort_by" name="sort_by">
@@ -41,13 +41,13 @@
                                     </select>
                                 </div>
                             </div>
-                            </form>
-                            <!-- <div class="col-md-2">
+                            </form> -->
+                            <div class="col-md-4">
                                 <div class="input-group">
                                     <input type="text" class="form-control form-control-sm" id="search" name="search"
-                                        placeholder="Type &amp; Enter">
+                                        placeholder="Enter order id, customer name, product name">
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered mb-0">
@@ -109,5 +109,28 @@
     }); 
 </script>
  
+
+<script>
+    $(document).ready(function (){
+        $(document).on('keydown', '#search', function (){
+            const search_val = $(this).val();
+            if (search_val === ''){
+                $('#my_pagination').show();
+            } else{ 
+                $.ajax({
+                    url: "{{route('backend.return.search')}}",
+                    method: "GET",
+                    data: { 'search_val': search_val },
+                    success: function (result){ 
+                        $("#main_table_body").html(result);
+                        $('#my_pagination').hide();
+                    }
+                });
+            }
+        });
+    }); 
+</script>
+
+
 @endsection
 @endsection

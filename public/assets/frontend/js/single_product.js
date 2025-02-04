@@ -360,7 +360,7 @@ try {
         } else {
             $('#add_to_cart_btn').prop('disabled', false);
             $("#stock_status").html("In Stock");
-            $('#add_to_cart_btn').html('In Stock');
+            $('#add_to_cart_btn').html('Add to cart');
             $("#stock_status").removeClass("text-danger");
             $("#stock_status").addClass("text-success");
             $("#add_to_cart_btn").removeClass("bg-danger"); 

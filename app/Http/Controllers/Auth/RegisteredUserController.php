@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\OtpMail;
+use App\Models\Backend\AttributeValue;
+use App\Models\Frontend\Cart;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -15,6 +17,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Session;
 
 class RegisteredUserController extends Controller
 {
@@ -36,7 +39,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'phone' => ['required', 'max:10', 'unique:'.User::class],
         ]); 
         $otp = random_int(1000, 9999); 
@@ -51,12 +54,43 @@ class RegisteredUserController extends Controller
     $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
-        'password' => Hash::make($request->password),
+        'password' => Hash::make($request->email),
         'user_type' => 2,
         'otp_verify_status' => 0,
         'phone' => $request->phone,
         'otp' => $otp, 
     ]);
+
+    if($request->hasFile('aadhar_front')){
+        $directory = "assets/both/images/aadhar_front";
+        $aadhar_front = $request->aadhar_front;
+        $aadhar_front_name = time().'.'.$aadhar_front->getClientOriginalExtension();
+        $aadhar_front->move(public_path($directory), $aadhar_front_name);
+        User::where('id', $user->id)->update([
+            "aadhar_front" => "public/".$directory.'/'.$aadhar_front_name,
+        ]);
+      }
+      if($request->hasFile('aadhar_back')){
+        $directory = "assets/both/images/aadhar_back";
+        $aadhar_back = $request->aadhar_back;
+        $aadhar_back_name = time().'.'.$aadhar_back->getClientOriginalExtension();
+        $aadhar_back->move(public_path($directory), $aadhar_back_name);
+        User::where('id', $user->id)->update([
+            "aadhar_back" => "public/".$directory.'/'.$aadhar_back_name,
+        ]);
+      }
+
+      if($request->hasFile('security_cheque')){
+        $directory = "assets/both/images/security_cheque";
+        $security_cheque = $request->security_cheque;
+        $security_cheque_name = time().'.'.$security_cheque->getClientOriginalExtension();
+        $security_cheque->move(public_path($directory), $security_cheque_name);
+        User::where('id', $user->id)->update([
+            "security_check" => "public/".$directory.'/'.$security_cheque_name,
+        ]);
+      }
+
+
     return redirect()->route('otp.verify', ['user' => $user->id]);
     }catch (\Exception $e){
         return $e->getMessage();
@@ -81,8 +115,50 @@ class RegisteredUserController extends Controller
                 "otp_verify_status" => 1,
                 "otp" => null
             ]);
-        event(new Registered($user)); 
+        // event(new Registered($user)); 
         Auth::login($user); 
+        $token = Auth::user()->createToken('Personal Access Token')->plainTextToken;
+        $ipAddress = $request->ip();
+        if ($ipAddress === '::1') { 
+            $ipAddress = '122.162.146.135'; 
+        }
+
+        $location_data = Http::get('http://ip-api.com/json/122.162.146.135');
+        $cart = session()->get('cart'); 
+        if($cart != '') {
+            foreach($cart as $index => $item) {
+                $product = Cart::where('product_id', $cart[$index]['product_id'])->where('user_id', Auth::user()->id)->first();
+                $attribute = AttributeValue::where('id', $cart[$index]['option_value_id'])->first()->attribute_id;
+                if($product){
+                    Cart::where('user_id', Auth::user()->id)->where('product_id', $cart[$index]['product_id'])->update([
+                        'user_id' => Auth::user()->id,
+                        'product_id' => $cart[$index]['product_id'],
+                        'quantity' => $cart[$index]['quantity'],  
+                        'delivery_date' => $cart[$index]['delivery_date'],
+                        'option_id' => $attribute,
+                        'option_value_id' => $cart[$index]['option_value_id'],
+                        'month' => $cart[$index]['month'],
+                        'price' => $cart[$index]['price'],
+                        'stock_id' => $cart[$index]['stock_id'],
+                        'status' => 1
+                    ]); 
+                }else{
+                Cart::create([
+                    'user_id' => Auth::user()->id,
+                    'product_id' => $cart[$index]['product_id'],
+                    'quantity' => $cart[$index]['quantity'],  
+                    'delivery_date' => $cart[$index]['delivery_date'],
+                    'option_id' => $attribute,
+                    'option_value_id' => $cart[$index]['option_value_id'],
+                    'month' => $cart[$index]['month'],
+                    'price' => $cart[$index]['price'],
+                    'stock_id' => $cart[$index]['stock_id'],
+                    'status' => 1
+                ]); 
+            }
+            }
+        }  
+        Session::forget('cart');
         return redirect(RouteServiceProvider::HOME);
         }else{
             return redirect()->route('otp.verify', [$user->id])->with('incorrect_otp', "Otp not match");

@@ -83,7 +83,7 @@
                             <div class="card-body">
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="signinSrEmail">Product
-                                        Images<small>(600x600)</small></label>
+                                        Images<small>(500x500)</small></label>
                                     <div class="col-md-9">
                                         <div class="input-group" data-toggle="" data-type="image" data-multiple="true"> 
                                                 <input type="file" class="form-control" id="product_images" name="product_images[]" multiple
@@ -117,7 +117,7 @@
                         </div>
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
-                                <h5 class="h6">Product price, stock</h5>
+                                <h5 class="h6">Product Price, Stock, Tax</h5>
                             </div>
                             <div class="card-body hidden">
                                 <div class="no_product_variant">
@@ -147,6 +147,19 @@
                                                 <option value="0" {{$product_detail->stock_status == 0 ? 'selected' :
                                                     ''}}>Out of Stock</option>
                                             </select> 
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-from-label">Tax<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-md-9">
+                                            <select class="form-control" id="tax" name="tax" required>
+                                                <option value="">Select</option>
+                                               @foreach($tax_rates as $tax_rate)
+                                               <option value="{{$tax_rate->id}}" {{$product_detail->tax_id == $tax_rate->id ? "selected":""}}>{{$tax_rate->tax_name}}({{$tax_rate->tax_rate}}%)</option>
+                                               @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -290,7 +303,41 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- <div class="card-body"> 
+                                <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="invoice_number">Select Tax</label>
+                                    <div class="col-md-9">
+                                        <div class="row"> 
+                                        @if(count($taxes) > 0)
+                                        @foreach($taxes as $tax)
+                                        <div class="col-md-3">
+                                        <label  class="col-form-label" for="tax">{{$tax->tax_name}} {{$tax->tax_rate}}% </label>
+                                         <input type="checkbox" name="tax[]" class="mx-1" value="{{$tax->id}}" 
+                                        @if($product_detail->tax_name != '')
+                                         @foreach(json_decode($product_detail->tax_name) as $old_tax_name)
+                                            @if($old_tax_name == $tax->tax_name)
+                                            checked
+                                            @endif
+                                         @endforeach
+                                         @endif
+                                         >
+                                        </div> 
+                                        @endforeach
+                                        @endif
+
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                    
+                            </div> --}}
+
+
                         </div>
+
+
+
                         <!-- <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header d-flex justify-content-between"
                                 style="border-bottom : 1px solid #e8e8e8;">
@@ -463,36 +510,7 @@
                             </div>
                         </div>
                         </form>
-                        <!------------------------------------------ END OF PRODUCT CATEGORY ----------------------------------------------->
-                        <div class="card" style="border: 1px solid #e8e8e8;">
-                            <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
-                                <h4>VAT & Tax</h4>
-                            </div>
-                            <div class="card-body">
-                                <form id="vatTaxForm">
-                                    <div class="form-group">
-                                        <label for="amount">Amount:</label>
-                                        <input type="number" class="form-control" id="amount" placeholder="Enter amount"
-                                            required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="vatRate">VAT Rate (%):</label>
-                                        <input type="number" class="form-control" id="vatRate"
-                                            placeholder="Enter VAT rate" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="taxRate">Tax Rate (%):</label>
-                                        <input type="number" class="form-control" id="taxRate"
-                                            placeholder="Enter Tax rate" required>
-                                    </div>
-
-                                    <button type="button" class="btn btn-primary"
-                                        onclick="calculate()">Calculate</button> 
-                            </div>
-                            <div id="result" class="mt-4 mx-4"></div>
-                        </div>
+                          
                     </div>
                 </div>
             </div>
@@ -574,10 +592,16 @@
             success: function (response){
                 console.log(response);
                 if (response.status == 200 && response.message == "success"){
-                    localStorage.setItem('product_create', 'success');
                     window.location.href = "{{route('backend.admin.product.index')}}";
                 }
-            }
+            },
+            error: function (xhr, status, error) {
+        console.log("Error:", error);
+        console.log("Status:", status);
+        console.log("Response:", xhr.responseText);
+    }
+
+
         }); 
     }    
 </script>

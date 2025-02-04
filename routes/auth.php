@@ -16,6 +16,7 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'store']);
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('sendLoginOTP', [AuthenticatedSessionController::class, 'sendLoginOTP'])->name('sendLoginOTP');
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
     Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
@@ -24,7 +25,6 @@ Route::middleware('guest')->group(function () {
     Route::post('edit-phone-number/{user}', [RegisteredUserController::class, 'editPhoneNumber'])->name('otp.edit_phone_number');
     Route::post('otp-verify-submit/{user_id}', [RegisteredUserController::class, 'verifyOtpSubmit'])->name('otp.verify.submit');
     Route::get('check-account_exist', [AuthenticatedSessionController::class, 'checkAccount'])->name('user.check_account_exist');
-   
 });
 
 Route::middleware('auth')->group(function () {

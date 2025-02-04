@@ -8,7 +8,7 @@
                         <li class="pt-2">Home</li>
                     </a>
                     @foreach($main_categories as $main)
-                    <a href="{{route('frontend.product.product_list', [Str::slug($main->name)])}}" class="text-decoration-none text-white">
+                    <a href="{{route('frontend.product.product_list', [Str::slug($main->slug)])}}" class="text-decoration-none text-white">
                         <li class="pt-2">{{$main->name}}</li>
                     </a>
                     @endforeach
@@ -108,9 +108,12 @@
     <div class="phone-call cbh-phone cbh-green cbh-show  cbh-static" id="clbh_phone_div">
         <a id="WhatsApp-button" href="https://wa.me/+919716016098" target="_blank" class="phoneJs"
             title="WhatsApp 360imagem">
-            <div class="cbh-ph-circle"></div>
-            <div class="cbh-ph-circle-fill"></div>
-            <div class="cbh-ph-img-circle1"></div>
+           
+            <div class="cbh-ph-circle"> </div>
+            <div class="cbh-ph-circle-fill"> </div>
+            <div class="cbh-ph-img-circle1">
+              <img src="public\assets\backend\images\whatsappImg.png">
+            </div>
         </a>
     </div> 
 </section> 

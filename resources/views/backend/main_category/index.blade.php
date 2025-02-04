@@ -17,7 +17,7 @@
                         <div class="col-md-12">
                             <div class="card" style="border: 1px solid #e9e9e9;">
                                 <div class="card-header d-flex justify-content-end" style="border-bottom: 1px solid #e9e9e9;"> 
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group mb-0">
                                             <input type="text" class="form-control form-control-sm" id="search" name="search"
                                                 placeholder="Search by category name">

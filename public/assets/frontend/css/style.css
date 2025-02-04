@@ -33,9 +33,9 @@ body {
   font-size: 8px !important;
 }
 #header-ul li {
-  margin: 0 8px;
+  margin: 0 3px;
   font-size: 13px;
-  position: relative;
+ 
 }
 #header-ul a.nav-link::before {
   content: "";
@@ -48,7 +48,7 @@ body {
   left: 2px;
 }
 #header-ul a.nav-link:hover::before {
-  width: 80%;
+  /* width: 80%; */
   transform: translateX(0);
 }
 #header-ul li a {
@@ -700,6 +700,10 @@ h3.text-center.mt-5.mb-5.before::before {
 .cbh-phone.cbh-gray .cbh-ph-img-circle1 {
   background-color: rgba(117, 235, 80, 1);
 }
+
+
+
+
 @-moz-keyframes cbh-circle-anim {
   0% {
     -moz-transform: rotate(0deg) scale(0.5) skew(1deg);
@@ -967,14 +971,77 @@ h3.text-center.mt-5.mb-5.before::before {
 #brand-slider img {
   border: 1px solid #dddddd;
 }
+
+
+
+
+
+
+
+
+/********************* add new styles ****************/
+
+
+
+.loaderScal{
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0; 
+  left: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffff;
+  display: none;
+}
+
+/* body.no-scroll {
+  overflow: hidden;
+} */
+ 
+.loaderPyment{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*  
+html, body {
+  overflow: hidden; 
+  height: 100%;       
+  margin: 0;         
+} */
+.rowposition{
+  position: relative;
+  align-items: center;
+}
+.positionCart{
+  position: absolute;
+  right: 0;
+}
+
+
+
+
+
+
+
+
+
 /* -----------------------------whats ap button-------------------------------------------------------------------- */
 /* -----------------------------index css end-------------------------------------------------------------------- */
 /* -----------------------------media quarry-------------------------------------------------------------------- */
+
 @media only screen and (max-width: 600px) {
   div#closeButton {
     width: 100%;
     margin-top: -21px;
   }
+
   p.text-end.text-white.fw-bold.pb-0.Offer.mb-0.cupan {
     text-align: center !important;
     font-size: 9px !important;
@@ -1030,6 +1097,9 @@ h3.text-center.mt-5.mb-5.before::before {
   }
   div#brand-slider {
     border: 1px solid #dddbdb;
+  }
+  .logo a img {
+    width: 70% !important;
   }
 }
 /* -----------------------------media quarry end-------------------------------------------------------------------- */
@@ -1988,8 +2058,25 @@ a.btn.btn-warning.animation {
 .main_verify>div>div{
  height: 200px;
 }
+.toggleBTN{
+  outline: none;
+  width: fit-content !important;
+}
+.dropMenu{
+  text-align: left;
+}
+.toggleBTN:focus{
+  border: none !important
+}
 
-
-
+@media (max-width:991px){
+  .positionCart{
+    position: static;
+  }
+  .menubarBtn{
+    justify-content:flex-start !important;
+    
+  }
+}
 
 

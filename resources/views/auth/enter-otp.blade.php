@@ -27,17 +27,12 @@
                 <p class="cstm_resend"><a onclick="resendOtp(event)">Resend OTP</a></p>
                 <p class="cstm_resend"><a href="" onclick="openVerifyNumber(event)">Edit Phone Number</a></p>
                 <!-- <p style="text-align:center;" class="cstm_resend">A 4 digit XXXX OTP is send to this number {{$user->phone}}. Please Enter the OTP to proceed </p> -->
-
                 <p class="cstm_resend">Already have an account? <a href="{{route('login')}}">Login here</a></p>
-                <p style="color:red">We have sent a verification link on your email please verify your email account</p>
-
+                <!-- <p style="color:red">We have sent a verification link on your email please verify your email account</p> -->
             </form>
             
-
-             
             <form method="POST" action="{{ route('otp.edit_phone_number', [$user->id]) }}" class="form" id="verify_number">
                 @csrf
-               
                 <p style="text-align: center;font-size:17px;font-weight: 600;">Verify Number</p> 
                 <div class="form-field"> 
                     <label for="phone_number">Enter Phone <span>*</span></label>

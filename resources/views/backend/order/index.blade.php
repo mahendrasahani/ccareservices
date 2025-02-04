@@ -6,7 +6,7 @@
                         <div class="row" style=" padding: 0px 15px 0px 16px;">
                             <div class="col-md-12">
                                     <div class="card" style="border: 1px solid #d0d0d0;">
-                                        <div class="card-header d-flex align-items-center" style="border-bottom: 1px solid #d0d0d0;">
+                                        <div class="card-header d-flex align-items-center" style="border-bottom: 1px solid #d0d0d0;gap:20px">
                                             <div class="col text-center text-md-left">
                                                 <h4 class="mb-md-0 h5">Orders</h4>
                                             </div>
@@ -21,12 +21,17 @@
                                                         Delete selection</a>
                                                 </div>
                                             </div> -->
-                                            <div class="col-xl-2 col-md-3 ml-auto">
-                                                <form id="filter_form" method="GET" action="">
+                                <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-sm" id="search" name="search" placeholder="Search name or order number">
+                                </div>
+                                </div>
+                                        <div class="col-xl-2 col-md-3 ml-auto">
+                                                <form id="filter_form" method="GET" action=""> 
                                                 <div class="row g-2">
                                                     <div class="col-md">
                                                         <div class="form-floating">
-                                                            <select class="form-select payment_status" id="payment_status" name="payment_status">
+                                                            <select class="form-select payment_status" style="padding:7px 0;" id="payment_status" name="payment_status">
                                                                 <option selected value="">Filter by Payment Status</option>
                                                                 <option value="paid" {{isset($_GET['payment_status']) && $_GET['payment_status'] == 'paid'?'selected':''}}>Paid</option>
                                                                 <option value="unpaid" {{isset($_GET['payment_status']) && $_GET['payment_status'] == 'unpaid'?'selected':''}}>Unpaid</option>
@@ -41,7 +46,7 @@
                                                 <div class="row g-2">
                                                     <div class="col-md">
                                                         <div class="form-floating">
-                                                            <select class="form-select" id="delivery_status" name="delivery_status">
+                                                            <select class="form-select" id="delivery_status" style="padding:7px 0;" name="delivery_status">
                                                                 <option selected value="">Filter by Deliver Status</option>
                                                                 <option value="ordered" {{isset($_GET['delivery_status']) == 'ordered'?'selected':''}}>Ordered</option>
                                                                 <option value="shipped" {{isset($_GET['delivery_status']) == 'shipped'?'selected':''}}>Shipped</option>
@@ -83,7 +88,7 @@
                                                                 </tr>
                                                             </thead>
                         
-                                                            <tbody>
+                                                            <tbody id="main_table_body">
                                                                 @foreach($orders as $order)
                                                                 <tr id="row_id_{{$order->id}}">
                                                                     <!-- <td class="footable-first-visible">
@@ -108,10 +113,13 @@
                                                                         @endif
                                                                     </td>  
                                                                     <td class="footable-last-visible">
-                                                                        <a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage" href="{{route('backend.order.edit', [$order->id])}}" title="View">
+                                                                        <a class="btn btn-secondary btn-icon btn-circle btn-sm ico_chnage" id="send_invoice_btn" href="{{route('backend.order.send_invoice_to_customer', [$order->id])}}" title="Send Invoice to Customer">
+                                                                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                                                        </a>
+                                                                        <a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage" href="{{route('backend.order.edit', [$order->id])}}" title="Edit/View Order">
                                                                             <i class="fa-regular fa-edit"></i>
                                                                         </a>
-                                                                        <a class="btn btn-success btn-sm text-white" style="border-radius: 100px; background-color: #0abb75;" title="Print Invoice" href="{{route('backend.invoice.index', [$order->id])}}" id="printIcon" >
+                                                                        <a class="btn btn-success btn-sm text-white" style="border-radius: 100px; background-color: #0abb75;" title="Print Invoice" href="{{route('backend.invoice.index', [$order->id])}}" id="printIcon" title="Delete Order">
                                                                             <i class="fa-solid fa-print" style="cursor: pointer;"></i>
                                                                         </a> 
                                                                         <button value="{{$order->id}}" class="btn btn-icon btn-sm delete_ico"
@@ -154,7 +162,16 @@
                 icon: "success",
                 timer: 5000,
                 });
-            </script>   
+            </script>  
+            @elseif(Session::has('invoice_sent'))
+            <script> 
+                Swal.fire({
+                title: "Success!",
+                text: "{{Session::get('invoice_sent')}}",
+                icon: "success",
+                timer: 5000,
+                });
+            </script> 
     @endif
 
     <script>
@@ -187,6 +204,10 @@
             }
         }); 
     });
+
+    $(document).on("click", "#send_invoice_btn", function(){
+        $(this).html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>');
+    }); 
 </script>
     
 <script> 
@@ -204,6 +225,27 @@
         var formElement = document.getElementById('filter_form');
         selectElement.addEventListener('change', function() {
             formElement.submit();
+        });
+    }); 
+</script>
+
+<script>
+    $(document).ready(function (){
+        $(document).on('keydown', '#search', function (){
+            const search_val = $(this).val();
+            if (search_val === ''){
+                $('#my_pagination').show();
+            } else{ 
+                $.ajax({
+                    url: "{{route('backend.product.search')}}",
+                    method: "GET",
+                    data: { 'search_val': search_val },
+                    success: function (result){ 
+                        $("#main_table_body").html(result);
+                        $('#my_pagination').hide();
+                    }
+                });
+            }
         });
     }); 
 </script>

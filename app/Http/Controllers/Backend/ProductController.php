@@ -13,6 +13,7 @@ use App\Models\Backend\Review;
 use App\Models\Backend\ShippingCharge;
 use App\Models\Backend\Stock;
 use App\Models\Backend\SubCategory;
+use App\Models\Backend\Tax;
 use App\Models\Frontend\Cart;
 use Auth;
 use Illuminate\Http\Request;
@@ -27,7 +28,6 @@ class ProductController extends Controller
 {
     public function index(){ 
         $product_list = Product::select('*')->withAvg('getReview', 'rating');
-
         if(isset($_GET['sortBy']) && $_GET['sortBy'] != ''){
             if($_GET['sortBy'] == 'price_high_to_low'){
                 $product_list = $product_list->orderBy('regular_price', 'desc');
@@ -52,8 +52,10 @@ class ProductController extends Controller
         $brand_list = Brand::where('status', 1)->get();
         $main_category_list = MainCategory::with('subCategory')->where('status', 1)->get();
         $attribute_list = Attribute::where('status', 1)->get();
+        $tax_rates = Tax::get();
         
-        return view('backend.product.create', compact('brand_list', 'main_category_list', 'attribute_list'));
+        return view('backend.product.create', compact('brand_list', 'main_category_list', 
+        'tax_rates', 'attribute_list'));
     }
 
     public function addAttribute(Request $request){  
@@ -98,8 +100,8 @@ class ProductController extends Controller
 
     public function store(Request $request){   
         $product_name = $request->product_name;
-        $min_qty = $request->min_qty;
-        $max_qty = $request->max_qty;   
+        // $min_qty = $request->min_qty;
+        // $max_qty = $request->max_qty;   
         $product_price = $request->product_price;
         $sku = $request->sku;
         $stock_status = $request->stock_status;
@@ -111,6 +113,10 @@ class ProductController extends Controller
         $slug = $request->slug;
         $product_status = $request->product_status;
         $product_brand = $request->product_brand; 
+        $tax = $request->tax; 
+
+        $tax_data = Tax::where('id', $tax)->first();
+
         $main_categories = collect($request->main_categories)->map(function ($value) {
             return intval(trim($value, '"'));
         })->all();  
@@ -126,8 +132,8 @@ class ProductController extends Controller
         // })->all();  
         $newProduct = Product::create([
             'product_name' => $product_name,
-            'min_purchase_qty' => $min_qty,
-            'max_purchase_qty' => $max_qty,   
+            'min_purchase_qty' => 1,
+            'max_purchase_qty' => 1,   
             'regular_price' => $product_price,
             'sku' => $sku,
             'stock_status' => $stock_status,
@@ -142,7 +148,10 @@ class ProductController extends Controller
             'main_category' => $main_categories,    
             'sub_category' => $sub_categories,
             'attribute_name' => $attribute_name,
-            'attribute_value' => $request->filtering_attributes,  
+            'attribute_value' => $request->filtering_attributes,
+            'tax_id' => $tax_data->$tax,
+            'tax_name' => $tax_data->tax_name,
+            'tax_rate' => $tax_data->tax_rate,
         ]); 
         $newProductId = $newProduct->id; 
         $imagePaths = []; 
@@ -160,6 +169,7 @@ class ProductController extends Controller
                 'product_images' => json_encode($imagePaths, JSON_UNESCAPED_SLASHES)
             ]);
         }
+  
         // $priceListMainArray = [];
         // foreach($request->price_list as $price_list){
         //     $priceListNewMainArray =  explode(",", $price_list);
@@ -205,14 +215,16 @@ class ProductController extends Controller
         ]);  
     }
 
-        public function edit($id){
-            $product_detail = Product::select('*')->with('getStock')->where('id', $id)->first(); 
-            $brand_list = Brand::where('status', 1)->get(); 
-            $main_category_list = MainCategory::where('status', 1)->get();
-            $attribute_list = Attribute::where('status', 1)->get(); 
-            // $option_name = Attribute::where('id', $product_detail->get_stock->attribute_id)->first()->name;
-            return view('backend.product.edit', compact('product_detail', 'brand_list', 'main_category_list', 'attribute_list'));
-        }
+    public function edit($id){
+        $tax_rates = Tax::get();
+        $product_detail = Product::select('*')->with('getStock')->where('id', $id)->first(); 
+        $brand_list = Brand::where('status', 1)->get(); 
+        $main_category_list = MainCategory::where('status', 1)->get();
+        $attribute_list = Attribute::where('status', 1)->get(); 
+        $taxes = Tax::where('status', 1)->get();
+        // $option_name = Attribute::where('id', $product_detail->get_stock->attribute_id)->first()->name;
+        return view('backend.product.edit', compact('product_detail', 'brand_list', 'main_category_list', 'attribute_list', 'taxes', 'tax_rates'));
+    }
 
         public function update($id, Request $request){ 
             $product_name = $request->product_name;
@@ -229,6 +241,8 @@ class ProductController extends Controller
             $slug = $request->slug;
             $product_status = $request->product_status;
             $product_brand = $request->product_brand; 
+            $tax = $request->tax;  
+            $tax_data = Tax::where('id', $tax)->first();
             $main_categories = collect($request->main_categories)->map(function ($value) {
                 return intval(trim($value, '"'));
             })->all();  
@@ -261,7 +275,10 @@ class ProductController extends Controller
                 'main_category' => $main_categories,    
                 'sub_category' => $sub_categories,
                 'attribute_name' => $attribute_name,
-                'attribute_value' => $request->filtering_attributes
+                'attribute_value' => $request->filtering_attributes,
+                'tax_id' => $tax_data->id,
+                'tax_name' => $tax_data->tax_name,
+                'tax_rate' => $tax_data->tax_rate,
             ]); 
             // $newProductId = $newProduct->id; 
             $imagePaths = []; 
@@ -278,8 +295,21 @@ class ProductController extends Controller
                 Product::where('id', $id)->update([
                     'product_images' => json_encode($imagePaths, JSON_UNESCAPED_SLASHES)
                 ]);
-            }
+            } 
 
+            // $taxes = $request->tax;
+            // $tax_name = [];
+            // $tax_rates = [];
+            // foreach($taxes as $tax){
+            //     $tax = Tax::where('id', $tax)->first();
+            //     $tax_name[] = $tax->tax_name;
+            //     $tax_rates[] = $tax->tax_rate;
+            // }
+            // Product::where('id', $id)->update([
+            //     "tax_name" => json_encode($tax_name, JSON_UNESCAPED_SLASHES),
+            //     "tax_rate" => json_encode($tax_rates, JSON_UNESCAPED_SLASHES)
+            // ]);
+ 
             return response()->json([
                 "status" => 200,
                 "message" => "success"
@@ -453,30 +483,37 @@ class ProductController extends Controller
 
 
         public function productListFrontView(Request $request, $main_category, $sub_category = ''){
+           try{ 
             $filter = (int)$request->filter;
-            $main_cat_id = MainCategory::where('slug', $main_category)->first()->id;
-            $product_list = Product::select('*');
+            $main_cat_id = MainCategory::where('slug', $main_category)->first();
+            $product_list = Product::select('*')->whereHas('getStock')->with('getStock');
             if($sub_category != ''){
-            $sub_cat_id = SubCategory::where('slug', $sub_category)->first()->id;
-          
+            $sub_cat_row = SubCategory::where('slug', $sub_category)->first();
+            $sub_cat_name = $sub_cat_row->name;
             if($filter != 0){
                 $product_list = $product_list->whereJsonContains('sub_category', $filter);
             }else{
-                $product_list = $product_list->whereJsonContains('sub_category', $sub_cat_id);
+                $product_list = $product_list->whereJsonContains('sub_category', $sub_cat_row->id);
             }
             }
             if($sub_category == ''){
-                $product_list = $product_list->whereJsonContains('main_category', $main_cat_id);
+                $product_list = $product_list->whereJsonContains('main_category', $main_cat_id->id);
             }
-             $product_list = $product_list->orderBy('id', 'desc')->paginate(12);
-             
-            $sub_cat_list = SubCategory::where('main_category_id', $main_cat_id)->get();
+            $product_list = $product_list->orderBy('id', 'desc')->paginate(12);
+            $sub_cat_list = SubCategory::where('main_category_id', $main_cat_id->id)->get();
             $page_url = url('category/'.$main_category.'/'.$sub_category.'/');
-            return view('frontend.product.index', compact('product_list', 'main_category', 'sub_category', 'sub_cat_list', 'page_url')); 
+            $main_category_name = $main_cat_id->name; 
+            // return $product_list;
+            return view('frontend.product.index', compact('product_list', 
+            'main_category', 'sub_category', 'sub_cat_list', 'page_url', 'main_category_name', 'sub_cat_name', 'sub_cat_row')); 
+        }catch(\Exception $e){
+            abort('404');
+        }
         }
 
         public function singleProductFrontView($slug){
-            $product_detail = Product::where('slug', $slug)->with('getStock')->first();  
+
+            $product_detail = Product::where('slug', $slug)->with('getStock')->first();
             // return $product_detail;
             $option_id = $product_detail->getStock[0]->attribute_id;
             $option_name = Attribute::where('id', $option_id)->first()->name; 
@@ -601,7 +638,7 @@ class ProductController extends Controller
         // $shipping_charge = intval(Session::get('shipping_charge'));
         $user_id = Auth::user()->id;
         // $shipping_charge = ShippingCharge::where('id', $request->shipping_charge_id);
-        $cart_item = Cart::with(['getProduct:id,product_name','getStock'])
+        $cart_item = Cart::with(['getProduct:id,product_name,tax_name,tax_rate','getStock'])
         ->whereHas('getStock', function ($query) {
             $query->whereNull('deleted_at');
         })
@@ -611,6 +648,12 @@ class ProductController extends Controller
                 ]); 
         }
 
-
+        public function getTaxList(){
+            $taxes = Tax::where('status', 1)->get();
+            return response()->json([
+                "data" => $taxes,
+                "status" => "success"
+            ], 200);
+        }
 
 }

@@ -70,17 +70,15 @@ b, strong {
         <tr>
           <td style="width: 50%;">
                <img src="{{url('/public/assets/frontend/images/logo/coolcarelogo.jpg')}}" width="100^" height="100%" alt="logo" border="0" />
-              <address>
-            <strong>Cool Care Service</strong><br>
-            F222 opposite radhaswami satsang patodi road, Saraswati Enclave, Sector 10A, Gurugram, Haryana 122001
-            </address>
+              <address><strong>Cool Care Service</strong><br>
+              F222 opposite radhaswami satsang patodi road, Saraswati Enclave, Sector 10A, Gurugram, Haryana 122001</address>
             <b>Telephone</b> 7291917070<br>
-                        <b>E-Mail</b> info@coolcareservice.in<br>
-            <b>Web Site:</b> <a href="https://www.coolcareservice.in">https://www.coolcareservice.in</a></td>
+            <b>E-Mail</b> info@coolcareservice.in<br>
+            <b>Web Site:</b><a href="https://www.coolcareservice.in">https://www.coolcareservice.in</a></td>
           <td style="width: 50%;"><b>Date Added</b> {{\Carbon\Carbon::parse($order->created_at)->format('M d, Y')}}<br>
-                        <b>Order ID:</b> {{$order->order_id}}<br>
-            <b>Payment Method</b> {{$order->payment_mode == "cash_on_delivery" ? "Cash On Delivery":"Online"}}<br>
-            </td>
+          <b>Order ID:</b> {{$order->order_id}}<br>
+          <b>Payment Method</b> {{$order->payment_mode == "cash_on_delivery" ? "Cash On Delivery":"Online"}}<br>
+        </td>
         </tr>
       </tbody>
     </table>
@@ -115,10 +113,11 @@ b, strong {
       <tbody>
       @foreach($order->getOrderProduct as $product)
                 <tr>
-          <td>{{$product->product_name}}
-                        <br>
+          <td>{{$product->product_name}} ({{$product->getProduct->tax_name}} {{$product->getProduct->tax_rate}}%)
+            <br>
             &nbsp;<small> - Select Month: {{$product->month}} </small><br>
             &nbsp;<small> - {{$product->option_id}}: {{$product->option_value_id}}</small> 
+
                         <!-- <br>
             &nbsp;<small> - Delivery Date: 2024-04-06</small> -->
             </td>
@@ -131,6 +130,18 @@ b, strong {
           <tr>
           <td class="text-right" colspan="3"><b>Sub-Total</b></td>
           <td class="text-right">₹{{number_format($order->sub_total, 2)}}</td>
+        </tr>
+        <tr>
+          <td class="text-right" colspan="3"><b>GST</b></td>
+          <td class="text-right">₹{{number_format($order->cgst, 2)}}</td>
+        </tr>
+        <tr>
+          <td class="text-right" colspan="3"><b>SGST</b></td>
+          <td class="text-right">₹{{number_format($order->sgst, 2)}}</td>
+        </tr>
+        <tr>
+          <td class="text-right" colspan="3"><b>IGST</b></td>
+          <td class="text-right">₹{{number_format($order->igst, 2)}}</td>
         </tr>
         <tr>
           <td class="text-right" colspan="3"><b>Shipping Charge</b></td>

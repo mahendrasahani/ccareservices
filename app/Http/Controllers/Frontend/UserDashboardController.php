@@ -16,9 +16,11 @@ class UserDashboardController extends Controller{
     public function userDashboardPageView(){
         $total_products_in_cart = Cart::where('user_id', Auth::user()->id)->count();
         $total_products_in_order_list = Order::where('user_id', Auth::user()->id)->count();
-        $recent_purchase_history = OrderProduct::with('getProduct:id,product_name,product_images')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+        $recent_purchase_history = OrderProduct::with('getProduct:id,product_name,product_images')
+        ->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
        $default_shipping_address = ShippingAddress::where('user_id', Auth::user()->id)->first();
     //    return $recent_purchase_history;
+
         return view('frontend.account.user_dashboard', compact('total_products_in_cart', 'total_products_in_order_list',
         'recent_purchase_history', 'default_shipping_address'));
     }
@@ -94,8 +96,7 @@ class UserDashboardController extends Controller{
         User::where('id', Auth::user()->id)->update([
             "company_id" => "public/".$directory.'/'.$company_id_name,
         ]);
-      }
-
+      } 
         return redirect()->back()->with('profile_updated', 'Profile has been updated successfully !');
     }
   

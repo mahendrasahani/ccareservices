@@ -227,7 +227,23 @@
                             <p class="sidebar-option">Payment Methods</p>
                         </span>
                         </a>
-                    </li>  
+                    </li> 
+                    
+                    <li><a href="{{route('backend.tax')}}">
+                        <span>
+                            <i class="fa fa-credit-card"></i>
+                            <p class="sidebar-option">Tax Rates</p>
+                        </span>
+                        </a>
+                    </li>
+                    <li><a href="{{route('backend.recent_activity')}}">
+                        <span>
+                            <i class="fa fa-credit-card"></i>
+                            <p class="sidebar-option">Recent Activity</p>
+                        </span>
+                        </a>
+                    </li>
+
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <span class="nav-text">

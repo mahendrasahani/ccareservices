@@ -1,6 +1,7 @@
 $(document).ready(async function(){
     try{
-    let product_id = $('#product_id').val(); 
+    let product_id = $('#product_id').val();
+    console.log("product_id " + product_id) ;
     let updateCartOnLoad = await fetch(baseUrl+"/update-cart-on-load");
     const response = await updateCartOnLoad.json();
         if(response.data == ''){
@@ -40,14 +41,14 @@ async function getDecryptId(encryptId) {
     try {
         const response = await fetch(baseUrl + "/get-product-id?encrypt_id=" + encryptId);
         const data = await response.json();
+        console.log(data);
         return data.product_id;
     } catch (error) {
         console.error('Error fetching product id:', error);
         return null; 
     }
 }
-
-
+ 
 $(document).on("click", "#remove_cart_item", async function(){
     let p_id = $(this).data("product_id"); 
     try{

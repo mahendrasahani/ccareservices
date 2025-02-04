@@ -15,10 +15,17 @@
                         </div>
                         <div class="col-md-12">
                             <div class="card" style="border: 1px solid #e8e8e8;">
-                                <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
+                                <div class="card-header  d-flex align-items-center justify-content-between" style="border-bottom: 1px solid #e8e8e8;">
                                     <h5>Delivery Boys
                                     </h5>
+                                    <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-sm" id="search" name="search" placeholder="Search name">
                                 </div>
+                                </div>
+                                </div>
+
+                                
                                 <div class="card-body">
                                    
                                         <table id="myTable" class="table aiz-table mb-0 footable footable-1 breakpoint-lg">
@@ -36,7 +43,7 @@
                                                 </tr>
                                             </thead>
             
-                                            <tbody>
+                                            <tbody id="main_table_body">
                                                 @php 
                                                     $sn = 1;
                                                 @endphp
@@ -58,8 +65,7 @@
                                                               <a class="dropdown-item" href="{{route('backend.delivery_boy.edit', [$delivery_boy->id])}}"> Edit</a> 
                                                             </div>
                                                           </div>
-                                                    </td>
-                                                    
+                                                    </td> 
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -98,5 +104,25 @@
     @endif
 
         
+<script>
+    $(document).ready(function (){
+        $(document).on('keydown', '#search', function (){
+            const search_val = $(this).val();
+            if (search_val === ''){
+                $('#my_pagination').show();
+            } else{ 
+                $.ajax({
+                    url: "{{route('backend.delivery_boy.search')}}",
+                    method: "GET",
+                    data: { 'search_val': search_val },
+                    success: function (result){  
+                        $("#main_table_body").html(result);
+                        $('#my_pagination').hide();
+                    }
+                });
+            }
+        });
+    }); 
+</script>
 @endsection
 @endsection

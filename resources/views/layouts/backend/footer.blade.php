@@ -288,7 +288,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{url('public/assets/backend/plugins/highlightjs/highlight.pack.min.js')}}"></script>
-    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/super-build/ckeditor.js"></script> -->
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="{{url('public/assets/frontend/js/cart.js')}}"></script>
     <script src="{{url('public/assets/frontend/js/single_product.js')}}"></script>

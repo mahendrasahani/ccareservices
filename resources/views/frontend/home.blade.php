@@ -16,8 +16,7 @@
         <h1 class="text-center heading">
           Home Appliances On Rent In Gurgaon- Appliance Rental Services
         </h1>
-        <a href="https://mail.google.com/mail/u/0/#search/task/FMfcgzGxSRNZXgtdMVPTqzPHkgbxkZTp" download>Download</a>
-      </div>
+       </div>
 
     </div>
   </div>
@@ -106,10 +105,14 @@
         @foreach($main_categories as $main)
         @if(count($main->subCategory) > 0)
         @foreach($main->subCategory as $sub)
-          <div class="col-md-4" id="media-product">
+          <div class="col-md-3" id="media-product">
             <div class="card hover-item">
-              <a href="{{route('frontend.product.product_list', [Str::slug($main->name), Str::slug($sub->name)])}}" class="text-decoration-none">
+              <a href="{{route('frontend.product.product_list', [Str::slug($main->slug), Str::slug($sub->slug)])}}" class="text-decoration-none">
+                @if($sub->thumbnail_image != '')
                 <img src="{{url($sub->thumbnail_image)}}" class="card-img-top" alt="...">
+                @else
+                <img src="{{url('public/assets/both/placeholder/product.jpg')}}" class="card-img-top" alt="...">
+                @endif
                 <div class="card-body" style="padding: 7px;">
                   <h6 class="card-title text-center  categry">{{$sub->name}} ON RENT</h6>
                 </div>

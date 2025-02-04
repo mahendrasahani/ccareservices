@@ -1,24 +1,21 @@
    @extends('layouts/frontend/main')
 @section('main-section')
  <style>
-            .hh-grayBox {
+    .hh-grayBox {
         background-color: #F8F8F8;
         margin-bottom: 20px;
         padding: 35px 0;
         margin-top: 20px;
     }
-
     .pt45 {
         padding-top: 45px;
     }
-
     .order-tracking {
         text-align: center;
         width:25%;
         position: relative;
         display: block;
     }
-
     .order-tracking .is-complete {
         display: block;
         position: relative;
@@ -32,7 +29,6 @@
         -webkit-transition: background 0.25s linear;
         z-index: 2;
     }
-
     .order-tracking .is-complete:after {
         display: block;
         position: absolute;
@@ -48,13 +44,11 @@
         transform: rotate(45deg);
         opacity: 0;
     }
-
     .order-tracking.completed .is-complete {
         border-color: #27aa80;
         border-width: 0px;
         background-color: #27aa80;
     }
-
     .order-tracking.completed .is-complete:after {
         border-color: #fff;
         border-width: 0px 3px 3px 0;
@@ -62,7 +56,6 @@
         left: 11px;
         opacity: 1;
     }
-
     .order-tracking p {
         color: #A4A4A4;
         font-size: 16px;
@@ -70,15 +63,12 @@
         margin-bottom: 0;
         line-height: 20px;
     }
-
     .order-tracking p span {
         font-size: 14px;
     }
-
     .order-tracking.completed p {
         color: #000;
     }
-
     .order-tracking::before {
         content: '';
         display: block;
@@ -90,32 +80,27 @@
         left: calc(-50% + 20px);
         z-index: 0;
     }
-
     .order-tracking:first-child:before {
         display: none;
     }
-
     .order-tracking.completed:before {
         background-color: #27aa80;
     }
-
     @media only screen and (max-width:400px) {
         .order-tracking p {
-        font-size: 12px;
-    }
+            font-size: 12px;
+        }
 
-    .order-tracking p span {
-        font-size: 12px;
-    }
+        .order-tracking p span {
+            font-size: 12px;
+        }
     }
  </style>
 
 <section class="dahboard-wrapper">
     <div class="container">
         <div class="row">
-
             @include('layouts/frontend/sidebar')
-
             <section class="discount-wrapper col-md-9">
                 <div class="dashboard-heading">
                     <h3>Order Code</h3>
@@ -186,7 +171,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-answer">
-                                        <p>{{$order->payment_method == 'cash_on_delivery' ? 'Cash On Delivery' : ''}}</p>
+                                        <p>{{$order->payment_method == 'cash_on_delivery' ? 'Cash On Delivery' : 'Online'}}</p>
                                     </div>
                                 </div>
                                 <!-- <div class="col-md-6">
@@ -226,28 +211,44 @@
                                 completed
                                 @endif ">
                                     <span class="is-complete"></span>
-                                    <p>Ordered<br><span>Mon, June 24</span></p>
+                                    <p>Ordered<br><span>
+                                    @if($order->ordered_date != "")
+                                        {{Carbon\Carbon::parse($order->ordered_date)->format('d M, Y')}}
+                                        @endif
+                                </span></p>
                                 </div>
                                 <div class="order-tracking 
                                 @if($order->order_status=='accepted' || $order->order_status == 'shipped' || $order->order_status == 'delivered')
                                 completed
                                 @endif ">
                                     <span class="is-complete"></span>
-                                    <p>Accepted<br><span>Mon, June 24</span></p>
+                                    <p>Accepted<br><span>
+                                    @if($order->accepted_date != "")
+                                        {{Carbon\Carbon::parse($order->accepted_date)->format('d M, Y')}}
+                                        @endif
+                                </span></p>
                                 </div>
                                 <div class="order-tracking 
                                 @if($order->order_status == 'shipped' || $order->order_status == 'delivered')
                                 completed
                                 @endif ">
                                     <span class="is-complete"></span>
-                                    <p>Shipped<br><span>Tue, June 25</span></p>
+                                    <p>Shipped<br><span>
+                                        @if($order->shipped_date != "")
+                                        {{Carbon\Carbon::parse($order->shipped_date)->format('d M, Y')}}
+                                        @endif
+                                </span></p>
                                 </div>
                                 <div class="order-tracking
                                 @if($order->order_status == 'delivered')
                                 completed
                                 @endif  ">
                                     <span class="is-complete"></span>
-                                    <p>Delivered<br><span>Fri, June 28</span></p>
+                                    <p>Delivered<br><span>
+                                    @if($order->delivered_date != "")
+                                        {{Carbon\Carbon::parse($order->delivered_date)->format('d M, Y')}}
+                                        @endif
+                                    </span></p>
                                 </div>
                             </div>
                         </div>
@@ -321,17 +322,38 @@
                                 </div>
                                 <div class="final-order-details">
                                     <div class="single-order-final">
+                                        <p> GST : </p>
+                                        <p> ₹{{number_format($order->cgst, 2)}} </p>
+                                    </div>
+                                </div>
+                                <div class="final-order-details">
+                                    <div class="single-order-final">
+                                        <p> SGST : </p>
+                                        <p> ₹{{number_format($order->sgst, 2)}} </p>
+                                    </div>
+                                </div>
+                                <div class="final-order-details">
+                                    <div class="single-order-final">
+                                        <p> IGST : </p>
+                                        <p> ₹{{number_format($order->igst, 2)}} </p>
+                                    </div>
+                                </div>
+
+                                @if($order->promo_discount != '' && $order->promo_discount > 0)
+                                <div class="final-order-details">
+                                    <div class="single-order-final">
                                         <p> Coupon discount : </p>
                                         <p> ₹{{number_format($order->promo_discount, 2)}} </p>
                                     </div>
                                 </div>
+                                @endif
+                                
                                 <div class="final-order-details total-final">
                                     <div class="single-order-final">
                                         <p> Total : </p>
                                         <p> ₹{{number_format($order->total - $order->promo_discount, 2)}} </p>
                                     </div>
-                                </div>
-                                 
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -340,8 +362,27 @@
         </div>
     </div>
 </section>
+@section('javascript-section')
+<script>
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        console.log('working,,...');
+        window.location.href = "/home"; // Redirect to home page or another page
+    };
+</script>
 
 
+    @if(Session::has('new_order'))
+        <script>  
+         window.localStorage.removeItem('SGST');
+         window.localStorage.removeItem('IGST');
+         window.localStorage.removeItem('CGST');
+        </script> 
+    @endif 
+@endsection
+
+
+ 
 
 
 @endsection

@@ -163,11 +163,7 @@
         <div class="tab-content mt-2">
             <div class="tab-pane fade show active p-tag" id="description">
                 <h6>SPECIFICATION﻿ / DESCRIPTION</h6>
-                <p>Rating 3 star</p>
-                <p>condition: good</p>
-                <p>Brand of the product may vary</p>
-                <p>Product may not be new, But it will be in good working condition</p> 
-                <p>SECURITY...(CASH NIL) PDC (Post Dated Cheque) 31December 2024 Rs.7000. It will be returned back at the time of Pickup. Stabilizer charge extra 700 Rs if required. Transport charge extra 300 Rs. Submeter charge...500 if Required. Power Requirements:AC 230 V, 50 Hz. Pre installed plug point of 15 Amp should be available near ac.</p>
+                {!! $product_detail->product_description !!}
             </div>
             <div class="tab-pane fade" id="myreview">
                 <div class="row"> 

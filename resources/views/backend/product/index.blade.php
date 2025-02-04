@@ -71,8 +71,7 @@
                                         </th>
                                         <th style="display: table-cell;">Name</th>
                                         <th style="display: table-cell;">Info</th>
-                                        <th style="display: table-cell;">Categories</th>
-                                        <th style="display: table-cell;">Brand</th>
+                                        <th style="display: table-cell;">Categories</th> 
                                         <th style="display: table-cell;">Published</th>
                                         <th style="display: table-cell;">Options</th>
                                     </tr>
@@ -143,11 +142,7 @@
                                             <span class="badge badge-primary mb-1">{{$main->name}}</span>
                                             @endforeach
                                         </td>
-                                        <td>
-                                            <div class=" brand d-flex align-items-center justify-content-center">
-                                                <img src="{{$product->getBrand->logo == '' ? url('public/assets/both/placeholder/brand.jpg') : url($product->getBrand->logo)}}">
-                                            </div>
-                                        </td>
+                                         
                                         <td><label class="switch">
                                                 <input type="checkbox" {{$product->product_status == 1 ? 'checked':''}}
                                                 id="product_status" name="product_status"

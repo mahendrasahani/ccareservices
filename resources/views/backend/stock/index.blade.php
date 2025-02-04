@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card" style="border: 1px solid #dadada;">
-                        <div class="d-flex align-items-center" style="border-bottom: 1px solid #ececec;">
+                        <div class="d-flex align-items-center" style="border-bottom: 1px solid #ececec;height:53px">
                             <div class="col text-center text-md-left">
                                 <h5 class="mb-md-0 h6">All Stocks</h5>
                             </div>
@@ -41,12 +41,12 @@
                                         <option value="">Options</option> 
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-2">
                                 <div class="input-group">
-                                    <input type="text" class="form-control form-control-sm" id="search" name="search" placeholder="Type &amp; Enter">
+                                    <input type="text" class="form-control form-control-sm" id="search" name="search" placeholder="Search Product Name">
                                 </div>
-                            </div> -->
+                            </div>  
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered mb-0">
@@ -148,6 +148,29 @@
         }); 
     });
 </script>
- 
+
+
+<script>
+    $(document).ready(function (){
+        $(document).on('keydown', '#search', function (){
+            const search_val = $(this).val();
+            if (search_val === ''){
+                $('#my_pagination').show();
+            } else{ 
+                $.ajax({
+                    url: "{{route('backend.stock.search')}}",
+                    method: "GET",
+                    data: { 'search_val': search_val },
+                    success: function (result){ 
+                        $("#main_table_body").html(result);
+                        $('#my_pagination').hide();
+                    }
+                });
+            }
+        });
+    }); 
+</script>
+
+
 @endsection
 @endsection

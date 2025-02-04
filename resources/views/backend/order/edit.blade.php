@@ -159,6 +159,21 @@
                                                             <td><strong class="font-weight-bold">Shipping :</strong></td>
                                                             <td>₹{{number_format($order->delivery_charge, 2)}}</td>
                                                         </tr>
+
+                                                        <tr style="font-size: 12px;">
+                                                            <td><strong class="font-weight-bold">CGST :</strong></td>
+                                                            <td>₹{{number_format($order->cgst, 2)}}</td>
+                                                        </tr>
+                                                        <tr style="font-size: 12px;">
+                                                            <td><strong class="font-weight-bold">SGST :</strong></td>
+                                                            <td>₹{{number_format($order->sgst, 2)}}</td>
+                                                        </tr>
+                                                        <tr style="font-size: 12px;">
+                                                            <td><strong class="font-weight-bold">IGST :</strong></td>
+                                                            <td>₹{{number_format($order->igst, 2)}}</td>
+                                                        </tr>
+
+
                                                         <tr style="font-size: 12px;">
                                                             <td><strong class="font-weight-bold">Discount :</strong></td>
                                                             <td><input type="number" name="discount" id="discount" min="0" value="{{$order->promo_discount ?? '0'}}"></td>

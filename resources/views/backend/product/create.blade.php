@@ -33,11 +33,11 @@
                                                 title="Translatable"></i></label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" name="product_name"
-                                                placeholder="Product Name" id="product_name" >
+                                                placeholder="Product Name" id="product_name" required>
                                             <span id="productNameError" class="formFiedllerror"></span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <!-- <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Minimum Purchase Qty <span
                                                 class="text-danger">*</span></label>
                                         <div class="col-md-9">
@@ -47,8 +47,8 @@
                                                 quantity for this product. Minimum should be 1.</small>
                                             <span id="minQtyError" class="formFiedllerror"></span>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
+                                    </div> -->
+                                    <!-- <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Maximum Purchase Qty</label>
                                         <div class="col-md-9">
                                             <input type="number" class="form-control" name="max_qty" min="1" value="1"
@@ -57,18 +57,18 @@
                                                 maximum quantity for this product. Default empty for
                                                 unlimited.</small>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                         </div>
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
-                                <h4 class="mb-0 h6">Product Images</h4>
+                                <h4 class="mb-0 h6">Product Images <span style="color:orange;">(The image dimensions must be exactly 500X500 pixels)</span></h4>
                             </div>
                             <div class="card-body">
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="signinSrEmail">Product
-                                        Images<small>(600x600)</small></label>
+                                        Images<small>(500x500)</small></label>
                                     <div class="col-md-9">
                                         <div class="input-group" data-toggle="" data-type="image" data-multiple="true">
                                             <input type="file" id="product_images" class="form-control"
@@ -83,7 +83,7 @@
                         </div>
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
-                                <h5 class="h6">Product price, stock
+                                <h5 class="h6">Product Price, Stock, Tax
                                 </h5>
                             </div>
 
@@ -107,9 +107,22 @@
                                         <label class="col-md-3 col-from-label">In Stock <span
                                                 class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <select class="form-control" id="stock_status" name="stock_status">
+                                            <select class="form-control" id="stock_status" name="stock_status" required>
                                                 <option value="1" selected>In Stock</option>
                                                 <option value="0">Out of Stock</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-from-label">Tax<span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-md-9">
+                                            <select class="form-control" id="tax" name="tax" required>
+                                                <option value="">Select</option>
+                                               @foreach($tax_rates as $tax_rate)
+                                               <option value="{{$tax_rate->id}}">{{$tax_rate->tax_name}}({{$tax_rate->tax_rate}}%)</option>
+                                               @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -484,33 +497,43 @@
                         </div>
                         </form>
                         <!------------------------------------------ END OF PRODUCT CATEGORY ----------------------------------------------->
-                        <div class="card" style="border: 1px solid #e8e8e8;">
+                        <!-- <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
                                 <h4>VAT & Tax</h4>
                             </div>
                             <div class="card-body">
-                                <form id="vatTaxForm">
+                                 
                                     <div class="form-group">
                                         <label for="amount">Amount:</label>
                                         <input type="number" class="form-control" id="amount" placeholder="Enter amount"
                                             required>
                                     </div> 
+                                    @foreach($tax_rates as $tax)
                                     <div class="form-group">
+                                        <label for="taxRate">{{$tax->tax_name}} ({{$tax->tax_rate}}%):</label>
+                                        <input type="number" class="form-control tax_rate" id="{{$tax->tax_name}}"
+                                            placeholder="{{$tax->tax_name}}" required disabled value="">
+                                            <input type="hidden" class="tax_value" value="{{ $tax->tax_rate }}">
+                                    </div> 
+                                    @endforeach
+                                    <button type="button" class="btn btn-primary" onclick="calculate()">Calculate</button>
+ 
+                                    <!-- <div class="form-group">
                                         <label for="vatRate">VAT Rate (%):</label>
                                         <input type="number" class="form-control" id="vatRate"
                                             placeholder="Enter VAT rate" required>
-                                    </div> 
-                                    <div class="form-group">
+                                    </div>  -->
+                                  
+                                    <!-- <div class="form-group">
                                         <label for="taxRate">Tax Rate (%):</label>
                                         <input type="number" class="form-control" id="taxRate"
                                             placeholder="Enter Tax rate" required>
-                                    </div> 
-                                    <button type="button" class="btn btn-primary"
-                                        onclick="calculate()">Calculate</button>
-                                </form> 
+                                    </div>  -->
+                                   
+                             
                             </div>
                             <div id="result" class="mt-4 mx-4"></div>
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>

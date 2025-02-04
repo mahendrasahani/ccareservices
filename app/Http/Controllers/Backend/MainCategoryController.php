@@ -84,6 +84,7 @@ class MainCategoryController extends Controller
         $order_number = $request->ordering_number; 
         $meta_title = $request->meta_title;
         $meta_description = $request->meta_description; 
+        $slug = $request->slug;
         $filtering_attributes = collect($request->filtering_attributes)->map(function ($value) {
             return intval(trim($value, '"'));
         })->all(); 
@@ -115,6 +116,7 @@ class MainCategoryController extends Controller
                 'meta_title' => $meta_title,
                 'meta_description' => $meta_description, 
                 'filtering_attribute' => $filtering_attributes, 
+               'slug' => $slug
             ]);
         return redirect()->route('backend.main_category.index')->with('update', "Main Category has been update successfully");   
     }

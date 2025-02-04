@@ -36,11 +36,21 @@ class Order extends Model
         "delivery_type", 
         "delivery_boy_id",
         "payment_method", 
+        "payment_id",
+        "razorpay_order_id",
         "tax", 
         "payment_status", 
         "order_status", 
         "status",
-        "cancel_note"
+        "cancel_note",
+        "cgst",
+        "sgst",
+        "igst",
+        "ordered_date",
+        "accepted_date",
+        "canceled_date",
+        "shipped_date",
+        "delivered_date"
     ];
 
    public function getOrderProduct(){
@@ -49,6 +59,10 @@ class Order extends Model
 
    public function getAllOrders(){
     return $this->belongsTo(User::class, 'user_id');
+   }
+
+   public function getUser(){
+    return $this->belongsTo(User::class, "user_id");
    }
 
   
