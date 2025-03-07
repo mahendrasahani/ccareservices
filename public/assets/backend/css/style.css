@@ -162,6 +162,10 @@ button.btn.btn-warning.btn_add.text-white.pt-2{
 
 }
 
+.h5Element{
+ color: #002c6f;
+}
+
 /* Hide default HTML checkbox */
 .switch input {
   opacity: 0;

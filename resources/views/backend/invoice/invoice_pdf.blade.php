@@ -137,18 +137,28 @@ b, strong {
           <td class="text-right" colspan="3"><b>Sub-Total</b></td>
           <td class="text-right">Rs.{{number_format($order->sub_total, 2)}}</td>
         </tr>
+
+        @if($order->cgst > 0)
         <tr>
           <td class="text-right" colspan="3"><b>CGST</b></td>
           <td class="text-right">Rs.{{number_format($order->cgst, 2)}}</td>
         </tr>
+      @endif
+
+      @if($order->sgst > 0)
         <tr>
           <td class="text-right" colspan="3"><b>SGST</b></td>
           <td class="text-right">Rs.{{number_format($order->sgst, 2)}}</td>
         </tr>
+        @endif
+
+        @if($order->igst > 0)
         <tr>
           <td class="text-right" colspan="3"><b>IGST</b></td>
           <td class="text-right">Rs.{{number_format($order->igst, 2)}}</td>
         </tr>
+        @endif
+
         <tr>
           <td class="text-right" colspan="3"><b>Shipping Charge</b></td>
           <td class="text-right">Rs.{{number_format($order->delivery_charge, 2)}}</td>

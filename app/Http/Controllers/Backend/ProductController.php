@@ -49,7 +49,7 @@ class ProductController extends Controller
         $brand_list = Brand::where('status', 1)->get();
         $main_category_list = MainCategory::with('subCategory')->where('status', 1)->get();
         $attribute_list = Attribute::where('status', 1)->get();
-        $tax_rates = Tax::get(); 
+        $tax_rates = Tax::where('tax_rate', '>', 0)->where('status', 1)->get(); 
         return view('backend.product.create', compact('brand_list', 'main_category_list', 
         'tax_rates', 'attribute_list'));
     }
@@ -140,7 +140,7 @@ class ProductController extends Controller
             'sub_category' => $sub_categories,
             'attribute_name' => $attribute_name,
             'attribute_value' => $request->filtering_attributes,
-            'tax_id' => $tax_data->$tax,
+            'tax_id' => $tax_data->id,
             'tax_name' => $tax_data->tax_name,
             'tax_rate' => $tax_data->tax_rate,
         ]); 
@@ -164,14 +164,18 @@ class ProductController extends Controller
     }
 
     public function edit($id){
-        $tax_rates = Tax::get();
-        $product_detail = Product::select('*')->with('getStock')->where('id', $id)->first(); 
-        $brand_list = Brand::where('status', 1)->get(); 
-        $main_category_list = MainCategory::where('status', 1)->get();
-        $attribute_list = Attribute::where('status', 1)->get(); 
-        $taxes = Tax::where('status', 1)->get();
-        // $option_name = Attribute::where('id', $product_detail->get_stock->attribute_id)->first()->name;
-        return view('backend.product.edit', compact('product_detail', 'brand_list', 'main_category_list', 'attribute_list', 'taxes', 'tax_rates'));
+        try{ 
+            $tax_rates = Tax::where('tax_rate', '>', 0)->where('status', 1)->get(); 
+            $product_detail = Product::select('*')->with('getStock')->where('id', $id)->first(); 
+            $brand_list = Brand::where('status', 1)->get(); 
+            $main_category_list = MainCategory::where('status', 1)->get();
+            $attribute_list = Attribute::where('status', 1)->get();  
+            // $taxes = Tax::where('status', 1)->get();
+            // $option_name = Attribute::where('id', $product_detail->get_stock->attribute_id)->first()->name;
+            return view('backend.product.edit', compact('product_detail', 'brand_list', 'main_category_list', 'attribute_list', 'tax_rates'));
+        }catch(\Exception $e){
+            return "something went wrong";
+        }
     }
 
         public function update($id, Request $request){ 

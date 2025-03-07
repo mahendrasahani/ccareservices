@@ -13,7 +13,7 @@ async function paymentPage(){
     let paymentMethods = await fetch(baseUrl+"/api/payment-methods");
     let paymentMethodResponse = await paymentMethods.json();
     let appendToPaymentMethod = '';
-    let gst = window.localStorage.getItem('GST');
+    let cgst = window.localStorage.getItem('GST');
     let sgst = window.localStorage.getItem('SGST');
     let igst = window.localStorage.getItem('IGST');
     let tax = window.localStorage.getItem('TAX');
@@ -64,36 +64,44 @@ async function paymentPage(){
         <p><b>Shipping Charge :</b></p>
         <p><b>${formatter.format(response.shipping_charge)}</b></p>
     </div>
-    </div>
- <div class="final-order-details">
-    <div class="single-order-final">
-        <p><b>CGST :</b></p>
-        <p><b>${formatter.format(gst)}</b></p>
-        <input type="hidden" value="${gst}" name="cgst">
-    </div>
-    </div>
+    </div>`;
+    if(cgst > 0){
+        amount_detail += `<div class="final-order-details">
+        <div class="single-order-final">
+            <p><b>CGST :</b></p>
+            <p><b>${formatter.format(cgst)}</b></p>
+            <input type="hidden" value="${cgst}" name="cgst">
+        </div>
+        </div>`;
+    }
 
-    <div class="final-order-details">
+    if(sgst > 0){
+    amount_detail += `<div class="final-order-details">
     <div class="single-order-final">
         <p><b>SGST :</b></p>
         <p><b>${formatter.format(sgst)}</b></p>
         <input type="hidden" value="${sgst}" name="sgst">
     </div>
-    </div>
-     <div class="final-order-details">
+    </div>`;
+    }
+
+
+    if(igst > 0){
+    amount_detail += `<div class="final-order-details">
     <div class="single-order-final">
         <p><b>IGST :</b></p>
         <p><b>${formatter.format(igst)}</b></p>
         <input type="hidden" value="${igst}" name="igst">
     </div>
-    </div>
+    </div>`;
+    }
  
-    <div class="final-order-details total-final">
+    amount_detail += `<div class="final-order-details total-final">
     <div class="single-order-final text-danger">
         <p><b>Total :</b></p>
-        <p><b>${formatter.format(sub_total + parseFloat(response.shipping_charge) + parseFloat(sgst) + parseFloat(igst) + parseFloat(gst))}</b></p>
+        <p><b>${formatter.format(sub_total + parseFloat(response.shipping_charge) + parseFloat(sgst) + parseFloat(igst) + parseFloat(cgst))}</b></p>
     </div> 
-    </div> `;
+    </div>`;
     $("#payble_amount_detail").html(amount_detail);
     $("#loader").hide();
     document.body.classList.remove('no-scroll');

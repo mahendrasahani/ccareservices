@@ -48,7 +48,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                                <label class="col-md-3 col-form-label" for="address">Address<span class="text-danger">*</span></label>
+                                                <label class="col-md-3 col-form-label" for="address">Address</label>
                                                 <div class="col-md-9">
                                                 <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{old('address')}}"/> 
                                                     @error('address')
@@ -146,7 +146,7 @@
                                     <div class="card" style="border: 1px solid #e8e8e8;">
                                         <div class="card-header d-flex justify-content-between" style="border-bottom : 1px solid #e8e8e8;"> 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox"  name="billing_detail_check" data-toggle="collapse" href="#billingDetails" role="button" id="billingDetails_checkbox" aria-expanded="false" aria-controls="billingDetails">
+                                                <input class="form-check-input" {{old('billing_detail_check') ? 'checked' : ''}} type="checkbox" name="billing_detail_check" data-toggle="collapse" href="#billingDetails" role="button" id="billingDetails_checkbox" aria-expanded="false" aria-controls="billingDetails" {{ old('billing_detail_check') ? 'checked' : '' }}>
                                                 <label class="form-check-label mb-0 h5" for="">
                                                     Billing address is different?
                                                 </label>
@@ -265,27 +265,28 @@
 
     </div>
 </div> 
-
-
-
-@section('javascript-section')
-
-<script>
-
-    $(document).ready(function(){
-        $('#billingDetails_checkbox').on('change', function(){
-            let requiredValue = $('#billingDetails input');
-
-            if(this.checked === true){
-                requiredValue.prop('required', true);
-            }else{
-                requiredValue.prop('required', false)
-            } 
-        })
-    })
  
+@section('javascript-section')
+<script>
+    $(document).ready(function(){
 
+        let billingDetails_checkbox = $('#billingDetails_checkbox');
+        
+        if(billingDetails_checkbox.prop('checked')){ 
+            $('#billingDetails').addClass('show'); 
+        }else{ 
+            $('#billingDetails').removeClass('show');
+        }
+        
+        $('#billingDetails_checkbox').on('change', function(){
+            let requiredValue = $('#billingDetails input'); 
+            if(this.checked === true){
+                requiredValue.prop('required', true); 
+            }else{
+                requiredValue.prop('required', false) 
+            }
+        }); 
+    })
 </script>
-
 @endsection
 @endsection

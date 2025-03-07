@@ -188,19 +188,27 @@
                                                             <td>₹{{number_format($order->delivery_charge, 2)}}</td>
                                                         </tr>
 
+                                                        @if($order->cgst > 0)
                                                         <tr style="font-size: 12px;">
                                                             <td><strong class="font-weight-bold">CGST :</strong></td>
                                                             <td>₹{{number_format($order->cgst, 2)}}</td>
                                                         </tr>
+                                                        @endif
+
+                                                        @if($order->sgst > 0)
                                                         <tr style="font-size: 12px;">
                                                             <td><strong class="font-weight-bold">SGST :</strong></td>
                                                             <td>₹{{number_format($order->sgst, 2)}}</td>
                                                         </tr>
+                                                        @endif
+
+
+                                                        @if($order->igst > 0)
                                                         <tr style="font-size: 12px;">
                                                             <td><strong class="font-weight-bold">IGST :</strong></td>
                                                             <td>₹{{number_format($order->igst, 2)}}</td>
                                                         </tr>
-
+                                                        @endif
 
                                                         <tr style="font-size: 12px;">
                                                             <td><strong class="font-weight-bold">Discount :</strong></td>

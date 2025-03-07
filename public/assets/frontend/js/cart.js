@@ -12,6 +12,7 @@ $(document).ready(async function(){
         let decryptId = await getDecryptId(product_id);   
         let decryptIdParse = parseInt(decryptId); 
         let found = false; 
+            
             response.data.forEach(function(item){
                 if(decryptIdParse == item.product_id){
                     $('#delivery_date').val(item.delivery_date);

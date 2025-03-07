@@ -28,15 +28,25 @@
 
 // ------------------------------- update month slider ------------------------------------
 const slider = document.getElementById('slider');
-const numbers = document.querySelectorAll('.number');
+let numbers = document.querySelectorAll('.number');
 
-slider.addEventListener('input', async function ()
+ 
+//slider.addEventListener('input', async function ()
+const selectmonth = async (m_value) =>
 {
-    const month = parseInt(this.value);
+    // const month = parseInt(slider.value); 
+    const month = parseInt(m_value);  
+
     const option_value = document.querySelector('input[name="option_value"]:checked').value;
     const product_id = document.getElementById("product_id").value;
     const option_value_id = document.querySelector('input[name="option_value"]:checked').value;
-    const range_slider_section_color = document.getElementById('range_slider_section')
+    const range_slider_section_color = document.getElementById('range_slider_section');
+    
+    if (!option_value_id || !product_id) {
+        console.error("Missing required values: option_value_id or product_id");
+        return;
+    }
+
     try{
         const response = await fetch(`${baseUrl}/single-product/get-month-price?product_id=${product_id}&option_value_id=${option_value_id}`);
         if (!response.ok){
@@ -44,13 +54,14 @@ slider.addEventListener('input', async function ()
         }
         const responseData = await response.json();
         let price;
+       
         switch (month){
             case 1:
-                slider.disabled = true;
+                slider.disabled = true; 
                 range_slider_section_color.style.filter = 'blur(1px)'; 
                 range_slider_section_color.style.color = '#deecfc'; 
                 price = responseData.data.price_1; 
-                slider.disabled = false;
+                slider.disabled = false; 
                 setTimeout(() =>{
                     slider.disabled = false;
                     range_slider_section_color.style.filter = 'blur(0px)';  
@@ -60,7 +71,7 @@ slider.addEventListener('input', async function ()
             case 2:
                 slider.disabled = true;
                 range_slider_section_color.style.filter = 'blur(1px)';
-                price = responseData.data.price_2;
+                price = responseData.data.price_2; 
                 slider.disabled = false;
                 setTimeout(() =>
                 {
@@ -191,7 +202,17 @@ slider.addEventListener('input', async function ()
     {
         console.error('There was a problem with the fetch operation:', error);
     }
+};
+
+slider.addEventListener('input', function(){
+    month = parseInt(slider.value); 
+    selectmonth(month);
 });
+
+const numbersfun = (month) =>{ 
+    $('#slider').val(month);
+    selectmonth(month); 
+}
 
  
 // ------------------------------- update month slider ------------------------------------

@@ -12,10 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="{{url('public/assets/frontend/font/MarlinGeo-ExtraBold.ttf')}}">
-    <!-- <meta name="base-url" content="http://localhost/ccareservices"> -->
-    <!-- <meta name="base-url" content="https://coolcare.toponsearch.in">  -->
-    <meta name="base-url" content="http://192.168.1.12/ccareservices">
-    
+    <meta name="base-url" content="{{ config('app.url')}}">
+ 
     <link
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">

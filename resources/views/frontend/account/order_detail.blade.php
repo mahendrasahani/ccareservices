@@ -320,24 +320,32 @@
                                         <p> ₹{{number_format($order->delivery_charge, 2)}} </p>
                                     </div>
                                 </div>
+                                @if($order->cgst > 0)
                                 <div class="final-order-details">
                                     <div class="single-order-final">
-                                        <p> GST : </p>
+                                        <p> CGST : </p>
                                         <p> ₹{{number_format($order->cgst, 2)}} </p>
                                     </div>
                                 </div>
+                                @endif
+
+                                @if($order->sgst > 0)
                                 <div class="final-order-details">
                                     <div class="single-order-final">
                                         <p> SGST : </p>
                                         <p> ₹{{number_format($order->sgst, 2)}} </p>
                                     </div>
                                 </div>
+                                @endif 
+
+                                @if($order->igst > 0)
                                 <div class="final-order-details">
                                     <div class="single-order-final">
                                         <p> IGST : </p>
                                         <p> ₹{{number_format($order->igst, 2)}} </p>
                                     </div>
                                 </div>
+                                @endif
 
                                 @if($order->promo_discount != '' && $order->promo_discount > 0)
                                 <div class="final-order-details">

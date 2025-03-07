@@ -220,9 +220,7 @@ input.btn.px-4.btn-outline-dark:hover{
         border-radius: 50%;
     }
 }
-    </style>
-
-
+</style> 
 
 <div class="content-body">
             <div class="top-set">
@@ -262,22 +260,49 @@ input.btn.px-4.btn-outline-dark:hover{
                                         <div class="col-md-6 p-3">
                                             <input required placeholder="City" type="text" class="form-control" name="city" id="city" value="{{$profile->city ?? ''}}">
                                         </div>
-                                        <div class="col-md-6 p-3" style="display: flex;">
-                                            <p class="mt-2" style="color: gray;">Upload Aadhar Card Front</p>
-                                            <input class="mt-2" placeholder="Aadhar" type="file" class="form-control" name="aadhar_front" id="aadhar_front">
-                                            @if($profile->aadhar_front != '' )<a href="{{url($profile->aadhar_front)}}">View</a>@endif
+                                        <div class="col-md-12 p-3">
+                                            <p class="mt-2 m-0" style="color: gray;">Upload Aadhar Card Front</p>
+                                            <div class="d-flex align-items-center" style="gap: 10px;">
+                                                <input class="mt-2 p-2 w-100" 
+                                                  placeholder="Aadhar" 
+                                                  type="file"
+                                                  class="form-control" 
+                                                  name="aadhar_front" 
+                                                  id="aadhar_front"
+                                                  style="border: 1px solid #ced4da;"
+                                                  >
+                                                <span>@if($profile->aadhar_front != '' )<a href="{{url($profile->aadhar_front)}}">View</a>@endif</span>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 p-3" style="display: flex;">
-                                            <p class="mt-2" style="color: gray;">Upload Aadhar Card Back</p>
-                                            <input class="mt-2" placeholder="Aadhar" type="file" class="form-control" name="aadhar_back" id="aadhar_back">
-                                            @if($profile->aadhar_back != '' )<a href="{{url($profile->aadhar_back)}}">View</a>@endif
+                                        <div class="col-md-12 p-3" >
+                                            <p class="mt-2 m-0" style="color: gray;">Upload Aadhar Card Back</p>
+
+                                            <div class="d-flex align-items-center" style="gap: 10px;">
+                                                <input class="mt-2 p-2 w-100" 
+                                                 placeholder="Aadhar" type="file"
+                                                 class="form-control" 
+                                                 name="aadhar_back" 
+                                                 id="aadhar_back"
+                                                 style="border: 1px solid #ced4da;"
+                                                 >
+                                                <span> @if($profile->aadhar_back != '' )<a href="{{url($profile->aadhar_back)}}">View</a>@endif </span>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 p-3" style="display: flex;">
-                                            <p class="mt-2 " style="color: gray;">Company Id</p>
-                                            <input class="mt-2" placeholder="Aadhar" type="file" class="form-control" name="company_id" id="company_id">
-                                            @if($profile->company_id != '' )<a href="{{url($profile->company_id)}}">View</a>@endif
+
+                                        <div class="col-md-12 p-3">
+                                            <p class="mt-2 mb-0 " style="color: gray;">Company Id</p>
+                                            <div class="d-flex align-items-center" style="gap: 10px;">
+                                                <input class="mt-2 p-2 w-100" 
+                                                 placeholder="Aadhar" type="file"
+                                                 class="form-control" 
+                                                 name="company_id" id="company_id"
+                                                 style="border: 1px solid #ced4da;"
+                                                 >
+                                                 <span> @if($profile->company_id != '' )<a href="{{url($profile->company_id)}}">View</a>@endif</span>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 p-3">
+
+                                        <div class="col-md-12 p-3">
                                             <input placeholder="Postcode" type="text" class="form-control" name="postal_code" id="postal_code" value="{{$profile->postal_code ?? ''}}">
                                         </div>
                                         <div class="form-group mt-3 col-md-12">

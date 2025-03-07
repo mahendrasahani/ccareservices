@@ -47,8 +47,7 @@
                             
                                     <div class="col-xl-2 col-md-3">
                                         <a href="{{ route('backend.order.select_customer') }}"   style="padding: 8px 12px; background: #6fd96f;" class="text-white" >
-                                            Create Order
-                                            <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create Order</button> -->
+                                            Create Order 
                                         </a>
                                             
                                         </div>

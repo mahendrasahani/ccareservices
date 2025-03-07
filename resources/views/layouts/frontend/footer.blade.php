@@ -8,7 +8,7 @@
                         <li class="pt-2">Home</li>
                     </a>
                     @foreach($main_categories as $main)
-                    <a href="{{route('frontend.product.product_list', [Str::slug($main->slug)])}}" class="text-decoration-none text-white">
+                    <a href="{{route('frontend.product.product_list', [Str::slug($main->slug), Str::slug($main->subCategory[0]->slug)])}}" class="text-decoration-none text-white">
                         <li class="pt-2">{{$main->name}}</li>
                     </a>
                     @endforeach
@@ -34,10 +34,11 @@
             <div class="col-md-3">
                 <h6 class="fw-bold  text-white">Extras</h6>
                 <ul class="list-inline hover-animate">
-                  
-                    <a href="" class="text-decoration-none text-white">
+                  @if(Auth::check())
+                    <a href="{{route('frontend.user.dashboar.view')}}" class="text-decoration-none text-white">
                         <li class="pt-2">My Account</li>
                     </a>
+                    @endif
                     <a href="" class="text-decoration-none text-white">
                         <li class="pt-2">Returns</li>
                     </a> 

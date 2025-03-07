@@ -565,12 +565,42 @@ class OrderController extends Controller{
     } 
 
 
-    public function selectCustomerToCreateOrder(){
-        try{
-            return view('backend.order.select_customer');
-        }catch(\Exception $e){
-            return 'something went wrong';      
+    public function selectCustomerToCreateOrder(Request $request){
+        $validate = $request->validate([
+            "name" => ['sometimes', 'nullable', 'string', 'max:255'],
+            "email" => ['sometimes', 'nullable', 'email', 'max:255'],
+            "phone" => ['sometimes', 'nullable', 'regex:/^(?:\+?[0-9]{10,15}|[0-9]{10})$/'],
+        ]);
+    
+        try {
+            $name = $request->name;
+            $email = $request->email;
+            $phone = $request->phone; 
+          
+            
+            if (empty($name) && empty($phone) && empty($email)) {  
+                $customers = [];  
+                $found_status = false;
+            }else{
+                $customers = User::where('user_type', 2);   
+                if (!empty($name)) {
+                    $customers = $customers->where('name', 'LIKE', '%'.$name.'%');
+                }
+                if (!empty($phone)) {
+                    $customers = $customers->where('phone', 'LIKE', '%'.$phone.'%');
+                }
+                if (!empty($email)) {
+                    $customers = $customers->where('email', 'LIKE', '%'.$email.'%');
+                } 
+                $customers = $customers->paginate(20); 
+                    $found_status = true;
+               
+            } 
+            return view('backend.order.select_customer', compact('customers', 'found_status'));
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong'], 500);
         }
     }
+    
 }
- 
+

@@ -23,17 +23,23 @@ class CustomerController extends Controller{
         return view('backend.customer.create');
     }
 
-    public function store(Request $request){ 
+    public function store(Request $request){  
         $validate =$request->validate([
             "name" => ['required'],
             "email" => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             "phone" => ['required', 'numeric', 'digits:10', 'unique:'.User::class], 
             "shipping_address" => ['required'],
             "shipping_name" => ['required'],
-            "shipping_email" => ['required'],
-            "shipping_phone" => ['required', 'numeric', 'digits:10',],
+            "shipping_email" => ['required', 'email', 'max:255'],
+            "shipping_phone" => ['required', 'numeric', 'digits:10'],
             "shipping_city" => ['required'],
-            "shipping_postal_code" => ['required'],  
+            "shipping_postal_code" => ['required', 'numeric'], 
+            
+            "billing_email" => ['email', 'max:255', 'nullable'], 
+            "billing_phone" => ['numeric', 'digits:10', 'nullable'], 
+            "billing_postal_code" => ['numeric', 'nullable'], 
+            
+
             "aadhar_front" => ['mimes:jpg,png,pdf,jpeg'],
             "aadhar_back" => ['mimes:jpg,png,pdf,jpeg'],
             "security_check" => ['mimes:jpg,png,pdf,jpeg'],

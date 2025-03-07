@@ -2141,8 +2141,15 @@ a.btn.btn-warning.animation {
     border-radius: 3px;
   } */
  
-
-
+.h5Element{
+  color: #002c6f;
+}
+.pElement{
+  font-style: 14px !important;
+}
+.ulListElement li{
+  font-size: 13px;
+}
 
 
 

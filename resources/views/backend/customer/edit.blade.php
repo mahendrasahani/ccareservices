@@ -228,7 +228,7 @@
                                             <!-- <div class="alert alert-info">Documents</div>   -->
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label" >Upload Aadhar Card Front </label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-7">
                                                     <input type="file" class="form-control" id="aadhar_front" name="aadhar_front"  value="{{old('aadhar_front')}}" accept=".pdf, .jpg, .jpeg, .png"/> 
                                                     @error('aadhar_front')
                                                         <p style="color:red; font-weight:bold;">{{$message}}</p>
@@ -239,20 +239,24 @@
                                                     @php
                                                     $extension = pathinfo($user->aadhar_front, PATHINFO_EXTENSION);
                                                     @endphp
-                                                    @if($extension == 'pdf')
-                                                        <p>This is a PDF file.</p>
-                                                    @elseif(in_array($extension, ['jpg', 'jpeg', 'png']))
 
-                                                    <div class="col-md-1">
-                                                            <img 
-                                                            src="{{ url($user->aadhar_front) }}"
-                                                            class="w-100 showImages"
-                                                            data-label="Aadhar Card Front"
-                                                            data-toggle="modal" data-target="#exampleModalCenter"
-                                                            >
-                                                           
+                                                    <div class="col-md-2">
+                                                        @if($extension == 'pdf')
+                                                            <a href="{{ url($user->aadhar_front) }}" 
+                                                                style="padding: 5px 10px; border: 1px solid #7571f9; color: #7571f9;" 
+                                                               >View pdf</a>
+
+                                                        @elseif(in_array($extension, ['jpg', 'jpeg', 'png']))
+
+                                                                <img 
+                                                                    src="{{ url($user->aadhar_front) }}"
+                                                                    class="w-50 showImages"
+                                                                    data-label="Aadhar Card Front"
+                                                                    data-toggle="modal" data-target="#exampleModalCenter"
+                                                                > 
+                                                        @endif 
                                                     </div>
-                                                    @endif 
+
                                                 @endif
 
 
@@ -260,35 +264,39 @@
 
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label">Upload Aadhar Card Back</label>
-                                                <div class="col-md-8">
-                                                    <input type="file" class="form-control" id="aadhar_back" name="aadhar_back"  accept=".pdf, .jpg, .jpeg, .png"/> 
+                                                <div class="col-md-7">
+                                                    <input type="file" class="form-control" id="aadhar_back" name="aadhar_back" accept=".pdf, .jpg, .jpeg, .png"/> 
                                                     @error('aadhar_back')
                                                         <p style="color:red; font-weight:bold;">{{$message}}</p>
                                                     @enderror
-                                                </div> 
+                                                </div>  
 
                                                 @if($user->aadhar_back != '') 
                                                 @php
                                                 $extension = pathinfo($user->aadhar_back, PATHINFO_EXTENSION);
                                                 @endphp
-                                                @if($extension == 'pdf')
-                                                    <p>This is a PDF file.</p>
-                                                @elseif(in_array($extension, ['jpg', 'jpeg', 'png']))
-                                                <div class="col-md-1">
-                                                        <img src="{{ url($user->aadhar_back) }}" 
-                                                         class="w-100 showImages" 
-                                                         data-label="Aadhar Card Back"
-                                                         data-toggle="modal" data-target="#exampleModalCenter"
-                                                         style="cursor: pointer;"> 
+                                                <div class="col-md-2"> 
+
+                                                    @if($extension == 'pdf')
+                                                        <a href="{{ url($user->aadhar_back) }}" 
+                                                            style="padding: 5px 10px; border: 1px solid #7571f9; color: #7571f9;" 
+                                                            >View pdf</a>
+
+                                                    @elseif(in_array($extension, ['jpg', 'jpeg', 'png'])) 
+                                                            <img src="{{ url($user->aadhar_back) }}" 
+                                                                class="w-50 showImages" 
+                                                                data-label="Aadhar Card Back"
+                                                                data-toggle="modal" data-target="#exampleModalCenter"
+                                                                style="cursor: pointer;"
+                                                               >  
+                                                    @endif
                                                 </div>
-                                                @endif
-                                               
                                                @endif
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label" >Upload Security Cheque</label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-7">
                                                     <input type="file" class="form-control" id="security_cheque" name="security_cheque"  accept=".pdf, .jpg, .jpeg, .png"/> 
                                                     @error('security_cheque')
                                                         <p style="color:red; font-weight:bold;">{{$message}}</p>
@@ -298,18 +306,24 @@
                                                 @php
                                                 $extension = pathinfo($user->security_check, PATHINFO_EXTENSION);
                                                 @endphp
-                                                @if($extension == 'pdf')
-                                                    <p>This is a PDF file.</p>
-                                                @elseif(in_array($extension, ['jpg', 'jpeg', 'png']))
-                                                <div class="col-md-1">
-                                                        <img src="{{ url($user->security_check) }}"  
-                                                         class="w-100 showImages" 
-                                                         data-label="security Cheque"
-                                                         data-toggle="modal" data-target="#exampleModalCenter"  
-                                                         style="cursor: pointer;"> 
-                                                </div>
-                                                @endif
-                                               
+
+                                               <div class="col-md-2 d-flex align-items-center">
+                                                    @if($extension == 'pdf')  
+                                                        <a href="{{ url($user->security_check) }}" 
+                                                          style="padding: 5px 10px; border: 1px solid #7571f9; color: #7571f9;"
+                                                          >View pdf</a>
+
+                                                    @elseif(in_array($extension, ['jpg', 'jpeg', 'png']))
+                                                
+                                                            <img src="{{ url($user->security_check) }}"  
+                                                                 class="w-50 showImages" 
+                                                                 data-label="security Cheque"
+                                                                 data-toggle="modal" data-target="#exampleModalCenter"  
+                                                                 style="cursor: pointer;">  
+                                                    
+                                                    @endif
+                                              </div>
+
                                                @endif
                                             </div>    
                                         </div>

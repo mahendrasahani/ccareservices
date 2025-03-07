@@ -74,8 +74,8 @@
           <div class="card-header d-flex">
             <div class="aiz-checkbox-inline" data-id="one">
               <label class="aiz-checkbox">
-                <input type="checkbox" id="addressToggle" > 
-              </label>
+                <input type="checkbox" id="addressToggle" name="billing_detail_check"> 
+              </label>  
             </div>
             <h3 class="h5" style="margin-left: 13px;">Billing address is different?</h3>
           </div>
@@ -107,7 +107,7 @@
               </div>
               <div class="mb-3">
                 <label for="zipCode" class="form-label">Zip Code<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="billing_zip_code" name="billing_zip_code" placeholder="Enter Zip Code" value="{{$billing_address->zip_code ?? ''}}">
+                <input type="text" class="form-control" id="billing_zip_code" name="b_zip_code" placeholder="Enter Zip Code" value="{{$billing_address->zip_code ?? ''}}">
                 <p class="input_error" id="error_billing_zip_code"></p>
               </div> 
               <!-- <div class="mb-3">

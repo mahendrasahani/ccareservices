@@ -102,27 +102,27 @@
                                         @php
                                             $attribute_value_name = App\Models\Backend\AttributeValue::where('id', $attribute_value->attribute_value_id)->first()->name;
                                         @endphp
-                                        <input type="radio" id="option_{{$attribute_value->attribute_value_id}}" name="option_value" value="{{$attribute_value->attribute_value_id}}" data-stock-id="{{$attribute_value->id}}" {{$index == 0 ? 'checked':''}}>
+                                        <input type="radio" id="option_{{$attribute_value->attribute_value_id}}" name="option_value" value="{{$attribute_value->attribute_value_id}}" data-stock-id="{{$attribute_value->id}}" {{$index == 0 ? 'checked':''}}>  
                                         <label for="option_{{$attribute_value->attribute_value_id}}">{{$attribute_value_name}}</label>
                                     @endforeach
-                                    <!-- <input type="text" id="stock_id" value="{{$product_detail->getStock[0]['id']}}"> -->
+                                    <!-- <input type="text" id="stock_id" value="{{$product_detail->getStock[0]['id']}}"> --> 
                                 </div>
                                 <div class="calculator card" id="range_slider_section">
                                     <label>Select Month</label>
                                     <input type="range" min="1" max="12" value="1" id="slider" class="range_slider">
                                     <div class="numbers-container mt-2">  
-                                        <div class="number" >1</div>
-                                        <div class="number">2</div>
-                                        <div class="number" >3</div>
-                                        <div class="number">4</div>
-                                        <div class="number">5</div>
-                                        <div class="number">6</div>
-                                        <div class="number">7</div>
-                                        <div class="number">8</div>
-                                        <div class="number">9</div>
-                                        <div class="number">10</div>
-                                        <div class="number">11</div>
-                                        <div class="number">12</div>
+                                        <div class="number" onclick="numbersfun(1)">1</div>
+                                        <div class="number"  onclick="numbersfun(2)">2</div>
+                                        <div class="number"  onclick="numbersfun(3)">3</div>
+                                        <div class="number" onclick="numbersfun(4)">4</div>
+                                        <div class="number" onclick="numbersfun(5)">5</div>
+                                        <div class="number" onclick="numbersfun(6)">6</div>
+                                        <div class="number" onclick="numbersfun(7)">7</div>
+                                        <div class="number" onclick="numbersfun(8)">8</div>
+                                        <div class="number" onclick="numbersfun(9)">9</div>
+                                        <div class="number" onclick="numbersfun(10)">10</div>
+                                        <div class="number" onclick="numbersfun(11)">11</div>
+                                        <div class="number" onclick="numbersfun(12)">12</div>
                                     </div>
                                     <p>Price: <span id="show_price">{{number_format($product_detail->getStock[0]['price_1'], 2)}}/-</p>
                                      <input type="hidden" name="month" id="month" value="1">
