@@ -58,7 +58,7 @@ class Product extends Model
     // }
 
     public function getStock(){
-        return $this->hasMany(Stock::class, 'product_id');
+        return $this->hasMany(Stock::class, 'product_id')->with('getAttrValue');
     }
 
     public function getOrderProduct(){

@@ -10,9 +10,12 @@ use Illuminate\Support\Facades\Auth;
 class ReviewController extends Controller
 {
     public function index(){
-        $reviews = Review::with(['getUser', 'getProduct'])->orderBy('id', 'desc')->paginate(10); 
-        // return $reviews;
-        return view('backend.review.index', compact('reviews'));
+        try{
+            $reviews = Review::with(['getUser', 'getProduct'])->orderBy('id', 'desc')->paginate(10); 
+            return view('backend.review.index', compact('reviews'));
+        }catch(\Exception $e){
+            return "Something went wrong.";
+        }
     }
 
     public function submitReview(Request $request){

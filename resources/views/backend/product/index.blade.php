@@ -72,6 +72,7 @@
                                         <th style="display: table-cell;">Name</th>
                                         <th style="display: table-cell;">Info</th>
                                         <th style="display: table-cell;">Categories</th> 
+                                        <th style="display: table-cell;">Tax</th> 
                                         <th style="display: table-cell;">Published</th>
                                         <th style="display: table-cell;">Options</th>
                                     </tr>
@@ -142,8 +143,13 @@
                                             <span class="badge badge-primary mb-1">{{$main->name}}</span>
                                             @endforeach
                                         </td>
+
+                                        <td>
+                                            {{ $product->tax_name }} {{ $product->tax_rate }}%
+                                        </td>
                                          
-                                        <td><label class="switch">
+                                        <td>
+                                            <label class="switch">
                                                 <input type="checkbox" {{$product->product_status == 1 ? 'checked':''}}
                                                 id="product_status" name="product_status"
                                                 value="{{$product->product_status}}" data-id="{{$product->id}}">

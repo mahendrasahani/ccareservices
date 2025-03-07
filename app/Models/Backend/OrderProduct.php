@@ -20,6 +20,10 @@ class OrderProduct extends Model
         "option_id",
         "option_value_id", 
         "stock_id", 
+        "return_status",
+        "return_qty_left",
+        "delivery_date",
+        "end_date",
     ];
 
     public function getProduct(){
@@ -29,7 +33,5 @@ class OrderProduct extends Model
     public function getOrder(){
         return $this->belongsTo(Order::class, 'order_id');
     }
-
-    
-     
+ 
 }

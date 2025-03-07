@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Backend\AdminDashboardController;
+use App\Http\Controllers\Backend\ApiController;
 use App\Http\Controllers\Backend\AttributeController;
 use App\Http\Controllers\Backend\AttributeValueController;
 use App\Http\Controllers\Backend\BrandController;
@@ -29,11 +30,10 @@ Route::middleware('guest')->group(function () {
 });
 
 // -------------------------After Admin login (start) ------------------------------------------------------------
-Route::middleware(['auth', 'web', 'admin_check'])->group(function () { 
+Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('admin/dashboard', [AdminDashboardController::class, 'adminDashboardPageView'])->name('backend.admin.dashboard.view');
     Route::get('admin/profile/edit', [AdminDashboardController::class, 'editAdminProfile'])->name('backend.admin.edit_admin_profile');
     Route::post('admin/profile-update', [AdminDashboardController::class, 'updateAdminProfile'])->name('backend.admin.update_admin_profile');
-
 // ------------------------------------Brand Routes(start)----------------------------------------------------------------
     Route::get('/admin/brand', [BrandController::class, 'index'])->name('backend.brand.index');
     Route::post('/admin/brand', [BrandController::class, 'store'])->name('backend.brand.store');
@@ -122,6 +122,7 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/stock/variant-value-list', [StockController::class, 'getVariantValueList'])->name('backend.stock.get_variant_value_list');
     Route::get('/admin/stock/destroy', [StockController::class, 'destroy'])->name('backend.stock.destroy');
     Route::get('/admin/stock/search', [StockController::class, 'search'])->name('backend.stock.search');
+    Route::get('/admin/stock/check-product-in-variant', [StockController::class, 'checkProductInVariant'])->name('backend.stock.check_product_in_variant');
     
 
 
@@ -131,6 +132,10 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/order/destroy', [OrderController::class, 'destroy'])->name('backend.order.destroy');
     Route::get('/admin/order/search', [OrderController::class, 'search'])->name('backend.product.search');
     Route::get('/admin/order/send-invoice-to-customer/{order_id}', [OrderController::class, 'sendInvoiceToCustomer'])->name('backend.order.send_invoice_to_customer');
+    Route::get('/admin/order/create-order', [OrderController::class, 'createOrder'])->name('backend.order.create_order');
+    Route::get('/admin/order/new-order', [OrderController::class, 'newOrder'])->name('backend.order.new_order');
+    Route::post('/admin/order/new-order', [OrderController::class, 'newOrderStore'])->name('backend.order.new_order_store');
+    Route::get('/admin/order/select-customer', [OrderController::class, 'selectCustomerToCreateOrder'])->name('backend.order.select_customer');
 
 
     Route::get('/admin/invoice/{id}', [InvoiceController::class, 'index'])->name('backend.invoice.index');
@@ -148,6 +153,10 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/customers/create', [CustomerController::class, 'create'])->name('backend.customer.create'); 
     Route::post('/admin/customers/store', [CustomerController::class, 'store'])->name('backend.customer.store'); 
     Route::get('/admin/customers/view/{id}', [CustomerController::class, 'view'])->name('backend.customer.view'); 
+    Route::get('/admin/customers/edit/{id}', [CustomerController::class, 'edit'])->name('backend.customer.edit'); 
+    Route::post('/admin/customers/update/{id}', [CustomerController::class, 'update'])->name('backend.customer.update'); 
+    Route::get('/admin/customers/update-active-status', [CustomerController::class, 'updateActiveStatus'])->name('backend.customer.update_active_status'); 
+
     Route::get('/admin/customers/search', [CustomerController::class, 'search'])->name('backend.customer.search');
 
 
@@ -165,7 +174,6 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/return/search', [ProductReturnController::class, 'search'])->name('backend.return.search');
 
      
-     
      Route::get('/admin/tax', [TaxController::class, 'index'])->name('backend.tax'); 
      Route::get('/admin/tax/create', [TaxController::class, 'create'])->name('backend.tax.create');
      Route::post('/admin/tax/store', [TaxController::class, 'store'])->name('backend.tax.store');
@@ -173,10 +181,15 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
      Route::post('/admin/tax/update/{id}', [TaxController::class, 'update'])->name('backend.tax.update');
      Route::get('/admin/tax/change-status', [TaxController::class, 'changeStatus'])->name('backend.tax.change_status');
 
-
-     Route::get('/admin/recent-activity', [RecentActivityController::class, 'index'])->name('backend.recent_activity');
+    Route::get('/admin/recent-activity', [RecentActivityController::class, 'index'])->name('backend.recent_activity');
     Route::get('/admin/recent-activity/search', [RecentActivityController::class, 'search'])->name('backend.recent_activity.search');
+    
+    //--------------------------admin api to create order-----------------------------------------------
+    Route::get('/admin/get-product-list-to-order', [ApiController::class, 'getProductListToCreateOrder'])->name('backend.get_product_list_to_create_order');
+    Route::get('/admin/get-variant-stock', [ApiController::class, 'getVariantStock'])->name('backend.get_variant_stock');
+    Route::get('/admin/get-active-shipping-charge', [ApiController::class, 'getShippingCharge'])->name('backend.get_active_shipping_charge');
 
+    //--------------------------admin api to create order-----------------------------------------------
 
 });
 // -------------------------After Admin login (end) ------------------------------------------------------------

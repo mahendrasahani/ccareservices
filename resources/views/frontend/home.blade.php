@@ -22,6 +22,7 @@
   </div>
   <!-- spport section -->
   <div class="wrapper d-flex justify-content-center mt-3">
+    
     <div class="card-fist service">
       <svg class="icon icon-like" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
         <path
@@ -34,6 +35,7 @@
       <img class="person_img" src="{{url('public/assets/frontend/images/icon/free-instalation1.png')}}" alt="">
       <p class="person_name">Free Repair And Maintenance</p>
     </div>
+
     <div class="card-fist service">
       <svg class="icon icon-like" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
         <path
@@ -75,6 +77,7 @@
       <p class="person_name">Free Installation</p>
 
     </div>
+
     <div class="card-fist service">
       <svg class="icon icon-like" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
         <path
@@ -88,12 +91,13 @@
       <p class="person_name">Secure Payment</p>
       <span class="short">All cards accepted</span>
     </div>
+
   </div>
 </section>
 <!-- spport section end -->
 <!--  product  start -->
 <section>
-  <div class="container mt-5">
+  <div class="container mt-3">
     <div class="row">
       <div class="col-md-12">
         <div class="d-flex align-items-center position-relative  mb-5 mt-5" id="before">
@@ -105,8 +109,8 @@
         @foreach($main_categories as $main)
         @if(count($main->subCategory) > 0)
         @foreach($main->subCategory as $sub)
-          <div class="col-md-3" id="media-product">
-            <div class="card hover-item">
+          <div class="col-md-3 col-6 mb-4" id="mediaroduct">
+            <div class="card hover-item h-100">
               <a href="{{route('frontend.product.product_list', [Str::slug($main->slug), Str::slug($sub->slug)])}}" class="text-decoration-none">
                 @if($sub->thumbnail_image != '')
                 <img src="{{url($sub->thumbnail_image)}}" class="card-img-top" alt="...">
@@ -127,7 +131,7 @@
        
       <!--button toggle-->
        
-      <div class="col-md-12 mt-5 mb-2">
+      <div class="col-md-12 mt-4 mb-2">
         <a href="#" class="text-decoration-none" >
           <button class="animate-btx animate-btx-home" style="margin: 0px auto;" id="show-hidden-menu">
             View More 
@@ -150,10 +154,10 @@
           <h4 class="bg-white" style="color: #656565; font-size: 17px;">&nbsp&nbspTrending Products&nbsp</h4>
         </div>
       </div>
-      <div id="my-unique-carousel" class="owl-carousel">
+      <div id="my-unique-carousel" class="owl-carousel h-100">
 
         @foreach($product_list as $product)
-        <div class="card">
+        <div class="card h-100">
           <img
             src="
             @if($product->product_images != '' || $product->product_images != null)
@@ -179,7 +183,7 @@
               </p>
               <p class="offer">-15% OFF</p>
             </div> -->
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between mt-2">
               <a href="{{route('frontend.product.single_product', [$product->slug])}}"><button type="button" class="btn btn-warning animation">View More</button></a>
             </div>
           </div>
@@ -200,7 +204,7 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-6">
-        <img src="{{url('public/assets/frontend/images/pexels-nataliya-vaitkevich-6214476.jpg')}}" class="w-100 mt-5">
+        <img src="{{url('public/assets/frontend/images/pexels-nataliya-vaitkevich-6214476.jpg')}}" class="w-100 mt-4">
       </div>
       <div class="col-md-6 " class="text-center">
         <div class="card" style="    border: none;  ">

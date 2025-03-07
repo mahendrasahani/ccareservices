@@ -89,7 +89,11 @@
                                     <div class="mb-3 d-flex justify-content-between">
                                         <span class="mr-2 ml-0">Brand:</span>
                                         <div class="brand-img-logo"> 
+                                            @if($product_detail->getBrand->logo != '')
                                             <img src="{{url($product_detail->getBrand->logo)}}" alt="Brand" > 
+                                            @else
+                                                {{ $product_detail->getBrand->name ?? '' }}
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="mb-3 d-flex justify-content-between">

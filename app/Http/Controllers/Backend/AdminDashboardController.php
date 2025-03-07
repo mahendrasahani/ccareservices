@@ -18,7 +18,7 @@ class AdminDashboardController extends Controller
         $total_order = Order::where('status', 1)->count();
         $total_sales = Order::where('status', 1)->where('order_status', 'delivered')->sum('total');
         $total_product = Product::count(); 
-        $latest_order = Order::orderBy('id', 'desc')->paginate(5);
+        $latest_order = Order::with('getUser')->orderBy('id', 'desc')->paginate(5);
         $return_order = ProductReturn::orderBy('id', 'desc')->get();
         $todays_recent_activity = RecentActivity::whereDate('created_at', now()->toDateString())->count();
 

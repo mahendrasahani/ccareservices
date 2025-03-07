@@ -1,6 +1,5 @@
 @extends('layouts/frontend/main')
 @section('main-section')
-
 <style>
    #toggleList li{
     list-style-type: none; 
@@ -28,11 +27,12 @@
         </div>
     </div> 
 </section> 
+
 <section>
     <div class="container mt-5">
         <div class="row">
             <form action="#" class="d-flex flex-column flex-md-row justify-content-between mb-3 align-items-center">
-                <h4 class="mb-3 mb-md-0">Categories</h4>
+                <h5 class="mb-3 mb-md-0">Categories</h5>
                  
             </form>
         </div>
@@ -42,25 +42,25 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-header">
-                        <h6>More Option</h6>
+            <div class="col-md-3">
+                <div class="card" style="border: 1px solid #E5EAF0">
+                    <div class="card-header" style="background:#E5EAF0; color:#01316b">
+                        <h6 class="m-0 p-0">More Option</h6>
                     </div>
                     <div class="card-body">  
-                        <ul id="toggleList">
-                        @foreach($main_categories as $main) 
-                            <li ><a href="#" class="text-decoration-none text-dark" >{{$main->name}}</a>
-                            @if(count($main->subCategory) > 0)
-                            <i class="fa-solid fa-caret-down mx-2"></i> 
-                                <ul>
-                                @foreach($main->subCategory as $sub)
-                                    <li class="mt-2 mb-2"><a href="{{route('frontend.product.product_list', [Str::slug($main->slug), Str::slug($sub->slug)])}}" class="text-decoration-none text-dark">{{$sub->name}}</a> </li> 
-                                    @endforeach
-                                </ul>
-                                @endif
-                            </li> 
-                            @endforeach
+                        <ul id="toggleList" class="">
+                            @foreach($main_categories as $main) 
+                                <li class="cotegories_list mb-3"><a href="#" class="text-decoration-none text-dark" >{{$main->name}}</a>
+                                @if(count($main->subCategory) > 0)
+                                <i class="fa-solid fa-caret-down mx-2"></i> 
+                                    <ul class="subList_categries">
+                                    @foreach($main->subCategory as $sub)
+                                        <li class="mt-2 mb-2"><a href="{{route('frontend.product.product_list', [Str::slug($main->slug), Str::slug($sub->slug)])}}" class="text-decoration-none text-dark">{{$sub->name}}</a> </li> 
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                                </li> 
+                                @endforeach
                         </ul> 
                     </div>
                 </div>
@@ -86,14 +86,14 @@
                     </div>
                 </div> -->
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <div class="row">
                     
                     <input type="hidden" value="{{$page_url}}" id="page_url">
 
                     @foreach($product_list as $product)
-                    <div class="col-md-3 all laptop" class="content" id="{{$product->slug}}">
-                        <div class="card ">
+                    <div class="col-md-4 all laptop" class="content" id="{{$product->slug}}">
+                        <div class="card h-100 ">
                             <div class="cart_img_wrap mt-2">
                                 <a href="{{route('frontend.product.single_product', [$product->slug])}}"><img
                                         src="{{$product->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->product_images[0])}}"></a>
@@ -107,9 +107,9 @@
                                 </p>
                                 @elseif($product->discount_type == 'percent')
                                 <p class="fw-bold">₹{{number_format($product->regular_price - ($product->regular_price * $product->discount)/100, 2)}}</p>
-                                @endif 
-                                <p class="" style="font-size: 11px; color: gray;">{!! Str::limit($product->product_description, 40) !!}</p>
-                                <hr> 
+                                @endif
+                              
+                                <hr>
                                 <a href="{{route('frontend.product.single_product', [$product->slug])}}" class="btn btn-warning animation search-cate">Rent Now</a>
                             </div>
                         </div>

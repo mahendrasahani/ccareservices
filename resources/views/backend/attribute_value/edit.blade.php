@@ -18,6 +18,12 @@
                                                 <input type="text" placeholder="Name" id="name" name="name" class="form-control" required="" value="{{$attribute_value_detail->name}}">
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="sort_order">Sort Order<i class="las la-language text-danger" title="Sort Order"></i></label>
+                                            <div class="col-sm-9">
+                                                <input type="number" placeholder="Sort Order" id="sort_order" name="sort_order" class="form-control" required="" value="{{$attribute_value_detail->sort_order}}">
+                                            </div>
+                                        </div>
                                         
                                         <div class="form-group mb-0 text-right">
                                             <button type="submit" class="btn btn-primary">Update</button>

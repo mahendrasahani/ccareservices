@@ -265,7 +265,7 @@ $(document).on('click', '#add_to_cart_btn', function(){
     let month = $('#month').val(); 
     let price = $('#price').val();  
     let stock_id = document.querySelector('input[name="option_value"]:checked').getAttribute('data-stock-id'); 
-    console.log(stock_id);
+    
     $("#quantity_error").html("");
     $("#date_error").html("");
     
@@ -296,7 +296,6 @@ $(document).on('click', '#add_to_cart_btn', function(){
                         'authentication': response.authentication
                     },
                     success:function(response){
-                        console.log(response);
                         let item_count = response.data.length; 
                         $('#cartItemCount').html(item_count);
                         let update_btn_text = $('#add_to_cart_btn'); 
@@ -318,17 +317,17 @@ $(document).on('click', '#add_to_cart_btn', function(){
 async function updateCart() {
     try {
         let product_id = document.getElementById("product_id").value;
-        const response = await fetch(baseUrl + "/verify-user");
+        const response = await fetch(baseUrl+"/verify-user");
         const userData = await response.json();
         if (userData.authentication === true) {
-            const productResponse = await fetch(baseUrl + "/check-product-in-cart?product_id=" + product_id);
+            const productResponse = await fetch(baseUrl+"/check-product-in-cart?product_id=" + product_id);
             const productData = await productResponse.json();
             if (productData.product_status === "already_exist") {
                 document.getElementById('add_to_cart_btn').innerHTML = 'Update Cart';
                 document.getElementById('add_to_cart_btn').classList.remove("add_to_cart_btn_success");
             }
         } else {
-            const productResponse = await fetch(baseUrl + "/check-product-in-cart?product_id=" + product_id);
+            const productResponse = await fetch(baseUrl+"/check-product-in-cart?product_id=" + product_id);
             const productData = await productResponse.json();
 
             if (productData.product_status === "already_exist") {

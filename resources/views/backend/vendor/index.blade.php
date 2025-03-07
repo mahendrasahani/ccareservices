@@ -17,7 +17,7 @@
                         <span>Add New Vendor</span>
                     </a>
                 </div>
-            </div>
+            </div>  
             <div class="row">
                 <div class="col-md-12">
                     <div class="card" style="border: 1px solid #dadada;">
@@ -46,10 +46,10 @@
                                 </div>
                             </div>
                             </form> -->
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="input-group">
                                     <input type="text" class="form-control form-control-sm" id="search" name="search"
-                                        placeholder="Search Name or Email">
+                                        placeholder="Search Name, Email or Number">
                                 </div>
                             </div>  
                         </div>
@@ -75,7 +75,7 @@
                                         </td>
                                         <td style="display: table-cell;"> 
                                             <div class="vendor_img">
-                                                <img src="{{url($vendor->profile_image != "" ? $vendor->profile_image:"public\assets\backend\images\profile\default-user.png")}}">
+                                                <img src="{{url($vendor->profile_image != "" ? $vendor->profile_image:"public\assets\backend\images\profile\default-user-icon.webp")}}">
                                             </div>   
                                         </td>
                                         <td style="display: table-cell;">
@@ -97,7 +97,7 @@
                                                 href="{{route('backend.vendor.edit', [$vendor->id])}}" title="Edit">
                                                 <i class="fa-regular fa-pen-to-square text-white"></i>
                                             </a> 
-                                            <button value="{{$vendor->id}}" class="btn btn-icon btn-sm delete_ico"
+                                            <button value="{{$vendor->id}}" class="btn btn-icon btn-sm delete_ico"  
                                             id="delete_btn"> <i class="fa-solid fa-trash-can"></i></button>
                                             </div>
                                         </td>

@@ -13,12 +13,14 @@ use App\Models\Backend\DeliveryBoy;
 use App\Models\Backend\Order;
 use App\Models\Backend\OrderProduct;
 use App\Models\Backend\ShippingAddress;
+use App\Models\Backend\ShippingCharge;
 use App\Models\Backend\Stock;
 use App\Models\Frontend\Cart;
 use App\Models\User;
  
 use Dompdf\Dompdf;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -28,8 +30,8 @@ use Razorpay\Api\Api;
  
 
 class OrderController extends Controller{
-    public function index(){ 
-        $orders = Order::select('*')->where('order_status', '!=', "not_confirmed");
+    public function index(){
+        $orders = Order::with(['getUser'])->select('*');
         if(isset($_GET['payment_status']) && $_GET['payment_status'] != ''){
             $orders = $orders->where('payment_status', $_GET['payment_status']);
         }
@@ -37,17 +39,17 @@ class OrderController extends Controller{
             $orders = $orders->where('order_status', $_GET['delivery_status']);
         }
         $orders = $orders->orderBy('id', 'desc')->paginate(10);
-        return view('backend.order.index', compact('orders'));
+        $customers = User::where("user_type", 2)->where('active_status', 1)->get();
+        return view('backend.order.index', compact('orders', 'customers'));
     }
 
     public function edit($id){ 
         $delivery_boy_list = DeliveryBoy::where('status', 1)->get();
-        $order = Order::with(['getOrderProduct:order_id,product_name,quantity,price,month,total_price,product_id,option_id,option_value_id', 'getOrderProduct.getProduct:id,product_images'])->where('id', $id)->first(); 
-        // return $order;
+        $order = Order::with(['getUser', 'getOrderProduct:order_id,product_name,quantity,price,month,total_price,product_id,option_id,option_value_id,delivery_date,end_date', 'getOrderProduct.getProduct:id,product_images'])->where('id', $id)->first();
         return view('backend.order.edit', compact('order', 'delivery_boy_list')); 
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id){ 
         $payment_status = $request->payment_status;
         $order_status = $request->order_status;
         $discount = $request->discount; 
@@ -64,6 +66,15 @@ class OrderController extends Controller{
             "delivery_date" => $delivery_date,
             "delivery_remark" => $delivery_remark,
         ]); 
+        $order_products = OrderProduct::where('order_id', $id)->get(); 
+        if(count($order_products) > 0){
+            foreach($order_products as $order_product){
+                OrderProduct::where('id', $order_product->id)->update([
+                    "delivery_date" => $request->delivery_date,
+                    "end_date" => Carbon::parse($request->delivery_date)->addMonths($order_product->month)
+                ]);
+            }
+        }
         if($order_status == 'accepted'){
             if($order_detail != $order_status){
                 Order::where('id', $id)->update([
@@ -103,7 +114,7 @@ class OrderController extends Controller{
             }elseif($order_status == 'delivered'){
                 if($order_detail != $order_status){
                     Order::where('id', $id)->update([
-                        "delivered_date" => Carbon::now(), 
+                        "delivered_date" => $request->delivery_date, 
                     ]); 
                 }
                 $order_status_data = [
@@ -112,21 +123,23 @@ class OrderController extends Controller{
                 ];
                 Mail::to($order_detail->shipping_email)->send(new OrderStatusUpdateMail($order_status_data, "Your order has been delivered."));
             }
- 
+
         return redirect()->route('backend.order.index')->with('order_updated', "Order has been updated!");
     }
 
     public function placeOrder(Request $request){
         $payment_mode = $request->paymentMethod; 
         $admin_email = User::where('id', 1)->first()->email;
-        // if($payment_mode == '1'){ 
+        // if($payment_mode == '1'){
             $shipping_charge = Session::get('shipping_charge');
             $cart_items = Cart::with('getProduct:id,product_name,tax_name,tax_rate', 'getStock')
             ->whereHas('getStock', function ($query) {
                 $query->whereNull('deleted_at');
             })
             ->where('user_id', Auth::user()->id)->get();
-                
+            if(count($cart_items) <= 0){
+                return redirect()->route('frontend.home.view');
+            }
             $sub_total = 0;
             foreach ($cart_items as $item) {
                 $sub_total += $item->price*$item->quantity;
@@ -136,11 +149,12 @@ class OrderController extends Controller{
             $shipping_address = ShippingAddress::where('user_id', Auth::user()->id)->first();
             $billing_address = BillingAddress::where('user_id', Auth::user()->id)->first();
             $latest_order = Order::latest()->first();
-            $new_order_id = $latest_order ? substr($latest_order->order_id, 3) + 1 : 1000001;
+            $new_order_number = $latest_order ? intval(substr($latest_order->order_id, 2)) + 1 : 1;
+            $new_order_id = 'CC' . str_pad($new_order_number, 3, '0', STR_PAD_LEFT);
            
             $new_order_id = Order::create([
                     "user_id" => Auth::user()->id,
-                    "order_id" => 'CCS'.$new_order_id,
+                    "order_id" => $new_order_id,
                     "payment_mode" => $request->paymentMethod,
                     "delivery_charge" => $shipping_charge, 
                     "sub_total" => $sub_total,
@@ -161,9 +175,7 @@ class OrderController extends Controller{
                     "ordered_date" => Carbon::now(),
                     "status" => 1
                     ])->id; 
-
                     $new_order_detail = Order::where('id', $new_order_id)->first();
- 
                 foreach ($cart_items as $item) {
                     $option_value = AttributeValue::where('id', $item->option_value_id)->first();
                     $option = Attribute::where('id', $item->option_id)->first();
@@ -174,12 +186,15 @@ class OrderController extends Controller{
                         "product_name" => $item->getProduct->product_name,
                         "quantity" => $item->quantity,
                         "price" => $item->price,
-                        "month" => $item->month,
+                        "month" => $item->month, 
+                        "delivery_date" => $item->delivery_date,
+                        "end_date" => Carbon::parse($item->delivery_date)->addMonths($item->month), 
                         "option_id" => $option->name,
                         "option_value_id" => $option_value->name,
                         "total_price" => $item->price * $item->quantity,
-                        "stock_id" => $item->stock_id
-                    ]); 
+                        "stock_id" => $item->stock_id,
+                        "return_qty_left" => $item->quantity
+                    ]);
                     $stock_item = Stock::findOrFail($item->stock_id);
                     if ($stock_item->quantity >= $item->quantity) { 
                         $stock_item->quantity -= $item->quantity; 
@@ -243,12 +258,9 @@ class OrderController extends Controller{
                 return response()->json($option);
             }
             // code for order with payment gateways -----------------------------------------------------------------------------------------
+        }
 
-        } 
-
-
-
-
+ 
     public function purchaseHistory(){
         $data['purchase_history'] = Order::with('getOrderProduct:order_id,product_name')
         ->where('user_id', Auth::user()->id)
@@ -266,8 +278,7 @@ class OrderController extends Controller{
         ->findOrFail($order_id);
         }catch(\Exception $e){
             abort(404);
-        }
-        // return $order;
+        } 
         return view('frontend.account.order_detail', compact('order'));
     }
 
@@ -364,15 +375,20 @@ class OrderController extends Controller{
     public function sendInvoiceToCustomer(Request $request, $order_id){
         $order = Order::with(['getOrderProduct:order_id,product_name,quantity,price,month,total_price,product_id,option_id,option_value_id', 
         'getOrderProduct.getProduct:id,product_images,tax_name,tax_rate', 'getUser:id,name,email'])->where('id', $order_id)->first();
+        $imagePath = public_path('assets/frontend/images/logo/coolcarelogo.jpg');
+        $imageData = base64_encode(file_get_contents($imagePath));
+        $imageSrc = 'data:image/jpeg;base64,' . $imageData; 
+
         $file_name = 'invoice_'.time().'.pdf';
-        $html = view('backend.invoice.invoice_pdf', compact('order'))->render(); 
+        $html = view('backend.invoice.invoice_pdf', compact('order', 'imageSrc'))->render(); 
         $dompdf = new Dompdf();
-        $dompdf->loadHtml($html); 
-        $dompdf->setPaper('A4', 'portrait'); 
-        $dompdf->render();  
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
         $pdfOutput = $dompdf->output();
-        $filePath = 'invoices/'.$file_name; 
-        $publicPath = public_path($filePath); 
+        $filePath = 'invoices/'.$file_name;
+        $publicPath = public_path($filePath);
 
         file_put_contents($publicPath, $pdfOutput);
         $invoice_mail_data  = [
@@ -385,5 +401,176 @@ class OrderController extends Controller{
         return redirect()->back()->with('invoice_sent', "The invoice successfully sent to customer.");
     }
 
+    public function createOrder(Request $request){
+        $user_id = $request->customer;
+        $user = User::where('id', $user_id)->first();
+        $shipping_info = ShippingAddress::where('user_id', $user->id)->first();
+        $billing_info = BillingAddress::where('user_id', $user->id)->first();
+        return view('backend.order.create', compact('user', 'shipping_info', 'billing_info'));
     }
+
+    public function newOrderStore(Request $request){
+        try{
+            $sub_total = 0;
+            $cgst = 0;
+            $sgst = 0;
+            $igst = 0;
+            $all_ordered_products = collect();
+            $payment_method= $request->payment_method;
+            $payment_status= $request->payment_status;
+            $order_status = $request->order_status;
+            $order_date= $request->order_date;
+            $delivery_date = $request->delivery_date;
+            $user_id= $request->user_id;
+
+            $shipping_name = $request->shipping_name;
+            $shipping_email = $request->shipping_email;
+            $shipping_phone = $request->shipping_phone;
+            $shipping_address = $request->shipping_address;
+            $shipping_city = $request->shipping_city;
+            $shipping_zip_code = $request->shipping_zip_code;
+
+            $billing_name= $request->billing_name ?? $shipping_name;
+            $billing_email = $request->billing_email ??  $shipping_email;
+            $billing_phone = $request->billing_phone ?? $shipping_phone;
+            $billing_address = $request->billing_address ?? $shipping_address;
+            $billing_city = $request->billing_city ?? $shipping_city; 
+            $billing_zip_code = $request->billing_zip_code ?? $shipping_zip_code; 
+
+            $product_ids = $request->product_id;
+            $variant_ids = $request->variant;
+            $selected_months = $request->selected_month;
+            $unit_prices = $request->unit_price;
+            $product_qtys = $request->product_qty;
+            
+            $shipping_charge = ShippingCharge::where('status', 1)->first()->amount;
+            
+            $product_ids_c = array_map('intval', (array) ($request->product_id ?? []));
+            $variant_ids_c = array_map('intval', (array) ($request->variant ?? []));
+            $selected_months_c = array_map('intval', (array) ($request->selected_month ?? []));
+            $unit_prices_c = array_map('intval', (array) ($request->unit_price ?? []));
+            $product_qtys_c = array_map('intval', (array) ($request->product_qty ?? []));
+            
+            foreach($product_ids_c as $index => $product_id){
+                $ordered_stock =  Stock::with(['getAttrValue', 'getProduct'])->where('product_id', $product_id)->where('attribute_value_id', $variant_ids_c[$index])->first();
+                $all_ordered_products->push($ordered_stock);
+                $sub_total += $unit_prices_c[$index]*$product_qtys_c[$index];
+                if($ordered_stock->getProduct->tax_name == "GST"){
+                    $cgst += floatval(($unit_prices_c[$index]*$product_qtys_c[$index])*$ordered_stock->getProduct->tax_rate/100);
+                }elseif($ordered_stock->getProduct->tax_name == "IGST"){
+                    $igst += floatval(($unit_prices_c[$index]*$product_qtys_c[$index])*$ordered_stock->getProduct->tax_rate/100);
+                }elseif($ordered_stock->getProduct->tax_name == "SGST"){
+                    $sgst += floatval(($unit_prices_c[$index]*$product_qtys_c[$index])*$ordered_stock->getProduct->tax_rate/100);
+                }
+            }
+
+            $total = ($sub_total) + floatval($shipping_charge) + floatval($cgst) + floatval($sgst) + floatval($igst);
+            ShippingAddress::updateOrCreate(
+                ['user_id' => $user_id],
+                [
+                    "name" => $shipping_name,
+                    "email" => $shipping_email,
+                    "phone" => $shipping_phone,
+                    "address" => $shipping_address,
+                    "city" => $shipping_city,
+                    "zip_code" => $shipping_zip_code,
+                    "country" => 'India',
+                ]
+            );
+
+            if ($request->has('billing_detail_check')) {
+            BillingAddress::updateOrCreate(
+                ['user_id' => $user_id],
+                [
+                    "name" => $billing_name,
+                    "email" => $billing_email,
+                    "phone" => $billing_phone,
+                    "address" => $billing_address,
+                    "city" => $billing_city,
+                    "zip_code" => $billing_zip_code,
+                    "country" => 'India',
+                ]
+            );
+        }else{
+            BillingAddress::updateOrCreate(
+                ['user_id' => $user_id],
+                [
+                    "name" => $shipping_name,
+                    "email" => $shipping_email,
+                    "phone" =>  $shipping_phone,
+                    "address" => $shipping_address,
+                    "city" => $shipping_city,
+                    "zip_code" => $shipping_zip_code,
+                    "country" => 'India',
+                ]
+            );
+        }
+
+            $latest_order = Order::latest()->first(); 
+
+            $new_order_number = $latest_order ? intval(substr($latest_order->order_id, 2)) + 1 : 1;
+            $new_order_id = 'CC' . str_pad($new_order_number, 3, '0', STR_PAD_LEFT);
+
+
+            $new_order_id = Order::create([
+                "user_id" => $user_id,
+                "order_id" => $new_order_id,
+                "payment_mode" => $payment_method,
+                "delivery_charge" => $shipping_charge, 
+                "sub_total" => $sub_total,
+                "total" =>  floatval($total),
+                "billing_name" => $billing_name,
+                "shipping_name" =>  $shipping_name,
+                "billing_email" =>  $billing_email,
+                "billing_phone" =>  $billing_phone,
+                "shipping_email" => $shipping_email,
+                "shipping_phone" => $shipping_phone,
+                "tax" => 0,
+                "cgst" => $cgst,
+                "sgst" => $sgst,
+                "igst" => $igst,
+                "delivery_date" => $delivery_date,
+                "payment_status" => $payment_status, 
+                "order_status" => $order_status,
+                "payment_method" => $payment_method,
+                "shipping_address" => $shipping_address .' '.$shipping_city .' '.$shipping_zip_code .' India',
+                "billing_address" =>  ($billing_address ?? '').' '.($billing_city ?? '').' '.($billing_zip_code ?? '').' India',
+                "ordered_date" => $order_date,
+                "status" => 1
+                ])->id;
+                $new_order_detail = Order::where('id', $new_order_id)->first();
+              
+                foreach ($all_ordered_products as $index => $item) {
+                    $option_value = AttributeValue::where('id', $item->attribute_value_id)->first();
+                    $option = Attribute::where('id', $item->attribute_id)->first();
+                    OrderProduct::create([
+                        "user_id" => $user_id,
+                        "order_id" => $new_order_id,
+                        "product_id" => $item->product_id,
+                        "product_name" => $item->getProduct->product_name,
+                        "quantity" => $product_qtys_c[$index],
+                        "price" => $unit_prices_c[$index],
+                        "month" => $selected_months_c[$index],
+                        "option_id" => $option->name,
+                        "option_value_id" => $option_value->name,
+                        "total_price" => $unit_prices_c[$index] * $product_qtys_c[$index],
+                        "stock_id" => $item->id,
+                        "return_qty_left" => $product_qtys_c[$index]
+                    ]);
+                }
+                return redirect()->route('backend.order.index')->with("order_created", "New order has been successfully created.");
+        }catch(\Exception $e){
+            return "Something went wrong.";
+        }
+    } 
+
+
+    public function selectCustomerToCreateOrder(){
+        try{
+            return view('backend.order.select_customer');
+        }catch(\Exception $e){
+            return 'something went wrong';      
+        }
+    }
+}
  

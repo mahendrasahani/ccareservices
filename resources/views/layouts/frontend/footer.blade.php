@@ -111,8 +111,8 @@
            
             <div class="cbh-ph-circle"> </div>
             <div class="cbh-ph-circle-fill"> </div>
-            <div class="cbh-ph-img-circle1">
-              <img src="public\assets\backend\images\whatsappImg.png">
+            <div class="cbh-ph-img-circle1 d-flex justify-content-center align-items-center">
+              <img src="{{url('public/assets\backend\images\whatsappImg.png')}}" style="width:35px">
             </div>
         </a>
     </div> 

@@ -69,7 +69,7 @@ b, strong {
       <tbody>
         <tr>
           <td style="width: 50%;">
-               <img src="{{url('/public/assets/frontend/images/logo/coolcarelogo.jpg')}}" width="100^" height="100%" alt="logo" border="0" />
+               <img src="{{$imageSrc}}" width="40%" alt="logo" border="0"/>
               <address><strong>Cool Care Service</strong><br>
               F222 opposite radhaswami satsang patodi road, Saraswati Enclave, Sector 10A, Gurugram, Haryana 122001</address>
             <b>Telephone</b> 7291917070<br>
@@ -85,19 +85,25 @@ b, strong {
     <table class="table table-bordered">
       <thead>
         <tr>
-          <td style="width: 50%;"><b>Payment Address</b></td>
-          <td style="width: 50%;"><b>Shipping Address</b></td>
+          <td style="width: 50%;"><b>Shipping Detail</b></td>
+          <td style="width: 50%;"><b>Billing Detail</b></td>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><address>
-           {{$order->billing_address}}
-            </address></td>
-          <td><address>
-           {{$order->shipping_address}}
-            
-            </address></td>
+          <td>
+          <p>{{ $order->shipping_name ?? '' }}</p>
+            <p>{{ $order->shipping_email ?? '' }}</p>
+            <p>{{ $order->shipping_phone ?? '' }}</p>
+            <address>{{$order->shipping_address}}</address>
+          </td>
+            <td> 
+            <p>{{ $order->billing_name ?? '' }}</p>
+            <p>{{ $order->billing_email ?? '' }}</p>
+            <p>{{ $order->billing_phone ?? '' }}</p>
+            <address>{{$order->billing_address}}</address>
+          </td>
+
         </tr>
       </tbody>
     </table>
@@ -132,7 +138,7 @@ b, strong {
           <td class="text-right">Rs.{{number_format($order->sub_total, 2)}}</td>
         </tr>
         <tr>
-          <td class="text-right" colspan="3"><b>GST</b></td>
+          <td class="text-right" colspan="3"><b>CGST</b></td>
           <td class="text-right">Rs.{{number_format($order->cgst, 2)}}</td>
         </tr>
         <tr>

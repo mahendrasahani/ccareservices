@@ -24,6 +24,7 @@
                                                         <th>#</th>
                                                         <th>Attribute Value</th>
                                                         <th>Attribute</th>
+                                                        <th>Sort Order</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
@@ -33,6 +34,7 @@
                                                         <td>{{$count++}}</td>
                                                         <td>{{$value->attribute->name}}</td>
                                                         <td>{{$value->name}}</td>
+                                                        <td>{{$value->sort_order}}</td>
                                                         <td >
                                                             <a href="{{route('backend.attribute_value.edit', [$value->id])}}"><i class="fa-regular fa-pen-to-square edit_icon text-white"></i></a>
                                                         </td>
@@ -69,6 +71,10 @@
                                                 <div class="form-group mb-3">
                                                     <label for="name">Attribute Value Name</label>
                                                     <input type="text" placeholder="Attribute Value" id="attribute_value" name="attribute_value" class="form-control" required>
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label for="name">Sort Order</label>
+                                                    <input type="number" placeholder="Sort Order" id="sort_order" name="sort_order" class="form-control" value="0" required>
                                                 </div>
                                                 <div class="form-group mb-3 text-right">
                                                     <button type="submit" class="btn btn-primary">Add</button>

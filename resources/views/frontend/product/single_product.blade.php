@@ -110,10 +110,10 @@
                                 <div class="calculator card" id="range_slider_section">
                                     <label>Select Month</label>
                                     <input type="range" min="1" max="12" value="1" id="slider" class="range_slider">
-                                    <div class="numbers-container mt-2">
-                                        <div class="number">1</div>
+                                    <div class="numbers-container mt-2">  
+                                        <div class="number" >1</div>
                                         <div class="number">2</div>
-                                        <div class="number">3</div>
+                                        <div class="number" >3</div>
                                         <div class="number">4</div>
                                         <div class="number">5</div>
                                         <div class="number">6</div>
@@ -138,9 +138,7 @@
                                             <!-- <button type="button" class="single_product_btn">Add to Wishlist</button> -->
                                         </div>
                                     </div>
-                                    <p  style="color:red; font-weight:bold;" id="quantity_error"></p>
- 
-                                
+                                    <p  style="color:red; font-weight:bold;" id="quantity_error"></p> 
                             </div>
                             
                         </div>
@@ -268,7 +266,7 @@
             timer: 5000,
             });
         </script> 
-        @endif
-
+@endif
+ 
 @endsection
 @endsection

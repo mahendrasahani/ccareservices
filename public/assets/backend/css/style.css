@@ -121,6 +121,10 @@ body {
   text-align: left;
  }
 
+.metismenu li a{
+  text-decoration: none;
+}
+
 [tabindex="-1"]:focus {
   outline: 0 !important; }
 /*##################
@@ -149,6 +153,13 @@ button.btn.btn-warning.btn_add.text-white.pt-2{
   display: inline-block;
   width: 52px;
   height: 21px;
+}
+
+.createOrderElement{
+  padding: 1.5rem 2.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+
 }
 
 /* Hide default HTML checkbox */
@@ -15616,6 +15627,95 @@ li span .sidebar-option{
   height: 300px;
   overflow-y:scroll;
 }
+.cardBorder img{border-radius: 5px;}
+.cardBorder h6{
+  font-size: 12px;
+  margin-top: .5rem;
+}
+.productPrice{
+  font-size: 13px;
+  font-weight: 500;
+  color: black;
+}
+ .addToCart{
+  text-decoration: none;
+ }
+.adminCotegories{
+  padding: 2.5px 0;
+}
+ 
+.adminCotegories span span{
+  font-size: 14px;
+  color: #01316b;
+  cursor: pointer;
+}
+.adminCotegories span i{
+    font-size: 14px;
+}
+.subLIstMenu li{
+  padding: 4px 5px;
+  font-size: 13px;
+}
+
+.subLIstMenu li:hover{
+  background: #f8f8f8;
+}
+ 
+.cotegoryH3{
+  padding: 8px 10px;
+  background-color: #01316b;
+  color: #fff;
+}
+.cotegoryH3 h3{
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+
+.qtyIncrementDecrement{
+  width: 28px;
+  height: 28px;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dee2e6;
+  cursor: pointer;
+}
+.monthSelect{
+  font-size: 13.5px !important;
+}
+.table-details thead tr th{
+  color: #01316b;
+}
+
+.cartSectin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: #01316b;
+  color: #fff;
+  padding: 3px 12px;
+  border: 1px solid #01316b;
+  border-radius: 5px;
+  transition: all ease-in-out .3s;
+}
+.cartSectin:hover{
+  background-color: #fff;
+  color: #01316b;
+
+}
+.cartSectin i{
+  color: #01316b;
+}
+
+
+.cardBorder div a{
+    text-decoration: none;
+}
+
+ 
 
 @media only screen and (max-width:802px){
   

@@ -61,15 +61,15 @@ Route::middleware(['auth', 'verified', 'customer_otp_verification'])->group(func
 // -------------------------After Both User and Admin login (start) --------------------------------------------------------------
    
 // ------------------------ Checkout page route (end) ---------------------------------------------------------------------
-       Route::get('/checkout', [CheckoutController::class, 'checkoutPageView'])->name('frontend.checkout.view');
-       Route::get('/checkout-product-list', [ProductController::class, 'productToCheckout'])->name('frontend.checkout.product_list');
-       Route::get('/get-tax-list', [ProductController::class, 'getTaxList'])->name('frontend.checkout.get_tax_list');
+        Route::get('/checkout', [CheckoutController::class, 'checkoutPageView'])->name('frontend.checkout.view');
+        Route::get('/checkout-product-list', [ProductController::class, 'productToCheckout'])->name('frontend.checkout.product_list');
+        Route::get('/get-tax-list', [ProductController::class, 'getTaxList'])->name('frontend.checkout.get_tax_list');
 
-       Route::post('/payment-method', [CheckoutController::class, 'submitCheckoutAddress'])->name('submit_checkout_address');
-       Route::get('/payment-method', [CheckoutController::class, 'redirectOnCart'])->name('redirect_on_cart');
+        Route::post('/payment-method', [CheckoutController::class, 'submitCheckoutAddress'])->name('submit_checkout_address');
+        Route::get('/payment-method', [CheckoutController::class, 'redirectOnCart'])->name('redirect_on_cart');
        
-       Route::get('/create-order', [RazorpayController::class, 'createOrder']);
-    Route::get('/payment-success', [RazorpayController::class, 'paymentSuccess']);
+        Route::get('/create-order', [RazorpayController::class, 'createOrder']);
+        Route::get('/payment-success', [RazorpayController::class, 'paymentSuccess']);
 
      
     // Route::get('/payment-method', [PaymentController::class, 'paymentMethodShow'])->name('payment_method'); 

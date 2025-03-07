@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 mt-3 mb-3"> 
-                    <h3>Create Product Return</h3>
+                    <h3>Edit Product Return</h3>
                 </div>
             </div>
         </div>
@@ -15,7 +15,7 @@
                     <div class="col-md-12">
                         <div class="card" style="border: 1px solid #e8e8e8;">
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
-                                <h4 class="mb-0 h6">Create Product Return</h4>
+                                <h4 class="mb-0 h6">Edit Product Return</h4>
                             </div> 
                             <form enctype="multipart/form-data" action="{{route('backend.return.update', [$return_data->id])}}" method="POST">
                                 @csrf
@@ -23,38 +23,40 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="order_id">Order Id<span class="text-danger">*</span></label>
                                     <div class="col-md-9">
-                                    <select name="order_id" id="order_id" class="form-control" required >
+                                    <!-- <select name="order_id" id="order_id" class="form-control" required readonly>
                                             <option value="">Select </option>  
                                             @foreach($orders as $order)
                                             <option value="{{$order->id}}" {{$return_data->order_id == $order->id ? 'selected':''}}>{{$order->order_id}}</option> 
                                             @endforeach
-                                    </select> 
-                                    <input type="hidden" name="order_number" id="order_number" value="{{$order->order_id}}">
+                                    </select>  -->
+                                    <input type="text"  class="form-control" name="order_number" id="order_number" value="{{$return_data->order_number}}" readonly>
+
+                                    <input type="hidden" name="order_number" id="order_number" value="{{$order->order_id}}" >
                                     </div> 
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="date_of_purchase">Date of Purchase:</label>
                                     <div class="col-md-9">
-                                        <input type="date" id="date_of_purchase" name="date_of_purchase" class="form-control" value="{{$return_data->date_of_purchase}}" required>
+                                        <input type="date" id="date_of_purchase" name="date_of_purchase" class="form-control" value="{{$return_data->date_of_purchase}}" required readonly>
                                     </div> 
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="customer_name">Customer Name<span class="text-danger">*</span></label>
                                     <div class="col-md-9">
-                                        <input type="text"  name="name" id="name" class="form-control" value="{{$return_data->customer_name}}">
+                                        <input type="text"  name="name" id="name" class="form-control" value="{{$return_data->customer_name}}" readonly>
                                         <input type="hidden"  name="user_id" id="user_id" class="form-control" value="{{$return_data->user_id}}">
                                     </div> 
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="customer_email">Customer Email<span class="text-danger">*</span></label>
                                     <div class="col-md-9">
-                                        <input type="email"  name="email" id="email" class="form-control" value="{{$return_data->customer_email}}">
+                                        <input type="email"  name="email" id="email" class="form-control" value="{{$return_data->customer_email}}" readonly>
                                     </div> 
                                 </div>
                                 <div class="form-group row"> 
                                     <label class="col-md-3 col-form-label" for="customer_no">Phone no.<span class="text-danger">*</span></label>
                                     <div class="col-md-9">
-                                        <input type="tel"  name="phone" id="phone" class="form-control" value="{{$return_data->customer_phone}}">
+                                        <input type="tel"  name="phone" id="phone" class="form-control" value="{{$return_data->customer_phone}}" readonly>
                                     </div> 
                                 </div> 
                                 </div>  
@@ -66,32 +68,30 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="product">Product Name<span class="text-danger">*</span></label>
                                     <div class="col-md-9">
-                                    <select name="product" id="product" class="form-control" required >
-                                            <option value="">Select</option>  
-                                            @foreach($order_product_list as $order_product) 
-                                            <option value="{{$order_product->product_id}}" {{$order_product->product_id == $return_data->product_id ? 'selected':''}} >{{$order_product->product_name}}</option>  
-                                            @endforeach 
-                                    </select> 
-                                    <input type="hidden" name="product_name" id="product_name" value="{{$return_data->product_name}}">
+                                    <input type="text" name="product_name" id="product_name" class="form-control" value="{{$return_data->product_name}}" readonly>
+ 
+                                    <input type="hidden" name="product" id="product" value="{{$return_data->id}}" readonly>
                                     <input type="hidden" name="stock_id" id="stock_id" value="{{$return_data->stock_id}}">
+                                    <input type="hidden" name="order_product_id" id="order_product_id" value="{{$order_product_list->id }}">
+
                                     </div> 
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="attribute">Attribute<span class="text-danger">*</span></label>
                                     <div class="col-md-9">
-                                        <input type="text" name="attribute" id="attribute" class="form-control" required value="{{$return_data->attribute_name}}"> 
+                                        <input type="text" name="attribute" id="attribute" class="form-control" required value="{{$return_data->attribute_name}}" readonly> 
                                     </div> 
                                 </div> 
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="attribute_value">Attribute Value<span class="text-danger">*</span></label>
                                     <div class="col-md-9">
-                                        <input type="text" name="attribute_value" id="attribute_value" class="form-control" required value="{{$return_data->attribute_value_name}}">
+                                        <input type="text" name="attribute_value" id="attribute_value" class="form-control" required value="{{$return_data->attribute_value_name}}" readonly>
                                     </div> 
                                 </div> 
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label" for="product_quantity">Quantity:</label>
                                     <div class="col-md-9">
-                                        <input type="number" name="quantity" id="quantity" class="form-control" required value="{{$return_data->quantity}}">
+                                        <input type="number" name="quantity" id="quantity" class="form-control" required value="{{$return_data->quantity}}" min="1">
                                     </div> 
                                 </div>
                                 <div class="form-group row">
@@ -161,6 +161,7 @@
             }); 
             if(orderResponse.ok){
                 let orderResponseData = await orderResponse.json();  
+                console.log(orderResponseData);
                 $("#name").val(orderResponseData.order.shipping_name);
                 $("#user_id").val(orderResponseData.order.user_id);
                 $("#email").val(orderResponseData.order.shipping_email);
@@ -186,7 +187,7 @@
                productResponseData.order_product.forEach(item =>{
                product_list += `<option value="${item.product_id}">${item.product_name}</option>`;
                }); 
-               $("#product").html(product_list);  
+            //    $("#product").html(product_list);  
                $("#attribute").val('');
             $("#attribute_value").val('');
             }else{
@@ -194,24 +195,24 @@
             } 
         }); 
 
-            $(document).on("change", "#product", async function(){
-                let order_product = $("#order_id").val();  
-                let product_id = $("#product").val();  
-                let oneProductResponse = await fetch($one_product_from_order_api_url, {
-                    method:"POST",
-                    headers:{
-                        "Content-Type" : "application/json",
-                        "Authorization" : "Bearer 1|Tm9ARAVXh35wTxyL6tIjrMMb8yQXs7FkH5laTCJef22e300d"
-                    },
-                    body:JSON.stringify({order_product:order_product, product_id:product_id})
-            });
-            let oneProductResponseData = await oneProductResponse.json(); 
-            $("#product_name").val(oneProductResponseData.single_order_product.product_name);
-            $("#attribute").val(oneProductResponseData.single_order_product.option_id);
-            $("#attribute_value").val(oneProductResponseData.single_order_product.option_value_id);
-            $("#quantity").val(oneProductResponseData.single_order_product.quantity);
-            $("#stock_id").val(oneProductResponseData.single_order_product.stock_id);
-            });
+            // $(document).on("change", "#product", async function(){
+            //     let order_product = $("#order_id").val();  
+            //     let product_id = $("#product").val();  
+            //     let oneProductResponse = await fetch($one_product_from_order_api_url, {
+            //         method:"POST",
+            //         headers:{
+            //             "Content-Type" : "application/json",
+            //             "Authorization" : "Bearer 1|Tm9ARAVXh35wTxyL6tIjrMMb8yQXs7FkH5laTCJef22e300d"
+            //         },
+            //         body:JSON.stringify({order_product:order_product, product_id:product_id})
+            // });
+            // let oneProductResponseData = await oneProductResponse.json(); 
+            // $("#product_name").val(oneProductResponseData.single_order_product.product_name);
+            // $("#attribute").val(oneProductResponseData.single_order_product.option_id);
+            // $("#attribute_value").val(oneProductResponseData.single_order_product.option_value_id);
+            // $("#quantity").val(oneProductResponseData.single_order_product.quantity);
+            // $("#stock_id").val(oneProductResponseData.single_order_product.stock_id);
+            // });
     </script>
 @endsection
 

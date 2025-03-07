@@ -10,7 +10,7 @@
                 </div> 
                 <div class="col-md-8 text-md-right">
                     <a href="{{route('backend.return.create')}}" class="btn btn-primary" style="background-color: #f5a100; border: none; border-radius: 50em;">
-                        <span>Add New Product</span>
+                        <span>Add New</span>
                     </a>
                 </div>
             </div>

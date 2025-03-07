@@ -87,8 +87,8 @@
                                 <h6>Default Shipping Address</h6>
                                 <hr>
                                 @if($default_shipping_address != '')
-                                <p>{{$default_shipping_address->address}}, {{$default_shipping_address->city}}</p>
-                                <p>{{$default_shipping_address->zip_code}} - {{$default_shipping_address->country}}</p>
+                                <p>{{$default_shipping_address->address}},</p>
+                                <p>{{$default_shipping_address->city}} - {{$default_shipping_address->zip_code}}</p>
                                 @endif
                             </div>
                             </div>  

@@ -42,16 +42,14 @@
                                             @if(count($reviews) > 0)
                                             @foreach($reviews as $review)
                                             <tr>
-                                                 
                                                 <td>{{$sn++}}</td>
                                                 <td>
-                                                     <p>{{$review->getProduct->product_name}}</p>
+                                                     <p>{{$review->getProduct?->product_name}}</p>
                                                 </td>
                                                 <td class="lh-1-8">
                                                     <span class="d-block">Name: {{$review->getUser->name ?? ''}}</span>
                                                     <span class="d-block">Email: {{$review->getUser->email ?? ''}}</span>
                                                     <span class="d-block">Phone: {{$review->getUser->phone ?? ''}}</span>
-                                                    
                                                 </td>
                                                 <td>
                                                 <div>

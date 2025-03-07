@@ -79,7 +79,7 @@
                 <p style="text-align: center;font-size:17px;font-weight: 600;">LOGIN TO COOLCARE</p>
                 <div class="form-field">
                     <label for="text">Mobile Number <span>*</span></label>
-                    <input type="tel" name="phone" id="phone" placeholder="Enter Mobile Number....." value="{{old('phone')}}">
+                    <input type="number" name="phone" id="phone"  maxlength="10" minlength="10"  placeholder="Enter Mobile Number....." value="{{old('phone')}}">
                     <p id="check_account_error" style="color:red;"></p>
                     @error('phone')
                       <p style="color:red;">{{$message}}</p>
@@ -111,6 +111,16 @@
     //         this.submit();
     //     } 
     // });
+
+    $(document).ready(function() {
+        $('#phone').on('input', function(){
+            const phoneVal = $('#phone').val();
+            //$('#phone').val(phoneVal.replace(/\D/g, ''));
+            if (phoneVal.length > 10) { 
+                $('#phone').val(phoneVal.slice(0, 10));
+            } 
+        })
+    })
     
     </script>
 </body>

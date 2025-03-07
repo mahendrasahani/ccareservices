@@ -21,7 +21,7 @@
                 <p style="text-align: center;font-size:17px;font-weight: 600;">Verify OTP</p> 
                 <div class="form-field"> 
                     <label for="verify_otp">Enter OTP <span>*</span></label>
-                    <input type="number" name="otp" placeholder="Enter OTP" required>
+                    <input type="number" id="otp" name="otp" placeholder="Enter OTP" maxlength="4" required>
                 </div>
                 <button class="form-btn" style="margin-top: 10px;">Submit</button>
                 <p class="cstm_resend"><a onclick="resendOtp(event)">Resend OTP</a></p>
@@ -90,7 +90,13 @@
                 numberval.innerHTML=val;
              }
 
-
+             $(document).ready(function(){
+                $('#otp').on('input', function(){
+                    let otpVal = $('#otp').val();
+                    $('#otp').val(otpVal.slice(0,4)); 
+                })
+             })
+              
 
         </script>
 
@@ -113,7 +119,6 @@
     showConfirmButton: false,
     timer: 1000
 });
-
 }
 
         </script>

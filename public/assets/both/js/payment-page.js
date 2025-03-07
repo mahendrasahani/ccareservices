@@ -3,9 +3,9 @@ $(async function () {
         style: 'currency',
         currency: 'INR',
       });
-async function paymentPage(){
-   console.log("start");
+async function paymentPage(){ 
    $("#loader").show();
+   document.body.classList.add('no-scroll');
     let sub_total = 0;
     let final_amount_total = 0; 
     let paymentData = await fetch(baseUrl+"/get-address-payment-detail");
@@ -67,7 +67,7 @@ async function paymentPage(){
     </div>
  <div class="final-order-details">
     <div class="single-order-final">
-        <p><b>GST :</b></p>
+        <p><b>CGST :</b></p>
         <p><b>${formatter.format(gst)}</b></p>
         <input type="hidden" value="${gst}" name="cgst">
     </div>
@@ -96,6 +96,7 @@ async function paymentPage(){
     </div> `;
     $("#payble_amount_detail").html(amount_detail);
     $("#loader").hide();
+    document.body.classList.remove('no-scroll');
     } 
     await paymentPage();
 });

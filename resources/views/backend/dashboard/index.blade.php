@@ -175,7 +175,7 @@
                                                     <td style="display: table-cell;">
                                                     {{$order->order_id}}
                                                     </td>
-                                                    <td>{{$order->shipping_name}}</td>
+                                                    <td>{{$order->getUser?->name ?? ''}}</td>
                                                     <td style="display: table-cell;">
                                                     {{strtoupper($order->order_status)}}
                                                     </td>

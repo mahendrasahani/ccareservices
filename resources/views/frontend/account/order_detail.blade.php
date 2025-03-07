@@ -200,7 +200,7 @@
                 </div>
                 <div class="track-order">
                     <div class="order-details">
-                        <h4>The Shop</h4>
+                        <h4>Your Order Status</h4>
                         <p>{{$order->cancel_note ?? ''}}</p>
                     </div>
                     <div class="row p-2">
@@ -364,10 +364,9 @@
 </section>
 @section('javascript-section')
 <script>
-    history.pushState(null, null, location.href);
+      history.pushState(null, null, location.href);
     window.onpopstate = function () {
-        console.log('working,,...');
-        window.location.href = "/home"; // Redirect to home page or another page
+        window.location.href = "{{ route('frontend.home.view') }}";
     };
 </script>
 

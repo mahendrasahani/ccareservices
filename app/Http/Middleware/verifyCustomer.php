@@ -15,11 +15,23 @@ class verifyCustomer
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response{
-        if(Auth::user()->otp_verify_status == 1){
+        if(Auth::user()->otp_verify_status == 1 && Auth::user()->active_status == 1){
             return $next($request);
-        }else{
+        }elseif(Auth::user()->otp_verify_status == 1 && Auth::user()->active_status == 0){
+            Auth::guard('web')->logout(); 
+            $request->session()->invalidate(); 
+            $request->session()->regenerateToken(); 
+            return redirect('/');
+        }elseif(Auth::user()->otp_verify_status == 0 && Auth::user()->active_status == 1){
             return redirect('/otp-re-verify/'.Auth::user()->id);
+        }elseif(Auth::user()->otp_verify_status == 0 && Auth::user()->active_status == 0){
+            Auth::guard('web')->logout(); 
+            $request->session()->invalidate(); 
+            $request->session()->regenerateToken(); 
+            return redirect('/');
         }
-        // return $next($request);
+        else{ 
+            return redirect('/');
+        } 
     }
 }

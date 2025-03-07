@@ -44,6 +44,7 @@ class User extends Authenticatable
         'otp_verify_status',
         'otp',
         'security_check',
+        'active_status'
     ];
 
     /**

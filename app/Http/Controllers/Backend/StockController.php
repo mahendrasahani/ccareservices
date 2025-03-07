@@ -32,7 +32,6 @@ class StockController extends Controller
     }
 
     public function store(Request $request){
-        // return $request->all(); 
         $validated = $request->validate([
             "product" => 'required',
             "select_variant_type" => 'required',
@@ -87,8 +86,6 @@ class StockController extends Controller
                 "stock_staus" => $stock_status,
                 "status" => 1,
             ]);
-               
-
         }catch(\Exception $e){
             return "Something went wrong";
         } 
@@ -222,6 +219,31 @@ class StockController extends Controller
      } 
 // ------------------------------------------------------------------------------------------
 
+
+    public function checkProductInVariant(Request $request){
+        try{
+            $product_id = $request->product_id;
+            $variant_type = $request->variant_type;
+            $variant_value = $request->variant_value;
+            $check_stock = Stock::where('product_id', $product_id)->where('attribute_id', $variant_type)->where('attribute_value_id', $variant_value)->exists();
+            if($check_stock){
+                return response()->json([
+                    "status" => "success",
+                    "availablity" => false
+                ], 200);
+            }else{
+                return response()->json([
+                    "status" => "success",
+                    "availablity" => true
+                ], 200);
+            } 
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => "failed",
+                "error" => $e->getMessage()
+            ], 400);
+        }
+    }
 
 
 

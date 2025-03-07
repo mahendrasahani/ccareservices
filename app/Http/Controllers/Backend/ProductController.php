@@ -36,15 +36,12 @@ class ProductController extends Controller
             }
         }else{
             $product_list = $product_list->orderBy('id', 'desc');
-        }
-
+        } 
         $product_list = $product_list->with('getBrand')->paginate(10); 
         $product_list->appends([
             'sortBy' => isset($_GET['sortBy']) ? $_GET['sortBy'] : '',
             'page' => isset($_GET['page']) ? $_GET['page'] : '',
-        ]);
-
-        // return $product_list;
+        ]); 
         return view('backend.product.index', compact('product_list'));
     }
 
@@ -52,8 +49,7 @@ class ProductController extends Controller
         $brand_list = Brand::where('status', 1)->get();
         $main_category_list = MainCategory::with('subCategory')->where('status', 1)->get();
         $attribute_list = Attribute::where('status', 1)->get();
-        $tax_rates = Tax::get();
-        
+        $tax_rates = Tax::get(); 
         return view('backend.product.create', compact('brand_list', 'main_category_list', 
         'tax_rates', 'attribute_list'));
     }
@@ -99,9 +95,7 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){   
-        $product_name = $request->product_name;
-        // $min_qty = $request->min_qty;
-        // $max_qty = $request->max_qty;   
+        $product_name = $request->product_name;   
         $product_price = $request->product_price;
         $sku = $request->sku;
         $stock_status = $request->stock_status;
@@ -113,17 +107,14 @@ class ProductController extends Controller
         $slug = $request->slug;
         $product_status = $request->product_status;
         $product_brand = $request->product_brand; 
-        $tax = $request->tax; 
-
+        $tax = $request->tax;  
         $tax_data = Tax::where('id', $tax)->first();
-
         $main_categories = collect($request->main_categories)->map(function ($value) {
             return intval(trim($value, '"'));
         })->all();  
         $sub_categories = collect($request->sub_categories)->map(function ($value) {
             return intval(trim($value, '"'));
         })->all(); 
-
         $attribute_name = collect($request->product_attributes)->map(function ($value) {
             return intval(trim($value, '"'));
         })->all(); 
@@ -158,57 +149,14 @@ class ProductController extends Controller
         if ($request->hasFile('product_images')) {
             foreach ($request->file('product_images') as $key => $image) {
                 $fileStorePath = 'assets/backend/upload/products'; 
-                // Generate a unique filename for each image
-                $fileName = $key . '_' . time() . '.' . $image->getClientOriginalExtension(); 
-                // Move the image to the specified directory
+                $fileName = $key . '_' . time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path($fileStorePath), $fileName); 
-                // Store the image path in the array
                 $imagePaths[] = $fileStorePath . '/' . $fileName;
             }
             Product::where('id', $newProductId)->update([
                 'product_images' => json_encode($imagePaths, JSON_UNESCAPED_SLASHES)
             ]);
-        }
-  
-        // $priceListMainArray = [];
-        // foreach($request->price_list as $price_list){
-        //     $priceListNewMainArray =  explode(",", $price_list);
-        //     array_push($priceListMainArray, $priceListNewMainArray); 
-        // }
-
-        //  Stock::create([
-        //     'product_id' => $newProductId,
-        //     'option_name' => $request->product_option_name,
-        //     'option_value' => $request->option_value,
-        //     'quantity' => $request->option_qty,
-        //     'month' => [1,2,3,4,5,6,7,8,9,10,11,12],
-        //     'price' => $priceListMainArray,
-        //     'status' => 1, 
-        //  ]);
-
-            // foreach($request->option_qty as $index => $qty){
-            //     Stock::create([
-            //         'product_id' => $newProductId,
-            //         'attribute_id' => $request->product_option_name,
-            //         'attribute_value_id' => $request->option_value[$index],
-            //         'quantity' => $qty,
-            //         'month' => '',
-            //         'price_1' => $request->price_1[$index],
-            //         'price_2' => $request->price_2[$index],
-            //         'price_3' => $request->price_3[$index],
-            //         'price_4' => $request->price_4[$index],
-            //         'price_5' => $request->price_5[$index],
-            //         'price_6' => $request->price_6[$index],
-            //         'price_7' => $request->price_7[$index],
-            //         'price_8' => $request->price_8[$index],
-            //         'price_9' => $request->price_9[$index],
-            //         'price_10' => $request->price_10[$index],
-            //         'price_11' => $request->price_11[$index],
-            //         'price_12' => $request->price_12[$index],
-            //         'status' => 1, 
-            //     ]);
-            // }
- 
+        } 
         return response()->json([
             "status" => 200,
             "message" => "success"
@@ -513,7 +461,13 @@ class ProductController extends Controller
 
         public function singleProductFrontView($slug){
 
-            $product_detail = Product::where('slug', $slug)->with('getStock')->first();
+            // $product_detail = Product::where('slug', $slug)->with('getStock')->first();
+            $product_detail = Product::where('slug', $slug)
+            ->with(['getStock' => function ($query) {
+                $query->with('getAttrValue')->orderByRaw('(SELECT sort_order FROM attribute_values WHERE attribute_values.id = stocks.attribute_value_id) ASC');
+            }])
+            ->first();
+            
             // return $product_detail;
             $option_id = $product_detail->getStock[0]->attribute_id;
             $option_name = Attribute::where('id', $option_id)->first()->name; 

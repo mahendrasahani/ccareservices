@@ -20,8 +20,8 @@
                                             <div class="col-md mb-3">
                                                 <div>
                                                     <div class="font-size-10 font-weight-bold mb-2" style="font-size: 12px;">Customer info</div>
-                                                    <div style="font-size: 12px;"><span class="opacity-80 mr-2 ml-0">Name:</span> {{$order->shipping_name}}</div>
-                                                    <div style="font-size: 12px;"><span class="opacity-80 mr-2 ml-0">Email:</span> {{$order->shipping_email}}</div>
+                                                    <div style="font-size: 12px;"><span class="opacity-80 mr-2 ml-0">Name:</span> {{$order->getUser?->name}}</div>
+                                                    <div style="font-size: 12px;"><span class="opacity-80 mr-2 ml-0">Email:</span> {{$order->getUser?->email}}</div>
                                                 </div>
                                             </div>
                                             
@@ -30,7 +30,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td class="">Order Code:</td>
-                                                            <td class="text-right text-info font-weight-bold">{{$order->order_id}}</td>
+                                                            <td class="text-right  font-weight-bold">{{$order->order_id}}</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="">Order Date:</td>
@@ -40,7 +40,15 @@
                                                         
                                                         <tr>
                                                             <td class="">Payment Method:</td>
-                                                            <td class="text-right font-weight-bold">{{$order->payment_method == "cash_on_delivery" ? "Cash On Delivery" : "Online"}}</td>
+                                                            <td class="text-right font-weight-bold">
+                                                                @if($order->payment_method == "cash_on_delivery" )
+                                                                Cash On Delivery
+                                                                @elseif($order->payment_method == "cash_on_delivery" )
+                                                                Online
+                                                                @else
+                                                                Not Available
+                                                                @endif
+                                                         </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -67,6 +75,7 @@
                                                         <option value="canceled" {{$order->order_status == "canceled" ? "selected" : ""}}>Cancel</option> 
                                                         <option value="shipped" {{$order->order_status == "shipped" ? "selected" : ""}}>Shipped</option> 
                                                         <option value="delivered" {{$order->order_status == "delivered" ? "selected" : ""}}>Delivered</option> 
+                                                        <option value="delivered" {{$order->order_status == "not_confirmed" ? "selected" : ""}}>Not Confirmed</option> 
                                                     </select>
                                                 </div>  
                                                 @if($order->order_status == 'canceled')
@@ -95,14 +104,20 @@
                                                     <textarea name="delivery_remark" id="delivery_remark" class="form-control">{{$order->delivery_remark ?? ''}}</textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 " style="font-size: 12px;">
-                                                <h5 class="font-size-14 mb-3">Shipping Address</h5>
+                                            <div class="col-md-4">
+                                                <h5 class="font-size-14 mb-3">Shipping Detail</h5>
+                                                <p>{{ $order->shipping_name ?? '' }}</p>
+                                                <p>{{ $order->shipping_email ?? '' }}</p>
+                                                <p>{{ $order->shipping_phone ?? '' }}</p>
                                                 <address> 
-                                                    {{$order->shipping_address}} 
+                                                    {{$order->shipping_address ?? ''}} 
                                                 </address>
                                             </div>
                                             <div class="col-md-4" >
-                                                <h5 class="h6 font-size-14 mb-3">Billing Address</h5>
+                                                <h5 class="h6 font-size-14 mb-3">Billing Detail</h5>
+                                                <p>{{ $order->billing_name ?? '' }}</p>
+                                                <p>{{ $order->billing_email ?? '' }}</p>
+                                                <p>{{ $order->billing_phone ?? '' }}</p>
                                                 <address>
                                                 {{$order->billing_address}} 
                                                 </address>
@@ -134,8 +149,21 @@
                                                                 <div>
                                                                     <span class="mr-2">
                                                                         <span class="opacity-50">{{$product->option_id}}</span>: {{$product->option_value_id}}
-                                                                    </span>
+                                                                    </span> 
                                                                 </div>
+
+                                                                <div>
+                                                                    <span class="mr-2">
+                                                                        <span class="opacity-50">Delivery Date</span>: {{Carbon\Carbon::parse($product->delivery_date)->format('d M, Y')}}
+                                                                    </span> 
+                                                                </div>
+                                                                <div>
+                                                                    <span class="mr-2">
+                                                                        <span class="opacity-50">End Date</span>: {{Carbon\Carbon::parse($product->end_date)->format('d M, Y')}}
+                                                                    </span> 
+                                                                </div>
+
+
                                                             </div>
                                                         </div>
                                                     </td>
@@ -185,8 +213,9 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                 
+                                                @if($order->order_status != 'not_confirmed')
                                                 <input type="submit" value="Update Order" class="btn btn-primary" style="background-color: #f5a100;border:0;" >
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

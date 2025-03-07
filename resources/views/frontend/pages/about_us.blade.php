@@ -36,18 +36,17 @@
                     Conditioner. </p>
                 <h5 class="fw-bold custom-text-color">Why CoolCare Services?</h5>
                 <ul>
-                    <li> Best price & Best service.</li>
-                    <li> Regular follow ups.</li>
-                    <li> Experience technical team does the work.</li>
-                    <li> Best post-sale support</li>
-                    <li> Our own technicians will do installation/service.</li>
-                    <li> Technicians availability from 10 AM – 10 PM. </li>
-                    <li> 7 days working.</li>
-                    <li> Highly Trained Technicians.</li>
-                    <li> Custom and Affordable AMC Plans</li>
-                    <li> Latest technical machines to repair appliances.</li>
-                    <li> Personal interaction for customer satisfaction.</li>
-
+                    <li>Best price & Best service.</li>
+                    <li>Regular follow ups.</li>
+                    <li>Experience technical team does the work.</li>
+                    <li>Best post-sale support</li>
+                    <li>Our own technicians will do installation/service.</li>
+                    <li>Technicians availability from 10 AM – 10 PM. </li>
+                    <li>7 days working.</li>
+                    <li>Highly Trained Technicians.</li>
+                    <li>Custom and Affordable AMC Plans</li>
+                    <li>Latest technical machines to repair appliances.</li>
+                    <li>Personal interaction for customer satisfaction.</li>
                 </ul>
 
             </div>

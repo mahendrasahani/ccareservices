@@ -36,8 +36,7 @@ class CheckoutController extends Controller
        $s_phone = $request->s_phone;
        $s_address = $request->s_address;
        $s_city = $request->s_city;
-       $s_zip_code = $request->s_zip_code;
-       $s_country = $request->s_country;
+       $s_zip_code = $request->s_zip_code; 
        $both_address = $request->both_address;
        $b_name = $request->b_name;
        $b_email = $request->b_email;
@@ -54,7 +53,7 @@ class CheckoutController extends Controller
             'address' => $s_address,
             'city' => $s_city,
             'zip_code' => $s_zip_code,
-            'country' => $s_country,
+            'country' => 'India',
        ]; 
        $billing_detail = [
         'user_id' => Auth::user()->id,
@@ -64,7 +63,7 @@ class CheckoutController extends Controller
         'address' => $b_address ?? $s_address,
         'city' => $b_city ?? $s_city,
         'zip_code' => $b_zip_code ?? $s_zip_code,
-        // 'country' => $b_country,
+        'country' => 'India',
        ]; 
 
        $shipping_address = ShippingAddress::where('user_id', Auth::user()->id)->first();

@@ -62,8 +62,7 @@
                 <p style="text-align: center;font-size:17px;font-weight: 600;">SIGNUP TO COOLCARE</p>
                 <div class="form-field">
                     <label for="">Full Name <span>*</span></label>
-                    <input type="text" name="name" placeholder="Enter your name....." required value="{{old('name')}}">
-
+                    <input type="text" name="name" placeholder="Enter your name....." required value="{{old('name')}}" id="fullName">
                 </div>
                 <div class="form-field">
                     <label for="">Email <span>*</span></label>
@@ -73,44 +72,12 @@
                     @enderror
                 </div>
                 <div class="form-field">
-                    <label for="phone">Phone <span>*</span></label>
-                    <input type="tel" name="phone"   placeholder="Enter your phone....." required value="{{old('phone')}}">
+                    <label for="phone" >Phone <span>*</span></label>
+                    <input type="number" name="phone" id="phone"  maxlength="10" placeholder="Enter your phone....." required value="{{old('phone')}}">
                     @error('phone')
                     <p style="color:red;">{{$message}}</p>
                     @enderror
-                </div>
-
-                {{--
-                <div class="form-field"> 
-                    <label for="">Password <span>*</span></label>
-                    <input type="password" name="password" placeholder="Create your password....." required>
-                </div>
-                @error('password')
-                <p style="color:red;">{{$message}}</p>
-                @enderror
-                <div class="form-field"> 
-                    <label for="">Confirm Password <span>*</span></label>
-                    <input type="password" name="password_confirmation" placeholder="Confirm your password....." required>
-                </div>
-
-                --}}
-                  <div class="form-field">
-                    <label for="aadhar_front" class="form-about">Upload Aadhar Card Front:</label>
-                    <input type="file" id="aadhar_front" name="aadhar_front"  required/> 
-                  </div>
-            
-       
-                  <div class="form-field">
-                    <label for="aadhar_back" class="form-about">Upload Aadhar Card Back:</label>
-                    <input type="file" id="aadhar_back" name="aadhar_back" required/> 
-                  </div>
-
-                  <div class="form-field">
-                    <label for="security_cheque" class="form-about">Upload Security Cheque:</label>
-                    <input type="file" id="security_cheque" name="security_cheque" required/> 
-                  </div>
-                 
-
+                </div> 
 
                 @error('password_confirmation')
                 <p>{{$message}}</p>
@@ -120,11 +87,28 @@
             </form>
         </div>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="{{url('public/assets/frontend/js/bootstrap.bundle.min.js')}}"></script>
-     
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+        <script src="{{url('public/assets/frontend/js/bootstrap.bundle.min.js')}}"></script>
+
+         <script>
+            $(document).ready(function(){
+                $('#fullName').on('input',function(){
+                   let fullNameVal =  $("#fullName").val();
+                    let regex = /^[A-Za-z ]+$/;
+                    if(!regex.test(fullNameVal)){
+                        $("#fullName").val(fullNameVal.slice(0,-1) )
+                    }
+                });
+
+                $('#phone').on('input', function(){
+                    let phoneVal = $('#phone').val();
+                    $('#phone').val(phoneVal.slice(0, 10));
+                })      
+            });
+
+         </script>
 </body>
 </html>
 

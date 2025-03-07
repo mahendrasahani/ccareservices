@@ -88,14 +88,18 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="{{url('public/assets/backend/images/user/1.png')}}" height="40" width="40" alt="">
+                                @if(Auth::user()->profile != '')
+                                <img src="{{url(Auth::user()->profile)}}" height="40" width="40" alt="">
+                                @else
+                                <img src="{{url('public/assets/backend/images/profile/default-user-icon.webp')}}" height="40" width="40" alt="">
+                                @endif
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li><a href="{{route('backend.admin.edit_admin_profile')}}"><i class="icon-user"></i><span>Edit Profile</span></a></li>
                                         <hr class="my-2">
-                                        <li><a href="http://localhost/ccareservices/"><i class="icon-user" target="_blank"></i><span>Go To Website</span></a></li>
+                                        <li><a href="{{ route('frontend.home.view') }}"><i class="icon-user" target="_blank"></i><span>Go To Website</span></a></li>
                                         <hr class="my-2">
                                         <li>  
                                         <form action="{{route('logout')}}" method="POST">
@@ -122,7 +126,7 @@
         <div class="nk-sidebar" id="nmk-sidebar">
             <div class="brand-logo">
                 <a href="index.html">
-                    <b class="logo-abbr"><img src="{{url('public/assets/backend/images/logo.png')}}" alt=""> </b>
+                    <!-- <b class="logo-abbr"><img src="{{url('public/assets/backend/images/logo.png')}}" alt=""> </b> -->
                      
                     <span class="brand-title">
                         <a href="{{route('backend.admin.dashboard.view')}}">
@@ -132,8 +136,8 @@
                 </a>
             </div>
             <hr>
-            <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu"> 
+            <div class="nk-nav-scroll" style="overflow:auto" >
+                <ul class="metismenu" id="menu" style="padding-bottom:2rem"> 
                     <li>
                         <a href="{{route('backend.admin.dashboard.view')}}">
                             <span>
@@ -172,18 +176,19 @@
                         </ul>
                     </li>
 
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="nav-text">
+                    <li><a href="{{route('backend.order.index')}}">
+                              <span class="nav-text">
                                 <img src="{{url('public/assets/backend/images/png.icon/package.png')}}" class="">
                                 <p class="sidebar-option">Orders</p>
-                            </span>
-
+                            </span> 
+                      </a> 
+                        <!-- <a class="has-arrow" href="javascript:void()" aria-expanded="false"> 
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('backend.order.index')}}">Orders</a></li> 
-                        </ul>
+                        </ul> -->
                     </li>
+
                     <li><a href="{{route('backend.vendor.index')}}">
                         <span>
                             <img src="{{url('public/assets/backend/images/png.icon/seller.png')}}" alt="">

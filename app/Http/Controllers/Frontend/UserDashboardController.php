@@ -42,9 +42,9 @@ class UserDashboardController extends Controller{
         $phone = $request->phone;
         $company_name = $request->company_name;
         $address_1 = $request->address_1;
-        $address_2 = $request->address_2;
-        $country = $request->country;
-        $state = $request->state;
+        // $address_2 = $request->address_2;
+        // $country = $request->country;
+        // $state = $request->state;
         $city = $request->city;
         $postal_code = $request->postal_code; 
 
@@ -54,9 +54,9 @@ class UserDashboardController extends Controller{
             "phone" => $phone,
             "company_name" => $company_name,
             "address_1" => $address_1,
-            "address_2" => $address_2,
-            "country" => $country,
-            "state" => $state,
+            // "address_2" => $address_2,
+            // "country" => $country,
+            // "state" => $state,
             "city" => $city,
             "postal_code" => $postal_code, 
         ]);

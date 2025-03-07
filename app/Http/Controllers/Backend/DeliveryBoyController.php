@@ -23,8 +23,8 @@ class DeliveryBoyController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email'],
-            'phone' => ['required'],
-        ]); 
+            "phone" => ['required', 'numeric', 'digits:10', 'unique:'.User::class], 
+        ]);
         $user = DeliveryBoy::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -35,7 +35,6 @@ class DeliveryBoyController extends Controller
             'status' => 1  
         ]);
         return redirect()->route('backend.delivery_boy.index')->with('created', 'Delivery boy has been created !');
-
     }
 
 
@@ -45,6 +44,11 @@ class DeliveryBoyController extends Controller
     }
 
     public function update(Request $request, $id){
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email'],
+            "phone" => ['required', 'numeric', 'digits:10', 'unique:'.User::class], 
+        ]);
         DeliveryBoy::where('id', $id)->update([
             'name' => $request->name,
             'email' => $request->email,

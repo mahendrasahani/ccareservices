@@ -69,7 +69,7 @@ public function getAttr(){
 }
 
 public function getAttrValue(){
-    return $this->hasOne(AttributeValue::class, 'id', 'attribute_value_id');
+    return $this->belongsTo(AttributeValue::class, 'attribute_value_id', 'id');
 }
 
 

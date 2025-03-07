@@ -64,7 +64,7 @@ $(async function () {
            
             if(item['get_product']['tax_name'] == 'SGST'){
               sgst_total += tax;
-            }else if(item['get_product']['tax_name'] == 'GST'){
+            }else if(item['get_product']['tax_name'] == 'CGST'){
               gst_total += tax;
             }else if(item['get_product']['tax_name'] == 'IGST'){
               igst_total += tax;
