@@ -101,7 +101,7 @@
                                         Return Orders
                                     </h4>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body" style="max-height: 400px; overflow: auto;" >
                                     <form>
                                         <table id="myTable" class="table aiz-table mb-0 footable footable-1 breakpoint-lg">
                                             <thead>

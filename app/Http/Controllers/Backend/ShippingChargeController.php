@@ -77,12 +77,16 @@ class ShippingChargeController extends Controller
     }
 
     public function update(Request $request, $id){
+        $validate = $request->validate([
+            "name" => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'],
+            "amount" => ['required', 'numeric'], 
+        ]);
         $name = $request->name;
         $amount = $request->amount;
         ShippingCharge::where('id', $id)->update([
             "name" => $name,
             "amount" => $amount
-        ]); 
+        ]);
         return redirect()->route('backend.shipping_charge.index')->with('updated', "Shipping charge has been updated !");
     }
 

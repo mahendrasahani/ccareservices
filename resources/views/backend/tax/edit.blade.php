@@ -28,9 +28,12 @@
                                                 <label class="control-label" for="name">Tax Rate</label>
                                             </div>
                                             <div class="col-md-9">
-                                                <input type="text" placeholder="Tax Rate" name="tax_rate" class="form-control" required value="{{$tax->tax_rate}}">
+                                                <input type="number" placeholder="Tax Rate" name="tax_rate" class="form-control" required value="{{$tax->tax_rate}}">
+                                                @error('tax_rate')
+                                                    <p style="color:red;">{{ $message }}</p>
+                                                @enderror
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="mb-0 text-right">
                                             <button type="submit" class="btn btn-primary" style="background-color: #f5a100; border: none;">Save</button>
                                         </div>

@@ -368,7 +368,15 @@
 
 
 @section('javascript-section')
- 
+@if(Session::has('upated'))
+<script>
+       Swal.fire({
+            title: "Success",
+            text: "{{ Session::get('upated') }}",
+            icon: "success"
+            });
+    </script>
+    @endif
 
 <script> 
     $(document).ready(function(){

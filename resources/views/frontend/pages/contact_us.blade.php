@@ -90,7 +90,7 @@
            <p style="color:red;"><b>The google recptcha is required.</b></p>
            @enderror
        </div> 
-            <button type="submit" class="animate-btx">Submit<span id="arrow-icon"></span></button>
+            <button type="submit" class="animate-btx mt-3 text-white btn btn-info btn-sm animate-btx">Submit<span id="arrow-icon"></span></button>
           </a>
         </div>
       </div>

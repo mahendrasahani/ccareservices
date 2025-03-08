@@ -99,11 +99,11 @@
                 <div class="upload-container mt-3">
                   <div class="circle" id="selected-image-container">
                     <img class="profile-pic selected-image-container"
-                      src="{{url($user_data->profile ?? 'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg')}}">
+                      src="{{url($user_data->profile ?? 'public/assets/both/images/user_profile/1713010229.jpg')}}">
                   </div>
                   <div class="p-image text-center">
-                    <button  class="upload-button" onclick="event.preventDefault(); document.querySelector('.file-upload').click()">Select
-                      Image</button>
+                    <button  class="upload-button" onclick="event.preventDefault(); document.querySelector('.file-upload').click()">
+                      Change Profile Picture</button>
                     <input class="file-upload d-none" type="file" name="profile" accept="image/*"
                       onchange="displayImage(this)" />
                   </div>

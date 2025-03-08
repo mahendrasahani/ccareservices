@@ -23,7 +23,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 p-tag">
-                <h1 class="custom-text-color">About Us</h1>
+                <h3 class="fw-bold custom-text-color">About Us</h3>
                 <h5 class="fw-bold custom-text-color">
                     About CoolCare Services
                 </h5>

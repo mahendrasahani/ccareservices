@@ -59,14 +59,14 @@
                         
                             <div class=" col-md-12">
                                 <div class="card recent">
-                                                        <div class="recent-heading">
-                                                            <h5>Recent Purchase History</h5>
-                                                        </div>
-                                                        <hr>
-                                                        <div class="recent-products-wrapper">
-                                                        @if(count($recent_purchase_history) != 0)
+                                        <div class="recent-heading">
+                                            <h5>Recent Purchase History</h5>
+                                        </div>
+                                        <hr>
+                                        <div class="recent-products-wrapper">
+                                        @if(count($recent_purchase_history) != 0)
                                     @foreach($recent_purchase_history as $recent_purchase)
-                                    <div class="recent-products">
+                                    <div class="recent-products pt-2 mt-2" style="border: 1px solid rgb(0 0 0 / 18%);">
                                         <div class="recent-products-img mx-2">
                                             <img src="{{url($recent_purchase->getProduct->product_images == '' ? 'public/assets/both/placeholder/product.jpg' : 'public/'.$recent_purchase->getProduct->product_images[0])}}"alt="{{$recent_purchase->getProduct->product_name ?? ''}}">
                                         </div>

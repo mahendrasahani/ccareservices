@@ -23,26 +23,22 @@ class CustomerController extends Controller{
         return view('backend.customer.create');
     }
 
-    public function store(Request $request){  
+    public function store(Request $request){
         $validate =$request->validate([
-            "name" => ['required'],
+            "name" => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'],
             "email" => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            "phone" => ['required', 'numeric', 'digits:10', 'unique:'.User::class], 
+            "phone" => ['required', 'numeric', 'digits:10', 'unique:'.User::class],
             "shipping_address" => ['required'],
-            "shipping_name" => ['required'],
+            "shipping_name" => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'],
             "shipping_email" => ['required', 'email', 'max:255'],
             "shipping_phone" => ['required', 'numeric', 'digits:10'],
             "shipping_city" => ['required'],
-            "shipping_postal_code" => ['required', 'numeric'], 
+            "shipping_postal_code" => ['required', 'numeric'],
             
-            "billing_email" => ['email', 'max:255', 'nullable'], 
-            "billing_phone" => ['numeric', 'digits:10', 'nullable'], 
+            "billing_name" => ['string', 'max:255', 'regex:/^[A-Za-z\s]+$/', 'nullable'],
+            "billing_email" => ['email', 'max:255', 'nullable'],
+            "billing_phone" => ['numeric', 'digits:10', 'nullable'],
             "billing_postal_code" => ['numeric', 'nullable'], 
-            
-
-            "aadhar_front" => ['mimes:jpg,png,pdf,jpeg'],
-            "aadhar_back" => ['mimes:jpg,png,pdf,jpeg'],
-            "security_check" => ['mimes:jpg,png,pdf,jpeg'],
         ]);
         try{
             $user = User::create([
@@ -146,18 +142,25 @@ class CustomerController extends Controller{
         }
     }
 
+ 
     public function update(Request $request, $id){  
         $request->validate([
-            "name" => ['required'],
+            "name" => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'],
             "email" => ['required', 'string', 'lowercase', 'email', Rule::unique('users', 'email')->ignore($id)],
             "phone" => ['required', 'numeric', 'digits:10', Rule::unique('users', 'phone')->ignore($id)],
             "shipping_address" => ['required'],
-            "shipping_name" => ['required'],
-            "shipping_email" => ['required'],
-            "shipping_phone" => ['required', 'numeric', 'digits:10',],
+            "shipping_name" => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'],
+           "shipping_email" => ['required', 'email', 'max:255'],
+            "shipping_phone" => ['required', 'numeric', 'digits:10'],
             "shipping_city" => ['required'],
-            "shipping_postal_code" => ['required'],  
+            "shipping_postal_code" => ['required', 'numeric'],
+
+            "billing_name" => ['string', 'max:255', 'regex:/^[A-Za-z\s]+$/', 'nullable'],
+            "billing_email" => ['email', 'max:255', 'nullable'],
+            "billing_phone" => ['numeric', 'digits:10', 'nullable'],
+            "billing_postal_code" => ['numeric', 'nullable'], 
         ]);
+
         try{
             User::where('id', $id)->update([
                 "name" => $request->name,
@@ -181,7 +184,7 @@ class CustomerController extends Controller{
                 ]
             );
             
-            if ($request->has('billing_detail_check')) {
+            if($request->has('billing_detail_check')){
                 BillingAddress::updateOrCreate(
                     ['user_id' => $id],
                     [

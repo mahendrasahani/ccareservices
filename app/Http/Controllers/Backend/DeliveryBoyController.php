@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\DeliveryBoy;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,9 +22,12 @@ class DeliveryBoyController extends Controller
     }
     public function store(Request $request){
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'unique:'.User::class],
             "phone" => ['required', 'numeric', 'digits:10', 'unique:'.User::class], 
+            "address" => ['required'], 
+            "father_name" => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'], 
+            "aadhar_number" => ['required', 'numeric', 'digits:12'],
         ]);
         $user = DeliveryBoy::create([
             'name' => $request->name,
@@ -45,10 +49,14 @@ class DeliveryBoyController extends Controller
 
     public function update(Request $request, $id){
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email'],
-            "phone" => ['required', 'numeric', 'digits:10', 'unique:'.User::class], 
+            'name' => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'],
+            'email' => ['required', 'string', 'lowercase', 'email', Rule::unique(User::class)->ignore($id)],
+            "phone" => ['required', 'numeric', 'digits:10', Rule::unique(User::class)->ignore($id)], 
+            "address" => ['required'], 
+            "father_name" => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'], 
+            "aadhar_number" => ['required', 'numeric', 'digits:12'],
         ]);
+
         DeliveryBoy::where('id', $id)->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -56,7 +64,7 @@ class DeliveryBoyController extends Controller
             'address' => $request->address, 
             'father_name' => $request->father_name, 
             'aadhar_number' => $request->aadhar_number, 
-            'status' => 1  
+            'status' => 1
         ]);
         return redirect()->route('backend.delivery_boy.index')->with('updated', 'Delivery boy has been updated !');
     }

@@ -34,11 +34,11 @@
                                     <div class="row g-2">
                                         <div class="col-md">
                                             <div class="form-floating">
-                                                <select class="form-select" id="delivery_status" style="padding:7px 0;" name="delivery_status">
+                                                 <select class="form-select" id="delivery_status" style="padding:7px 0;" name="delivery_status">
                                                     <option selected value="">Filter by Deliver Status</option>
-                                                    <option value="ordered" {{isset($_GET['delivery_status']) == 'ordered'?'selected':''}}>Ordered</option>
-                                                    <option value="shipped" {{isset($_GET['delivery_status']) == 'shipped'?'selected':''}}>Shipped</option>
-                                                    <option value="delivered" {{isset($_GET['delivery_status']) == 'delivered'?'selected':''}}>Delivered</option> 
+                                                    <option value="ordered" {{isset($_GET['delivery_status']) && $_GET['delivery_status']  == 'ordered' ? 'selected' : ''}}>Ordered</option>
+                                                    <option value="shipped" {{isset($_GET['delivery_status']) && $_GET['delivery_status'] == 'shipped' ? 'selected' : ''}}>Shipped</option>
+                                                    <option value="delivered" {{isset($_GET['delivery_status']) && $_GET['delivery_status'] == 'delivered' ? 'selected' : ''}}>Delivered</option> 
                                                 </select>
                                             </div>
                                         </div>

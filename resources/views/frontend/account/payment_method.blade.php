@@ -43,6 +43,7 @@
                 <label class="form-check-label" for="termsConditions">
                   <h5 class="m-0" style="color:#002c6f"> Terms & Conditions</h5> 
                 </label>
+                <p class="text-danger checkedError" style="font-size: 15px; display:none">Please Cheked this..</p>
           </div>  
 
           <div class="" id="termCollaps" style="display: none;">
@@ -99,8 +100,7 @@
                   <h5 class="h5Element">Maintenance policy</h5>
                   <p class="pElement" style="font-size: 14px;">Maintenance of electronic appliances will be taken care of by Lessor for the entire tenure of the contract. This does not cover damages or breakdowns due to mishandling. Such issues will be addressed & resolved within 3-5 days after notifying our customer care team. In case the issue is not resolved within 5 days, we will not charge the rent for the down time period.</p>
               </div>
-          </div>
-             
+          </div> 
       </div>
       
   </section>
@@ -116,6 +116,7 @@
   </div>
 </div>
 
+
 @section('javascript-section')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="{{url('public/assets/both/js/payment-page.js')}}"></script>
@@ -123,6 +124,15 @@
 <script>
     $(document).on("click", "#submit_order_detail", function(e){
       e.preventDefault();
+
+      const termsConditions = $('#termsConditions'); 
+      if(!termsConditions.prop('checked')){
+        $('.checkedError').show();
+        return;
+      }else{
+        $('.checkedError').hide();
+      }
+
       $("#loader").show();
         let payment_type = $('input[name="paymentMethod"]:checked').val();
         let formData = $("#order_form").serialize();
@@ -160,20 +170,38 @@
         }else{
             $("#order_form").submit();
         }
-    }); 
-    
+    });
        
     $(document).ready(function(){
       let termsConditions = $('#termsConditions');
-      $(termsConditions).on('click', function(){
+      if (termsConditions.prop('checked')){
+        $('#termCollaps').show();
+      }else{
+        $('#termCollaps').hide();
+      }
+      
+      $(termsConditions).on('change', function(){
           if (termsConditions.prop('checked')) {   
             $('#termCollaps').show();
         } else {
             $('#termCollaps').hide();
-        }
+        };
       });
 });
     
 </script> 
+
+<script>
+  // $(document).ready(function(){
+  //   $('#termsConditions').on('change', function(){
+  //     let termsConditions = $('#termsConditions');
+  //       if(termsConditions.prop('checked')){
+  //         console.log("cheked is true");
+  //       }else{
+  //         console.log("cheked is false")
+  //       }
+  //   })
+  // })
+</script>
 @endsection
 @endsection

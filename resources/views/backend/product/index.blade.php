@@ -36,16 +36,10 @@
                                     <select class="form-control form-control-sm" name="type" id="sort_by"
                                         name="sort_by">
                                         <option>Sort by</option>
-                                        <option value="rating_high_to_low">Rating (High > Low)</option>
-                                        <option value="rating_low_to_high">Rating (Low > High)</option>
-                                        <option value="sale_high_to_low">Num of Sale (High > Low)</option>
-                                        <option value="sale_low_to_high">Num of Sale (Low > High)</option>
-                                        <option value="price_high_to_low" {{isset($_GET['sortBy']) &&
-    $_GET['sortBy'] == 'price_high_to_low' ? 'selected' : ''}}>Base Price (High >
-                                            Low)</option>
-                                        <option value="price_low_to_high" {{isset($_GET['sortBy']) &&
-    $_GET['sortBy'] == 'price_low_to_high' ? 'selected' : ''}}>Base Price (Low >
-                                            High)</option>
+                                        <option value="rating_high_to_low" {{ isset($_GET['sortBy']) && $_GET['sortBy'] ==  "rating_high_to_low" ? "selected":"" }}>Rating (High > Low)</option>
+                                        <option value="rating_low_to_high" {{ isset($_GET['sortBy']) && $_GET['sortBy'] == "rating_low_to_high"  ? "selected":"" }}>Rating (Low > High)</option>
+                                        <option value="sale_high_to_low" {{ isset($_GET['sortBy']) && $_GET['sortBy'] == "sale_high_to_low"  ? "selected":"" }}>Num of Sale (High > Low)</option>
+                                        <option value="sale_low_to_high" {{ isset($_GET['sortBy']) && $_GET['sortBy'] == "sale_low_to_high"  ? "selected":"" }}>Num of Sale (Low > High)</option> 
                                     </select>
                                 </div>
                             </div>

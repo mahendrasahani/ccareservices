@@ -27,12 +27,22 @@ use Str;
 class ProductController extends Controller
 {
     public function index(){ 
-        $product_list = Product::select('*')->withAvg('getReview', 'rating');
+        $product_list = Product::select('*')->withAvg('getReview', 'rating')
+        ->withCount(['sales as delivered_sales_count']);   
         if(isset($_GET['sortBy']) && $_GET['sortBy'] != ''){
-            if($_GET['sortBy'] == 'price_high_to_low'){
-                $product_list = $product_list->orderBy('regular_price', 'desc');
-            }elseif($_GET['sortBy'] == 'price_low_to_high'){
-                $product_list = $product_list->orderBy('regular_price', 'asc');
+             if($_GET['sortBy'] == 'rating_high_to_low'){ 
+                $product_list = $product_list->orderByDesc('get_review_avg_rating');  
+            }
+            elseif($_GET['sortBy'] == 'rating_low_to_high'){ 
+                $product_list = $product_list->orderBy('get_review_avg_rating', 'asc');
+            }
+            elseif($_GET['sortBy'] == 'sale_high_to_low'){  
+                $product_list = $product_list->orderByDesc('delivered_sales_count');
+            }
+            elseif($_GET['sortBy'] == 'sale_low_to_high'){  
+                $product_list = $product_list->orderBy('delivered_sales_count', 'asc');
+            }else{ 
+                $product_list = $product_list->orderBy('id', 'desc');
             }
         }else{
             $product_list = $product_list->orderBy('id', 'desc');
@@ -44,6 +54,8 @@ class ProductController extends Controller
         ]); 
         return view('backend.product.index', compact('product_list'));
     }
+
+
 
     public function create(){  
         $brand_list = Brand::where('status', 1)->get();
