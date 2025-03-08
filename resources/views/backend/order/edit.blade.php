@@ -304,7 +304,6 @@
         let formattedFinalPrice = '₹' + finalPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');  
         $('#showFinalPrice').text(formattedFinalPrice); 
         // $("#total_price").val(finalPrice); 
-
     }
 </script> 
 

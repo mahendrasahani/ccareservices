@@ -49,17 +49,17 @@
 
                                     <!-- your all data cotegory section start -->
                                     <div class="card p-2 mt-5 mb-5" style="border: 1px solid #01316b;">
-                                        <table class="table table-bordered mt-4 mb-4">
+                                        <table class="table table-bordered table-responsive mt-4 mb-4">
                                             <thead>
                                                 <tr style="font-size: 12px;">
-                                                    <th width="30%">Product</th>
-                                                    <th>Variant</th>
-                                                    <th>QTY</th>
-                                                    <th>Month</th>
-                                                    <th>Unit price</th>
-                                                    <th>Tax</th>
-                                                    <th>Total</th>
-                                                    <th>Action</th>
+                                                    <th style="width:190px;">Product</th>
+                                                    <th style="width:120px;">Variant</th>
+                                                    <th style="width:100px;">QTY</th>
+                                                    <th style="width:180px">Month</th>
+                                                    <th style="width:100px">Unit price</th>
+                                                    <th style="width:150px">Tax</th>
+                                                    <th style="width:160px;" >Total</th>
+                                                    <th style="width:110px;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="CartProduct">
@@ -341,7 +341,7 @@
             newRow.innerHTML = `
                 <td>
                     <div class="media">
-                        <img src="{{url('public/')}}/${p_img}" class="" width="65px" style="border-radius: 5px;"> 
+                        <img src="{{url('public/')}}/${p_img}" class="" width="60px" style="border-radius: 5px;"> 
                         <div class="media-body mx-2">
                             <p class="mb-0"><b>${p_name}</b></p>
                         </div>

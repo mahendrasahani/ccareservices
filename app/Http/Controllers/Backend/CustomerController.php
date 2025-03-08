@@ -307,4 +307,20 @@ class CustomerController extends Controller{
         }
     } 
     // ------------------------------------------------------------------------------------------
+
+    public function allCustomersList(){
+        try{
+            $customers = User::where('user_type', 2)->where('active_status', 1)->get();
+            return response()->json([
+                "stauts" => "success",
+                "no_of_records" => count($customers),
+                "customers" => $customers
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => "failed",
+                "error" => $e->getMessage()
+            ], 400);
+        }
+    }
 }

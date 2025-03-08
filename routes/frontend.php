@@ -25,8 +25,10 @@ Route::get('/about-us', [PageController::class, 'aboutPageView'])->name('fronten
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicyPageView'])->name('frontend.privacy_policy.view');
 Route::get('/terms-and-condition', [PageController::class, 'termsAndConditionPageView'])->name('frontend.terms_and_condition.view');
 Route::get('/contact-us', [PageController::class, 'contactUsPageView'])->name('frontend.contact_us.view');
+Route::post('/contact-us', [PageController::class, 'submitContactPage'])->name('frontend.contact_us.submit_contact_form');
 // Route::get('/product', [PageController::class, 'viewProductPageView'])->name('frontend.view_product.view');
 Route::get('/single-product', [PageController::class, 'viewSingleProductView'])->name('frontend.single_product.view');
+Route::get('/return', [PageController::class, 'returnView'])->name('frontend.return.view');
 // ------------------------ All Pages route (end) --------------------------------------------------------
 
 // -------------------------After user login (start) ------------------------------------------------------------

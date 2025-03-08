@@ -150,21 +150,21 @@
                                     <div class="card" style="border: 1px solid #e8e8e8;">
                                         <div class="card-header d-flex justify-content-between" style="border-bottom : 1px solid #e8e8e8;"> 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" checked name="billing_detail_check" data-toggle="collapse" href="#billingDetails" role="button" id="billingDetails_checkbox" aria-expanded="false" aria-controls="billingDetails">
+                                                <input class="form-check-input" type="checkbox" checked name="billing_detail_check" data-toggle="collapse" href="#billingDetails_edit" role="button" id="billingDetails_checkbox_edit" aria-expanded="false" aria-controls="billingDetails_edit">
                                                 <label class="form-check-label mb-0 h5" for="">
                                                     Billing address is different?
                                                 </label>
                                             </div> 
                                         </div>
-                                        <div class="card-body collapse show" id="billingDetails"> 
+                                        <div class="card-body collapse show" id="billingDetails_edit"> 
 
                                              <div class="form-group row">
                                                 <label class="col-md-3 col-form-label" for="billing_name">Name</label>
                                                 <div class="col-md-9">
-                                                <input type="text" class="form-control" id="billing_name" name="billing_name" placeholder="Name" value="{{$billing_address->name ?? ''}}"/> 
-                                                    @error('billing_name')
-                                                        <p style="color:red; font-weight:bold;">{{$message}}</p>
-                                                    @enderror
+                                                   <input type="text" class="form-control" id="billing_name" name="billing_name" placeholder="Name" value="{{$billing_address->name ?? ''}}"/> 
+                                                       @error('billing_name')
+                                                         <p style="color:red; font-weight:bold;">{{$message}}</p>
+                                                       @enderror
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -216,8 +216,7 @@
                                             </div>
 
                                         </div>
-                                    </div>
-
+                                    </div> 
 
                                       
                                     <div class="card" style="border: 1px solid #e8e8e8;">
@@ -378,7 +377,20 @@
             let imgName = $(this).data('label');  
             $('#imgModal').text(imgName);  
           $('.showmodalIMG').attr('src', imgUrl);
-        })
+        }); 
+
+        if($('#billingDetails_checkbox_edit').prop('checked')){
+            $('#billingDetails_edit input').attr('required', true)
+        }else{
+            $('#billingDetails_edit input').attr('required', false)
+        } 
+        $('#billingDetails_checkbox_edit').on('change', function(){
+            if($('#billingDetails_checkbox_edit').prop('checked')){ 
+                $('#billingDetails_edit input').attr('required', true);
+            }else{
+                $('#billingDetails_edit input').attr('required', false);
+            }
+        }); 
     })
 </script>
 

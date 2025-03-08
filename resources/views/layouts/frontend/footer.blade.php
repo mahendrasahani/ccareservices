@@ -39,7 +39,7 @@
                         <li class="pt-2">My Account</li>
                     </a>
                     @endif
-                    <a href="" class="text-decoration-none text-white">
+                    <a href="{{ route('frontend.return.view') }}" class="text-decoration-none text-white">
                         <li class="pt-2">Returns</li>
                     </a> 
                 </ul>
@@ -55,7 +55,7 @@
                     <a href="mailto:testing12@gmail.com" class="text-decoration-none text-white">
                         <li class="pt-2"><i class="fa-regular fa-envelope"></i>&nbsp info@coolcareservice.in</li>
                     </a>
-                    <a href="mailto:testing12@gmail.com" class="text-decoration-none text-white">
+                    <a href="{{route('frontend.contact_us.view')}}" class="text-decoration-none text-white">
                         <li class="pt-2"><i class="fa-solid fa-location-dot"></i>&nbsp View on map</li>
                     </a> 
                 </ul>

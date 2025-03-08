@@ -566,41 +566,54 @@ class OrderController extends Controller{
 
 
     public function selectCustomerToCreateOrder(Request $request){
-        $validate = $request->validate([
-            "name" => ['sometimes', 'nullable', 'string', 'max:255'],
-            "email" => ['sometimes', 'nullable', 'email', 'max:255'],
-            "phone" => ['sometimes', 'nullable', 'regex:/^(?:\+?[0-9]{10,15}|[0-9]{10})$/'],
-        ]);
+        // $validate = $request->validate([
+        //     "name" => ['sometimes', 'nullable', 'string', 'max:255'],
+        //     "email" => ['sometimes', 'nullable', 'email', 'max:255'],
+        //     "phone" => ['sometimes', 'nullable', 'regex:/^(?:\+?[0-9]{10,15}|[0-9]{10})$/'],
+        // ]);
     
-        try {
+        // try {
+            $found_status = true;
+            $search = $request->search;
             $name = $request->name;
             $email = $request->email;
             $phone = $request->phone; 
-          
-            
-            if (empty($name) && empty($phone) && empty($email)) {  
+            $customers = User::where('user_type', 2);   
+            if (empty($search)) {
                 $customers = [];  
-                $found_status = false;
+                $found_status = false; 
             }else{
-                $customers = User::where('user_type', 2);   
-                if (!empty($name)) {
-                    $customers = $customers->where('name', 'LIKE', '%'.$name.'%');
-                }
-                if (!empty($phone)) {
-                    $customers = $customers->where('phone', 'LIKE', '%'.$phone.'%');
-                }
-                if (!empty($email)) {
-                    $customers = $customers->where('email', 'LIKE', '%'.$email.'%');
-                } 
-                $customers = $customers->paginate(20); 
-                    $found_status = true;
+                $customers = $customers->where('name', 'LIKE', '%'.$search.'%')
+                ->orWhere('phone', 'LIKE', '%'.$search.'%')
+                ->orWhere('email', 'LIKE', '%'.$search.'%');
+                $customers = $customers->where('active_status', 1)->paginate(20); 
+                $found_status = true;
+            }
+            // if (empty($name) && empty($phone) && empty($email)) {  
+            //     $customers = [];  
+            //     $found_status = false;
+            // }else{
+            //     $customers = User::where('user_type', 2);   
+            //     if (!empty($name)) {
+            //         $customers = $customers->where('name', 'LIKE', '%'.$name.'%');
+            //     }
+            //     if (!empty($phone)) {
+            //         $customers = $customers->Orwhere('phone', 'LIKE', '%'.$phone.'%');
+            //     }
+            //     if (!empty($email)) {
+            //         $customers = $customers->where('email', 'LIKE', '%'.$email.'%');
+            //     } 
+            //     $customers = $customers->paginate(20); 
+            //         $found_status = true;
                
-            } 
+            // } 
             return view('backend.order.select_customer', compact('customers', 'found_status'));
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Something went wrong'], 500);
-        }
+        // } catch (\Exception $e) {
+        //     return response()->json(['error' => 'Something went wrong'], 500);
+        // }
     }
+
+ 
     
 }
 

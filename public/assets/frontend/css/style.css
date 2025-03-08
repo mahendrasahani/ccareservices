@@ -1499,8 +1499,10 @@ section.dahboard-wrapper {
 
 .form-field input {
   border: 1px solid #8080808c;
-  border-radius: 8px;
+  border-radius: 5px;
   padding-left: 15px;
+  padding: 8px 10px;
+font-weight: 300;
 }
 .form-field select {
   width: 100%;

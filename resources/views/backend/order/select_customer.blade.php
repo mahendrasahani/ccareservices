@@ -15,25 +15,16 @@
                                     <h3> Create Order</h3>
                                 </div>
                                     
-                                <div class="col-md-6 mb-3">
-                                    <label class="control-label" for="name">Name</label>
-                                    <input type="text" placeholder="Name" name="name" class="form-control" value="{{ isset($_GET['name']) && $_GET['name'] != '' ? $_GET['name'] : '' }}">
-                                    @error('name')
-                                    <p style="color:red;">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-6 mb-3">
-                                    <label class="control-label" for="email">Email id</label>
-                                    <input type="text" placeholder="Email id" name="email" class="form-control" value="{{ isset($_GET['email']) && $_GET['email'] != '' ? $_GET['email'] : '' }}">
-                                    @error('email')
-                                    <p style="color:red;">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                                
                                 
                                 <div class="col-md-6 mb-3">
-                                    <label class="control-label" for="number">Phone Number</label>
-                                    <input type="text" placeholder="Phone Number" name="phone" class="form-control" value="{{ isset($_GET['phone']) && $_GET['phone'] != '' ? $_GET['phone'] : '' }}">
+                                    <label class="control-label" for="search">Search by Name, Email or Number</label>
+                                    <input type="text" 
+                                       placeholder="Search by Name, Email or Number" 
+                                       name="search" class="form-control" 
+                                       value="{{ isset($_GET['search']) && $_GET['search'] != '' ? $_GET['search'] : '' }}"
+                                       id="handalInput"
+                                       >
                                     @error('phone')
                                     <p style="color:red;">{{ $message }}</p>
                                     @enderror
@@ -61,9 +52,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php 
+                                    $sn=1;
+                                    @endphp
                                     @foreach($customers as $customer)
                                     <tr>
-                                        <th scope="row">1</th>
+                                        <th scope="row">{{ $sn++ }}</th>
                                         <td>{{ $customer->name ?? '' }}</td>
                                         <td>{{ $customer->email ?? '' }}</td>
                                         <td>{{ $customer->phone ?? '' }}</td>
@@ -74,11 +68,7 @@
                                     @endforeach
                                 </tbody>
                         </table> 
-                        
 
-
-                        
-                         
                     </div> 
                     @else
                         
@@ -91,13 +81,80 @@
                 </div> 
             </div> 
 
+            <!------------------------------------------------------------------>
+            <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email id</th>
+                            <th scope="col">Mobil Number</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderList"> 
+                        
+                    
+                    </tbody>
+            </table> 
+            <!------------------------------------------------------------------>
+
         </div>
 </section>
     </div>
 </div>
- 
 
 @section('javascript-section')
+
+
+<script>
+
+    const handalInputOrderSearch = async () =>{
+           let searchInputValue =  document.getElementById('handalInput').value;  
+           let orderList = document.getElementById('orderList');
+
+           let url = "{{ route('backend.customer.get_all_customers_list') }}"; 
+
+           try{
+                let response = await fetch(url)
+                if(!response.ok){
+                    console.log("Network error")
+                }
+                let data = await response.json();
+                let customersData = data.customers;
+                console.log(customersData)
+
+                let filteredCustomers = customersData.filter(customer => customer.name);
+
+                 let append_html = "";
+
+                 filteredCustomers.forEach((element, index) => {  
+                    append_html += `
+                        <tr>
+                            <th scope="row">${index+1}</th>
+                            <td>${element.name}</td>
+                            <td> ${element.email}</td>
+                            <td> ${element.phone}</td>
+                            <td>
+                              <a href=" "  class="btn btn-info">Create Order</a>
+                            </td>
+                        </tr>
+                    `  
+                 }); 
+                 orderList.innerHTML = append_html;
+
+           }catch(error){
+                console.log(error)
+           }  
+           
+    };
+
+    document.getElementById('handalInput').addEventListener('input', function(){
+        handalInputOrderSearch();
+    });
+
+</script>
+
 
 @endsection
 @endsection

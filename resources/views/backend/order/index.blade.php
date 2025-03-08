@@ -10,7 +10,7 @@
                                     <div class="col text-center text-md-left">
                                         <h4 class="mb-md-0 h5">Orders</h4>
                                     </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                         <div class="input-group">
                             <input type="text" class="form-control form-control-sm" id="search" name="search" placeholder="Search name or order number">
                         </div> 
@@ -46,7 +46,7 @@
                                 </div>
                             
                                     <div class="col-xl-2 col-md-3">
-                                        <a href="{{ route('backend.order.select_customer') }}"   style="padding: 8px 12px; background: #6fd96f;" class="text-white" >
+                                        <a href="{{ route('backend.order.select_customer') }}"   style="padding: 8px 12px; background: #01316b;" class="text-white" >
                                             Create Order 
                                         </a>
                                             

@@ -156,6 +156,7 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/customers/edit/{id}', [CustomerController::class, 'edit'])->name('backend.customer.edit'); 
     Route::post('/admin/customers/update/{id}', [CustomerController::class, 'update'])->name('backend.customer.update'); 
     Route::get('/admin/customers/update-active-status', [CustomerController::class, 'updateActiveStatus'])->name('backend.customer.update_active_status'); 
+    Route::get('/admin/customers/get-all-customers-list', [CustomerController::class, 'allCustomersList'])->name('backend.customer.get_all_customers_list'); 
 
     Route::get('/admin/customers/search', [CustomerController::class, 'search'])->name('backend.customer.search');
 

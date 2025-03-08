@@ -21,7 +21,7 @@
   <!-- breadcrumb end -->
 </section>
 <!------------------------------------------------------Cart checkout-------------------------- -->
-@if($cart_product != '')
+@if(count($cart_product) > 0)
 <section class="">  
   <div class="container"> 
     <div class="row d-flex justify-content-center my-4">

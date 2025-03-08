@@ -1,6 +1,6 @@
 @extends('layouts/frontend/main')
 @section('main-section')
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <!-- background image-->
 <section id="banner-image">
   <!-- breadcrumb strat -->
@@ -23,6 +23,8 @@
 <!-- google map & contact us -->
 <section>
   <div class="container">
+    <form action="{{ route('frontend.contact_us.submit_contact_form') }}" method="POST">
+      @csrf
     <div class="row">
       <div class="col-md-6 mt-5 mb-5">
         <h1 style=" color: #002c6f;">Contact Us</h1>
@@ -43,19 +45,28 @@
         <div class="form-group required mt-2 mb-2">
           <label class="col-sm-2 control-label" for="input-name">Your Name</label>
           <div class="col-sm-10">
-            <input type="text" name="name" value="" id="input-name" class="form-control">
+            <input type="text" name="name" value="{{ old('name') }}" id="input-name" class="form-control" required>
+            @error('name')
+              <p style="color:red;"><b>{{ $message }}</b></p>
+            @enderror
           </div>
         </div>
         <div class="form-group required mt-2 mb-2">
           <label class="col-sm-2 control-label" for="input-email" style="display: inline;">E-Mail Address</label>
           <div class="col-sm-10">
-            <input type="text" name="email" value="" id="input-email" class="form-control">
+            <input type="email" name="email" value="{{ old('email') }}" id="input-email" class="form-control" required>
+            @error('email')
+              <p style="color:red;"><b>{{ $message }}</b></p>
+            @enderror
           </div>
         </div>
         <div class="form-group required">
           <label class="col-sm-2 control-label" for="input-enquiry">Enquiry</label>
           <div class="col-sm-10">
-            <textarea name="enquiry" rows="4" id="input-enquiry" class="form-control"></textarea>
+            <textarea name="message" rows="4" id="input-enquiry" class="form-control" required>{{ old('message') }}</textarea>
+            @error('message')
+              <p style="color:red;"><b>{{ $message }}</b></p>
+            @enderror
           </div>
         </div>
       </div>
@@ -67,23 +78,37 @@
             referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
-      <div class="col-md-12 mt-5 mb-5">
-        <h6>captcha</h6>
-        <form id="myForm" action="process-form.php" method="post">
-          <!-- Your other form fields go here -->
-          <!-- Add the reCAPTCHA widget -->
-          <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_API_KEY"></div>
-          <a href="#" class="text-decoration-none " id="onclick=" submitForm()>
-            <button class="animate-btx">
-              Submit
-              <span id="arrow-icon"></span>
-            </button>
+      <div class="col-md-12 mb-5">
+        <h6>captcha</h6>  
+          <div class="inputfild">
+           <script src="https://www.google.com/recaptcha/api.js"
+               async defer></script>
+           <div class="g-recaptcha" id="feedback-recaptcha"
+               data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}">
+           </div>
+           @error('g-recaptcha-response')
+           <p style="color:red;"><b>The google recptcha is required.</b></p>
+           @enderror
+       </div> 
+            <button type="submit" class="animate-btx">Submit<span id="arrow-icon"></span></button>
           </a>
-        </form>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
-</section>
-
+</section> 
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+@section('javascript-section')
+  @if(Session::has('submitted'))
+    <script>
+      Swal.fire({
+      title: "Thankyou",
+      text: "{{ Session::get('submitted') }}",
+      icon: "success"
+    });
+    </script>
+  @endif
+@endsection
+
 @endsection
