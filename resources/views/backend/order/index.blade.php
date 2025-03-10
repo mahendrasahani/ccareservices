@@ -80,9 +80,13 @@
                                                             <td>
                                                             @if($order->order_status == 'not_confirmed')
                                                                  <span class="text-capitalize">NOT CONFIRMED</span>
+                                                                 @elseif($order->order_status == '')
+                                                                 <span class="text-capitalize">NOT COMPLETED</span> 
                                                                  @else
                                                                 <span class="text-capitalize">{{strtoupper($order->order_status)}}</span>
-                                                                @endif
+                                                            @endif
+
+
                                                             </td> 
                                                             <td style="display: table-cell;">
                                                                 @if($order->payment_status == 'paid')

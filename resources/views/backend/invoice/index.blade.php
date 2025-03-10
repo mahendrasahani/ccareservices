@@ -77,7 +77,15 @@ b, strong {
             <b>Web Site:</b><a href="https://www.coolcareservice.in">https://www.coolcareservice.in</a></td>
           <td style="width: 50%;"><b>Date Added</b> {{\Carbon\Carbon::parse($order->created_at)->format('M d, Y')}}<br>
           <b>Order ID:</b> {{$order->order_id}}<br>
-          <b>Payment Method</b> {{$order->payment_mode == "cash_on_delivery" ? "Cash On Delivery":"Online"}}<br>
+          <b>Payment Method</b>
+          @if($order->payment_method == "cash_on_delivery")
+          Cash On Delivery
+          @elseif($order->payment_method == "razorpay")
+          Online
+          @else
+          Not Available
+          @endif 
+          <br>
         </td>
         </tr>
       </tbody>

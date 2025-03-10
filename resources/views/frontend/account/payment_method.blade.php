@@ -43,7 +43,7 @@
                 <label class="form-check-label" for="termsConditions">
                   <h5 class="m-0" style="color:#002c6f"> Terms & Conditions</h5> 
                 </label>
-                <p class="text-danger checkedError" style="font-size: 15px; display:none">Please Cheked this..</p>
+                <p class="text-danger checkedError" style="font-size: 15px; display:none">Accept Terms & Conditions</p>
           </div>  
 
           <div class="" id="termCollaps" style="display: none;">
@@ -178,30 +178,22 @@
         $('#termCollaps').show();
       }else{
         $('#termCollaps').hide();
+        $('.checkedError').hide();
       }
       
       $(termsConditions).on('change', function(){
           if (termsConditions.prop('checked')) {   
             $('#termCollaps').show();
+            $('.checkedError').hide();
         } else {
-            $('#termCollaps').hide();
+            $('#termCollaps').hide(); 
+            $('.checkedError').show();
         };
       });
 });
     
 </script> 
 
-<script>
-  // $(document).ready(function(){
-  //   $('#termsConditions').on('change', function(){
-  //     let termsConditions = $('#termsConditions');
-  //       if(termsConditions.prop('checked')){
-  //         console.log("cheked is true");
-  //       }else{
-  //         console.log("cheked is false")
-  //       }
-  //   })
-  // })
-</script>
+
 @endsection
 @endsection

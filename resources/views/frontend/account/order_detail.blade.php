@@ -171,7 +171,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-answer">
-                                        <p>{{$order->payment_method == 'cash_on_delivery' ? 'Cash On Delivery' : 'Online'}}</p>
+                                    @if($order->payment_method == "cash_on_delivery")
+                                        <p>Cash On Delivery</p>
+                                    @elseif($order->payment_method == "razorpay")
+                                        <p>Online</p> 
+                                    @else
+                                        <p>Not Available</p> 
+                                    @endif  
                                     </div>
                                 </div>
                                 <!-- <div class="col-md-6">
@@ -209,7 +215,8 @@
                                 <div class="order-tracking 
                                 @if($order->order_status == 'ordered'||$order->order_status=='accepted' || $order->order_status == 'shipped' || $order->order_status == 'delivered')
                                 completed
-                                @endif ">
+                                @endif
+                                 ">
                                     <span class="is-complete"></span>
                                     <p>Ordered<br><span>
                                     @if($order->ordered_date != "")
@@ -220,7 +227,8 @@
                                 <div class="order-tracking 
                                 @if($order->order_status=='accepted' || $order->order_status == 'shipped' || $order->order_status == 'delivered')
                                 completed
-                                @endif ">
+                                @endif
+                                 ">
                                     <span class="is-complete"></span>
                                     <p>Accepted<br><span>
                                     @if($order->accepted_date != "")
@@ -231,7 +239,8 @@
                                 <div class="order-tracking 
                                 @if($order->order_status == 'shipped' || $order->order_status == 'delivered')
                                 completed
-                                @endif ">
+                                @endif 
+                                ">
                                     <span class="is-complete"></span>
                                     <p>Shipped<br><span>
                                         @if($order->shipped_date != "")
@@ -242,7 +251,8 @@
                                 <div class="order-tracking
                                 @if($order->order_status == 'delivered')
                                 completed
-                                @endif  ">
+                                @endif 
+                                 ">
                                     <span class="is-complete"></span>
                                     <p>Delivered<br><span>
                                     @if($order->delivered_date != "")

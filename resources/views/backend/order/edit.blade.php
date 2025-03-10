@@ -43,7 +43,7 @@
                                                             <td class="text-right font-weight-bold">
                                                                 @if($order->payment_method == "cash_on_delivery" )
                                                                 Cash On Delivery
-                                                                @elseif($order->payment_method == "cash_on_delivery" )
+                                                                @elseif($order->payment_method == "razorpay" )
                                                                 Online
                                                                 @else
                                                                 Not Available
@@ -75,7 +75,8 @@
                                                         <option value="canceled" {{$order->order_status == "canceled" ? "selected" : ""}}>Cancel</option> 
                                                         <option value="shipped" {{$order->order_status == "shipped" ? "selected" : ""}}>Shipped</option> 
                                                         <option value="delivered" {{$order->order_status == "delivered" ? "selected" : ""}}>Delivered</option> 
-                                                        <option value="delivered" {{$order->order_status == "not_confirmed" ? "selected" : ""}}>Not Confirmed</option> 
+                                                        <option value="not_confirmed" {{$order->order_status == "not_confirmed" ? "selected" : ""}}>Not Confirmed</option> 
+                                                        <option value="" {{$order->order_status == "" ? "selected" : ""}}>Not Completed</option> 
                                                     </select>
                                                 </div>  
                                                 @if($order->order_status == 'canceled')
