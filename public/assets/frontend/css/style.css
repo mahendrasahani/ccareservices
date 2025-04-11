@@ -28,7 +28,6 @@ body {
     justify-content: end;
 }
 
-
 #closeButton i.fa-solid.fa-x {
   font-size: 8px !important;
 }
@@ -51,6 +50,13 @@ body {
   /* width: 80%; */
   transform: translateX(0);
 }
+
+
+
+
+
+
+
 #header-ul li a {
   color: #01316b;
   font-weight: 600;
@@ -86,6 +92,10 @@ body {
 
 .card-fist:hover {
   transform: rotate(5deg);
+}
+
+.footer a{
+  text-transform: uppercase !important;
 }
 
 .icon {
@@ -165,8 +175,8 @@ ul.dropdown-menu li a.dropdown-item {
 }
 
 .hover-item:hover {
-  transform: scale(1.06);
-  transition: transform 0.5s ease-in-out;
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
 } 
 .hover-item img {
   width: 100%;
@@ -974,7 +984,14 @@ h3.text-center.mt-5.mb-5.before::before {
 
 
 
+
+
+
+
+
 /********************* add new styles ****************/
+
+
 
 .loaderScal{
   width: 100%;
@@ -1002,6 +1019,16 @@ h3.text-center.mt-5.mb-5.before::before {
   align-items: center;
 } */
 
+/*  
+html, body {
+  overflow: hidden; 
+  height: 100%;       
+  margin: 0;         
+} */
+
+
+
+
 .loaderScal {
   position: fixed;
   top: 0;
@@ -1018,7 +1045,7 @@ h3.text-center.mt-5.mb-5.before::before {
 .loaderPyment {
   text-align: center;
   background: white;
-  color: #000; 
+  color: #000;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -1042,14 +1069,6 @@ body.no-scroll {
   overflow: hidden;
 }
 
-
-
-/*  
-html, body {
-  overflow: hidden; 
-  height: 100%;       
-  margin: 0;         
-} */
 .rowposition{
   position: relative;
   align-items: center;
@@ -1097,7 +1116,6 @@ html, body {
   }
   #section1 {
     display: flex;
-    padding: 8px 0 !important;
   }
   .service {
     padding: 17px 0px 0 0;
@@ -1110,7 +1128,7 @@ html, body {
     display: contents;
   }
   .card.hover-item {
-    /* margin-bottom: 42px; */
+    margin-bottom: 42px;
   }
   .CoolCare li {
     padding: 3px 0px;
@@ -1499,10 +1517,8 @@ section.dahboard-wrapper {
 
 .form-field input {
   border: 1px solid #8080808c;
-  border-radius: 5px;
+  border-radius: 8px;
   padding-left: 15px;
-  padding: 8px 10px;
-font-weight: 300;
 }
 .form-field select {
   width: 100%;
@@ -1771,6 +1787,7 @@ input[type=range]:focus::-ms-fill-upper {
   font-size: 15px;
 }
 .number {
+    cursor: pointer !important;
   width: calc(100% / 12);
   text-align: center;
 }
@@ -1794,7 +1811,6 @@ input[type=range]:focus::-ms-fill-upper {
           min-height: 100px;
           /* min-width: 100px; */
           max-width: 100px;
-          margin-top: 10px;
           margin-bottom: 15px;
           cursor: pointer;
           border: 2px solid transparent;
@@ -1817,7 +1833,6 @@ input[type=range]:focus::-ms-fill-upper {
   .mainImage {
       overflow: hidden;
       /* min-width: 500px; */
-      width:100%;
       max-width: 500px;
       border-radius: 10px;
       cursor: crosshair;
@@ -1919,7 +1934,8 @@ fieldset {
 
 .cart_img_wrap {
     /* width: 200px; */
-    height: 210px;
+    width: 100px;
+    height: 100px;
 }
 .cart_img_wrap img{ 
     object-fit: contain;
@@ -1938,12 +1954,16 @@ fieldset {
 .cart_table td{
   text-align: center;
   vertical-align: middle;
+  font-size: 14px;
 }
 .cart_table th{
   text-align: center;
   vertical-align: middle;
+  font-size: 14px;
 }
-
+.card-body{
+  overflow: auto;
+}
 button.swal2-confirm.swal2-styled{
   background-color: #01b7e0 !important; 
 }
@@ -2109,89 +2129,20 @@ a.btn.btn-warning.animation {
   border: none !important
 }
 
-.toggleMenubar{
-  border: none !important;
-  font-size: 24px !important;
-  cursor: pointer;
-}
-/* categories_list style */
- .cotegories_list a{
-    font-weight: 500 !important;
-    color: #01316b !important;
- }
- .cotegories_list i{color: #01316b !important;}
- .subList_categries{
-  padding-left: 1rem !important;
- }
- .subList_categries li a{
-   font-size: 12.3px !important;
-   color: black !important;
- }
- .loaderScal{
-  /* display: flex !important;
-  align-items: center !important; */
- }
-
-  /* adminProductIMG  admin stayle*/
-
-  .adminProductIMG{
-    width: 100%;
-    height: 150px;
-  }
-  /* .cardBorder{
-    border: 1px solid #333;
-    border-radius: 3px;
-  } */
- 
-.h5Element{
-  color: #002c6f;
-}
-.pElement{
-  font-style: 14px !important;
-}
-.ulListElement li{
-  font-size: 13px;
-}
-
-
-
 @media (max-width:991px){
   .positionCart{
     position: static;
   }
   .menubarBtn{
     justify-content:flex-start !important;
+    
   }
-}
-@media (max-width:600px){
-  .heading {
-    font-size: 15px;
-    padding: 0 .5rem;
-  }
-  .toggleMenubar{
-    font-size: 20px !important;
-  }
-  button.btn.btn-warning.animation {
-    padding: 6.5px 12px;
-  }
-  .title{font-size: 12px !important; line-height: 13px;}
-  h6.card-title.text-center.categry {
-    font-size: 12px;
-  }
-  .fontsizeicon{
-    font-size: 15px !important;
-  }
-.card-fist {
-  width: 150px;
-  padding: 18px;
-}
-.person_name {
-  font-size: 12px;
 }
 
-.wrapper{
-  padding: 5px;
-}
-}
+@media (max-width:500px){
+  .cart_img_wrap {
+    width: 70px;
+    height: 70px;
+}}
 
 

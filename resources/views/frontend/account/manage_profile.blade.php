@@ -63,12 +63,12 @@
                   </div>
                 </div>
 
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                   <div class="form-field">
                     <label for="postalCode" class="form-about">Postal Code:</label>
-                    <input type="text" id="postal_code" name="postal_code" placeholder="Enter your postal code" required value="{{$user_data->postal_code ?? ''}}"/>
+                    <input type="text" id="postal_code" name="postal_code" placeholder="Enter your postal code"  value="{{$user_data->postal_code ?? ''}}"/>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="col-12">
                     <div class="row">
@@ -99,7 +99,7 @@
                 <div class="upload-container mt-3">
                   <div class="circle" id="selected-image-container">
                     <img class="profile-pic selected-image-container"
-                      src="{{url($user_data->profile ?? 'public/assets/both/images/user_profile/1713010229.jpg')}}">
+                      src="{{url($user_data->profile ?? 'public/assets/both/images/user_profile/profile.jpg')}}">
                   </div>
                   <div class="p-image text-center">
                     <button  class="upload-button" onclick="event.preventDefault(); document.querySelector('.file-upload').click()">
@@ -120,7 +120,7 @@
                   <h6>Default Shipping Address</h6>
                   <hr>
                   <p style="font-size: 14px;">{{$shipping_addres->address ?? Auth::user()->address_1.', '.Auth::user()->address_2}},</p>
-                  <p style="font-size: 14px;">{{$shipping_addres->city ?? Auth::user()->city}} - {{$shipping_addres->zip_code ?? Auth::user()->zip_code}}</p>
+                  <p style="font-size: 14px;">{{$shipping_addres->city ?? Auth::user()->city}}</p>
                 </div>
               </div>
               @endif 
@@ -131,7 +131,7 @@
                   <h6>Default Billing Address</h6>
                   <hr>
                   <p style="font-size: 14px;">{{$billing_address->address ?? ''}},</p>
-                  <p style="font-size: 14px;">{{$billing_address->city ?? ''}} - {{$billing_address->zip_code ?? ''}}</p>
+                  <p style="font-size: 14px;">{{$billing_address->city ?? ''}}</p>
                 </div>
               </div>
               @endif

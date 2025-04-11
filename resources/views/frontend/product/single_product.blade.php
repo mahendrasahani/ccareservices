@@ -160,9 +160,12 @@
         </ul> 
         <div class="tab-content mt-2">
             <div class="tab-pane fade show active p-tag" id="description">
-                <h6>SPECIFICATION﻿ / DESCRIPTION</h6>
+                 <!--<h6 style="text-transform: uppercase;">SPECIFICATION / DESCRIPTION</h6>-->
+             
                 {!! $product_detail->product_description !!}
+                
             </div>
+            
             <div class="tab-pane fade" id="myreview">
                 <div class="row"> 
                         <h6>Leave a review</h6>
@@ -256,7 +259,15 @@
         </div>  
     </div>
 </section> 
+
 @section('javascript-section')
+
+<script>
+    document.getElementById("delivery_date").addEventListener("keydown", function (event) {
+        event.preventDefault();
+    });
+</script>
+  
 @if(Session::has('review_sent'))
         <script> 
             Swal.fire({

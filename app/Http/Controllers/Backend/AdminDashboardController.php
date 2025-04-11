@@ -43,25 +43,19 @@ class AdminDashboardController extends Controller
             $phone = $request->phone;
             $company_name = $request->company_name;
             $address_1 = $request->address_1;
-            $address_2 = $request->address_2;
             $country = $request->country;
             $state = $request->state;
             $city = $request->city;
-            $postal_code = $request->postal_code; 
-    
+            $postal_code = $request->postal_code;  
             User::where('id', Auth::user()->id)->update([
                 "name" => $name,
                 "email" => $email,
                 "phone" => $phone,
                 "company_name" => $company_name,
-                "address_1" => $address_1,
-                "address_2" => $address_2,
-                "country" => $country,
-                "state" => $state,
+                "address_1" => $address_1,  
                 "city" => $city,
                 "postal_code" => $postal_code, 
-            ]); 
-    
+            ]);  
             if($request->hasFile('profile')){
                 $directory = "assets/both/images/user_profile";
                 $profile = $request->profile;

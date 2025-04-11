@@ -121,10 +121,6 @@ body {
   text-align: left;
  }
 
-.metismenu li a{
-  text-decoration: none;
-}
-
 [tabindex="-1"]:focus {
   outline: 0 !important; }
 /*##################
@@ -153,17 +149,6 @@ button.btn.btn-warning.btn_add.text-white.pt-2{
   display: inline-block;
   width: 52px;
   height: 21px;
-}
-
-.createOrderElement{
-  padding: 1.5rem 2.5rem;
-  border: 1px solid #ced4da;
-  border-radius: 10px;
-
-}
-
-.h5Element{
- color: #002c6f;
 }
 
 /* Hide default HTML checkbox */
@@ -9281,6 +9266,20 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 The smaller device rules always should write below the bigger device rules
 Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Component
 */
+
+.card, .card-body{
+  overflow: auto !important;
+}
+.addcontants{
+  padding: 2.5px 10px;
+  border: 1px solid #7571f9;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.nk-sidebar .metismenu a {
+  padding: 10px !important;
+}
 @media only screen and (min-width: 768px) {
   [data-sidebar-style="mini"] .nav-header {
     width: 3.75rem; }
@@ -9303,7 +9302,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   [data-sidebar-style="mini"] .header-content {
     margin-left: 0; }
     [data-sidebar-style="mini"] .header-content .header-left {
-      margin-left: 0.625rem; }
+      padding-left: 1.625rem; }
       [data-sidebar-style="mini"] .header-content .header-left .drop-down {
         top: 0.3125rem; }
   [data-sidebar-style="mini"] .nav-user {
@@ -9321,10 +9320,14 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     [data-sidebar-style="mini"] .nav-user .dropdown-menu {
       left: 2.8125rem !important;
       top: 1.375rem !important; }
-  [data-sidebar-style="mini"] .nk-sidebar {
+
+  /* [data-sidebar-style="mini"] .nk-sidebar {
     width: 3.75rem;
     overflow: visible;
-    position: absolute; }
+    position: absolute; } */
+
+
+
     [data-sidebar-style="mini"] .nk-sidebar .nav-text {
       display: none; }
     [data-sidebar-style="mini"] .nk-sidebar .slimScrollDiv,
@@ -15719,8 +15722,6 @@ li span .sidebar-option{
     text-decoration: none;
 }
 
- 
-
 @media only screen and (max-width:802px){
   
   .logo-impact{
@@ -15971,8 +15972,8 @@ font-size: 10px;
         margin: 10px;
     }
 .vendor_img{
-      width: 100px;
-      height: 100px;
+      width: 50px;
+      height: 50px;
     }
 .vendor_img img{
       width: 100%;

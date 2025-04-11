@@ -252,13 +252,13 @@ input.btn.px-4.btn-outline-dark:hover{
                                             <input required placeholder="company name" type="text" class="form-control" name="company_name" id="company_name" value="{{$profile->company_name ?? ''}}">
                                         </div>
                                         <div class="col-md-6 p-3">
-                                            <input required placeholder="Address 1" type="text" class="form-control" name="address_1" id="address_1" value="{{$profile->address_1 ?? ''}}">
-                                        </div>
-                                        <div class="col-md-6 p-3">
-                                            <input required placeholder="Address 2" type="text" class="form-control" name="address_2" id="address_2" value="{{$profile->address_2 ?? ''}}">
-                                        </div>
+                                            <input required placeholder="Address" type="text" class="form-control" name="address_1" id="address_1" value="{{$profile->address_1 ?? ''}}">
+                                        </div> 
                                         <div class="col-md-6 p-3">
                                             <input required placeholder="City" type="text" class="form-control" name="city" id="city" value="{{$profile->city ?? ''}}">
+                                        </div>
+                                        <div class="col-md-12 p-3">
+                                            <input placeholder="Postcode" type="text" class="form-control" name="postal_code" id="postal_code" value="{{$profile->postal_code ?? ''}}">
                                         </div>
                                         <div class="col-md-12 p-3">
                                             <p class="mt-2 m-0" style="color: gray;">Upload Aadhar Card Front</p>
@@ -271,7 +271,10 @@ input.btn.px-4.btn-outline-dark:hover{
                                                   id="aadhar_front"
                                                   style="border: 1px solid #ced4da;"
                                                   >
-                                                <span>@if($profile->aadhar_front != '' )<a href="{{url($profile->aadhar_front)}}">View</a>@endif</span>
+                                                <span>@if($profile->aadhar_front != '' )
+                                                    <a href="{{url($profile->aadhar_front)}}">View</a>
+                                                    @endif
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="col-md-12 p-3" >
@@ -302,18 +305,9 @@ input.btn.px-4.btn-outline-dark:hover{
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12 p-3">
-                                            <input placeholder="Postcode" type="text" class="form-control" name="postal_code" id="postal_code" value="{{$profile->postal_code ?? ''}}">
-                                        </div>
-                                        <div class="form-group mt-3 col-md-12">
-                                            <label class="form-label" style="color: gray;">Country</label>
-                                            <input required placeholder="Postcode" type="text" class="form-control" name="country" id="country" value="{{$profile->country ?? ''}}">
-
-                                        </div>
-                                        <div class="form-group mt-3 col-md-12">
-                                            <label class="form-label" style="color: gray;">State</label>
-                                            <input required placeholder="Postcode" type="text" class="form-control" name="state" id="state" value="{{$profile->state ?? ''}}">
-                                        </div>
+                                       
+                                     
+                                         
                                         <div class="col-md-12 text-end mt-4">
                                             <input class="btn px-4  btn-outline-dark" type="submit" value="Update Profile">
                                         </div>

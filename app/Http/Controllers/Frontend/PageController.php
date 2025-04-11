@@ -27,7 +27,7 @@ class PageController extends Controller
     }
     public function submitContactPage(Request $request){
         $validate = $request->validate([
-            'g-recaptcha-response' => ['required', new Recaptcha()],
+            // 'g-recaptcha-response' => ['required', new Recaptcha()],
             "name" => ['required', 'string', "max:50"],
             "email" => ['required', 'email'],
             "message" => ['required']

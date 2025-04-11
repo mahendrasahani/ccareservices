@@ -9,6 +9,7 @@ use App\Models\Backend\RecentActivity;
 use App\Models\Frontend\Cart;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Crypt;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Session;
+use App\Rules\Recaptcha;
 
 class RegisteredUserController extends Controller
 {
@@ -38,13 +40,13 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => ['required', 'string', 'max:25', 'regex:/^[A-Za-z\s]+$/'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:60', 'unique:'.User::class],
             'phone' => ['required', 'numeric', 'digits:10', 'unique:'.User::class],
+            // 'g-recaptcha-response' => ['required', new Recaptcha()],
         ]); 
-        // $otp = random_int(1000, 9999);
-        $otp = '0909';
+        $otp = random_int(1000, 9999);
+        // $otp = '0909';
         // $otp_mail_data = [
         //     "user_name" => $request->name,
         //     "otp" => $otp
@@ -95,9 +97,9 @@ class RegisteredUserController extends Controller
     //   }
 
 
-    return redirect()->route('otp.verify', ['user' => $user->id]);
+    return redirect()->route('otp.verify', ['user' => Crypt::encrypt($user->id)]);
     }catch (\Exception $e){
-        return $e->getMessage();
+       abort('404');
     }
 
         // return view('auth.enter-otp', compact('user'));
@@ -107,10 +109,20 @@ class RegisteredUserController extends Controller
     }
 
     public function verifyOtp($user){
-        $user = User::findOrFail($user);
-        return view('auth.enter-otp', compact('user'));
+        try{
+
+            $user = User::findOrFail(Crypt::decrypt($user));
+            return view('auth.enter-otp', compact('user'));
+        }catch(\Exception $e){
+            abort('404');
+        }
     }
     public function verifyOtpSubmit(Request $request, $user_id){
+        $validate = $request->validate([
+            // 'g-recaptcha-response' => ['required', new Recaptcha()],
+            'otp' => ['required', 'numeric', 'digits:4'],
+        ]);
+
         $otp = $request->otp;
         $user = User::where('id', $user_id)->first();
 
@@ -188,7 +200,7 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
         }else{
-            return redirect()->route('otp.verify', [$user->id])->with('incorrect_otp', "Otp not match");
+            return redirect()->route('otp.verify', [Crypt::encrypt($user->id)])->with('incorrect_otp', "Otp not match");
         }
  
     }
@@ -219,13 +231,17 @@ class RegisteredUserController extends Controller
     }
 
     public function editPhoneNumber(Request $request, $user){
+        $validate = $request->validate([
+            // 'g-recaptcha-response' => ['required', new Recaptcha()],
+            'phone' => ['required', 'numeric', 'digits:10'],
+        ]);
         $otp = random_int(1000, 9999); 
-            User::where('id', $user)->update([
-                "phone" => $request->phone,
-                "otp" => $otp 
-            ]);
-            $response = Http::get('https://api.msg91.com/api/sendhttp.php?authkey=372411AIYHh0nX61f29867P1&sender=COOLCS&mobiles=91'.$request->phone.'&route=transactional &message=Your OTP Verification Code from COOLCARE SERVICES is '.$otp.'. Do not share it with anyone.&DLT_TE_ID=1307164337662843810&response=json&pluginsource=70');
-            return redirect()->route('otp.verify', [$user]);
+        User::where('id', $user)->update([
+            "phone" => $request->phone,
+            "otp" => $otp 
+        ]);
+        $response = Http::get('https://api.msg91.com/api/sendhttp.php?authkey=372411AIYHh0nX61f29867P1&sender=COOLCS&mobiles=91'.$request->phone.'&route=transactional &message=Your OTP Verification Code from COOLCARE SERVICES is '.$otp.'. Do not share it with anyone.&DLT_TE_ID=1307164337662843810&response=json&pluginsource=70');
+        return redirect()->route('otp.verify', [Crypt::encrypt($user)]);
     }
 
     public function resendOtp(Request $request){

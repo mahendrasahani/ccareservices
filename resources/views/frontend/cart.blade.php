@@ -25,7 +25,7 @@
 <section class="">  
   <div class="container"> 
     <div class="row d-flex justify-content-center my-4">
-      <div class="col-md-12">
+        <div class="col-md-8">
         <div class="card mb-4">
           <div class="card-header py-3">
             <h5 class="mb-0">Cart - {{$cart_product == '' ? 0:count($cart_product)}} items</h5>
@@ -67,7 +67,8 @@
                     <td>
                        {{$product->quantity}}
                     </td> 
-                    <td>₹ {{number_format($product->price * $product->quantity, 2)}}/- <br><button class="remover_cart" id="remove_cart_item" data-product_id="{{$product->product_id}}" onclick="deleteProduct()">Delete</button></td>
+                    <td>₹ {{number_format($product->price * $product->quantity, 2)}}/- 
+                    <button class="remover_cart" id="remove_cart_item" data-product_id="{{$product->product_id}}" onclick="deleteProduct()">Delete</button></td>
                   </tr>
                   @endforeach
 
@@ -99,7 +100,11 @@
                         <input type="number" min="0" step="1" class="form-control" name="commisson_amounts_2" value="{{$product['quantity']}}">
                       </div>
                     </td>
-                    <td>₹ {{number_format($product['price'] * $product['quantity'], 2)}}/- <br><button class="remover_cart" id="remove_cart_item" data-product_id="{{$product['product_id']}}" onclick="deleteProduct()">Delete</button></td>
+                    <td>₹ {{number_format($product['price'] * $product['quantity'], 2)}}/- 
+                      <button class="remover_cart" id="remove_cart_item" data-product_id="{{$product['product_id']}}" onclick="deleteProduct()"> 
+                        Delete
+                    </button>
+                </td>
                   </tr>
                   @endforeach
                   @endif
@@ -128,12 +133,9 @@
                     </div> --> 
                 </div>
               </div>   
-          </div>
         </div>
-       
-        <div class="row"> 
-      <div class="col-md-6">
-        <div class="card ">
+        <div class="col-md-4">
+        <div class="card">
           <div class="card-header py-3">
             <h5 class="mb-0">Cart Total</h5>
           </div>
@@ -187,6 +189,10 @@
           </div>
         </div>
       </div>
+    </div>
+       
+    <div class="row"> 
+     
     </div>
     
 

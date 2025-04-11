@@ -320,7 +320,7 @@ $(document).on('click', '#add_to_cart_btn', function(){
                         let item_count = response.data.length; 
                         $('#cartItemCount').html(item_count);
                         let update_btn_text = $('#add_to_cart_btn'); 
-                        update_btn_text.html("Added"); 
+                        update_btn_text.html("View Rent"); 
                         update_btn_text.addClass("add_to_cart_btn_success");
                         // Show SweetAlert
                         Swal.fire({
@@ -380,7 +380,7 @@ try {
         } else {
             $('#add_to_cart_btn').prop('disabled', false);
             $("#stock_status").html("In Stock");
-            $('#add_to_cart_btn').html('Add to cart');
+            $('#add_to_cart_btn').html('Rent Now');
             $("#stock_status").removeClass("text-danger");
             $("#stock_status").addClass("text-success");
             $("#add_to_cart_btn").removeClass("bg-danger"); 

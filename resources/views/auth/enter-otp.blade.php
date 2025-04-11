@@ -21,16 +21,31 @@
                 <p style="text-align: center;font-size:17px;font-weight: 600;">Verify OTP</p> 
                 <div class="form-field"> 
                     <label for="verify_otp">Enter OTP <span>*</span></label>
-                    <input type="number" id="otp" name="otp" placeholder="Enter OTP" maxlength="4" required>
+                    <input type="number" id="otp" name="otp" placeholder="Enter OTP" maxlength="4" required >
+                    @error('otp')
+                        <p style="color:red;">{{ $message }}</p>
+                    @enderror
                 </div>
+                <!-- <div class="form-field">
+                    // uncomment this captcha code when go live-----------------
+                <label for="verify_otp">Captcha <span>*</span></label> 
+                <div class="inputfild">
+                <script src="https://www.google.com/recaptcha/api.js"
+                    async defer></script>
+                <div class="g-recaptcha" id="feedback-recaptcha"
+                    data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}">
+                </div>  
+                @error('g-recaptcha-response')
+                <p style="color:red;">The google recptcha is required.</p>
+                @enderror
+            </div> 
+            </div>  -->
                 <button class="form-btn" style="margin-top: 10px;">Submit</button>
                 <p class="cstm_resend"><a onclick="resendOtp(event)">Resend OTP</a></p>
                 <p class="cstm_resend"><a href="" onclick="openVerifyNumber(event)">Edit Phone Number</a></p>
-                <!-- <p style="text-align:center;" class="cstm_resend">A 4 digit XXXX OTP is send to this number {{$user->phone}}. Please Enter the OTP to proceed </p> -->
-                <p class="cstm_resend">Already have an account? <a href="{{route('login')}}">Login here</a></p>
-                <!-- <p style="color:red">We have sent a verification link on your email please verify your email account</p> -->
-            </form>
-            
+                 <p class="cstm_resend">Already have an account? <a href="{{route('login')}}">Login here</a></p>
+             </form>
+ 
             <form method="POST" action="{{ route('otp.edit_phone_number', [$user->id]) }}" class="form" id="verify_number">
                 @csrf
                 <p style="text-align: center;font-size:17px;font-weight: 600;">Verify Number</p> 
@@ -39,7 +54,7 @@
                     <input type="number" value="{{$user->phone}}" name="phone" id="phone_number" placeholder="Enter Phone" required>
                 </div>  
                 <button class="form-btn">Submit</button>
-            </form>
+        </form>
         </div>
     </div>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -47,6 +62,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="{{url('public/assets/frontend/js/bootstrap.bundle.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
     @if(Session::has('incorrect_otp'))
         <script> 
             Swal.fire({

@@ -16,7 +16,7 @@
                     <div class="col-md-12">
                         <div class="card" style="border: 1px solid #e8e8e8;"> 
                             <div class="card-header" style="border-bottom: 1px solid #e8e8e8;">
-                                <h4 class="mb-0 h6">User Information</h4>
+                                <h4 class="mb-0 h6">Customer Information</h4>
                             </div> 
                             <form enctype="multipart/form-data" action="{{route('backend.customer.update', [$user->id])}}" method="POST">
                                 @csrf
@@ -69,15 +69,7 @@
                                             @enderror
                                         </div> 
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-3 col-form-label" for="postal_code">Postal Code</label>
-                                        <div class="col-md-9">
-                                        <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="Postal Code" value="{{$user->postal_code ?? ''}}"/> 
-                                            @error('postal_code')
-                                                <p style="color:red; font-weight:bold;">{{$message}}</p>
-                                            @enderror
-                                        </div>
-                                    </div>
+                                     
 
                                     <div class="card" style="border: 1px solid #e8e8e8;">
                                         <div class="card-header d-flex justify-content-between" style="border-bottom : 1px solid #e8e8e8;">
@@ -135,15 +127,7 @@
                                                 </div> 
                                             </div>  
  
-                                            <div class="form-group row">
-                                                <label class="col-md-3 col-form-label" for="shipping_postal_code">Postal Code</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" class="form-control" id="shipping_postal_code" name="shipping_postal_code" placeholder="Postal Code" value="{{ $shipping_address->zip_code ?? ''}}"/> 
-                                                    @error('shipping_postal_code')
-                                                        <p style="color:red; font-weight:bold;">{{$message}}</p>
-                                                    @enderror
-                                                </div>
-                                            </div>
+                                             
                                         </div>
                                     </div>
 
@@ -205,15 +189,7 @@
                                                     @enderror
                                                 </div> 
                                             </div>  
-                                            <div class="form-group row">
-                                                <label class="col-md-3 col-form-label" for="billing_postal_code">Postal Code</label>
-                                                <div class="col-md-9">
-                                                <input type="text" class="form-control" id="billing_postal_code" name="billing_postal_code" placeholder="Postal Code" value="{{$billing_address->zip_code ?? ''}}"/> 
-                                                    @error('billing_postal_code')
-                                                        <p style="color:red; font-weight:bold;">{{$message}}</p>
-                                                    @enderror
-                                                </div>
-                                            </div>
+                                             
 
                                         </div>
                                     </div> 

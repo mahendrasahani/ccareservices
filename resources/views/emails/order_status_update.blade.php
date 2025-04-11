@@ -15,7 +15,7 @@
     <div class="invoice" style="margin:auto; margin-top:50px; background:#fff; padding:10px 30px;box-shadow: 1px 1px 6px 2px #a19696; border-radius:0.3rem; min-width:315px; max-width:450px;"> 
         <div style="text-align:center;">
             <div class="logo">
-                <img src="http://localhost/ccareservices/public/assets/frontend/images/logo/coolcarelogo.jpg" alt="logo" style="width:130px;">
+                <img src="{{ url('public/assets/frontend/images/logo/coolcarelogo.jpg') }}" alt="logo" style="width:130px;">
             </div>  
         </div>
         <hr>

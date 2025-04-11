@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="{{url('public/assets/frontend/font/MarlinGeo-ExtraBold.ttf')}}">
-    <meta name="base-url" content="{{ config('app.url')}}">
+    <meta name="base-url" content="{{ url('/') }}">
+    
  
     <link
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
@@ -99,7 +100,7 @@
                         <div class="offcanvas-body">
                             <ul class="navbar-nav dropMenu justify-content-end flex-grow-1 pe-3" id="header-ul">
                                     <li class="nav-item">
-                                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                                        <a class="nav-link" aria-current="page" href="/">HOME</a>
                                     </li> 
                                     
                                         @foreach($main_categories as $main) 

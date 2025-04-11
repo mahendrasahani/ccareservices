@@ -177,8 +177,14 @@
                                                     </td>
                                                     <td>{{$order->getUser?->name ?? ''}}</td>
                                                     <td style="display: table-cell;">
-                                                    {{strtoupper($order->order_status)}}
-                                                    </td>
+                                                    @if($order->order_status == 'not_confirmed')
+                                                                 <span class="text-capitalize">NOT CONFIRMED</span>
+                                                                 @elseif($order->order_status == '')
+                                                                 <span class="text-capitalize">NOT COMPLETED</span> 
+                                                                 @else
+                                                                <span class="text-capitalize">{{strtoupper($order->order_status)}}</span>
+                                                    @endif
+                                                    </td> 
                                                     <td>
                                                         {{Carbon\Carbon::parse($order->created_at)->format('d M, Y')}}
                                                     </td>

@@ -153,8 +153,7 @@
                     url: "{{route('backend.customer.search')}}",
                     method: "GET",
                     data: { 'search_val': search_val },
-                    success: function (result){ 
-                        console.log(result);
+                    success: function (result){  
                         $("#main_table_body").html(result);
                         $('#my_pagination').hide();
                     }

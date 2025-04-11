@@ -9,30 +9,30 @@
         <link rel="stylesheet" href="main.css">
     </head>
 	
-	<style>
-		table {
-			border:0px;
-			border-collapse:collapse;
-			padding:5px;
-			margin: auto;
-		width: 100%;
-		}
-		table th {
-			border:1px solid #b3adad;
-			padding:5px;
-			background: #f0f0f0;
-			color: #313030;
-		}
-		table td {
-			border:1px solid #b3adad;
-			text-align:left;
-			padding:5px;
-			background: #ffffff;
-            color: #313030;}
-			
-.line span{display:block; width:100%; border-bottom:1px solid red; margin-top:25px; text-align:center}
-.line h2{font-size:15px; text-align:center; position:relative; top:10px; padding:0 15px; display:inline-block; background:white}
-	</style> 
+<style>
+	table {
+		border:0px;
+		border-collapse:collapse;
+		padding:5px;
+		margin: auto;
+	width: 100%;
+	}
+	table th {
+		border:1px solid #b3adad;
+		padding:5px;
+		background: #f0f0f0;
+		color: #313030;
+	}
+	table td {
+		border:1px solid #b3adad;
+		text-align:left;
+		padding:5px;
+		background: #ffffff;
+        color: #313030;
+	} 	
+	.line span{display:block; width:100%; border-bottom:1px solid red; margin-top:25px; text-align:center}
+	.line h2{font-size:15px; text-align:center; position:relative; top:10px; padding:0 15px; display:inline-block; background:white}
+</style> 
        <table style="height: 64px; width: 878.5px;">
 <tbody>
 <tr>

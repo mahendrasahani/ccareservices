@@ -88,7 +88,7 @@
                                 <hr>
                                 @if($default_shipping_address != '')
                                 <p>{{$default_shipping_address->address}},</p>
-                                <p>{{$default_shipping_address->city}} - {{$default_shipping_address->zip_code}}</p>
+                                <p>{{$default_shipping_address->city}}</p>
                                 @endif
                             </div>
                             </div>  

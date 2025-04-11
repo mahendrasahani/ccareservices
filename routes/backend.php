@@ -130,12 +130,17 @@ Route::middleware(['auth', 'web', 'admin_check'])->group(function () {
     Route::get('/admin/order/edit/{id}', [OrderController::class, 'edit'])->name('backend.order.edit');
     Route::post('/admin/order/update/{id}', [OrderController::class, 'update'])->name('backend.order.update');
     Route::get('/admin/order/destroy', [OrderController::class, 'destroy'])->name('backend.order.destroy');
-    Route::get('/admin/order/search', [OrderController::class, 'search'])->name('backend.product.search');
+    Route::get('/admin/order/search', [OrderController::class, 'search'])->name('backend.order.search');
     Route::get('/admin/order/send-invoice-to-customer/{order_id}', [OrderController::class, 'sendInvoiceToCustomer'])->name('backend.order.send_invoice_to_customer');
     Route::get('/admin/order/create-order', [OrderController::class, 'createOrder'])->name('backend.order.create_order');
     Route::get('/admin/order/new-order', [OrderController::class, 'newOrder'])->name('backend.order.new_order');
     Route::post('/admin/order/new-order', [OrderController::class, 'newOrderStore'])->name('backend.order.new_order_store');
     Route::get('/admin/order/select-customer', [OrderController::class, 'selectCustomerToCreateOrder'])->name('backend.order.select_customer');
+    Route::post('/admin/order/get-order-detail-for-renewal', [OrderController::class, 'getOrderDetailForRenewal'])->name('backend.order.get_order_detail_for_renewal');
+    Route::post('/admin/order/get-order-renewal', [OrderController::class, 'addOrderRenewal'])->name('backend.order.add_order_renewal');
+    Route::post('/admin/order/edit-order-renewal', [OrderController::class, 'editOrderRenewal'])->name('backend.order.edit_order_renewal');
+    Route::post('/admin/order/update-order-renewal', [OrderController::class, 'updateOrderRenewal'])->name('backend.order.update_order_renewal');
+    Route::get('/admin/order/destroy-renewal-detail', [OrderController::class, 'destroyRenewalDetail'])->name('backend.order.destroy_renewal_detail');
 
 
     Route::get('/admin/invoice/{id}', [InvoiceController::class, 'index'])->name('backend.invoice.index');

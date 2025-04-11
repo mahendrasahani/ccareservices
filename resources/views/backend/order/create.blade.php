@@ -174,7 +174,7 @@
                                                     <div class="col-md-4" style="font-size: 12px;">
                                                         <div class="mb-3" id="order_status_area">
                                                             <label class="mb-0">Phone</label>
-                                                            <input type="text" value="{{ $shipping_info->phone ?? '' }}" name="shipping_phone" class="form-control" required>
+                                                            <input type="number" value="{{ $shipping_info->phone ?? '' }}" name="shipping_phone" class="form-control" required>
                                                         </div>  
                                                     </div>  
                                                     <div class="col-md-4" style="font-size: 12px;">
@@ -223,7 +223,7 @@
                                                                 <div class="col-md-4" style="font-size: 12px;">
                                                                     <div class="mb-3" id="order_status_area">
                                                                         <label class="mb-0">Phone</label>
-                                                                        <input type="text" value="{{ $billing_info->phone ?? '' }}" name="billing_phone" class="form-control" >
+                                                                        <input type="number" value="{{ $billing_info->phone ?? '' }}" name="billing_phone" class="form-control" >
                                                                     </div>  
                                                                 </div>  
                                                                 <div class="col-md-4" style="font-size: 12px;">
@@ -325,7 +325,6 @@
                 selectedMonth: 1 
             };
             cartArray.push(product);
-            // Check if the product already exists to avoid duplicate entries
             if (document.getElementById(`cart_row_${p_id}`)) {
                 return;
             }
@@ -399,10 +398,6 @@
     // //handal Admin_ order Form
       $(document).ready(function(){
         $('#handalAdmin_orderForm').on('submit', function(e){
-
-            console.log(cartArray, "array data")
-            console.log(cartArray.length, "array length")
-
             if(cartArray.length === 0){
                 e.preventDefault();
                 alert("Please add items..!")
@@ -511,7 +506,6 @@
     document.getElementById('order_date').addEventListener('change', function () {
             let orderDate = this.value;
             let deliveryDateField = document.getElementById('delivery_date');
-
             if (orderDate) {
                 deliveryDateField.disabled = false;
                 deliveryDateField.min = orderDate; // Ensure delivery_date is not earlier than order_date
@@ -525,13 +519,12 @@
         $(document).ready(function(){
             $('#adminBilling_chechbox').on('change', function(){
                 let billingInfo_input = $('#billingInfo input');
-
                 if(this.checked === true){
                     billingInfo_input.prop('required', true);
                 }else{
                     billingInfo_input.prop('required', false);
                 }
-            }); 
+            });
             
         });
     

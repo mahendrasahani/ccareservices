@@ -43,7 +43,7 @@
       <div class="col-md-6">
         <h4>Contact Us</h4>
         <div class="form-group required mt-2 mb-2">
-          <label class="col-sm-2 control-label" for="input-name">Your Name</label>
+          <label class="col-sm-2 control-label" for="input-name">Your Name <span style="color:red;">*</span></label>
           <div class="col-sm-10">
             <input type="text" name="name" value="{{ old('name') }}" id="input-name" class="form-control" required>
             @error('name')
@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="form-group required mt-2 mb-2">
-          <label class="col-sm-2 control-label" for="input-email" style="display: inline;">E-Mail Address</label>
+          <label class="col-sm-2 control-label" for="input-email" style="display: inline;">E-Mail Address <span style="color:red;">*</span></label>
           <div class="col-sm-10">
             <input type="email" name="email" value="{{ old('email') }}" id="input-email" class="form-control" required>
             @error('email')
@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="form-group required">
-          <label class="col-sm-2 control-label" for="input-enquiry">Enquiry</label>
+          <label class="col-sm-2 control-label" for="input-enquiry">Enquiry <span style="color:red;">*</span></label>
           <div class="col-sm-10">
             <textarea name="message" rows="4" id="input-enquiry" class="form-control" required>{{ old('message') }}</textarea>
             @error('message')
@@ -78,8 +78,9 @@
             referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
-      <div class="col-md-12 mb-5">
-        <h6>captcha</h6>  
+      <!-- <div class="col-md-12 mb-5">
+         // uncomment this captcha code when go live-----------------
+      <label for="verify_otp">Captcha <span style="color:red;">*</span></label>  
           <div class="inputfild">
            <script src="https://www.google.com/recaptcha/api.js"
                async defer></script>
@@ -92,7 +93,7 @@
        </div> 
             <button type="submit" class="animate-btx mt-3 text-white btn btn-info btn-sm animate-btx">Submit<span id="arrow-icon"></span></button>
           </a>
-        </div>
+        </div> -->
       </div>
     </form>
   </div>

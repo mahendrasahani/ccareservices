@@ -26,37 +26,55 @@
                                         <label class="col-md-3 col-from-label">Name <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" name="vendor_name" placeholder="Vendor Name" id="product_name" value="{{$vendor->name}}" required> 
+                                       @error('vendor_name')
+                                                <p style="color:red;">{{ $message }}</p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-from-label">Email</label>
+                                        <label class="col-md-3 col-from-label">Email <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
                                              <input type="email" id="vendor_email" name="vendor_email" class="form-control" placeholder="Vendor Email" value="{{$vendor->email}}">
+                                        @error('vendor_email')
+                                                <p style="color:red;">{{ $message }}</p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-from-label">Phone no.</label>
+                                        <label class="col-md-3 col-from-label">Phone no. <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
                                              <input type="tel" id="vendor_phone" name="vendor_phone" class="form-control" placeholder="Your Phone Number" value="{{$vendor->phone}}">
+                                        @error('vendor_phone')
+                                                <p style="color:red;">{{ $message }}</p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-from-label">Business Name</label>
+                                        <label class="col-md-3 col-from-label">Business Name <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control" name="business_name" placeholder="Business Name" id="business_name" value="{{$vendor->business_name}}"> 
+                                        @error('business_name')
+                                                <p style="color:red;">{{ $message }}</p>
+                                            @endif
                                         </div>
                                     </div> 
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-from-label">Address</label>
+                                        <label class="col-md-3 col-from-label">Address <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
                                             <input type="text" id="vendor_address" name="vendor_address" class="form-control" placeholder="Your Address" value="{{$vendor->address}}"> 
+                                        @error('vendor_address')
+                                                <p style="color:red;">{{ $message }}</p>
+                                            @endif
                                         </div>
                                     </div> 
 
                                     <div class="form-group row">
-                                        <label class="col-md-3 col-from-label">GST</label>
+                                        <label class="col-md-3 col-from-label">GST <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
                                             <input type="text" id="vendor_gst" name="vendor_gst" class="form-control" placeholder="GST" value="{{$vendor->gst}}"> 
+                                         @error('vendor_gst')
+                                                <p style="color:red;">{{ $message }}</p>
+                                            @endif
                                         </div>
                                     </div>
 

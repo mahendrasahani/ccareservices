@@ -64,20 +64,19 @@ $(async function () {
            
             if(item['get_product']['tax_name'] == 'SGST'){
               sgst_total += tax;
-            }else if(item['get_product']['tax_name'] == 'CGST'){
+            }else if(item['get_product']['tax_name'] == 'GST'){
               gst_total += tax;
             }else if(item['get_product']['tax_name'] == 'IGST'){
               igst_total += tax;
-            }
-            
-
+            } 
             product_tr += `<tr>
                               <td class="footable-first-visible d-flex">
                                 <a href="#" target="_blank" class="product-name-default">${item['get_product']['product_name']}</a>
                                 <strong>× ${item['quantity']} </strong> 
                               </td> 
-                              <td>${item['get_product']['tax_name']} ${item['get_product']['tax_rate']}% ₹${tax}.00</td>
                               <td style="text-align: end">${formatter.format(item['get_stock'][month_price]*item['quantity'])}</td>
+                              <td style="text-align: end;">${item['get_product']['tax_name']} ${item['get_product']['tax_rate']}% ₹${tax}.00</td>
+                              <td style="text-align: end;" id="subtotal_amount"></td>
                           </tr>`;
 
               sub_total = sub_total + ((item['get_stock'][month_price]*item['quantity'])+tax);
@@ -110,7 +109,7 @@ $(async function () {
             window.localStorage.setItem('IGST', igst_total);
             
             $("#product_on_checkout").html(product_tr); 
-            $("#sub_total").html(formatter.format(sub_total));
+            $("#sub_total").html('<b>'+formatter.format(sub_total)+'</b>');
             // $("#CGST").html(`₹${cgst}.00`); 
             // $("#IGST").html(`₹${igst}.00`); 
             // $("#SGST").html(`₹${sgst}.00`);  

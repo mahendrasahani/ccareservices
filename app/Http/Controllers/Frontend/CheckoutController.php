@@ -30,13 +30,14 @@ class CheckoutController extends Controller
     }
 
     public function submitCheckoutAddress(Request $request){
+        // return $request;
         $validate = $request->validate([
             "s_name" => ['required'],
             "s_email" => ['required', 'email'],
             "s_phone" => ['required', 'numeric', 'digits:10'],
             "s_address" => ['required'],
             "s_city" => ['required'],
-            "s_zip_code" => ['required', 'numeric']
+            // "s_zip_code" => ['required', 'numeric']
         ]); 
         // "b_email" => ['sometimes', 'nullable', 'email'],
         // "b_phone" => ['sometimes', 'nullable', 'numeric', 'digits:10'], 
@@ -57,7 +58,7 @@ class CheckoutController extends Controller
             $b_phone = $request->b_phone;
             $b_address = $request->b_address;
             $b_city = $request->b_city;
-            $b_zip_code = $request->b_zip_code; 
+            // $b_zip_code = $request->b_zip_code; 
             ShippingAddress::updateOrCreate(
                 ['user_id' => Auth::user()->id],
                 [
@@ -66,7 +67,7 @@ class CheckoutController extends Controller
                     "phone" => $s_phone,
                     "address" => $s_address,
                     "city" => $s_city,
-                    "zip_code" => $s_zip_code,
+                    // "zip_code" => $s_zip_code,
                     "country" => 'India'
                 ]
             ); 
@@ -79,7 +80,7 @@ class CheckoutController extends Controller
                         "phone" => $b_phone,
                         "address" => $b_address,
                         "city" => $b_city,
-                        "zip_code" => $b_zip_code,
+                        // "zip_code" => $b_zip_code,
                         "country" => 'India'
                     ]
                 ); 
@@ -92,7 +93,7 @@ class CheckoutController extends Controller
                         "phone" => $s_phone,
                         "address" => $s_address,
                         "city" => $s_city,
-                        "zip_code" => $s_zip_code,
+                        // "zip_code" => $s_zip_code,
                         "country" => 'India'
                     ]
                 );    
@@ -116,7 +117,7 @@ class CheckoutController extends Controller
         $s_phone = $request->s_phone;
         $s_address = $request->s_address;
         $s_city = $request->s_city;
-        $s_zip_code = $request->s_zip_code; 
+        // $s_zip_code = $request->s_zip_code; 
         $both_address = $request->both_address;
         $b_name = $request->b_name;
         $b_email = $request->b_email;
@@ -132,7 +133,7 @@ class CheckoutController extends Controller
             'phone' => $s_phone,
             'address' => $s_address,
             'city' => $s_city,
-            'zip_code' => $s_zip_code,
+            // 'zip_code' => $s_zip_code,
             'country' => 'India',
        ]; 
        $billing_detail = [
@@ -142,7 +143,7 @@ class CheckoutController extends Controller
         'phone' => $b_phone ?? $s_phone,
         'address' => $b_address ?? $s_address,
         'city' => $b_city ?? $s_city,
-        'zip_code' => $b_zip_code ?? $s_zip_code,
+        // 'zip_code' => $b_zip_code ?? $s_zip_code,
         'country' => 'India',
        ];  
        $shipping_address = ShippingAddress::where('user_id', Auth::user()->id)->first();

@@ -2,10 +2,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <h6 class="fw-bold  text-white">Categories</h6>
+                <h6 class="fw-bold  text-white">CATEGORIES</h6>
                 <ul class="list-inline hover-animate">
                     <a href="/" class="text-decoration-none text-white ">
-                        <li class="pt-2">Home</li>
+                        <li class="pt-2">HOME</li>
                     </a>
                     @foreach($main_categories as $main)
                     <a href="{{route('frontend.product.product_list', [Str::slug($main->slug), Str::slug($main->subCategory[0]->slug)])}}" class="text-decoration-none text-white">
@@ -15,32 +15,32 @@
                 </ul>
             </div>
             <div class="col-md-3">
-                <h6 class="fw-bold text-white">Information</h6>
+                <h6 class="fw-bold text-white">INFORMATION</h6>
                 <ul class="list-inline hover-animate">
                     <a href="{{route('frontend.about.view')}}" class="text-decoration-none text-white ">
-                        <li class="pt-2">About Us</li>
+                        <li class="pt-2">ABOUT US</li>
                     </a>
                     <a href="{{route('frontend.privacy_policy.view')}}" class="text-decoration-none text-white">
-                        <li class="pt-2">Privacy Policy</li>
+                        <li class="pt-2">PRIVACY POLICY</li>
                     </a>
                     <a href="{{route('frontend.terms_and_condition.view')}}" class="text-decoration-none text-white">
-                        <li class="pt-2">Terms & Conditions</li>
+                        <li class="pt-2">TERMS & CONDITIONS</li>
                     </a>
                     <a href="{{route('frontend.contact_us.view')}}" class="text-decoration-none text-white">
-                        <li class="pt-2">Contact Us</li>
+                        <li class="pt-2">CONTACT US</li>
                     </a> 
                 </ul>
             </div>
             <div class="col-md-3">
-                <h6 class="fw-bold  text-white">Extras</h6>
+                <h6 class="fw-bold  text-white">EXTRAS</h6>
                 <ul class="list-inline hover-animate">
                   @if(Auth::check())
                     <a href="{{route('frontend.user.dashboar.view')}}" class="text-decoration-none text-white">
-                        <li class="pt-2">My Account</li>
+                        <li class="pt-2">MY ACCOUNT</li>
                     </a>
                     @endif
                     <a href="{{ route('frontend.return.view') }}" class="text-decoration-none text-white">
-                        <li class="pt-2">Returns</li>
+                        <li class="pt-2">RETURNS</li>
                     </a> 
                 </ul>
             </div>
@@ -99,7 +99,7 @@
 </footer>
 <section style="background-color: #509abd">
     <div class="copy-right text-center">
-        <span class="text-white" style="font-size: 13px;">Copyright © 2024 </span>
+        <span class="text-white" style="font-size: 13px;">Copyright © 2025   </span>
         <a href="index.html" class="text-decoration-none"
             style="text-transform:lowercase; font-size: 13px; color: rgb(246, 246, 246);">coolcareservice.in</a> |
         <span class="text-white" style="font-size: 13px;"> Powered by</span>

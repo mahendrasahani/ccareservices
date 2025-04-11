@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Session;
 class CartController extends Controller
 {
     public function showCart(){ 
-
+        $cart_product = [];
         if(Auth::check()){
             $cart_product = Cart::where('user_id', Auth::user()->id)->with(['getProduct:id,product_name,product_images,slug', 'getStock'])
             ->whereHas('getStock', function ($query) {
@@ -21,9 +21,8 @@ class CartController extends Controller
             })
             ->get();
         }else{
-            $cart_product = Session::get('cart');
-        } 
-        // return $cart_product; 
+            $cart_product = Session::get('cart', []);
+        }  
         return view('frontend.cart', compact('cart_product'));
     }
 

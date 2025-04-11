@@ -148,7 +148,7 @@ b, strong {
         </tr>
         @if($order->cgst > 0)
         <tr>
-          <td class="text-right" colspan="3"><b>CGST</b></td>
+          <td class="text-right" colspan="3"><b>GST</b></td>
           <td class="text-right">₹{{number_format($order->cgst, 2)}}</td>
         </tr>
         @endif

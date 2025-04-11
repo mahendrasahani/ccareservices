@@ -63,6 +63,9 @@
                 <div class="form-field">
                     <label for="">Full Name <span>*</span></label>
                     <input type="text" name="name" placeholder="Enter your name....." required value="{{old('name')}}" id="fullName">
+                    @error('name')
+                    <p style="color:red;">{{$message}}</p>
+                    @enderror
                 </div>
                 <div class="form-field">
                     <label for="">Email <span>*</span></label>
@@ -77,11 +80,22 @@
                     @error('phone')
                     <p style="color:red;">{{$message}}</p>
                     @enderror
-                </div> 
-
-                @error('password_confirmation')
-                <p>{{$message}}</p>
+                </div>  
+                <!-- <div class="form-field">
+                // uncomment this captcha code when go live-----------------
+                <label for="text">Captcha <span>*</span></label> 
+                <div class="inputfild">
+                <script src="https://www.google.com/recaptcha/api.js"
+                    async defer></script>
+                <div class="g-recaptcha" id="feedback-recaptcha"
+                    data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}">
+                </div>
+                @error('g-recaptcha-response')
+                <p style="color:red;">The google recptcha is required.</p>
                 @enderror
+            </div> 
+            </div>  -->
+                
                 <button class="form-btn" style="margin-top: 10px;">SignUp</button>
                 <p>Already have an account? <a href="{{route('login')}}">Login here</a></p>
             </form>

@@ -9,7 +9,7 @@
  .table {
     width: 100%;
     max-width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
     
  .table-bordered {
@@ -54,11 +54,7 @@ b, strong {
     
     
 </style>
-
-
-
-
-
+ 
     <h1>Invoice {{$order->order_id}}</h1>
     <table class="table table-bordered">
       <thead>
@@ -148,7 +144,7 @@ b, strong {
 
         @if($order->cgst > 0)
         <tr>
-          <td class="text-right" colspan="3"><b>CGST</b></td>
+          <td class="text-right" colspan="3"><b>GST</b></td>
           <td class="text-right">Rs.{{number_format($order->cgst, 2)}}</td>
         </tr>
       @endif
@@ -179,7 +175,9 @@ b, strong {
           <td class="text-right" colspan="3"><b>Total</b></td>
           <td class="text-right">Rs.{{number_format($order->total - $order->promo_discount, 2)}}</td>
         </tr>
-       
-              </tbody>
+       </tbody>
     </table>
+    @if($order->delivery_remark != '')
+    <p>Remark:- {{ $order->delivery_remark }}</p>
+    @endif
   

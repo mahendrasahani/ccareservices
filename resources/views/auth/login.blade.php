@@ -39,12 +39,29 @@
                 <p style="text-align: center;font-size:17px;font-weight: 600;">LOGIN TO COOLCARE</p>
                 <div class="form-field">
                     <label for="text">Mobile Number <span>*</span></label>
-                    <input type="number" name="phone" id="phone"  maxlength="10" minlength="10"  placeholder="Enter Mobile Number....." value="{{old('phone')}}">
+                    <input type="number" name="phone" id="phone" required  maxlength="10" minlength="10"  placeholder="Enter Mobile Number....." value="{{old('phone')}}">
                     <p id="check_account_error" style="color:red;"></p>
                     @error('phone')
                       <p style="color:red;">{{$message}}</p>
                     @enderror 
                 </div>
+                
+                <!-- <div class="form-field">
+                    // uncomment this captcha code when go live-----------------
+                <label for="text">Captcha <span>*</span></label> 
+                <div class="inputfild">
+                <script src="https://www.google.com/recaptcha/api.js"
+                    async defer></script>
+                <div class="g-recaptcha" id="feedback-recaptcha"
+                    data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}">
+                </div>
+                @error('g-recaptcha-response')
+                <p style="color:red;">The google recptcha is required.</p>
+                @enderror
+            </div> 
+            </div>  -->
+
+
                 
               {{--  <a href="{{route('password.request')}}" style="text-align:center;margin-top:5px"><span>Forget Password?</span></a> --}}
                 <button class="form-btn">Login</button>

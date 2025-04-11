@@ -16,7 +16,7 @@
     <table class="table-container">
         <tr>
             <th>Serial No.</th>
-            <th>Details</th>
+            <th>Ordre No</th>
             <th>Info</th>
             <th>Amount</th>
             <th>Action</th>
@@ -26,7 +26,7 @@
         @foreach($purchase_history as $p_history)
         <tr>
             <td> {{ $serialNo++ }} </td> 
-            <td> Order No. {{$p_history->order_id}} </td>
+            <td> {{$p_history->order_id}} </td>
             <td> {{count($p_history->getOrderProduct)}} products </td>
             <td> ₹{{number_format($p_history->total - $p_history->promo_discount, 2)}}/-  </td>
             <td><a href="{{route('frontend.user.view_order_detail', [Crypt::encryptString($p_history->id)])}}" class="discount-details-btn ">View Details</a> </td>

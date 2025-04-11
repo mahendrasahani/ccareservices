@@ -50,7 +50,8 @@ class Order extends Model
         "accepted_date",
         "canceled_date",
         "shipped_date",
-        "delivered_date"
+        "delivered_date",
+        "renewal_status"
     ];
 
    public function getOrderProduct(){
@@ -64,6 +65,8 @@ class Order extends Model
    public function getUser(){
     return $this->belongsTo(User::class, "user_id");
    }
+
+   
 
   
 }

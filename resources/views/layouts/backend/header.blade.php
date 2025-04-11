@@ -27,6 +27,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+    <style>
+
+.metismenu{
+    overflow-y: auto;
+}
+@media only screen and (max-width: 1199px) {
+    .metismenu li span .sidebar-option {
+        display: none;
+    }
+    .nk-sidebar{
+        width: 4.1875rem;
+    } 
+    .brand-logo a img{
+        width: 50px;
+    }
+    .header{
+        margin-left: 4.1875rem;
+    }
+    .content-body {
+        margin-left: 4.1875rem;
+        z-index: 0;
+    }
+    .nav-control, .hamburger, .toggle-icon {
+        display: inline-block;
+        display: block !important;
+    }
+
+    }
+    .nav-control, .hamburger, .toggle-icon {
+        display: inline-block;
+    }
+    .brand-logo {
+        padding: 10px 0 0 0;
+        margin-top: 0px;
+    }
+
+    </style>
+
+
 </head>
     
 </head>
@@ -124,7 +163,7 @@
             Sidebar start
         ***********************************-->
         <div class="nk-sidebar" id="nmk-sidebar">
-            <div class="brand-logo">
+            <div class="brand-logo mb-1">
                 <a href="index.html">
                     <!-- <b class="logo-abbr"><img src="{{url('public/assets/backend/images/logo.png')}}" alt=""> </b> -->
                      
@@ -135,9 +174,9 @@
                     </span>
                 </a>
             </div>
-            <hr>
+     
             <div class="nk-nav-scroll" style="overflow:auto" >
-                <ul class="metismenu" id="menu" style="padding-bottom:2rem"> 
+                <ul class="metismenu menu-2" id="menu" style="padding-bottom:3rem"> 
                     <li>
                         <a href="{{route('backend.admin.dashboard.view')}}">
                             <span>
@@ -148,8 +187,9 @@
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="nav-text">
-                                <img src="{{url('public/assets/backend/images/png.icon/box.png')}}">
+                            <span class="nav-text-">
+                                <!-- <img src="{{url('public/assets/backend/images/png.icon/box.png')}}"> -->
+                                <i class="fab fa-product-hunt"></i>
                                 <p class="sidebar-option">Product</p>
                             </span>
                         </a>
@@ -164,8 +204,8 @@
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="nav-text">
-                                 <img src="{{url('public/assets/backend/images/png.icon/category.png')}}" alt="">   
+                            <span class="nav-text-">
+                               <img src="{{url('public/assets/backend/images/png.icon/dashboard.png')}}" class="">
                                 <p class="sidebar-option">Category</p>
                             </span>
 
@@ -177,7 +217,7 @@
                     </li>
 
                     <li><a href="{{route('backend.order.index')}}">
-                              <span class="nav-text">
+                              <span class="nav-text-">
                                 <img src="{{url('public/assets/backend/images/png.icon/package.png')}}" class="">
                                 <p class="sidebar-option">Orders</p>
                             </span> 
@@ -191,7 +231,8 @@
 
                     <li><a href="{{route('backend.vendor.index')}}">
                         <span>
-                            <img src="{{url('public/assets/backend/images/png.icon/seller.png')}}" alt="">
+                            <!-- <img src="{{url('public/assets/backend/images/png.icon/seller.png')}}" alt=""> -->
+                            <i class="fa-solid fa-user-tie"></i>
                             <p class="sidebar-option">Vendors</p>
                         </span>
                         </a>

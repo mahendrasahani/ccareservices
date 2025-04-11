@@ -91,5 +91,6 @@ Route::middleware(['auth', 'verified', 'customer_otp_verification'])->group(func
 
  
  
-Route::get('/test-command', [HomeController::class, 'testCommand']);
-
+// test routes
+Route::get('/test-command', [HomeController::class, 'testCommand']); 
+// Route::get('/contact_email_template', [HomeController::class, 'contactEmailTemplate']);

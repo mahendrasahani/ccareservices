@@ -17,6 +17,7 @@ async function paymentPage(){
     let sgst = window.localStorage.getItem('SGST');
     let igst = window.localStorage.getItem('IGST');
     let tax = window.localStorage.getItem('TAX');
+  
      
     paymentMethodResponse.data.forEach(function (item){
         appendToPaymentMethod += `<div class="form-check">
@@ -29,11 +30,11 @@ async function paymentPage(){
     <tbody>  
         <tr>
             <th>Shipping address</th>
-            <td>${response.shipping_address.name}, ${response.shipping_address.address}, <br>${response.shipping_address.city}, <br>${response.shipping_address.zip_code}</td> 
+            <td>${response.shipping_address.name}, ${response.shipping_address.address}, <br>${response.shipping_address.city}</td> 
             </tr>
             <tr>
             <th>Billing address</th>
-            <td>${response.billing_address.name}, ${response.billing_address.address}, <br>${response.billing_address.city}, <br>${response.billing_address.zip_code}</td> 
+            <td>${response.billing_address.name}, ${response.billing_address.address}, <br>${response.billing_address.city}</td> 
             </tr>
             <tr>
             <th>Payment Method</th>
@@ -41,7 +42,7 @@ async function paymentPage(){
             <div class="mb-3" id="payment_methods> 
                 ${appendToPaymentMethod}
             </div> 
-            
+                
             </td>
         </tr>          
     </tbody>`; 
@@ -68,7 +69,7 @@ async function paymentPage(){
     if(cgst > 0){
         amount_detail += `<div class="final-order-details">
         <div class="single-order-final">
-            <p><b>CGST :</b></p>
+            <p><b>GST :</b></p>
             <p><b>${formatter.format(cgst)}</b></p>
             <input type="hidden" value="${cgst}" name="cgst">
         </div>

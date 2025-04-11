@@ -103,7 +103,7 @@
             @include('layouts/frontend/sidebar')
             <section class="discount-wrapper col-md-9">
                 <div class="dashboard-heading">
-                    <h3>Order Code</h3>
+                    <h3>Order #{{$order->order_id}}</h3>
                 </div>
                 <div class="order-details">
                     <h4> Summary </h4>
@@ -112,7 +112,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p>   Order Code :   </p>
+                                        <p>Order Code :</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p>   Name :   </p>
+                                        <p>Name :</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -132,7 +132,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p>   Email :   </p>
+                                        <p>Email :</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p>   Shipping Address :   </p>
+                                        <p>Shipping Address :</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -150,13 +150,26 @@
                                         <p>{{$order->shipping_address}}</p>
                                     </div>
                                 </div>
+                                @if($order->delivery_remark != '')
+                                <div class="col-md-6">
+                                    <div class="product-inquery">
+                                        <p>Remark :</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="product-answer">
+                                        <p>{{$order->delivery_remark}}</p>
+                                    </div>
+                                </div>
+                                @endif
+
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p>   Total Order Amount :   </p>
+                                        <p>Total Order Amount :</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -166,7 +179,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="product-inquery">
-                                        <p>   Payment Method :   </p>
+                                        <p>Payment Method :</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -333,7 +346,7 @@
                                 @if($order->cgst > 0)
                                 <div class="final-order-details">
                                     <div class="single-order-final">
-                                        <p> CGST : </p>
+                                        <p> GST : </p>
                                         <p> ₹{{number_format($order->cgst, 2)}} </p>
                                     </div>
                                 </div>
@@ -393,7 +406,7 @@
         <script>  
          window.localStorage.removeItem('SGST');
          window.localStorage.removeItem('IGST');
-         window.localStorage.removeItem('CGST');
+         window.localStorage.removeItem('GST');
         </script> 
     @endif 
 @endsection

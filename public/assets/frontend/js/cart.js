@@ -5,7 +5,7 @@ $(document).ready(async function(){
     const response = await updateCartOnLoad.json();
         if(response.data == ''){
             $('#cartItemCount').html('0');
-            $('#add_to_cart_btn').html('Add to cart');
+            $('#add_to_cart_btn').html('Rent Now');
         }else{
         let item_count = response.data.length;   
         $('#cartItemCount').html(item_count);   
@@ -22,14 +22,14 @@ $(document).ready(async function(){
                     $('#quantity').val(item.quantity);
                     $('#price').val(item.price);
                     $('#show_price').html(item.price);
-                    $('#add_to_cart_btn').html('Added');
+                    $('#add_to_cart_btn').html('View Rent');
                     $('#add_to_cart_btn').addClass("add_to_cart_btn_success");
                     checkStock();
                     found = true;   
                 }
             });
             if (!found){ 
-                $('#add_to_cart_btn').html('Add to cart'); 
+                $('#add_to_cart_btn').html('Rent Now'); 
             }
         }
     } catch (error) {

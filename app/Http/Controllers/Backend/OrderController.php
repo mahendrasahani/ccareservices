@@ -12,6 +12,7 @@ use App\Models\Backend\BillingAddress;
 use App\Models\Backend\DeliveryBoy;
 use App\Models\Backend\Order;
 use App\Models\Backend\OrderProduct;
+use App\Models\Backend\RenewDetail;
 use App\Models\Backend\ShippingAddress;
 use App\Models\Backend\ShippingCharge;
 use App\Models\Backend\Stock;
@@ -45,7 +46,8 @@ class OrderController extends Controller{
 
     public function edit($id){ 
         $delivery_boy_list = DeliveryBoy::where('status', 1)->get();
-        $order = Order::with(['getUser', 'getOrderProduct:order_id,product_name,quantity,price,month,total_price,product_id,option_id,option_value_id,delivery_date,end_date', 'getOrderProduct.getProduct:id,product_images'])->where('id', $id)->first();
+        $order = Order::with(['getUser', 'getOrderProduct:id,order_id,product_name,quantity,price,month,total_price,product_id,option_id,option_value_id,delivery_date,end_date', 'getOrderProduct.getProduct:id,product_images', 'getOrderProduct.getRenewalProduct'])->where('id', $id)->first();
+        // return $order;
         return view('backend.order.edit', compact('order', 'delivery_boy_list')); 
     }
 
@@ -170,8 +172,8 @@ class OrderController extends Controller{
                     "sgst" => $request->sgst,
                     "igst" => $request->igst,
                     "payment_status" => "unpaid", 
-                    "shipping_address" =>  $shipping_address->address.' '.$shipping_address->city.' '.$shipping_address->zip_code.' '.$shipping_address->country,
-                    "billing_address" =>  $billing_address->address.' '.$billing_address->city.' '.$billing_address->zip_code.' '.$billing_address->country,
+                    "shipping_address" =>  $shipping_address->address.' '.$shipping_address->city.' '.$shipping_address->country,
+                    "billing_address" =>  $billing_address->address.' '.$billing_address->city.' '.$billing_address->country,
                     "ordered_date" => Carbon::now(),
                     "status" => 1
                     ])->id; 
@@ -275,7 +277,8 @@ class OrderController extends Controller{
         $order_id = Crypt::decryptString($id);
         $order = Order::with('getOrderProduct:order_id,product_id,product_name,price,total_price,quantity', 'getOrderProduct.getProduct:id,product_name,product_images')
         ->withTrashed()
-        ->findOrFail($order_id);
+        ->findOrFail($order_id); 
+       
         }catch(\Exception $e){
             abort(404);
         } 
@@ -410,6 +413,13 @@ class OrderController extends Controller{
     }
 
     public function newOrderStore(Request $request){
+        $validate = $request->validate([
+            "payment_status" => ['required'],
+            "payment_method" => ['required'],
+            "order_status" => ['required'],
+            "order_date" => ['required'],
+            "delivery_date" => ['required'],
+        ]); 
         try{
             $sub_total = 0;
             $cgst = 0;
@@ -455,13 +465,13 @@ class OrderController extends Controller{
                 $ordered_stock =  Stock::with(['getAttrValue', 'getProduct'])->where('product_id', $product_id)->where('attribute_value_id', $variant_ids_c[$index])->first();
                 $all_ordered_products->push($ordered_stock);
                 $sub_total += $unit_prices_c[$index]*$product_qtys_c[$index];
-                if($ordered_stock->getProduct->tax_name == "GST"){
+                if($ordered_stock->getProduct->tax_name == "CGST"){
                     $cgst += floatval(($unit_prices_c[$index]*$product_qtys_c[$index])*$ordered_stock->getProduct->tax_rate/100);
                 }elseif($ordered_stock->getProduct->tax_name == "IGST"){
                     $igst += floatval(($unit_prices_c[$index]*$product_qtys_c[$index])*$ordered_stock->getProduct->tax_rate/100);
                 }elseif($ordered_stock->getProduct->tax_name == "SGST"){
                     $sgst += floatval(($unit_prices_c[$index]*$product_qtys_c[$index])*$ordered_stock->getProduct->tax_rate/100);
-                }
+                }  
             }
 
             $total = ($sub_total) + floatval($shipping_charge) + floatval($cgst) + floatval($sgst) + floatval($igst);
@@ -565,14 +575,8 @@ class OrderController extends Controller{
     } 
 
 
-    public function selectCustomerToCreateOrder(Request $request){
-        // $validate = $request->validate([
-        //     "name" => ['sometimes', 'nullable', 'string', 'max:255'],
-        //     "email" => ['sometimes', 'nullable', 'email', 'max:255'],
-        //     "phone" => ['sometimes', 'nullable', 'regex:/^(?:\+?[0-9]{10,15}|[0-9]{10})$/'],
-        // ]);
-    
-        // try {
+    public function selectCustomerToCreateOrder(Request $request){ 
+        try {
             $found_status = true;
             $search = $request->search;
             $name = $request->name;
@@ -588,32 +592,123 @@ class OrderController extends Controller{
                 ->orWhere('email', 'LIKE', '%'.$search.'%');
                 $customers = $customers->where('active_status', 1)->paginate(20); 
                 $found_status = true;
-            }
-            // if (empty($name) && empty($phone) && empty($email)) {  
-            //     $customers = [];  
-            //     $found_status = false;
-            // }else{
-            //     $customers = User::where('user_type', 2);   
-            //     if (!empty($name)) {
-            //         $customers = $customers->where('name', 'LIKE', '%'.$name.'%');
-            //     }
-            //     if (!empty($phone)) {
-            //         $customers = $customers->Orwhere('phone', 'LIKE', '%'.$phone.'%');
-            //     }
-            //     if (!empty($email)) {
-            //         $customers = $customers->where('email', 'LIKE', '%'.$email.'%');
-            //     } 
-            //     $customers = $customers->paginate(20); 
-            //         $found_status = true;
-               
-            // } 
+            } 
             return view('backend.order.select_customer', compact('customers', 'found_status'));
-        // } catch (\Exception $e) {
-        //     return response()->json(['error' => 'Something went wrong'], 500);
-        // }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong'], 500);
+        }
     }
 
+    public function getOrderDetailForRenewal(Request $request){
+        try{
+            $order_id = $request->order_id;
+            $ordered_product_id = $request->ordered_product_id;
+            $order_detail = Order::where('id', $order_id)->first();
+            $ordered_product_detail = OrderProduct::where('id', $ordered_product_id)->first();
+            return response()->json([
+                "status" => "success",
+                "order_detail" => $order_detail,
+                "ordered_product_detail" => $ordered_product_detail
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => "failed",
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function addOrderRenewal(Request $request){
+        $validate = $request->validate([
+            "renewal_order_id" => ['required', 'numeric'],
+            "renewal_ordered_product_id" => ['required'],
+            "renewal_month" => ['required', 'numeric'],
+            "renewal_start_from" => ['required'],
+            "renewal_unit_prie" => ['required', 'numeric'],
+        ]);
+        try{
+            $startDate = Carbon::parse($request->renewal_start_from);
+            $noOfMonths = (int) $request->renewal_month;
+            $renewalEndDate = $startDate->copy()->addMonths($noOfMonths);
+
+            RenewDetail::create([
+                "order_id" => $request->renewal_order_id,
+                "product_id" => $request->renewal_ordered_product_id,
+                "month" => $request->renewal_month,
+                "unit_price" => $request->renewal_unit_prie,
+                "total_amount" => $request->renewal_unit_prie,
+                "start_date" => $request->renewal_start_from,
+                "end_date" => $renewalEndDate,
+                "renewal_note" => $request->renewal_note,
+                "quantity" => $request->renewal_quantity
+            ]);
+             return redirect()->back()->with('renewal_created', "Renewal has been created successfully.");
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => "failed",
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
  
-    
+    public function editOrderRenewal(Request $request){
+        try{
+            $renewal_order_id = $request->renewal_id; 
+            $renewal_order_detail = RenewDetail::where('id', $renewal_order_id)->first();
+            return response()->json([
+                "status" => "success",
+                "renewal_order_detail" => $renewal_order_detail
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => "failed",
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function updateOrderRenewal(Request $request){
+        $validate = $request->validate([  
+            "edit_renewal_month" => ['required', 'numeric'],
+            "edit_renewal_start_from" => ['required'],
+            "edit_renewal_unit_prie" => ['required', 'numeric'],
+        ]);
+        try{
+            $startDate = Carbon::parse($request->edit_renewal_start_from);
+            $noOfMonths = (int) $request->edit_renewal_month;
+            $renewalEndDate = $startDate->copy()->addMonths($noOfMonths);
+
+            RenewDetail::where('id', $request->renew_order_detail_id)->update([ 
+                "month" => $request->edit_renewal_month,
+                "unit_price" => $request->edit_renewal_unit_prie,
+                "total_amount" => $request->edit_renewal_unit_prie,
+                "start_date" => $request->edit_renewal_start_from,
+                "end_date" => $renewalEndDate,
+                "renewal_note" => $request->edit_renewal_note,
+                "quantity" => $request->edit_renewal_quantity
+            ]);
+             return redirect()->back()->with('renewal_update', "Renewal has been updated successfully.");
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => "failed",
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function destroyRenewalDetail(Request $request){
+        try{
+            $id = $request->id;
+            RenewDetail::destroy($id);
+            return response()->json([
+                "status" => "success",
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                "status" => "failed",
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
 }
 

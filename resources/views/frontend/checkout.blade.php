@@ -34,32 +34,50 @@
                 <label for="forName">Full Name<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" placeholder="Enter your full name" id="shipping_full_name" name="s_name" value="{{$shipping_address->name ?? Auth::user()->name}}" required>
                 <p class="input_error" id="error_shipping_full_name"></p>
+                @error('s_name')
+                <p style="color:red;">{{ $message }}</p>
+                @enderror
               </div>
               <div class="mb-3">
                 <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
                 <input type="email" class="form-control" id="shipping_email" name="s_email" placeholder="Enter your email" value="{{$shipping_address->email ?? Auth::user()->email}}" required>
                 <p class="input_error" id="error_shipping_email"></p>
+                @error('s_email')
+                <p style="color:red;">{{ $message }}</p>
+                @enderror
               </div>
               <div class="mb-3">
                 <label for="email" class="form-label">Phone<span class="text-danger">*</span></label>
                 <input type="number" class="form-control" id="shipping_phone" name="s_phone" placeholder="Enter your phone" value="{{$shipping_address->phone ?? Auth::user()->phone}}" required>
                 <p class="input_error" id="error_shipping_phone"></p>
+                 @error('s_phone')
+                <p style="color:red;">{{ $message }}</p>
+                @enderror
               </div>
               <div class="mb-3">
                 <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="shipping_address" name="s_address" placeholder="Enter full address" value="{{$shipping_address->address ?? Auth::user()->address_1}}" required>
                 <p class="input_error" id="error_shipping_address"></p>
+                 @error('s_address')
+                <p style="color:red;">{{ $message }}</p>
+                @enderror
               </div>
               <div class="mb-3">
                 <label for="city" class="form-label">City<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="shipping_city" name="s_city" placeholder="Enter City" value="{{$shipping_address->city ?? Auth::user()->city}}" required>
                 <p class="input_error" id="error_shipping_city"></p>
+                @error('s_city')
+                <p style="color:red;">{{ $message }}</p>
+                @enderror
               </div>
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <label for="zipCode" class="form-label">Zip Code<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="shipping_zip_code" name="s_zip_code" placeholder="Enter Zip Code" value="{{$shipping_address->zip_code ?? Auth::user()->postal_code}}">
                 <p class="input_error" id="error_shipping_zip_code"></p>
-              </div> 
+                @error('s_zip_code')
+                <p style="color:red;">{{ $message }}</p>
+                @enderror
+              </div>  -->
               <!-- <div class="mb-3">
                 <label for="region" class="form-label">Country / Region<span class="text-danger">*</span></label>
                 <select class="form-control aiz-selectpicker" name="s_country" id="s_country">
@@ -105,11 +123,11 @@
                 <input type="text" class="form-control" id="billing_city" name="b_city" placeholder="Enter City" value="{{$billing_address->city ?? ''}}">
                 <p class="input_error" id="error_billing_city"></p>
               </div>
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <label for="zipCode" class="form-label">Zip Code<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="billing_zip_code" name="b_zip_code" placeholder="Enter Zip Code" value="{{$billing_address->zip_code ?? ''}}">
                 <p class="input_error" id="error_billing_zip_code"></p>
-              </div> 
+              </div>  -->
               <!-- <div class="mb-3">
                 <label for="region" class="form-label">Country / Region <span class="text-danger">*</span></label>
                 <select class="form-control aiz-selectpicker" name="b_country" id="billing_country">
@@ -131,8 +149,9 @@
                 <thead>
                   <tr>
                     <th>Product</th>
-                    <th>Tax</th>
-                    <th style="text-align: end">Subtotal</th>
+                    <th style="text-align: end">Rent Amount</th>
+                    <th style="text-align: end;">Tax</th>
+                    <th style="text-align: end;">Sub Total</th>
                   </tr>
                 </thead>
                 <tbody class="order-paymnent" id="product_on_checkout"> 
@@ -145,11 +164,13 @@
                   <tr>
                     <td>{{$tax->tax_name}} {{$tax->tax_rate}}%</td>
                     <td style="text-align: end" id="{{$tax->tax_name}}">₹  </td>
-                  </tr>
+                  </tr> 
                   @endforeach -->
-                  <tr>
-                    <td>Subtotal</td>
-                    <td style="text-align: end" id="sub_total">₹</td>
+                  <!-- <tr>
+                    <td style="text-align: end;" colspan="3"><b>Rent Amount</b></td> 
+                  </tr> -->
+                  <tr> 
+                    <td style="text-align: end;" colspan="3" id="sub_total"><b>₹</b></td>
                   </tr>
                   <tr>
                     <td>Shipping</td>

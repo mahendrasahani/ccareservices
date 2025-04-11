@@ -4,7 +4,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>© CoolCare Services. 2024 All Rights Reserved.</p>
+                <p>© CoolCare Services. 2025 All Rights Reserved.</p>
             </div>
         </div>
         <!--**********************************
@@ -302,9 +302,7 @@
             {
                 $('#nmk-sidebar').toggleClass("n-sidebar nk-sidebar")
                 $('#navToggle-header').toggleClass("nav-header-1 nav-header")
-
                 $('#main-wrapper').toggleClass("menu-toggle");
-
                 $(".hamburger").toggleClass("is-active");
 
             });

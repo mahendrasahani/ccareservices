@@ -25,37 +25,55 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Name <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" name="vendor_name" placeholder="Vendor Name" id="product_name" required> 
+                                            <input type="text" class="form-control" value="{{ old('vendor_name') }}" name="vendor_name" placeholder="Vendor Name" id="product_name" required> 
+                                            @error('vendor_name')
+                                                <p style="color:red;">{{ $message }}</p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Email <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                             <input type="email" id="vendor_email" name="vendor_email" class="form-control" placeholder="Vendor Email">
-                                        </div>
+                                             <input type="email" id="vendor_email" value="{{ old('vendor_email') }}" name="vendor_email" class="form-control" placeholder="Vendor Email">
+                                             @error('vendor_email')
+                                                <p style="color:red;">{{ $message }}</p>
+                                            @endif
+                                            </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Phone no.<span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                             <input type="tel" id="vendor_phone" name="vendor_phone" class="form-control" placeholder="Your Phone Number">
-                                        </div>
+                                             <input type="tel" id="vendor_phone" value="{{ old('vendor_phone') }}" name="vendor_phone" class="form-control" placeholder="Your Phone Number">
+                                             @error('vendor_phone')
+                                                <p style="color:red;">{{ $message }}</p>
+                                            @endif
+                                            </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Business Name <span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" name="business_name" placeholder="Business Name" id="business_name"> 
+                                            <input type="text" class="form-control" value="{{ old('business_name') }}" name="business_name" placeholder="Business Name" id="business_name"> 
+                                            @error('business_name')
+                                                <p style="color:red;">{{ $message }}</p>
+                                            @endif
                                         </div>
                                     </div> 
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">Address<span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <input type="text" id="vendor_address" name="vendor_address" class="form-control" placeholder="Your Address"> 
+                                            <input type="text" id="vendor_address" value="{{ old('vendor_address') }}" name="vendor_address" class="form-control" placeholder="Your Address"> 
+                                            @error('vendor_address')
+                                                <p style="color:red;">{{ $message }}</p>
+                                            @endif
                                         </div>
                                     </div> 
                                     <div class="form-group row">
                                         <label class="col-md-3 col-from-label">GST<span class="text-danger">*</span></label>
                                         <div class="col-md-9">
-                                            <input type="text" id="vendor_gst" name="vendor_gst" class="form-control" placeholder="GST"> 
+                                            <input type="text" id="vendor_gst" value="{{ old('vendor_gst') }}" name="vendor_gst" class="form-control" placeholder="GST"> 
+                                            @error('vendor_gst')
+                                                <p style="color:red;">{{ $message }}</p>
+                                            @endif
                                         </div>
                                     </div> 
                                     <!-- <div class="form-group row">

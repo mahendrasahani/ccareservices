@@ -72,9 +72,10 @@
                                                     <select class="form-control" id="order_status" name="order_status" style="font-size: 12px;">
                                                         <option value="ordered" {{$order->order_status == "ordered" ? "selected" : ""}}>Ordered</option> 
                                                         <option value="accepted" {{$order->order_status == "accepted" ? "selected" : ""}}>Accept</option> 
-                                                        <option value="canceled" {{$order->order_status == "canceled" ? "selected" : ""}}>Cancel</option> 
                                                         <option value="shipped" {{$order->order_status == "shipped" ? "selected" : ""}}>Shipped</option> 
                                                         <option value="delivered" {{$order->order_status == "delivered" ? "selected" : ""}}>Delivered</option> 
+                                                        <option value="renewed" {{$order->order_status == "renewed" ? "selected" : ""}}>Renewed</option> 
+                                                        <option value="canceled" {{$order->order_status == "canceled" ? "selected" : ""}}>Cancel</option> 
                                                         <option value="not_confirmed" {{$order->order_status == "not_confirmed" ? "selected" : ""}}>Not Confirmed</option> 
                                                         <option value="" {{$order->order_status == "" ? "selected" : ""}}>Not Completed</option> 
                                                     </select>
@@ -126,22 +127,25 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-bordered">
+                                        <table class="table" style="border: 2px solid #cbcbcb;">
                                             <thead>
                                                 <tr style="font-size: 12px;">
                                                     <th>#</th>
                                                     <th width="40%">Product</th>
                                                     <th>QTY</th>
                                                     <th>Month</th>
-                                                    <th>Unit price</th>
+                                                    <th>Unit price</th> 
                                                     <th>Total</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
-                                            @foreach($order->getOrderProduct as $product)
-                                                <tr style="font-size: 12px;">
-                                                    <td>1</td>
+                                            @php
+                                            $sn = 1;
+                                            @endphp
+                                            @foreach($order->getOrderProduct as $product) 
+                                                <tr style="font-size: 12px; border: 2px solid #cbcbcb; border-bottom: none;">
+                                                    <td>{{ $sn++ }}</td>
                                                     <td>
                                                         <div class="media"> 
                                                             <img src="{{$product->getProduct->product_images == '' ? url('public/assets/both/placeholder/product.jpg') : url('public/'.$product->getProduct->product_images[0])}}" class="" width="20%"> 
@@ -151,8 +155,7 @@
                                                                     <span class="mr-2">
                                                                         <span class="opacity-50">{{$product->option_id}}</span>: {{$product->option_value_id}}
                                                                     </span> 
-                                                                </div>
-
+                                                                </div> 
                                                                 <div>
                                                                     <span class="mr-2">
                                                                         <span class="opacity-50">Delivery Date</span>: {{Carbon\Carbon::parse($product->delivery_date)->format('d M, Y')}}
@@ -162,17 +165,82 @@
                                                                     <span class="mr-2">
                                                                         <span class="opacity-50">End Date</span>: {{Carbon\Carbon::parse($product->end_date)->format('d M, Y')}}
                                                                     </span> 
-                                                                </div>
-
-
+                                                                </div> 
                                                             </div>
+                                                            @if(count($product->getRenewalProduct) > 0)
+                                                            <img src="{{ url('public/assets/backend/images/renewal.png') }}" width="30%">
+                                                            @endif
                                                         </div>
                                                     </td>
                                                     <td>{{$product->quantity}}</tdlass=>
                                                     <td>{{$product->month}} Months</td>
                                                     <td>₹{{number_format($product->price, 2)}}</td>
                                                     <td>₹{{number_format($product->total_price, 2)}}</td>
+                                                    <td>
+                                                         <div class="d-flex align-items-center gap-2"> 
+                                                            <button class="mr-3 text-primary font-weight-bold addcontants" id="add_renewal_btn" data-order-id="{{ $order->id }}" data-ordered-product-id="{{ $product->id }}">Add Renewal</button>
+                                                            <!-- <span class="mr-3 text-primary font-weight-bold addcontants" data-toggle="modal" data-target="#addModal">
+                                                                 Add Renewal
+                                                            </span> -->
+                                                            <!-- <span>
+                                                                <a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage" href="" title="Edit" data-toggle="modal" data-target="#editModal">
+                                                                    <i class="fa-regular fa-edit"></i>
+                                                                </a>
+                                                            </span> -->
+                                                        </div>
+                                                    </td>
                                                 </tr>
+                                                @if(count($product->getRenewalProduct) > 0)
+                                                <tr style="border-right: 2px solid #cbcbcb; border-left: 2px solid #cbcbcb;">
+                                                    <td colspan="5"><h4 class="h6 font-size-8 font-weight-">Renew Detail:-</h4></td>
+                                                </tr>
+                                                @foreach($product->getRenewalProduct as $renewal_detail) 
+                                                @php
+                                                $renewal_sn = 1;
+                                                @endphp
+                                                <tr class="m-5" style="border: 2px solid #cbcbcb; border-top: none;">
+                                                <td colspan="2">
+                                                <div class="media"> 
+                                                        <div class="media-body mx-2">
+                                                            <div>
+                                                                <span class="mr-2">
+                                                                    <span class="opacity-50">Start Date</span>: {{ \Carbon\Carbon::parse($renewal_detail->start_date)->format('d M, Y') }}
+                                                                </span> 
+                                                            </div>
+                                                            <div>
+                                                                <span class="mr-2">
+                                                                    <span class="opacity-50">End Date</span>: {{ \Carbon\Carbon::parse($renewal_detail->end_date)->format('d M, Y') }}
+                                                                </span> 
+                                                            </div> 
+                                                            @if($renewal_detail->renewal_note != '')
+                                                            <div>
+                                                                <span class="mr-2">
+                                                                    <span class="opacity-50">Renew Note</span>: {{ $renewal_detail->renewal_note }} 
+                                                                </span> 
+                                                            </div> 
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{ $renewal_detail->quantity }}</td>
+                                                <td>{{ $renewal_detail->month }} Month</td>
+                                                <td>{{ $renewal_detail->unit_price }}</td>
+                                                <td>{{ $renewal_detail->total_amount }}</td>
+                                                <td>
+                                                  <span> 
+                                                     <button id="edit_renewal_btn" data-renewal-id="{{ $renewal_detail->id }}" class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage" title="Edit">
+                                                         <i class="fa-regular fa-edit"></i>
+                                                    </button> 
+                                                    <button value="{{$renewal_detail->id}}" class="btn btn-icon btn-sm delete_ico"
+                                                    id="renewal_delete_btn"> <i class="fa-solid fa-trash-can"></i></button> 
+                                                 </span> 
+                                                </td>
+                                                </tr>
+                                         
+                                                @endforeach
+                                                
+                                                @endif
+
                                                 @endforeach 
                                             </tbody>
                                         </table>
@@ -191,7 +259,7 @@
 
                                                         @if($order->cgst > 0)
                                                         <tr style="font-size: 12px;">
-                                                            <td><strong class="font-weight-bold">CGST :</strong></td>
+                                                            <td><strong class="font-weight-bold">GST :</strong></td>
                                                             <td>₹{{number_format($order->cgst, 2)}}</td>
                                                         </tr>
                                                         @endif
@@ -220,6 +288,7 @@
                                                             <input type="hidden" id="total_price" name="total_price" value="{{$order->total}}">
                                                             <td class="h6" id="showFinalPrice">₹{{number_format($order->total - $order->promo_discount, 2)}}</td>
                                                         </tr>
+                                                       
                                                     </tbody>
                                                 </table>
                                                 @if($order->order_status != 'not_confirmed')
@@ -287,26 +356,208 @@
                 </div>
             </div>
             <!-- #/ container end-->
+
+            <!----- modal s elements start ---->
+            <!-- add Modal --> 
+            <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Add Renew Order</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('backend.order.add_order_renewal') }}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <input type="hidden" id="renewal_order_id" name="renewal_order_id">
+                                    <input type="hidden" id="renewal_ordered_product_id" name="renewal_ordered_product_id">
+                                    <input type="hidden" id="renewal_quantity" name="renewal_quantity">
+                                    <div class="col-sm-6 mb-3">
+                                        <label> Select Month</label>
+                                        <input type="number" id="renewal_month" name="renewal_month" class="form-control" min="1" max="12" required>
+                                    </div>
+                                    <div class="col-sm-6 mb-3">
+                                        <label> Start From</label>
+                                        <input type="date" id="renewal_start_from" name="renewal_start_from" class="form-control" required>
+                                    </div>
+                                    <div class="col-sm-6 mb-3">
+                                        <label> Unit Price</label>
+                                        <input type="number" id="renewal_unit_prie" name="renewal_unit_prie" class="form-control" value="" required>
+                                    </div>  
+                                    <div class="col-sm-6 mb-3">
+                                        <label> Renewal Note</label>
+                                        <input type="text" id="renewal_note" name="renewal_note" class="form-control">
+                                    </div>  
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button class="btn btn-info text-white">Add</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
+            <!--- edit modal --->
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Renew Order</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                            <form action="{{ route('backend.order.update_order_renewal') }}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <input type="hidden" id="renew_order_detail_id" name="renew_order_detail_id"> 
+                                    <input type="hidden" id="edit_renewal_quantity" name="edit_renewal_quantity">
+                                    <div class="col-sm-6 mb-3">
+                                        <label> Select Month</label>
+                                        <input type="number" id="edit_renewal_month" name="edit_renewal_month" class="form-control" min="1" max="12" required>
+                                    </div>
+                                    <div class="col-sm-6 mb-3">
+                                        <label> Start From</label>
+                                        <input type="date" id="edit_renewal_start_from" name="edit_renewal_start_from" class="form-control" required>
+                                    </div>
+                                    <div class="col-sm-6 mb-3">
+                                        <label> Unit Price</label>
+                                        <input type="number" id="edit_renewal_unit_prie" name="edit_renewal_unit_prie" class="form-control" value="" required>
+                                    </div>  
+                                    <div class="col-sm-6 mb-3">
+                                        <label> Renewal Note</label>
+                                        <input type="text" id="edit_renewal_note" name="edit_renewal_note" class="form-control">
+                                    </div>  
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button class="btn btn-info text-white">Update</button>
+                                    </div>
+                                </div>
+                            </form>
+                            </div> 
+                        </div>
+                    </div>
+            </div>
+            <!----- modal s elements end---->
+
         </div>
 
 
 
 @section('javascript-section') 
-<script> 
-     $(document).ready(function(){
+ 
+    <script>
+    $(document).on("click", "#add_renewal_btn", function(e){
+        e.preventDefault();
+        let order_id = $(this).data('order-id');
+        let ordered_product_id = $(this).data('ordered-product-id'); 
+        let url = "{{ route('backend.order.get_order_detail_for_renewal') }}";
+        fetch(url, {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            },
+            body:JSON.stringify({order_id:order_id, ordered_product_id:ordered_product_id}) 
+        })
+        .then(response => response.json())
+        .then(responseData => {
+            $("#renewal_order_id").val(responseData.order_detail.id); 
+            $("#renewal_ordered_product_id").val(responseData.ordered_product_detail.id); 
+            $("#renewal_month").val(responseData.ordered_product_detail.month); 
+            let endDate = new Date(responseData.ordered_product_detail.end_date);
+            endDate.setDate(endDate.getDate() + 1);
+            let nextDate = endDate.toISOString().split('T')[0];
+            $("#renewal_start_from").val(nextDate);
+            $("#renewal_unit_prie").val(responseData.ordered_product_detail.price); 
+            $("#renewal_quantity").val(responseData.ordered_product_detail.quantity); 
+            $('#addModal').modal('show');
+        }).catch(error => {
+            console.error("Error: ", error);
+        }); 
+    }); 
+
+    $(document).on("click", "#edit_renewal_btn", function(e){
+        e.preventDefault();
+        let renewal_id = $(this).data('renewal-id');
+        let url = "{{ route('backend.order.edit_order_renewal') }}";
+        fetch(url, {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            },
+            body:JSON.stringify({renewal_id:renewal_id}) 
+        })
+        .then(response => response.json())
+        .then(responseData => {
+            console.log(responseData); 
+            $("#renew_order_detail_id").val(responseData.renewal_order_detail.id);  
+            $("#edit_renewal_quantity").val(responseData.renewal_order_detail.quantity);  
+            $("#edit_renewal_month").val(responseData.renewal_order_detail.month);  
+            let rawDate = responseData.renewal_order_detail.start_date;
+            let formattedDate = rawDate.split(' ')[0];
+            $("#edit_renewal_start_from").val(formattedDate);
+     
+ 
+            $("#edit_renewal_unit_prie").val(responseData.renewal_order_detail.unit_price); 
+            $("#edit_renewal_note").val(responseData.renewal_order_detail.renewal_note); 
+            $('#editModal').modal('show');
+
+        }).catch(error => {
+            console.error("Error: ", error);
+        }); 
+    });
+
+    $(document).on('click', '#renewal_delete_btn', function (e){
+        e.preventDefault();
+        const id = $(this).val(); 
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) =>
+        {
+            if (result.isConfirmed){ 
+                $.ajax({
+                    url: "{{route('backend.order.destroy_renewal_detail')}}",
+                    data: { 'id': id },
+                    type: "GET",
+                    success: function (response){
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Renewal has been deleted.",
+                            icon: "success"
+                        }); 
+                        window.location.reload();
+                    }
+                })
+            }
+        }); 
+    });
+</script>
+
+    <script> 
+         $(document).ready(function(){
         $(document).on("click", "#discount", calculateDiscount);
 
         $(document).on("keyup", "#discount", calculateDiscount);
-     });
-    function calculateDiscount(){
+         });
+        function calculateDiscount(){
         let discountPrice = $(this).val(); 
         let totalPrice = $("#total_price").val(); 
         let finalPrice = totalPrice - discountPrice;
         let formattedFinalPrice = '₹' + finalPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');  
         $('#showFinalPrice').text(formattedFinalPrice); 
         // $("#total_price").val(finalPrice); 
-    }
-</script> 
+        }
+    </script> 
 
     <script> 
         $(document).on("change", "#order_status", function(){
@@ -321,9 +572,27 @@
                 $('#cancel_note_area').remove();
             }
         });
+
+        
     </script>
+
+    @if(Session::has('renewal_created'))
+        <script>
+            Swal.fire({
+                title: "Success",
+                text: "{{ Session::get('renewal_created') }}",
+                icon: "success"
+            });
+        </script>
+        @elseif(Session::has('renewal_update'))
+        <script>
+            Swal.fire({
+                title: "Success",
+                text: "{{ Session::get('renewal_update') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
 @endsection
-
-
-
+ 
 @endsection

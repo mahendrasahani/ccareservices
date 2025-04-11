@@ -16,6 +16,7 @@ class CustomerController extends Controller{
         $customers_list = User::with(['getShippingAddress', 'getUserOrder'])
         ->withCount('getUserOrder')
         ->where('user_type', 2)->orderBy('id', 'desc')->paginate(10);
+ 
         return view('backend.customer.index', compact('customers_list'));
     }
 
@@ -32,13 +33,11 @@ class CustomerController extends Controller{
             "shipping_name" => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'],
             "shipping_email" => ['required', 'email', 'max:255'],
             "shipping_phone" => ['required', 'numeric', 'digits:10'],
-            "shipping_city" => ['required'],
-            "shipping_postal_code" => ['required', 'numeric'],
+            "shipping_city" => ['required'], 
             
             "billing_name" => ['string', 'max:255', 'regex:/^[A-Za-z\s]+$/', 'nullable'],
             "billing_email" => ['email', 'max:255', 'nullable'],
-            "billing_phone" => ['numeric', 'digits:10', 'nullable'],
-            "billing_postal_code" => ['numeric', 'nullable'], 
+            "billing_phone" => ['numeric', 'digits:10', 'nullable'], 
         ]);
         try{
             $user = User::create([
@@ -49,8 +48,7 @@ class CustomerController extends Controller{
                 'user_type' => 2,
                 'address_1' => $request->address,
                 'city' => $request->city,
-                'country' => 'India',
-                'postal_code' => $request->postal_code, 
+                'country' => 'India', 
                 'otp_verify_status' => 1,
             ]);
             ShippingAddress::create([
@@ -59,8 +57,7 @@ class CustomerController extends Controller{
                 "email" => $request->shipping_email,
                 "phone" => $request->shipping_phone,
                 "address" => $request->shipping_address,
-                "city" => $request->shipping_city,
-                "zip_code" => $request->shipping_postal_code,
+                "city" => $request->shipping_city, 
                 "country" => 'India'
             ]);
 
@@ -71,8 +68,7 @@ class CustomerController extends Controller{
                 "email" => $request->billing_email,
                 "phone" => $request->billing_phone,
                 "address" => $request->billing_address,
-                "city" => $request->billing_city,
-                "zip_code" => $request->billing_postal_code,
+                "city" => $request->billing_city, 
                 "country" => 'India'
             ]);
         }else{
@@ -82,8 +78,7 @@ class CustomerController extends Controller{
                 "email" => $request->shipping_email,
                 "phone" => $request->shipping_phone,
                 "address" =>  $request->shipping_address,
-                "city" => $request->shipping_city,
-                "zip_code" => $request->shipping_postal_code,
+                "city" => $request->shipping_city, 
                 "country" => 'India'
             ]);
         }
@@ -152,13 +147,11 @@ class CustomerController extends Controller{
             "shipping_name" => ['required', 'string', 'max:255', 'regex:/^[A-Za-z\s]+$/'],
            "shipping_email" => ['required', 'email', 'max:255'],
             "shipping_phone" => ['required', 'numeric', 'digits:10'],
-            "shipping_city" => ['required'],
-            "shipping_postal_code" => ['required', 'numeric'],
+            "shipping_city" => ['required'], 
 
             "billing_name" => ['string', 'max:255', 'regex:/^[A-Za-z\s]+$/', 'nullable'],
             "billing_email" => ['email', 'max:255', 'nullable'],
-            "billing_phone" => ['numeric', 'digits:10', 'nullable'],
-            "billing_postal_code" => ['numeric', 'nullable'], 
+            "billing_phone" => ['numeric', 'digits:10', 'nullable'], 
         ]);
 
         try{
@@ -167,8 +160,7 @@ class CustomerController extends Controller{
                 "email" => $request->email,
                 "phone" => $request->phone,
                 'address_1' => $request->address,
-                'city' => $request->city,
-                'postal_code' => $request->postal_code
+                'city' => $request->city, 
             ]);
 
             ShippingAddress::updateOrCreate(
@@ -178,8 +170,7 @@ class CustomerController extends Controller{
                     "email" => $request->shipping_email,
                     "phone" => $request->shipping_phone,
                     "address" => $request->shipping_address,
-                    "city" => $request->shipping_city,
-                    "zip_code" => $request->shipping_postal_code,
+                    "city" => $request->shipping_city, 
                     "country" => 'India'
                 ]
             );
@@ -192,8 +183,7 @@ class CustomerController extends Controller{
                     "email" => $request->billing_email,
                     "phone" => $request->billing_phone,
                     "address" => $request->billing_address,
-                    "city" => $request->billing_city,
-                    "zip_code" => $request->billing_postal_code,
+                    "city" => $request->billing_city, 
                 ]);
             }else{
                 BillingAddress::updateOrCreate(
@@ -203,8 +193,7 @@ class CustomerController extends Controller{
                     "email" => $request->shipping_email,
                     "phone" => $request->shipping_phone,
                     "address" =>  $request->shipping_address,
-                    "city" => $request->shipping_city,
-                    "zip_code" => $request->shipping_postal_code,
+                    "city" => $request->shipping_city, 
                 ]);
             }
 
@@ -264,6 +253,7 @@ class CustomerController extends Controller{
         $search_val = $request->search_val;
         if($search_val != ''){
             $search_result = User::where('name', 'like', '%'.$search_val.'%')
+            ->orWhere('phone', 'like', '%'.$search_val.'%')
             ->with(['getShippingAddress', 'getUserOrder'])
             ->withCount('getUserOrder')
             ->where('user_type', 2)->get();
@@ -282,22 +272,28 @@ class CustomerController extends Controller{
             $html .= '</tr>';
         }else{
             foreach($search_result as $index => $search_data){
+                 
+                if($search_data->active_status == 1){
+                    $toggele_status = "checked";
+                }else{
+                    $toggele_status = "";
+                }
+
                 $html .= '';
                 $html .= '<tr id="row_id_'.$search_data->id.'">';
                 $html .= '<td>'.($index+1).'</td>';
                 $html .= '<td>'.$search_data->name.'</td>';
                 $html .= '<td>'.$search_data->email.'</td>';
-                $html .= '<td>';
-                if($search_data->getShippingAddress != ''){ 
-                    $search_data->getShippingAddress->phone ?? '-';
-                }
-                $html .= '</td>';
+                $html .= '<td>'.$search_data->phone.'</td>';
+               
                 $html .= '<td>'.$search_data->get_user_order_count ?? ''.'</td>';
-                $html .= '<td>';
-                if($search_data->getShippingAddress != ''){ 
-                    $search_data->getShippingAddress->address ?? '-';
-                } 
-                $html .= '</td>'; 
+                $html .= '<td>'.$search_data->address_1 ?? ''. '</td>'; 
+                $html .= '<td>
+                    <label class="switch">
+                        <input type="checkbox" data-id="'.$search_data->id.'" data-status="'.$search_data->active_status.'"'.$toggele_status.' id="status">
+                        <span class="slider"></span>
+                    </label>
+                </td>';
                 $html .= '<td>';
                 $html .= '<a class="btn btn-soft-primary btn-icon btn-circle btn-sm ico_chnage" href="'.route('backend.customer.view', [$search_data->id]).'" title="View"><i class="fa-regular fa-eye"></i></a>';
                 $html .= '</td> ';

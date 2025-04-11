@@ -33,5 +33,9 @@ class OrderProduct extends Model
     public function getOrder(){
         return $this->belongsTo(Order::class, 'order_id');
     }
+
+    public function getRenewalProduct(){
+        return $this->hasMany(RenewDetail::class, 'product_id');
+    }
  
 }

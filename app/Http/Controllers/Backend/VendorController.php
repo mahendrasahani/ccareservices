@@ -34,33 +34,24 @@ class VendorController extends Controller
      } 
 
      public function store(Request $request){
-         // $validated = $request->validate([
-         //    "vendor_name" => 'required',
-         //    "vendor_email" => 'required',
-         //    "vendor_phone" => 'required',
-         //    "business_name" => 'required',
-         //    "vendor_address" => 'required', 
-         // ]);  
+        
+         $validated = $request->validate([
+            "vendor_name" => ['required', 'regex:/^[a-zA-Z\s]+$/'],
+            "vendor_email" => ['required', 'string', 'lowercase', 'email'],
+            "vendor_phone" => ['required', 'numeric', 'digits:10'],
+            "business_name" => ['required'],
+            "vendor_address" => ['required'], 
+         ]);
          try{
            $vendor_id = Vendor::create([
                "name" => $request->vendor_name,
                "profile_image" => '',
                "business_name" => $request->business_name,
-               "email" => $request->vendor_email,
+               "email" => $request->vendor_email,   
                "phone" => $request->vendor_phone,
                "address" => $request->vendor_address,
                "gst" => $request->vendor_gst
-            ])->id;
-
-            // if($request->hasFile('vendor_image')){
-            //    $profile_image = $request->vendor_image;
-            //    $file_name = time().'.'.$profile_image->getClientOriginalExtension();
-            //    $profile_image->move(public_path('assets/backend/upload/vendor'), $file_name);
-            //    Vendor::where('id', $vendor_id)->update([
-            //       "profile_image" => 'public/assets/backend/upload/vendor/'.$file_name
-            //    ]);
-            // }
-
+            ])->id; 
          }catch(\Exception $e){ 
            return 'Something went wrong';
          } 
@@ -69,9 +60,13 @@ class VendorController extends Controller
 
 
      public function update(Request $request, $id){
-      $validated = $request->validate([
-         "vendor_name" => 'required', 
-      ]);  
+        $validated = $request->validate([
+            "vendor_name" => ['required', 'regex:/^[a-zA-Z\s]+$/'],
+            "vendor_email" => ['required', 'string', 'lowercase', 'email'],
+            "vendor_phone" => ['required', 'numeric', 'digits:10'],
+            "business_name" => ['required'],
+            "vendor_address" => ['required'], 
+         ]);
       try{
         $vendor_id = Vendor::where('id', $id)->update([
             "name" => $request->vendor_name, 
@@ -80,15 +75,7 @@ class VendorController extends Controller
             "phone" => $request->vendor_phone,
             "address" => $request->vendor_address,
             "gst" => $request->vendor_gst
-        ]);
-         // if($request->hasFile('vendor_image')){
-         //    $profile_image = $request->vendor_image;
-         //    $file_name = time().'.'.$profile_image->getClientOriginalExtension();
-         //    $profile_image->move(public_path('assets/backend/upload/vendor'), $file_name);
-         //    Vendor::where('id', $id)->update([
-         //       "profile_image" => 'public/assets/backend/upload/vendor/'.$file_name
-         //    ]);
-         // }
+        ]); 
       }catch(\Exception $e){ 
         return 'Something went wrong';
       } 
